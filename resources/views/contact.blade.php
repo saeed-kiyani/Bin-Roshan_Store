@@ -1,0 +1,639 @@
+@extends('layouts.app')
+
+@section('title', 'Contact Us | Bin Ismail')
+
+@section('description', 'Contact Bin Ismail for products, orders, availability and customer support.')
+
+@section('content')
+
+{{-- =========================================================
+     HERO
+========================================================= --}}
+
+<section class="bg-[#f7f5f0] py-24 lg:py-32">
+
+    <div class="max-w-4xl mx-auto px-4 text-center">
+
+        <p class="text-xs uppercase tracking-[0.45em] text-[#a47c15] font-semibold">
+            Get In Touch
+        </p>
+
+        <h1 class="mt-6 text-5xl sm:text-6xl lg:text-7xl font-light">
+            Contact Us
+        </h1>
+
+        <p class="mt-7 max-w-2xl mx-auto text-gray-600 leading-8">
+            Whether you're looking for a specific product,
+            need more information, or simply want to say hello,
+            we'd love to hear from you.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+{{-- =========================================================
+     CONTACT CONTENT
+========================================================= --}}
+
+<section class="py-20 lg:py-28">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="grid lg:grid-cols-5 gap-12 lg:gap-20">
+
+
+            {{-- =================================================
+                 CONTACT INFORMATION
+            ================================================= --}}
+
+            <div class="lg:col-span-2">
+
+                <p class="text-xs uppercase tracking-[0.4em] text-[#a47c15] font-semibold">
+                    Bin Ismail
+                </p>
+
+                <h2 class="mt-5 text-4xl font-light">
+                    We'd love to hear from you.
+                </h2>
+
+                <p class="mt-6 text-gray-600 leading-8">
+                    Reach out to us for product information,
+                    availability, orders or general enquiries.
+                </p>
+
+
+                <div class="mt-10 space-y-7">
+
+
+                    {{-- WhatsApp --}}
+
+                    <div class="flex gap-4">
+
+                        <div class="w-11 h-11 border border-gray-200 flex items-center justify-center flex-shrink-0">
+
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.5"
+                                    d="M21 11.5a8.38 8.38 0 0 1-9 8.3 8.6 8.6 0 0 1-3.9-.9L3 20l1.2-4.8a8.3 8.3 0 1 1 16.8-3.7Z"
+                                />
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <p class="text-xs uppercase tracking-widest text-gray-400">
+                                WhatsApp
+                            </p>
+
+                            <a
+                                href="https://wa.me/{{ config('store.whatsapp') }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="mt-1 block text-sm hover:text-[#a47c15] transition"
+                            >
+                                Chat with us
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    {{-- Phone --}}
+
+                    <div class="flex gap-4">
+
+                        <div class="w-11 h-11 border border-gray-200 flex items-center justify-center flex-shrink-0">
+
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.5"
+                                    d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.968-.852-1.09l-4.423-.991a1.125 1.125 0 0 0-1.173.417l-.97 1.293a1.125 1.125 0 0 1-1.21.38 12.04 12.04 0 0 1-7.23-7.23 1.125 1.125 0 0 1 .38-1.21l1.293-.97c.37-.278.53-.757.417-1.173L7.02 3.102A1.125 1.125 0 0 0 5.93 2.25H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
+                                />
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <p class="text-xs uppercase tracking-widest text-gray-400">
+                                Phone
+                            </p>
+
+                            <p class="mt-1 text-sm">
+                                +92 XXX XXXXXXX
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    {{-- Email --}}
+
+                    <div class="flex gap-4">
+
+                        <div class="w-11 h-11 border border-gray-200 flex items-center justify-center flex-shrink-0">
+
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.5"
+                                    d="M3 5.5h18v13H3z"
+                                />
+
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.5"
+                                    d="m3 6 9 7 9-7"
+                                />
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <p class="text-xs uppercase tracking-widest text-gray-400">
+                                Email
+                            </p>
+
+                            <p class="mt-1 text-sm">
+                                info@binismail.com
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    {{-- Business Hours --}}
+
+                    <div class="flex gap-4">
+
+                        <div class="w-11 h-11 border border-gray-200 flex items-center justify-center flex-shrink-0">
+
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="9"
+                                    stroke-width="1.5"
+                                />
+
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-width="1.5"
+                                    d="M12 7v5l3 2"
+                                />
+
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <p class="text-xs uppercase tracking-widest text-gray-400">
+                                Business Hours
+                            </p>
+
+                            <p class="mt-1 text-sm">
+                                Monday — Saturday
+                            </p>
+
+                            <p class="mt-1 text-sm text-gray-500">
+                                10:00 AM — 9:00 PM
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            {{-- =================================================
+                 CONTACT FORM
+            ================================================= --}}
+
+            <div class="lg:col-span-3">
+
+                <div class="border border-gray-200 p-7 sm:p-10">
+
+                    <div class="mb-8">
+
+                        <h2 class="text-2xl font-light">
+                            Send us a message
+                        </h2>
+
+                        <p class="mt-2 text-sm text-gray-500">
+                            We'll get back to you as soon as possible.
+                        </p>
+
+                    </div>
+
+
+                    <form
+                        action="#"
+                        method="POST"
+                        onsubmit="return showContactMessage(event)"
+                        class="space-y-6"
+                    >
+
+                        @csrf
+
+
+                        {{-- Name --}}
+
+                        <div>
+
+                            <label
+                                for="name"
+                                class="block text-xs uppercase tracking-widest font-semibold"
+                            >
+                                Your Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                required
+                                placeholder="Enter your name"
+                                class="mt-3 w-full border border-gray-300 px-4 py-4 text-sm outline-none focus:border-black transition"
+                            >
+
+                        </div>
+
+
+                        {{-- Email --}}
+
+                        <div>
+
+                            <label
+                                for="email"
+                                class="block text-xs uppercase tracking-widest font-semibold"
+                            >
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                required
+                                placeholder="you@example.com"
+                                class="mt-3 w-full border border-gray-300 px-4 py-4 text-sm outline-none focus:border-black transition"
+                            >
+
+                        </div>
+
+
+                        {{-- Phone --}}
+
+                        <div>
+
+                            <label
+                                for="phone"
+                                class="block text-xs uppercase tracking-widest font-semibold"
+                            >
+                                Phone / WhatsApp
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="+92"
+                                class="mt-3 w-full border border-gray-300 px-4 py-4 text-sm outline-none focus:border-black transition"
+                            >
+
+                        </div>
+
+
+                        {{-- Subject --}}
+
+                        <div>
+
+                            <label
+                                for="subject"
+                                class="block text-xs uppercase tracking-widest font-semibold"
+                            >
+                                Subject
+                            </label>
+
+                            <select
+                                id="subject"
+                                name="subject"
+                                class="mt-3 w-full border border-gray-300 px-4 py-4 text-sm outline-none focus:border-black transition bg-white"
+                            >
+
+                                <option>Product Inquiry</option>
+                                <option>Order Inquiry</option>
+                                <option>Availability</option>
+                                <option>General Question</option>
+
+                            </select>
+
+                        </div>
+
+
+                        {{-- Message --}}
+
+                        <div>
+
+                            <label
+                                for="message"
+                                class="block text-xs uppercase tracking-widest font-semibold"
+                            >
+                                Message
+                            </label>
+
+                            <textarea
+                                id="message"
+                                name="message"
+                                rows="6"
+                                required
+                                placeholder="How can we help?"
+                                class="mt-3 w-full border border-gray-300 px-4 py-4 text-sm outline-none focus:border-black transition resize-none"
+                            ></textarea>
+
+                        </div>
+
+
+                        {{-- Submit --}}
+
+                        <button
+                            type="submit"
+                            class="w-full bg-black text-white py-5 text-sm font-semibold uppercase tracking-widest hover:bg-[#a47c15] transition"
+                        >
+                            Send Message
+                        </button>
+
+
+                        <p
+                            id="contact-success"
+                            class="hidden text-center text-sm text-green-700 bg-green-50 p-4"
+                        >
+                            Thank you! Your message has been prepared.
+                        </p>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+{{-- =========================================================
+     WHATSAPP SECTION
+========================================================= --}}
+
+<section class="bg-black text-white py-20">
+
+    <div class="max-w-4xl mx-auto px-4 text-center">
+
+        <p class="text-xs uppercase tracking-[0.4em] text-[#c8a64b]">
+            Prefer WhatsApp?
+        </p>
+
+        <h2 class="mt-5 text-4xl sm:text-5xl font-light">
+            Talk to us directly.
+        </h2>
+
+        <p class="mt-5 text-gray-400">
+            For the fastest response, send us a message on WhatsApp.
+        </p>
+
+        <a
+            href="https://wa.me/{{ config('store.whatsapp') }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex mt-8 bg-white text-black px-9 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-[#c8a64b] transition"
+        >
+            Open WhatsApp
+        </a>
+
+    </div>
+
+</section>
+
+
+
+{{-- =========================================================
+     LOCATION
+========================================================= --}}
+
+<section class="py-24 bg-[#f7f5f0]">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+            <div>
+
+                <p class="text-xs uppercase tracking-[0.4em] text-[#a47c15] font-semibold">
+                    Visit Us
+                </p>
+
+                <h2 class="mt-5 text-4xl sm:text-5xl font-light">
+                    Find Bin Ismail
+                </h2>
+
+                <p class="mt-6 text-gray-600 leading-8 max-w-lg">
+                    Our physical store location can be displayed
+                    here once your business address is finalized.
+                </p>
+
+
+                <div class="mt-8">
+
+                    <p class="text-xs uppercase tracking-widest text-gray-400">
+                        Address
+                    </p>
+
+                    <p class="mt-2 text-sm">
+                        Your Store Address
+                    </p>
+
+                    <p class="text-sm text-gray-500">
+                        Pakistan
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="#"
+                    class="inline-flex mt-8 border border-black px-7 py-4 text-xs font-semibold uppercase tracking-widest hover:bg-black hover:text-white transition"
+                >
+                    Get Directions
+                </a>
+
+            </div>
+
+
+            {{-- Map Placeholder --}}
+
+            <div class="aspect-[4/3] bg-gray-200 flex items-center justify-center">
+
+                <div class="text-center px-6">
+
+                    <div class="mx-auto w-14 h-14 rounded-full bg-white flex items-center justify-center">
+
+                        <svg
+                            class="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="1.5"
+                                d="M12 21s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12Z"
+                            />
+
+                            <circle
+                                cx="12"
+                                cy="9"
+                                r="2"
+                                stroke-width="1.5"
+                            />
+
+                        </svg>
+
+                    </div>
+
+                    <p class="mt-5 text-sm font-medium">
+                        Google Maps
+                    </p>
+
+                    <p class="mt-2 text-xs text-gray-500">
+                        Your store location will appear here.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+{{-- =========================================================
+     FLOATING WHATSAPP
+========================================================= --}}
+
+<a
+    href="https://wa.me/{{ config('store.whatsapp') }}"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Chat with Bin Ismail on WhatsApp"
+    class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] text-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition duration-300"
+>
+
+    <svg
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="w-7 h-7"
+    >
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.1-.471-.149-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.1-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51-.173-.008-.372-.01-.57-.01-.198 0-.52.075-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982 1-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.437-9.884 9.89-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.002 5.45-4.438 9.884-9.889 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.304-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.478-8.413"/>
+    </svg>
+
+</a>
+
+
+
+{{-- =========================================================
+     CONTACT FORM JAVASCRIPT
+========================================================= --}}
+
+<script>
+
+function showContactMessage(event) {
+
+    event.preventDefault();
+
+    const name =
+        document.getElementById('name').value.trim();
+
+    const email =
+        document.getElementById('email').value.trim();
+
+    const message =
+        document.getElementById('message').value.trim();
+
+
+    if (!name || !email || !message) {
+
+        return false;
+
+    }
+
+
+    document
+        .getElementById('contact-success')
+        .classList.remove('hidden');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | FRONTEND ONLY
+    |--------------------------------------------------------------------------
+    |
+    | Later this form will submit to a Laravel controller.
+    |
+    */
+
+
+    return false;
+
+}
+
+</script>
+
+@endsection
