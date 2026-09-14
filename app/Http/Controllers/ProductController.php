@@ -100,15 +100,84 @@ class ProductController extends Controller
     */
 
     public function create()
-    {
-        $categories = Category::query()
-            ->where('is_active', true)
-            ->orderBy('sort_order')
-            ->orderBy('name')
-            ->get();
+{
+    $categories = Category::query()
+        ->where('is_active', true)
+        ->orderBy('sort_order')
+        ->orderBy('name')
+        ->get();
 
-        return view('admin.products.create', compact('categories'));
-    }
+    // Cosmetics Product Types
+    $cosmeticProductTypes = [
+        'makeup' => 'Makeup',
+        'skincare' => 'Skincare',
+        'haircare' => 'Haircare',
+        'fragrance' => 'Fragrance',
+        'body_care' => 'Body Care',
+        'nail_care' => 'Nail Care',
+    ];
+
+    // Cosmetics Brands
+    $cosmeticBrands = [
+        'maybelline' => 'Maybelline',
+        'loreal_paris' => "L'Oréal Paris",
+        'mac' => 'MAC',
+        'huda_beauty' => 'Huda Beauty',
+        'nyx' => 'NYX',
+        'the_ordinary' => 'The Ordinary',
+        'cerave' => 'CeraVe',
+        'nars' => 'NARS',
+        'revlon' => 'Revlon',
+        'garnier' => 'Garnier',
+        'neutrogena' => 'Neutrogena',
+        'fenty_beauty' => 'Fenty Beauty',
+        'rare_beauty' => 'Rare Beauty',
+        'elf' => 'e.l.f.',
+        'makeup_revolution' => 'Makeup Revolution',
+    ];
+
+    // Cosmetics Skin Types
+    $cosmeticSkinTypes = [
+        'all_skin_types' => 'All Skin Types',
+        'oily' => 'Oily',
+        'dry' => 'Dry',
+        'combination' => 'Combination',
+        'sensitive' => 'Sensitive',
+    ];
+
+    // Cosmetics Concerns / Benefits
+    $cosmeticConcerns = [
+        'hydration' => 'Hydration',
+        'brightening' => 'Brightening',
+        'acne_blemishes' => 'Acne & Blemishes',
+        'oil_control' => 'Oil Control',
+        'anti_aging' => 'Anti-Aging',
+        'sun_protection' => 'Sun Protection',
+        'hair_fall' => 'Hair Fall',
+        'frizz_control' => 'Frizz Control',
+    ];
+
+    // Cosmetics Product Forms
+    $cosmeticProductForms = [
+        'cream' => 'Cream',
+        'gel' => 'Gel',
+        'serum' => 'Serum',
+        'lotion' => 'Lotion',
+        'powder' => 'Powder',
+        'liquid' => 'Liquid',
+        'spray' => 'Spray',
+        'stick' => 'Stick',
+    ];
+
+    return view('admin.products.create', compact(
+        'categories',
+        'cosmeticProductTypes',
+        'cosmeticBrands',
+        'cosmeticSkinTypes',
+        'cosmeticConcerns',
+        'cosmeticProductForms'
+    ));
+}
 
 
     /*
@@ -127,57 +196,94 @@ class ProductController extends Controller
     */
 
     private function getCategoryType(Category $category): string
-    {
-        $categoryText = Str::lower(
-            trim(
-                ($category->slug ?? '') . ' ' . ($category->name ?? '')
-            )
-        );
-
-        /*
-        |--------------------------------------------------------------------------
-        | LACE CATEGORY
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            Str::contains($categoryText, 'lace')
-        ) {
-            return 'lace';
-        }
+{
+    $categoryText = Str::lower(
+        trim(
+            ($category->slug ?? '') . ' ' . ($category->name ?? '')
+        )
+    );
 
 
-        /*
-        |--------------------------------------------------------------------------
-        | CLOTHING CATEGORY
-        |--------------------------------------------------------------------------
-        */
+    /*
+    |--------------------------------------------------------------------------
+    | LACE CATEGORY
+    |--------------------------------------------------------------------------
+    */
 
-        if (
-            Str::contains($categoryText, 'clothing') ||
-            Str::contains($categoryText, 'apparel')
-        ) {
-            return 'clothing';
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | OTHER CATEGORIES
-        |--------------------------------------------------------------------------
-        |
-        | Cosmetics
-        | Jewelry
-        | Watches
-        | Tailor Accessories
-        | etc.
-        |
-        | These will be added later.
-        |--------------------------------------------------------------------------
-        */
-
-        return 'other';
+    if (Str::contains($categoryText, 'lace')) {
+        return 'lace';
     }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | CLOTHING CATEGORY
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+        Str::contains($categoryText, 'clothing') ||
+        Str::contains($categoryText, 'apparel')
+    ) {
+        return 'clothing';
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | COSMETICS CATEGORY
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+        Str::contains($categoryText, 'cosmetic') ||
+        Str::contains($categoryText, 'beauty')
+    ) {
+        return 'cosmetics';
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | JEWELRY CATEGORY
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+        Str::contains($categoryText, 'jewelry') ||
+        Str::contains($categoryText, 'jewellery')
+    ) {
+        return 'jewelry';
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | WATCHES CATEGORY
+    |--------------------------------------------------------------------------
+    */
+
+    if (Str::contains($categoryText, 'watch')) {
+        return 'watches';
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | TAILOR ACCESSORIES
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+        Str::contains($categoryText, 'tailor') ||
+        Str::contains($categoryText, 'tailoring')
+    ) {
+        return 'tailor_accessories';
+    }
+
+
+    return 'other';
+}
 
 
     /*
@@ -387,6 +493,31 @@ class ProductController extends Controller
                 'boolean',
             ],
 
+            // Cosmetics filters
+            'cosmetic_product_type' => [        
+            'nullable',
+            'string',
+            'in:makeup,skincare,haircare,fragrance,body_care,nail_care',
+            ],
+
+            'skin_types' => ['nullable', 'array'],
+            'skin_types.*' => [     
+                'string',
+                'in:all_skin_types,oily,dry,combination,sensitive',
+            ],
+
+            'concerns' => ['nullable', 'array'],
+            'concerns.*' => [       
+                'string',
+                'in:hydration,brightening,acne_blemishes,oil_control,anti_aging,sun_protection,hair_fall,frizz_control',
+            ],
+
+            'product_forms' => ['nullable', 'array'],
+            'product_forms.*' => [
+                'string',
+                'in:cream,gel,serum,lotion,powder,liquid,spray,stick',
+            ],
+
         ]);
 
 
@@ -457,24 +588,44 @@ class ProductController extends Controller
         */
 
         $clothingGender = null;
-        $clothingBrand = null;
-        $clothingSizes = null;
+$clothingBrand = null;
+$clothingSizes = null;
 
-        $laceCategory = null;
-        $laceSubcategories = null;
-        $laceWidth = null;
-        $laceHeight = null;
-        $laceLength = null;
+$cosmeticBrand = null;
+
+$laceCategory = null;
+$laceSubcategories = null;
+$laceWidth = null;
+$laceHeight = null;
+$laceLength = null;
 
 
-        if ($categoryType === 'clothing') {
+/*
+|--------------------------------------------------------------------------
+| CLOTHING DATA
+|--------------------------------------------------------------------------
+*/
 
-            $clothingGender = $validated['gender'] ?? null;
+if ($categoryType === 'clothing') {
 
-            $clothingBrand = $validated['brand'] ?? null;
+    $clothingGender = $validated['gender'] ?? null;
 
-            $clothingSizes = $validated['sizes'] ?? null;
-        }
+    $clothingBrand = $validated['brand'] ?? null;
+
+    $clothingSizes = $validated['sizes'] ?? null;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| COSMETICS DATA
+|--------------------------------------------------------------------------
+*/
+
+if ($categoryType === 'cosmetics') {
+
+    $cosmeticBrand = $validated['brand'] ?? null;
+}
 
 
         if ($categoryType === 'lace') {
@@ -498,72 +649,36 @@ class ProductController extends Controller
         */
 
         $product = Product::create([
+    'category_id' => $validated['category_id'],
+    'name' => $validated['name'],
+    'slug' => $slug,
+    'sku' => $validated['sku'],
 
-            'category_id' => $validated['category_id'],
+    // Clothing filters
+    'gender' => $validated['gender'] ?? null,
+    'sizes' => $validated['sizes'] ?? null,
+    'brand' => $validated['brand'] ?? null,
 
-            'name' => $validated['name'],
+    // Cosmetics filters
+    'cosmetic_product_type' => $validated['cosmetic_product_type'] ?? null,
+    'skin_types' => $validated['skin_types'] ?? null,
+    'concerns' => $validated['concerns'] ?? null,
+    'product_forms' => $validated['product_forms'] ?? null,
 
-            'slug' => $slug,
+    // Lace filters
+    'lace_category' => $validated['lace_category'] ?? null,
+    'lace_subcategories' => $validated['lace_subcategories'] ?? null,
+    'width' => $validated['width'] ?? null,
+    'height' => $validated['height'] ?? null,
+    'length' => $validated['length'] ?? null,
 
-            'sku' => $validated['sku'],
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | CLOTHING FILTERS
-            |--------------------------------------------------------------------------
-            */
-
-            'gender' => $clothingGender,
-
-            'brand' => $clothingBrand,
-
-            'sizes' => $clothingSizes,
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | LACE FILTERS
-            |--------------------------------------------------------------------------
-            */
-
-            'lace_category' => $laceCategory,
-
-            'lace_subcategories' => $laceSubcategories,
-
-            'width' => $laceWidth,
-
-            'height' => $laceHeight,
-
-            'length' => $laceLength,
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | PRODUCT DETAILS
-            |--------------------------------------------------------------------------
-            */
-
-            'description' => $validated['description'] ?? null,
-
-            'price' => $validated['price'],
-
-            'sale_price' => $validated['sale_price'] ?? null,
-
-            'stock' => $validated['stock'],
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | STATUS
-            |--------------------------------------------------------------------------
-            */
-
-            'is_featured' => $request->boolean('is_featured'),
-
-            'is_active' => $request->boolean('is_active'),
-
-        ]);
+    'description' => $validated['description'] ?? null,
+    'price' => $validated['price'],
+    'sale_price' => $validated['sale_price'] ?? null,
+    'stock' => $validated['stock'],
+    'is_featured' => $request->boolean('is_featured'),
+    'is_active' => $request->boolean('is_active'),
+]);
 
 
         /*
@@ -614,25 +729,87 @@ class ProductController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function edit(Product $product)
-    {
-        $product->load([
-            'category',
-            'images',
-            'primaryImage',
-        ]);
+   public function edit(Product $product)
+{
+    $product->load([
+        'category',
+        'images',
+        'primaryImage',
+    ]);
 
-        $categories = Category::query()
-            ->where('is_active', true)
-            ->orderBy('sort_order')
-            ->orderBy('name')
-            ->get();
+    $categories = Category::query()
+        ->where('is_active', true)
+        ->orderBy('sort_order')
+        ->orderBy('name')
+        ->get();
 
-        return view('admin.products.edit', compact(
-            'product',
-            'categories'
-        ));
-    }
+    $cosmeticProductTypes = [
+        'makeup' => 'Makeup',
+        'skincare' => 'Skincare',
+        'haircare' => 'Haircare',
+        'fragrance' => 'Fragrance',
+        'body_care' => 'Body Care',
+        'nail_care' => 'Nail Care',
+    ];
+
+    $cosmeticBrands = [
+        'maybelline' => 'Maybelline',
+        'loreal_paris' => "L'Oréal Paris",
+        'mac' => 'MAC',
+        'huda_beauty' => 'Huda Beauty',
+        'nyx' => 'NYX',
+        'the_ordinary' => 'The Ordinary',
+        'cerave' => 'CeraVe',
+        'nars' => 'NARS',
+        'revlon' => 'Revlon',
+        'garnier' => 'Garnier',
+        'neutrogena' => 'Neutrogena',
+        'fenty_beauty' => 'Fenty Beauty',
+        'rare_beauty' => 'Rare Beauty',
+        'elf' => 'e.l.f.',
+        'makeup_revolution' => 'Makeup Revolution',
+    ];
+
+    $cosmeticSkinTypes = [
+        'all_skin_types' => 'All Skin Types',
+        'oily' => 'Oily',
+        'dry' => 'Dry',
+        'combination' => 'Combination',
+        'sensitive' => 'Sensitive',
+    ];
+
+    $cosmeticConcerns = [
+        'hydration' => 'Hydration',
+        'brightening' => 'Brightening',
+        'acne_blemishes' => 'Acne & Blemishes',
+        'oil_control' => 'Oil Control',
+        'anti_aging' => 'Anti-Aging',
+        'sun_protection' => 'Sun Protection',
+        'hair_fall' => 'Hair Fall',
+        'frizz_control' => 'Frizz Control',
+    ];
+
+    $cosmeticProductForms = [
+        'cream' => 'Cream',
+        'gel' => 'Gel',
+        'serum' => 'Serum',
+        'lotion' => 'Lotion',
+        'powder' => 'Powder',
+        'liquid' => 'Liquid',
+        'spray' => 'Spray',
+        'stick' => 'Stick',
+    ];
+
+    return view('admin.products.edit', compact(
+        'product',
+        'categories',
+        'cosmeticProductTypes',
+        'cosmeticBrands',
+        'cosmeticSkinTypes',
+        'cosmeticConcerns',
+        'cosmeticProductForms'
+    ));
+}
 
 
     /*
@@ -829,6 +1006,31 @@ class ProductController extends Controller
                 'boolean',
             ],
 
+            // Cosmetics filters
+'cosmetic_product_type' => [
+    'nullable',
+    'string',
+    'in:makeup,skincare,haircare,fragrance,body_care,nail_care',
+],
+
+'skin_types' => ['nullable', 'array'],
+'skin_types.*' => [
+    'string',
+    'in:all_skin_types,oily,dry,combination,sensitive',
+],
+
+'concerns' => ['nullable', 'array'],
+'concerns.*' => [
+    'string',
+    'in:hydration,brightening,acne_blemishes,oil_control,anti_aging,sun_protection,hair_fall,frizz_control',
+],
+
+'product_forms' => ['nullable', 'array'],
+'product_forms.*' => [
+    'string',
+    'in:cream,gel,serum,lotion,powder,liquid,spray,stick',
+],
+
         ]);
 
 
@@ -882,16 +1084,17 @@ class ProductController extends Controller
         |
         |--------------------------------------------------------------------------
         */
+$clothingGender = null;
+$clothingBrand = null;
+$clothingSizes = null;
 
-        $clothingGender = null;
-        $clothingBrand = null;
-        $clothingSizes = null;
+$cosmeticBrand = null;
 
-        $laceCategory = null;
-        $laceSubcategories = null;
-        $laceWidth = null;
-        $laceHeight = null;
-        $laceLength = null;
+$laceCategory = null;
+$laceSubcategories = null;
+$laceWidth = null;
+$laceHeight = null;
+$laceLength = null;
 
 
         if ($categoryType === 'clothing') {
@@ -902,6 +1105,10 @@ class ProductController extends Controller
 
             $clothingSizes = $validated['sizes'] ?? null;
         }
+
+        if ($categoryType === 'cosmetics') {
+    $cosmeticBrand = $validated['brand'] ?? null;
+}
 
 
         if ($categoryType === 'lace') {
@@ -943,9 +1150,17 @@ class ProductController extends Controller
 
             'gender' => $clothingGender,
 
-            'brand' => $clothingBrand,
+'brand' => $categoryType === 'cosmetics'
+    ? $cosmeticBrand
+    : $clothingBrand,
 
-            'sizes' => $clothingSizes,
+'sizes' => $clothingSizes,
+
+            // Cosmetics filters
+            'cosmetic_product_type' => $validated['cosmetic_product_type'] ?? null,
+            'skin_types' => $validated['skin_types'] ?? null,
+            'concerns' => $validated['concerns'] ?? null,
+            'product_forms' => $validated['product_forms'] ?? null,
 
 
             /*
@@ -989,6 +1204,7 @@ class ProductController extends Controller
             'is_featured' => $request->boolean('is_featured'),
 
             'is_active' => $request->boolean('is_active'),
+            
 
         ]);
 

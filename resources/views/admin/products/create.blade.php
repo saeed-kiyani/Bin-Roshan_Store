@@ -4,6 +4,70 @@
 
 @section('content')
 
+@php
+    $cosmeticBrands = [
+        'Maybelline' => 'Maybelline',
+        "L'Oréal Paris" => "L'Oréal Paris",
+        'MAC' => 'MAC',
+        'Huda Beauty' => 'Huda Beauty',
+        'NYX Professional Makeup' => 'NYX Professional Makeup',
+        'The Ordinary' => 'The Ordinary',
+        'CeraVe' => 'CeraVe',
+        'NARS' => 'NARS',
+        'Revlon' => 'Revlon',
+        'Wet n Wild' => 'Wet n Wild',
+        'Essence' => 'Essence',
+        'Garnier' => 'Garnier',
+        'Neutrogena' => 'Neutrogena',
+        'Lakmé' => 'Lakmé',
+        'Fenty Beauty' => 'Fenty Beauty',
+        'Rare Beauty' => 'Rare Beauty',
+        'e.l.f. Cosmetics' => 'e.l.f. Cosmetics',
+        'Makeup Revolution' => 'Makeup Revolution',
+        'Dove' => 'Dove',
+        'Other' => 'Other',
+    ];
+
+    $cosmeticProductTypes = [
+        'makeup' => 'Makeup',
+        'skincare' => 'Skincare',
+        'haircare' => 'Haircare',
+        'fragrance' => 'Fragrance',
+        'body_care' => 'Body Care',
+        'nail_care' => 'Nail Care',
+    ];
+
+    $cosmeticSkinTypes = [
+        'all_skin_types' => 'All Skin Types',
+        'oily' => 'Oily',
+        'dry' => 'Dry',
+        'combination' => 'Combination',
+        'sensitive' => 'Sensitive',
+    ];
+
+    $cosmeticConcerns = [
+        'hydration' => 'Hydration',
+        'brightening' => 'Brightening',
+        'acne_blemishes' => 'Acne & Blemishes',
+        'oil_control' => 'Oil Control',
+        'anti_aging' => 'Anti-Aging',
+        'sun_protection' => 'Sun Protection',
+        'hair_fall' => 'Hair Fall',
+        'frizz_control' => 'Frizz Control',
+    ];
+
+    $cosmeticProductForms = [
+        'cream' => 'Cream',
+        'gel' => 'Gel',
+        'serum' => 'Serum',
+        'lotion' => 'Lotion',
+        'powder' => 'Powder',
+        'liquid' => 'Liquid',
+        'spray' => 'Spray',
+        'stick' => 'Stick',
+    ];
+@endphp
+
 <div class="min-h-screen bg-gray-50 py-12">
 
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -306,11 +370,11 @@
 {{-- =========================================================
      LACE INFORMATION
 ========================================================= --}}
+
 <div
     id="lace-filter"
     data-filter-section="laces"
-    class="mt-7 border-t border-gray-200 pt-7"
->
+    class="mt-7 border-t border-gray-200 pt-7">
 
     <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
         Laces Filtration
@@ -318,97 +382,72 @@
 
 
     {{-- LACE CATEGORY --}}
+
     <div>
 
-        <label
+        <!-- <label
             for="lace_category"
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-        >
+            class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
             Lace Category
-        </label>
+        </label> -->
 
         <select
-            name="lace_category"
-            id="lace_category"
-            class="mt-3 w-full border border-gray-300 px-4 py-3 bg-white text-sm text-gray-700 focus:outline-none focus:border-black"
-        >
+    name="lace_category"
+    id="lace_category"
+    class="w-full px-4 py-3 border border-gray-200 bg-white text-sm text-gray-700 focus:outline-none focus:border-gray-400">
 
-            <option value="">
-                Select Lace Category
-            </option>
+    <option value="">Select Lace Category</option>
 
-            <option
-                value="basic_everyday"
-                {{ old('lace_category') === 'basic_everyday' ? 'selected' : '' }}
-            >
-                Basic & Everyday Laces
-            </option>
+    <option value="basic_everyday">
+        Basic & Everyday Laces
+    </option>
 
-            <option
-                value="embroidered"
-                {{ old('lace_category') === 'embroidered' ? 'selected' : '' }}
-            >
-                Embroidered Laces
-            </option>
+    <option value="embroidered">
+        Embroidered Laces
+    </option>
 
-            <option
-                value="fancy"
-                {{ old('lace_category') === 'fancy' ? 'selected' : '' }}
-            >
-                Fancy Laces
-            </option>
+    <option value="fancy">
+        Fancy Laces
+    </option>
 
-            <option
-                value="traditional"
-                {{ old('lace_category') === 'traditional' ? 'selected' : '' }}
-            >
-                Traditional Laces
-            </option>
+    <option value="traditional">
+        Traditional Laces
+    </option>
 
-            <option
-                value="suit_specific"
-                {{ old('lace_category') === 'suit_specific' ? 'selected' : '' }}
-            >
-                Suit Specific Laces
-            </option>
+    <option value="suit_specific">
+        Suit Specific Laces
+    </option>
 
-            <option
-                value="premium_bridal"
-                {{ old('lace_category') === 'premium_bridal' ? 'selected' : '' }}
-            >
-                Premium & Bridal Laces
-            </option>
-
-        </select>
+    <option value="premium_bridal">
+        Premium & Bridal Laces
+    </option>
+</select>
 
     </div>
 
 
     {{-- LACE SUBCATEGORIES --}}
+
+    <div id="lace-subcategories-container" class="mt-6 hidden">
+
+    <p class="text-xs text-gray-400 mb-4">
+        Select all subcategories that apply to this lace.
+    </p>
+
     <div
-        id="lace-subcategories-container"
-        class="mt-6 hidden"
+        id="lace-subcategories"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
     >
-
-        <p class="text-xs text-gray-400 mb-4">
-            Select all subcategories that apply to this lace.
-        </p>
-
-        <div
-            id="lace-subcategories"
-            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
-        >
-        </div>
-
     </div>
+
+</div>
 
 
     {{-- WIDTH --}}
+
     <div class="mt-7">
 
-        <label
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-        >
+        <label class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
             Width
         </label>
 
@@ -447,11 +486,10 @@
 
 
     {{-- HEIGHT --}}
+
     <div class="mt-7">
 
-        <label
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-        >
+        <label class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
             Height
         </label>
 
@@ -490,11 +528,10 @@
 
 
     {{-- LENGTH --}}
+
     <div class="mt-7">
 
-        <label
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-        >
+        <label class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
             Length
         </label>
 
@@ -563,9 +600,125 @@
         Cosmetics Information
     </p>
 
-    <p class="text-sm text-gray-500">
-        Cosmetics filters will be added here.
-    </p>
+    {{-- COSMETICS BRAND --}}
+    <div>
+        <label
+            for="cosmetic_brand"
+            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
+        >
+            Brand
+        </label>
+
+        <select
+            id="cosmetic_brand"
+            name="brand"
+            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
+        >
+            <option value="">Select Cosmetic Brand</option>
+
+            @foreach($cosmeticBrands as $value => $label)
+                <option
+                    value="{{ $value }}"
+                    {{ old('brand') === $value ? 'selected' : '' }}
+                >
+                    {{ $label }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+
+    {{-- PRODUCT TYPE --}}
+    <div class="mt-7">
+        <label
+            for="cosmetic_product_type"
+            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
+        >
+            Product Type
+        </label>
+
+        <select
+            id="cosmetic_product_type"
+            name="cosmetic_product_type"
+            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
+        >
+            <option value="">Select Product Type</option>
+
+            @foreach($cosmeticProductTypes as $value => $label)
+                <option
+                    value="{{ $value }}"
+                    {{ old('cosmetic_product_type') === $value ? 'selected' : '' }}
+                >
+                    {{ $label }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+
+    {{-- SKIN TYPE --}}
+    <div class="mt-7">
+        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
+            Skin Type
+        </p>
+
+        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            @foreach($cosmeticSkinTypes as $value => $label)
+                <label class="flex items-center gap-3 cursor-pointer">
+                    <input
+                        type="checkbox"
+                        name="skin_types[]"
+                        value="{{ $value }}"
+                        {{ in_array($value, old('skin_types', [])) ? 'checked' : '' }}
+                        class="w-4 h-4"
+                    >
+                    <span class="text-sm text-gray-700">{{ $label }}</span>
+                </label>
+            @endforeach
+        </div>
+    </div>
+
+    {{-- CONCERN / BENEFIT --}}
+    <div class="mt-7">
+        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
+            Concern / Benefit
+        </p>
+
+        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            @foreach($cosmeticConcerns as $value => $label)
+                <label class="flex items-center gap-3 cursor-pointer">
+                    <input
+                        type="checkbox"
+                        name="concerns[]"
+                        value="{{ $value }}"
+                        {{ in_array($value, old('concerns', [])) ? 'checked' : '' }}
+                        class="w-4 h-4"
+                    >
+                    <span class="text-sm text-gray-700">{{ $label }}</span>
+                </label>
+            @endforeach
+        </div>
+    </div>
+
+    {{-- PRODUCT FORM --}}
+    <div class="mt-7">
+        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
+            Product Form
+        </p>
+
+        <div class="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4">
+            @foreach($cosmeticProductForms as $value => $label)
+                <label class="flex items-center gap-3 cursor-pointer">
+                    <input
+                        type="checkbox"
+                        name="product_forms[]"
+                        value="{{ $value }}"
+                        {{ in_array($value, old('product_forms', [])) ? 'checked' : '' }}
+                        class="w-4 h-4"
+                    >
+                    <span class="text-sm text-gray-700">{{ $label }}</span>
+                </label>
+            @endforeach
+        </div>
+    </div>
 </div>
 
 {{-- =========================================================
@@ -1028,9 +1181,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-</script>
-
-<script>
 document.addEventListener('DOMContentLoaded', function () {
 
     const laceCategory = document.getElementById('lace_category');
@@ -1041,15 +1191,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | LACE SUBCATEGORIES
-    |--------------------------------------------------------------------------
-    */
-
     const laceSubcategories = {
-
         basic_everyday: [
             'Cotton Lace',
             'Simple Border Lace',
@@ -1097,24 +1239,8 @@ document.addEventListener('DOMContentLoaded', function () {
             'Stone Bridal Lace',
             'Luxury Border Lace'
         ]
-
     };
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | OLD VALUES
-    |--------------------------------------------------------------------------
-    */
-
-    const oldSubcategories = @json(old('lace_subcategories', []));
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | UPDATE SUBCATEGORIES
-    |--------------------------------------------------------------------------
-    */
 
     function updateLaceSubcategories() {
 
@@ -1122,18 +1248,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         subcategoryWrapper.innerHTML = '';
 
-
         if (
             !selectedCategory ||
             !laceSubcategories[selectedCategory] ||
             laceSubcategories[selectedCategory].length === 0
         ) {
-
             subcategoryContainer.classList.add('hidden');
-
             return;
         }
-
 
         subcategoryContainer.classList.remove('hidden');
 
@@ -1143,29 +1265,17 @@ document.addEventListener('DOMContentLoaded', function () {
             const label = document.createElement('label');
 
             label.className =
-                'flex items-center gap-2 text-sm text-gray-700 cursor-pointer';
+                'flex items-center gap-2 text-sm text-gray-700';
 
 
             const checkbox = document.createElement('input');
 
             checkbox.type = 'checkbox';
-
             checkbox.name = 'lace_subcategories[]';
-
             checkbox.value = subcategory;
 
-            checkbox.className = 'w-4 h-4';
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | RESTORE OLD VALUE
-            |--------------------------------------------------------------------------
-            */
-
-            if (oldSubcategories.includes(subcategory)) {
-                checkbox.checked = true;
-            }
+            checkbox.className =
+                'rounded border-gray-300';
 
 
             const text = document.createElement('span');
@@ -1174,35 +1284,45 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
             label.appendChild(checkbox);
-
             label.appendChild(text);
 
             subcategoryWrapper.appendChild(label);
 
         });
-
     }
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | CATEGORY CHANGE
-    |--------------------------------------------------------------------------
-    */
+    laceCategory.addEventListener('change', updateLaceSubcategories);
 
-    laceCategory.addEventListener(
-        'change',
-        updateLaceSubcategories
-    );
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | INITIAL LOAD
-    |--------------------------------------------------------------------------
-    */
 
     updateLaceSubcategories();
+
+});
+
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const nameInput = document.getElementById('name');
+    const slugInput = document.getElementById('slug');
+
+    if (nameInput && slugInput) {
+
+        nameInput.addEventListener('input', function () {
+
+            const slug = this.value
+                .toLowerCase()
+                .trim()
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-');
+
+            slugInput.value = slug;
+
+        });
+
+    }
 
 });
 </script>

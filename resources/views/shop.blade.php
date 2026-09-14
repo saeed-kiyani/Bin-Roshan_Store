@@ -20,6 +20,11 @@
     $selectedBrands = request()->input('brand', []);
     $selectedSizes = request()->input('sizes', []);
 
+    $selectedCosmeticProductType = request()->input('cosmetic_product_type', '');
+    $selectedSkinTypes = request()->input('skin_types', []);
+    $selectedConcerns = request()->input('concerns', []);
+    $selectedProductForms = request()->input('product_forms', []);
+
     $selectedLaceSubcategories = request()->input(
         'lace_subcategories',
         []
@@ -39,6 +44,18 @@
 
     if (!is_array($selectedSizes)) {
         $selectedSizes = [$selectedSizes];
+    }
+
+    if (!is_array($selectedSkinTypes)) {
+        $selectedSkinTypes = [$selectedSkinTypes];
+    }
+
+    if (!is_array($selectedConcerns)) {
+        $selectedConcerns = [$selectedConcerns];
+    }
+
+    if (!is_array($selectedProductForms)) {
+        $selectedProductForms = [$selectedProductForms];
     }
 
     if (!is_array($selectedLaceSubcategories)) {
@@ -384,7 +401,10 @@
                     Shop Products
                 </h2>
 
-                <p class="mt-2 text-sm text-gray-500">
+                <p
+                    id="shop-product-count"
+                    class="mt-2 text-sm text-gray-500"
+                >
                     Showing {{ $products->count() }} products
                 </p>
 
@@ -427,7 +447,7 @@
 
                 <select
                     name="sort"
-                    onchange="this.form.submit()"
+                    onchange="this.form.requestSubmit()"
                     class="border border-gray-300 bg-white px-5 py-3 text-sm focus:outline-none focus:border-black"
                 >
 
@@ -548,13 +568,11 @@
 
 
                     {{-- =================================================
-     PRICE
+     PRICE RANGE
 ================================================== --}}
 
 <div class="border-t border-gray-200 pt-6">
-
     <div class="flex items-center justify-between">
-
         <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
             Price
         </p>
@@ -563,27 +581,40 @@
             id="price-range-label"
             class="text-xs text-gray-500"
         >
-            Up to PKR {{ number_format($priceMax) }}
+            Up to PKR {{ number_format($selectedMaxPrice) }}
         </span>
-
     </div>
 
-    <div class="mt-7">
+    {{-- SINGLE PRICE SLIDER --}}
+    <div class="relative mt-7 h-5">
+        <div
+            class="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -translate-y-1/2 rounded-full"
+        ></div>
+
+        <div
+            id="price-active-track"
+            class="absolute top-1/2 left-0 h-1 bg-black -translate-y-1/2 rounded-full"
+        ></div>
 
         <input
             type="range"
             id="price-slider"
             min="{{ $priceMin }}"
             max="{{ $priceMax }}"
-            value="{{ request()->filled('max_price') ? request('max_price') : $priceMax }}"
+            value="{{ $selectedMaxPrice }}"
             step="1"
-            class="w-full price-range-slider"
+            class="price-slider absolute inset-0 w-full appearance-none bg-transparent"
         >
-
     </div>
 
-    <div class="flex items-center justify-between mt-3">
+    <input
+        type="hidden"
+        name="max_price"
+        id="max-price-input"
+        value="{{ $selectedMaxPrice }}"
+    >
 
+    <div class="flex items-center justify-between mt-3">
         <span class="text-[10px] uppercase tracking-widest text-gray-400">
             PKR {{ number_format($priceMin) }}
         </span>
@@ -591,16 +622,7 @@
         <span class="text-[10px] uppercase tracking-widest text-gray-400">
             PKR {{ number_format($priceMax) }}
         </span>
-
     </div>
-
-    <input
-        type="hidden"
-        name="max_price"
-        id="max-price-input"
-        value="{{ request()->filled('max_price') ? request('max_price') : $priceMax }}"
-    >
-
 </div>
 
 
@@ -727,6 +749,68 @@
 
                     @endif
 
+
+                    {{-- =================================================
+                         COSMETICS FILTERS
+                    ================================================== --}}
+                    @if($categoryType === 'cosmetics')
+
+                        <div class="mt-7 border-t border-gray-200 pt-7">
+                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">Product Type</p>
+                            <select name="cosmetic_product_type" class="w-full border border-gray-200 bg-white px-3 py-3 text-sm focus:outline-none focus:border-black">
+                                <option value="">All Product Types</option>
+                                @foreach([
+                                    'makeup' => 'Makeup',
+                                    'skincare' => 'Skincare',
+                                    'haircare' => 'Haircare',
+                                    'fragrance' => 'Fragrance',
+                                    'body_care' => 'Body Care',
+                                    'nail_care' => 'Nail Care'
+                                ] as $value => $label)
+                                    <option value="{{ $value }}" {{ $selectedCosmeticProductType === $value ? 'selected' : '' }}>{{ $label }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="mt-7 border-t border-gray-200 pt-7">
+                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">Brand</p>
+                            <div class="space-y-3">
+                                @forelse($cosmeticBrands as $brand)
+                                    <label class="flex items-center gap-3 cursor-pointer">
+                                        <input type="checkbox" name="brand[]" value="{{ $brand }}" {{ in_array($brand, $selectedBrands) ? 'checked' : '' }} class="w-4 h-4">
+                                        <span class="text-sm text-gray-700">{{ $brand }}</span>
+                                    </label>
+                                @empty
+                                    <p class="text-sm text-gray-400">No brands available.</p>
+                                @endforelse
+                            </div>
+                        </div>
+
+                        @foreach([
+                            'skin_types' => ['title' => 'Skin Type', 'options' => [
+                                'all_skin_types' => 'All Skin Types', 'oily' => 'Oily', 'dry' => 'Dry', 'combination' => 'Combination', 'sensitive' => 'Sensitive'
+                            ], 'selected' => $selectedSkinTypes],
+                            'concerns' => ['title' => 'Concern / Benefit', 'options' => [
+                                'hydration' => 'Hydration', 'brightening' => 'Brightening', 'acne_blemishes' => 'Acne & Blemishes', 'oil_control' => 'Oil Control', 'anti_aging' => 'Anti-Aging', 'sun_protection' => 'Sun Protection', 'hair_fall' => 'Hair Fall', 'frizz_control' => 'Frizz Control'
+                            ], 'selected' => $selectedConcerns],
+                            'product_forms' => ['title' => 'Product Form', 'options' => [
+                                'cream' => 'Cream', 'gel' => 'Gel', 'serum' => 'Serum', 'lotion' => 'Lotion', 'powder' => 'Powder', 'liquid' => 'Liquid', 'spray' => 'Spray', 'stick' => 'Stick'
+                            ], 'selected' => $selectedProductForms]
+                        ] as $field => $data)
+                            <div class="mt-7 border-t border-gray-200 pt-7">
+                                <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">{{ $data['title'] }}</p>
+                                <div class="space-y-3">
+                                    @foreach($data['options'] as $value => $label)
+                                        <label class="flex items-center gap-3 cursor-pointer">
+                                            <input type="checkbox" name="{{ $field }}[]" value="{{ $value }}" {{ in_array($value, $data['selected']) ? 'checked' : '' }} class="w-4 h-4">
+                                            <span class="text-sm text-gray-700">{{ $label }}</span>
+                                        </label>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endforeach
+
+                    @endif
 
                     {{-- =================================================
                          LACE FILTERS
@@ -1194,6 +1278,10 @@
                             'gender',
                             'brand',
                             'sizes',
+                            'cosmetic_product_type',
+                            'skin_types',
+                            'concerns',
+                            'product_forms',
                             'lace_category',
                             'lace_subcategories',
                             'width',
@@ -1207,7 +1295,7 @@
                             href="{{ $selectedCategory
                                 ? route('shop', ['category' => $selectedCategory->slug])
                                 : route('shop') }}"
-                            class="block text-center mt-4 text-xs uppercase tracking-widest text-gray-500 hover:text-black"
+                            class="block text-center mt-4 text-xs uppercase tracking-widest text-gray-500 hover:text-black shop-clear-filters"
                         >
                             Clear Filters
                         </a>
@@ -1223,239 +1311,9 @@
                  PRODUCT GRID
             ================================================== --}}
 
-            <div>
+            <div id="product-results">
 
-                @if($products->count())
-
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-x-4 sm:gap-x-6 gap-y-12">
-
-                        @foreach($products as $product)
-
-                            @php
-
-                                $productPrice = $product->sale_price
-                                    ?? $product->price;
-
-                                $image = optional(
-                                    $product->primaryImage
-                                )->image;
-
-                                $imageUrl = $image
-                                    ? asset(
-                                        'storage/' .
-                                        ltrim($image, '/')
-                                    )
-                                    : asset(
-                                        'images/placeholder.jpg'
-                                    );
-
-                            @endphp
-
-
-                            <article
-    class="group product-card"
-    data-category="{{ strtolower($product->category?->slug ?? '') }}"
-    data-price="{{ (float) $productPrice }}"
-    data-gender="{{ strtolower($product->gender ?? '') }}"
-    data-brand="{{ strtolower($product->brand ?? '') }}"
-    data-sizes="{{ implode(',', array_map('strtolower', $product->sizes ?? [])) }}"
-    data-lace-category="{{ strtolower($product->lace_category ?? '') }}"
-    data-lace-subcategories="{{ implode(',', array_map('strtolower', $product->lace_subcategories ?? [])) }}"
-    data-lace-width="{{ implode(',', array_map('strtolower', $product->width ?? [])) }}"
-    data-lace-height="{{ implode(',', array_map('strtolower', $product->height ?? [])) }}"
-    data-lace-length="{{ implode(',', array_map('strtolower', $product->length ?? [])) }}"
->
-
-                                {{-- IMAGE --}}
-
-                                <div class="relative overflow-hidden bg-gray-100 aspect-[4/5]">
-
-                                    <a
-                                        href="{{ route(
-                                            'product.show',
-                                            $product->slug
-                                        ) }}"
-                                        class="block w-full h-full"
-                                    >
-
-                                        <img
-                                            src="{{ $imageUrl }}"
-                                            alt="{{ $product->name }}"
-                                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105"
-                                            loading="lazy"
-                                            onerror="this.onerror=null;this.src='{{ asset('images/placeholder.jpg') }}';"
-                                        >
-
-                                    </a>
-
-
-                                    {{-- FEATURED --}}
-
-                                    @if($product->is_featured)
-
-                                        <span
-                                            class="absolute top-4 left-4 bg-black text-white text-[10px] uppercase tracking-widest px-3 py-2"
-                                        >
-                                            Featured
-                                        </span>
-
-                                    @endif
-
-
-                                    {{-- SALE --}}
-
-                                    @if(
-                                        $product->sale_price &&
-                                        $product->price > $product->sale_price
-                                    )
-
-                                        <span
-                                            class="absolute top-4 right-4 bg-[#b38b2c] text-white text-[10px] uppercase tracking-widest px-3 py-2"
-                                        >
-                                            Sale
-                                        </span>
-
-                                    @endif
-
-
-                                    {{-- ADD TO BAG --}}
-
-                                    <button
-                                        type="button"
-                                        onclick='addToCart({
-                                            id: {{ $product->id }},
-                                            name: @json($product->name),
-                                            price: {{ (float) $productPrice }},
-                                            image: @json($imageUrl)
-                                        })'
-                                        class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur text-black py-3 text-xs font-semibold uppercase tracking-widest opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition duration-300"
-                                    >
-                                        Add to Bag
-                                    </button>
-
-                                </div>
-
-
-                                {{-- DETAILS --}}
-
-                                <div class="pt-5">
-
-                                    <p class="text-[10px] uppercase tracking-widest text-gray-400">
-                                        {{ $product->category?->name ?? 'Product' }}
-                                    </p>
-
-                                    <h3 class="mt-2 text-sm font-medium text-gray-900">
-                                        <a
-                                            href="{{ route(
-                                                'product.show',
-                                                $product->slug
-                                            ) }}"
-                                            class="hover:opacity-60 transition"
-                                        >
-                                            {{ $product->name }}
-                                        </a>
-                                    </h3>
-
-
-                                    <div class="mt-2">
-
-                                        @if(
-                                            $product->sale_price &&
-                                            $product->price > $product->sale_price
-                                        )
-
-                                            <span class="text-sm text-black">
-                                                PKR {{ number_format($product->sale_price) }}
-                                            </span>
-
-                                            <span class="ml-2 text-xs text-gray-400 line-through">
-                                                PKR {{ number_format($product->price) }}
-                                            </span>
-
-                                        @else
-
-                                            <span class="text-sm text-gray-600">
-                                                PKR {{ number_format($product->price) }}
-                                            </span>
-
-                                        @endif
-
-                                    </div>
-
-
-                                    {{-- WHATSAPP --}}
-
-                                    <button
-                                        type="button"
-                                        onclick="orderOnWhatsApp(@json($product->name))"
-                                        class="mt-4 text-[10px] uppercase tracking-widest text-gray-400 hover:text-black transition"
-                                    >
-                                        Order on WhatsApp
-                                    </button>
-
-                                </div>
-
-                            </article>
-
-                        @endforeach
-
-                    </div>
-
-                @else
-
-                    {{-- =================================================
-                         NO PRODUCTS
-                    ================================================== --}}
-
-                    <div class="py-24 text-center">
-
-                        <div class="mx-auto w-16 h-16 border border-gray-300 rounded-full flex items-center justify-center">
-
-                            <svg
-                                class="w-6 h-6 text-gray-400"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <circle
-                                    cx="11"
-                                    cy="11"
-                                    r="7"
-                                    stroke-width="1.5"
-                                />
-
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-width="1.5"
-                                    d="m20 20-4-4"
-                                />
-
-                            </svg>
-
-                        </div>
-
-                        <h3 class="mt-6 text-xl font-light">
-                            No products found
-                        </h3>
-
-                        <p class="mt-2 text-sm text-gray-500">
-                            Try changing or clearing your filters.
-                        </p>
-
-                        <a
-                            href="{{ $selectedCategory
-                                ? route('shop', ['category' => $selectedCategory->slug])
-                                : route('shop') }}"
-                            class="inline-flex mt-7 border border-black px-6 py-3 text-xs uppercase tracking-widest hover:bg-black hover:text-white transition"
-                        >
-                            Clear Filters
-                        </a>
-
-                    </div>
-
-                @endif
-
-            </div>
+                @include('partials.shop-product-results')
 
         </div>
 
@@ -1523,236 +1381,39 @@
 
 </a>
 
+
+{{-- =========================================================
+     LACE CATEGORY JAVASCRIPT
+========================================================= --}}
+
 <script>
 
-/*
-|--------------------------------------------------------------------------
-| BIN ISMAIL SHOP - INSTANT FILTERING
-|--------------------------------------------------------------------------
-| - No page reload when filters are changed
-| - Single price slider
-| - Clothing filters
-| - Lace filters
-| - URL updates without reload
-|--------------------------------------------------------------------------
-*/
-
 document.addEventListener('DOMContentLoaded', function () {
-
-    /*
-    |--------------------------------------------------------------------------
-    | FILTER FORM
-    |--------------------------------------------------------------------------
-    */
 
     const filterForm = document.querySelector(
         'aside form[action="{{ route('shop') }}"]'
     );
 
-    if (!filterForm) {
+    const laceCategory = document.getElementById('lace_category');
+
+    const laceGroups = document.querySelectorAll(
+        '.lace-subcategory-group'
+    );
+
+
+    if (!laceCategory) {
         return;
     }
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | PRODUCT CARDS
-    |--------------------------------------------------------------------------
-    */
-
-    const productCards = Array.from(
-        document.querySelectorAll('.product-card')
-    );
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | PRODUCT COUNT
-    |--------------------------------------------------------------------------
-    */
-
-    const productCountText =
-        document.querySelector(
-            'p.mt-2.text-sm.text-gray-500'
-        );
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | PRICE SLIDER
-    |--------------------------------------------------------------------------
-    */
-
-    const priceSlider =
-        document.getElementById('price-slider');
-
-    const maxPriceInput =
-        document.getElementById('max-price-input');
-
-    const priceLabel =
-        document.getElementById('price-range-label');
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | LACE CATEGORY
-    |--------------------------------------------------------------------------
-    */
-
-    const laceCategory =
-        document.getElementById('lace_category');
-
-    const laceGroups =
-        document.querySelectorAll(
-            '.lace-subcategory-group'
-        );
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | CURRENT CATEGORY TYPE
-    |--------------------------------------------------------------------------
-    */
-
-    const currentCategoryType =
-        @json($categoryType);
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | GET CHECKED VALUES
-    |--------------------------------------------------------------------------
-    */
-
-    function getCheckedValues(name) {
-
-        return Array.from(
-            filterForm.querySelectorAll(
-                'input[name="' + name + '[]"]:checked'
-            )
-        ).map(function (input) {
-
-            return String(input.value)
-                .trim()
-                .toLowerCase();
-
-        });
-
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | NORMALIZE PRODUCT ARRAY
-    |--------------------------------------------------------------------------
-    */
-
-    function normalizeArray(value) {
-
-        if (!value) {
-            return [];
-        }
-
-        if (Array.isArray(value)) {
-
-            return value
-                .map(function (item) {
-
-                    return String(item)
-                        .trim()
-                        .toLowerCase();
-
-                })
-                .filter(Boolean);
-
-        }
-
-        return String(value)
-            .split(',')
-            .map(function (item) {
-
-                return item
-                    .trim()
-                    .toLowerCase();
-
-            })
-            .filter(Boolean);
-
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | ARRAY MATCH
-    |--------------------------------------------------------------------------
-    */
-
-    function arrayMatches(
-        productValues,
-        selectedValues
-    ) {
-
-        /*
-        |--------------------------------------------------------------------------
-        | No filter selected
-        |--------------------------------------------------------------------------
-        */
-
-        if (!selectedValues.length) {
-            return true;
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Product has no value
-        |--------------------------------------------------------------------------
-        */
-
-        if (!productValues.length) {
-            return false;
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | ANY selected value can match
-        |--------------------------------------------------------------------------
-        */
-
-        return selectedValues.some(function (value) {
-
-            return productValues.includes(
-                String(value)
-                    .trim()
-                    .toLowerCase()
-            );
-
-        });
-
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | UPDATE LACE SUBCATEGORY VISIBILITY
-    |--------------------------------------------------------------------------
-    */
-
     function updateLaceSubcategories() {
 
-        if (!laceCategory) {
-            return;
-        }
-
-
-        const selected =
-            laceCategory.value;
+        const selected = laceCategory.value;
 
 
         /*
         |--------------------------------------------------------------------------
-        | Hide all groups
+        | HIDE ALL GROUPS
         |--------------------------------------------------------------------------
         */
 
@@ -1765,25 +1426,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
         /*
         |--------------------------------------------------------------------------
-        | Show selected group
+        | SHOW SELECTED GROUP
         |--------------------------------------------------------------------------
         */
 
         if (selected) {
 
-            const activeGroup =
-                document.querySelector(
-                    '[data-lace-group="' +
-                    CSS.escape(selected) +
-                    '"]'
-                );
-
+            const activeGroup = document.querySelector(
+                '[data-lace-group="' + selected + '"]'
+            );
 
             if (activeGroup) {
 
-                activeGroup.classList.remove(
-                    'hidden'
-                );
+                activeGroup.classList.remove('hidden');
 
             }
 
@@ -1792,846 +1447,327 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | UPDATE PRICE LABEL
-    |--------------------------------------------------------------------------
-    */
+    laceCategory.addEventListener('change', function () {
 
-    function updatePriceLabel() {
-
-        if (!priceSlider) {
-            return;
-        }
-
-
-        const value =
-            Number(priceSlider.value);
-
-
-        if (priceLabel) {
-
-            priceLabel.textContent =
-                'Up to PKR ' +
-                value.toLocaleString();
-
-        }
-
-
-        if (maxPriceInput) {
-
-            maxPriceInput.value =
-                value;
-
-        }
-
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | UPDATE URL WITHOUT RELOAD
-    |--------------------------------------------------------------------------
-    */
-
-    function updateFilterUrl() {
-
-        const params =
-            new URLSearchParams();
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | CATEGORY
-        |--------------------------------------------------------------------------
-        */
-
-        @if($selectedCategory)
-
-        params.set(
-            'category',
-            @json($selectedCategory->slug)
-        );
-
-        @endif
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | SEARCH
-        |--------------------------------------------------------------------------
-        */
-
-        @if(request('search'))
-
-        params.set(
-            'search',
-            @json(request('search'))
-        );
-
-        @endif
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | PRICE
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            priceSlider &&
-            Number(priceSlider.value) <
-                Number(priceSlider.max)
-        ) {
-
-            params.set(
-                'max_price',
-                priceSlider.value
-            );
-
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | CHECKBOX FILTERS
-        |--------------------------------------------------------------------------
-        */
-
-        const filterNames = [
-            'gender',
-            'brand',
-            'sizes',
-            'lace_subcategories',
-            'width',
-            'height',
-            'length'
-        ];
-
-
-        filterNames.forEach(function (name) {
-
-            getCheckedValues(name).forEach(
-                function (value) {
-
-                    params.append(
-                        name + '[]',
-                        value
-                    );
-
-                }
-            );
-
+        laceGroups.forEach(function (group) {
+            group.querySelectorAll('input[type="checkbox"]').forEach(function (checkbox) {
+                checkbox.checked = false;
+            });
         });
 
+        updateLaceSubcategories();
 
-        /*
-        |--------------------------------------------------------------------------
-        | LACE CATEGORY
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            laceCategory &&
-            laceCategory.value
-        ) {
-
-            params.set(
-                'lace_category',
-                laceCategory.value
-            );
-
+        if (filterForm && typeof window.applyShopFilters === 'function') {
+            window.applyShopFilters();
         }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | SORT
-        |--------------------------------------------------------------------------
-        */
-
-        const sortSelect =
-            document.querySelector(
-                'select[name="sort"]'
-            );
-
-
-        if (
-            sortSelect &&
-            sortSelect.value
-        ) {
-
-            params.set(
-                'sort',
-                sortSelect.value
-            );
-
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | CHANGE URL ONLY
-        |--------------------------------------------------------------------------
-        |
-        | replaceState DOES NOT reload the page.
-        |
-        |--------------------------------------------------------------------------
-        */
-
-        const query =
-            params.toString();
-
-
-        const newUrl =
-            query
-                ? window.location.pathname +
-                  '?' +
-                  query
-                : window.location.pathname;
-
-
-        window.history.replaceState(
-            {},
-            '',
-            newUrl
-        );
-
-    }
+    });
 
 
     /*
     |--------------------------------------------------------------------------
-    | MAIN FILTER FUNCTION
-    |--------------------------------------------------------------------------
-    */
-
-    function filterProducts() {
-
-        /*
-        |--------------------------------------------------------------------------
-        | CLOTHING FILTERS
-        |--------------------------------------------------------------------------
-        */
-
-        const selectedGenders =
-            getCheckedValues('gender');
-
-
-        const selectedBrands =
-            getCheckedValues('brand');
-
-
-        const selectedSizes =
-            getCheckedValues('sizes');
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | LACE FILTERS
-        |--------------------------------------------------------------------------
-        */
-
-        const selectedSubcategories =
-            getCheckedValues(
-                'lace_subcategories'
-            );
-
-
-        const selectedWidths =
-            getCheckedValues('width');
-
-
-        const selectedHeights =
-            getCheckedValues('height');
-
-
-        const selectedLengths =
-            getCheckedValues('length');
-
-
-        const selectedLaceCategory =
-            laceCategory
-                ? laceCategory.value
-                    .trim()
-                    .toLowerCase()
-                : '';
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | PRICE
-        |--------------------------------------------------------------------------
-        */
-
-        const selectedMaxPrice =
-            priceSlider
-                ? Number(priceSlider.value)
-                : Infinity;
-
-
-        let visibleCount = 0;
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | CHECK EVERY PRODUCT
-        |--------------------------------------------------------------------------
-        */
-
-        productCards.forEach(function (card) {
-
-            /*
-            |--------------------------------------------------------------------------
-            | PRICE
-            |--------------------------------------------------------------------------
-            */
-
-            const price =
-                Number(
-                    card.dataset.price || 0
-                );
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | CLOTHING DATA
-            |--------------------------------------------------------------------------
-            */
-
-            const gender =
-                String(
-                    card.dataset.gender || ''
-                )
-                .trim()
-                .toLowerCase();
-
-
-            const brand =
-                String(
-                    card.dataset.brand || ''
-                )
-                .trim()
-                .toLowerCase();
-
-
-            const sizes =
-                normalizeArray(
-                    card.dataset.sizes
-                );
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | LACE DATA
-            |--------------------------------------------------------------------------
-            */
-
-            const productLaceCategory =
-                String(
-                    card.dataset.laceCategory || ''
-                )
-                .trim()
-                .toLowerCase();
-
-
-            const laceSubcategories =
-                normalizeArray(
-                    card.dataset.laceSubcategories
-                );
-
-
-            const widths =
-                normalizeArray(
-                    card.dataset.laceWidth
-                );
-
-
-            const heights =
-                normalizeArray(
-                    card.dataset.laceHeight
-                );
-
-
-            const lengths =
-                normalizeArray(
-                    card.dataset.laceLength
-                );
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | PRICE MATCH
-            |--------------------------------------------------------------------------
-            */
-
-            const priceMatches =
-                price <= selectedMaxPrice;
-
-
-            let matches =
-                priceMatches;
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | CLOTHING
-            |--------------------------------------------------------------------------
-            */
-
-            if (
-                currentCategoryType ===
-                'clothing'
-            ) {
-
-                const genderMatches =
-                    arrayMatches(
-                        [gender],
-                        selectedGenders
-                    );
-
-
-                const brandMatches =
-                    arrayMatches(
-                        [brand],
-                        selectedBrands
-                    );
-
-
-                const sizeMatches =
-                    arrayMatches(
-                        sizes,
-                        selectedSizes
-                    );
-
-
-                matches =
-                    matches &&
-                    genderMatches &&
-                    brandMatches &&
-                    sizeMatches;
-
-            }
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | LACE
-            |--------------------------------------------------------------------------
-            */
-
-            if (
-                currentCategoryType ===
-                'lace'
-            ) {
-
-                const laceCategoryMatches =
-                    !selectedLaceCategory ||
-                    productLaceCategory ===
-                        selectedLaceCategory;
-
-
-                const laceSubcategoryMatches =
-                    arrayMatches(
-                        laceSubcategories,
-                        selectedSubcategories
-                    );
-
-
-                const widthMatches =
-                    arrayMatches(
-                        widths,
-                        selectedWidths
-                    );
-
-
-                const heightMatches =
-                    arrayMatches(
-                        heights,
-                        selectedHeights
-                    );
-
-
-                const lengthMatches =
-                    arrayMatches(
-                        lengths,
-                        selectedLengths
-                    );
-
-
-                matches =
-                    matches &&
-                    laceCategoryMatches &&
-                    laceSubcategoryMatches &&
-                    widthMatches &&
-                    heightMatches &&
-                    lengthMatches;
-
-            }
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | SHOW / HIDE
-            |--------------------------------------------------------------------------
-            */
-
-            if (matches) {
-
-                card.classList.remove(
-                    'hidden'
-                );
-
-                visibleCount++;
-
-            } else {
-
-                card.classList.add(
-                    'hidden'
-                );
-
-            }
-
-        });
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | UPDATE PRODUCT COUNT
-        |--------------------------------------------------------------------------
-        */
-
-        if (productCountText) {
-
-            productCountText.textContent =
-                'Showing ' +
-                visibleCount +
-                ' products';
-
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | UPDATE URL
-        |--------------------------------------------------------------------------
-        */
-
-        updateFilterUrl();
-
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | VERY IMPORTANT:
-    | PREVENT FORM RELOAD
-    |--------------------------------------------------------------------------
-    */
-
-    filterForm.addEventListener(
-        'submit',
-        function (event) {
-
-            /*
-            |--------------------------------------------------------------------------
-            | STOP NORMAL GET FORM SUBMISSION
-            |--------------------------------------------------------------------------
-            */
-
-            event.preventDefault();
-
-            /*
-            |--------------------------------------------------------------------------
-            | FILTER USING JAVASCRIPT
-            |--------------------------------------------------------------------------
-            */
-
-            filterProducts();
-
-        }
-    );
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | CHECKBOX FILTERS
-    |--------------------------------------------------------------------------
-    |
-    | IMPORTANT:
-    | There is NO form.submit() here.
-    |
-    |--------------------------------------------------------------------------
-    */
-
-    filterForm
-        .querySelectorAll(
-            'input[type="checkbox"]'
-        )
-        .forEach(function (input) {
-
-            input.addEventListener(
-                'change',
-                function () {
-
-                    filterProducts();
-
-                }
-            );
-
-        });
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | LACE CATEGORY
-    |--------------------------------------------------------------------------
-    */
-
-    if (laceCategory) {
-
-        laceCategory.addEventListener(
-            'change',
-            function () {
-
-                /*
-                |--------------------------------------------------------------------------
-                | Uncheck old lace subcategories
-                |--------------------------------------------------------------------------
-                */
-
-                laceGroups.forEach(
-                    function (group) {
-
-                        group
-                            .querySelectorAll(
-                                'input[type="checkbox"]'
-                            )
-                            .forEach(
-                                function (checkbox) {
-
-                                    checkbox.checked =
-                                        false;
-
-                                }
-                            );
-
-                    }
-                );
-
-
-                /*
-                |--------------------------------------------------------------------------
-                | Show correct subcategory group
-                |--------------------------------------------------------------------------
-                */
-
-                updateLaceSubcategories();
-
-
-                /*
-                |--------------------------------------------------------------------------
-                | Filter immediately
-                |--------------------------------------------------------------------------
-                */
-
-                filterProducts();
-
-            }
-        );
-
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | SINGLE PRICE SLIDER
-    |--------------------------------------------------------------------------
-    */
-
-    if (priceSlider) {
-
-        priceSlider.addEventListener(
-            'input',
-            function () {
-
-                updatePriceLabel();
-
-                filterProducts();
-
-            }
-        );
-
-
-        priceSlider.addEventListener(
-            'change',
-            function () {
-
-                updatePriceLabel();
-
-                filterProducts();
-
-            }
-        );
-
-
-        updatePriceLabel();
-
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | CLEAR FILTERS
-    |--------------------------------------------------------------------------
-    */
-
-    const clearFilterElements =
-        document.querySelectorAll(
-            '[data-clear-filters], .clear-filters'
-        );
-
-
-    clearFilterElements.forEach(
-        function (element) {
-
-            element.addEventListener(
-                'click',
-                function (event) {
-
-                    event.preventDefault();
-
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | Uncheck all checkboxes
-                    |--------------------------------------------------------------------------
-                    */
-
-                    filterForm
-                        .querySelectorAll(
-                            'input[type="checkbox"]'
-                        )
-                        .forEach(
-                            function (checkbox) {
-
-                                checkbox.checked =
-                                    false;
-
-                            }
-                        );
-
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | Reset lace category
-                    |--------------------------------------------------------------------------
-                    */
-
-                    if (laceCategory) {
-
-                        laceCategory.value = '';
-
-                    }
-
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | Hide lace subcategories
-                    |--------------------------------------------------------------------------
-                    */
-
-                    laceGroups.forEach(
-                        function (group) {
-
-                            group.classList.add(
-                                'hidden'
-                            );
-
-                        }
-                    );
-
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | Reset price
-                    |--------------------------------------------------------------------------
-                    */
-
-                    if (priceSlider) {
-
-                        priceSlider.value =
-                            priceSlider.max;
-
-                        updatePriceLabel();
-
-                    }
-
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | Filter immediately
-                    |--------------------------------------------------------------------------
-                    */
-
-                    filterProducts();
-
-                }
-            );
-
-        }
-    );
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | INITIALIZE
+    | INITIAL LOAD
     |--------------------------------------------------------------------------
     */
 
     updateLaceSubcategories();
 
-    updatePriceLabel();
-
-    filterProducts();
-
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| AJAX FILTERING + PRICE SLIDER
+|--------------------------------------------------------------------------
+*/
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const filterForm = document.querySelector(
+        'aside form[action="{{ route('shop') }}"]'
+    );
+
+    const sortForm = document.querySelector(
+        'form[action="{{ route('shop') }}"] select[name="sort"]'
+    )?.closest('form');
+
+    const resultsContainer = document.getElementById('product-results');
+    const productCount = document.getElementById('shop-product-count');
+
+    if (!filterForm || !resultsContainer) {
+        return;
+    }
+
+    let requestController = null;
+
+    function buildUrl(form) {
+        const formData = new FormData(form);
+        const params = new URLSearchParams();
+
+        for (const [key, value] of formData.entries()) {
+            if (value !== '') {
+                params.append(key, value);
+            }
+        }
+
+        return '{{ route('shop') }}' + (params.toString() ? '?' + params.toString() : '');
+    }
+
+    async function loadShopResults(form, updateHistory = true) {
+
+        const url = buildUrl(form);
+
+        if (requestController) {
+            requestController.abort();
+        }
+
+        requestController = new AbortController();
+
+        resultsContainer.style.opacity = '0.55';
+        resultsContainer.style.pointerEvents = 'none';
+
+        try {
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'text/html'
+                },
+                signal: requestController.signal
+            });
+
+            if (!response.ok) {
+                throw new Error('Filter request failed.');
+            }
+
+            const data = await response.json();
+
+            if (!data.html) {
+                throw new Error('Product results were not returned.');
+            }
+
+            resultsContainer.innerHTML = data.html;
+
+            if (productCount) {
+                productCount.textContent =
+                    'Showing ' + Number(data.count || 0).toLocaleString() + ' products';
+            }
+
+            if (updateHistory) {
+                window.history.pushState({}, '', url);
+            }
+
+            window.scrollTo({
+                top: document.querySelector('#product-results')?.getBoundingClientRect().top + window.scrollY - 120 || window.scrollY,
+                behavior: 'smooth'
+            });
+
+        } catch (error) {
+            if (error.name !== 'AbortError') {
+                console.error(error);
+            }
+        } finally {
+            resultsContainer.style.opacity = '';
+            resultsContainer.style.pointerEvents = '';
+        }
+    }
+
+    window.applyShopFilters = function () {
+        loadShopResults(filterForm, true);
+    };
+
+    filterForm.querySelectorAll('input[type="checkbox"]').forEach(function (input) {
+        input.addEventListener('change', function () {
+            window.applyShopFilters();
+        });
+    });
+
+    filterForm.querySelectorAll('select').forEach(function (select) {
+        if (select.id === 'lace_category') {
+            return;
+        }
+
+        select.addEventListener('change', function () {
+            window.applyShopFilters();
+        });
+    });
+
+    if (sortForm) {
+        sortForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            loadShopResults(sortForm, true);
+        });
+    }
+
+    const priceSlider = document.getElementById('price-slider');
+    const maxInput = document.getElementById('max-price-input');
+    const rangeLabel = document.getElementById('price-range-label');
+    const activeTrack = document.getElementById('price-active-track');
+
+    if (priceSlider && maxInput) {
+
+        const absoluteMin = Number(priceSlider.min);
+        const absoluteMax = Number(priceSlider.max);
+        let priceSubmitTimer = null;
+
+        function updatePriceSlider() {
+            const maxValue = Number(priceSlider.value);
+
+            maxInput.value = maxValue;
+
+            if (rangeLabel) {
+                rangeLabel.textContent =
+                    'Up to PKR ' + maxValue.toLocaleString();
+            }
+
+            const range = absoluteMax - absoluteMin;
+
+            if (activeTrack && range > 0) {
+                const maxPercent = ((maxValue - absoluteMin) / range) * 100;
+                activeTrack.style.width = maxPercent + '%';
+            }
+        }
+
+        priceSlider.addEventListener('input', updatePriceSlider);
+
+        priceSlider.addEventListener('change', function () {
+            clearTimeout(priceSubmitTimer);
+
+            priceSubmitTimer = setTimeout(function () {
+                window.applyShopFilters();
+            }, 100);
+        });
+
+        updatePriceSlider();
+    }
+
+    const clearFiltersLink = document.querySelector('.shop-clear-filters');
+
+    if (clearFiltersLink) {
+        clearFiltersLink.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            const url = this.href;
+
+            window.history.pushState({}, '', url);
+
+            fetch(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'text/html'
+                }
+            })
+            .then(function (response) {
+                if (!response.ok) {
+                    throw new Error('Could not clear filters.');
+                }
+                return response.json();
+            })
+            .then(function (data) {
+                if (data.html) {
+                    resultsContainer.innerHTML = data.html;
+                }
+
+                if (productCount) {
+                    productCount.textContent =
+                        'Showing ' + Number(data.count || 0).toLocaleString() + ' products';
+                }
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+        });
+    }
+
+    window.addEventListener('popstate', function () {
+        fetch(window.location.href, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'text/html'
+            }
+        })
+        .then(function (response) {
+            if (!response.ok) {
+                throw new Error('Could not restore filters.');
+            }
+            return response.json();
+        })
+        .then(function (data) {
+            if (data.html) {
+                resultsContainer.innerHTML = data.html;
+            }
+
+            if (productCount) {
+                productCount.textContent =
+                    'Showing ' + Number(data.count || 0).toLocaleString() + ' products';
+            }
+        })
+        .catch(function (error) {
+            console.error(error);
+        });
+    });
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| PRICE SLIDER STYLES
+|--------------------------------------------------------------------------
+*/
+
+/*
+|--------------------------------------------------------------------------
+| WHATSAPP ORDER
+|--------------------------------------------------------------------------
+*/
+
+function orderOnWhatsApp(productName) {
+
+    const phone = "{{ config('store.whatsapp') }}";
+
+    const message =
+        "Hello Bin Ismail! I am interested in: " +
+        productName +
+        ". Please share more details and availability.";
+
+    const url =
+        "https://wa.me/" +
+        phone +
+        "?text=" +
+        encodeURIComponent(message);
+
+    window.open(url, '_blank');
+
+}
 
 </script>
 
 <style>
+    .price-slider {
+        height: 20px;
+    }
 
-.price-range-slider {
-    appearance: none;
-    width: 100%;
-    height: 4px;
-    border-radius: 999px;
-    background: #e5e7eb;
-    outline: none;
-    cursor: pointer;
-}
+    .price-slider::-webkit-slider-thumb {
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 9999px;
+        background: #000;
+        cursor: pointer;
+        pointer-events: auto;
+        border: 2px solid #fff;
+        box-shadow: 0 0 0 1px #000;
+    }
 
-.price-range-slider::-webkit-slider-thumb {
-    appearance: none;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: #000;
-    border: 2px solid #fff;
-    box-shadow: 0 0 0 1px #000;
-    cursor: pointer;
-}
-
-.price-range-slider::-moz-range-thumb {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: #000;
-    border: 2px solid #fff;
-    box-shadow: 0 0 0 1px #000;
-    cursor: pointer;
-}
-
+    .price-slider::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        border-radius: 9999px;
+        background: #000;
+        cursor: pointer;
+        pointer-events: auto;
+        border: 2px solid #fff;
+        box-shadow: 0 0 0 1px #000;
+    }
 </style>
 
 @endsection

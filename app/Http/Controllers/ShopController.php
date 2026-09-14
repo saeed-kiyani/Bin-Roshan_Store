@@ -59,6 +59,8 @@ class ShopController extends Controller
                 str_contains($categoryText, 'apparel')
             ) {
                 $categoryType = 'clothing';
+            } elseif (str_contains($categoryText, 'cosmetic')) {
+                $categoryType = 'cosmetics';
             }
         }
 
@@ -209,6 +211,51 @@ class ShopController extends Controller
 
         /*
         |--------------------------------------------------------------------------
+        | COSMETICS FILTERS
+        |--------------------------------------------------------------------------
+        */
+        if ($categoryType === 'cosmetics') {
+            $cosmeticProductType = $request->input('cosmetic_product_type');
+            $brands = $this->arrayInput($request->input('brand', []));
+            $skinTypes = $this->arrayInput($request->input('skin_types', []));
+            $concerns = $this->arrayInput($request->input('concerns', []));
+            $productForms = $this->arrayInput($request->input('product_forms', []));
+
+            if (!empty($cosmeticProductType)) {
+                $products->where('cosmetic_product_type', $cosmeticProductType);
+            }
+
+            if (!empty($brands)) {
+                $products->whereIn('brand', $brands);
+            }
+
+            if (!empty($skinTypes)) {
+                $products->where(function ($query) use ($skinTypes) {
+                    foreach ($skinTypes as $skinType) {
+                        $query->orWhereJsonContains('skin_types', $skinType);
+                    }
+                });
+            }
+
+            if (!empty($concerns)) {
+                $products->where(function ($query) use ($concerns) {
+                    foreach ($concerns as $concern) {
+                        $query->orWhereJsonContains('concerns', $concern);
+                    }
+                });
+            }
+
+            if (!empty($productForms)) {
+                $products->where(function ($query) use ($productForms) {
+                    foreach ($productForms as $productForm) {
+                        $query->orWhereJsonContains('product_forms', $productForm);
+                    }
+                });
+            }
+        }
+
+        /*
+        |--------------------------------------------------------------------------
         | FILTER OPTIONS
         |--------------------------------------------------------------------------
         |
@@ -227,6 +274,10 @@ class ShopController extends Controller
             'gender',
             'brand',
             'sizes',
+            'cosmetic_product_type',
+            'skin_types',
+            'concerns',
+            'product_forms',
             'lace_subcategories',
             'width',
             'height',
@@ -236,6 +287,7 @@ class ShopController extends Controller
         ]);
 
         $clothingBrands = collect();
+        $cosmeticBrands = collect();
         $laceSubcategories = collect();
         $laceWidths = collect();
         $laceHeights = collect();
@@ -243,6 +295,17 @@ class ShopController extends Controller
 
         if ($categoryType === 'clothing') {
             $clothingBrands = $filterProducts
+                ->pluck('brand')
+                ->filter(fn ($brand) => filled($brand))
+                ->map(fn ($brand) => trim($brand))
+                ->filter()
+                ->unique()
+                ->sort()
+                ->values();
+        }
+
+        if ($categoryType === 'cosmetics') {
+            $cosmeticBrands = $filterProducts
                 ->pluck('brand')
                 ->filter(fn ($brand) => filled($brand))
                 ->map(fn ($brand) => trim($brand))
@@ -373,12 +436,25 @@ class ShopController extends Controller
 
         $products = $products->get();
 
+        // AJAX filter requests return only the product results.
+        // This prevents a full browser/page reload when filters change.
+        if ($request->ajax()) {
+            return response()->json([
+                'html' => view('partials.shop-product-results', [
+                    'products' => $products,
+                    'selectedCategory' => $selectedCategory,
+                ])->render(),
+                'count' => $products->count(),
+            ]);
+        }
+
         return view('shop', compact(
             'products',
             'categories',
             'selectedCategory',
             'categoryType',
             'clothingBrands',
+            'cosmeticBrands',
             'laceSubcategories',
             'laceWidths',
             'laceHeights',

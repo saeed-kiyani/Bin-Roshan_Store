@@ -10,45 +10,58 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Product extends Model
 {
     protected $fillable = [
-    'category_id',
+        'category_id',
 
-    // Clothing filters
-    'name',
-    'slug',
-    'sku',
-    'gender',
-    'sizes',
-    'brand',
+        // Clothing filters
+        'name',
+        'slug',
+        'sku',
+        'gender',
+        'sizes',
+        'brand',
 
-    // Lace filters
-    'lace_category',
-    'lace_subcategories',
-    'width',
-    'height',
-    'length',
+        // Cosmetics filters
+        'cosmetic_product_type',
+        'skin_types',
+        'concerns',
+        'product_forms',
 
-    'description',
-    'price',
-    'sale_price',
-    'stock',
-    'is_featured',
-    'is_active',
-];
+        // Lace filters
+        'lace_category',
+        'lace_subcategories',
+        'width',
+        'height',
+        'length',
+
+        'description',
+        'price',
+        'sale_price',
+        'stock',
+        'is_featured',
+        'is_active',
+    ];
 
     protected $casts = [
-    'price' => 'decimal:2',
-    'sale_price' => 'decimal:2',
-    'stock' => 'integer',
-    'is_featured' => 'boolean',
-    'is_active' => 'boolean',
+        'price' => 'decimal:2',
+        'sale_price' => 'decimal:2',
+        'stock' => 'integer',
+        'is_featured' => 'boolean',
+        'is_active' => 'boolean',
 
-    'sizes' => 'array',
+        // Clothing
+        'sizes' => 'array',
 
-    'lace_subcategories' => 'array',
-    'width' => 'array',
-    'height' => 'array',
-    'length' => 'array',
-];
+        // Cosmetics
+        'skin_types' => 'array',
+        'concerns' => 'array',
+        'product_forms' => 'array',
+
+        // Laces
+        'lace_subcategories' => 'array',
+        'width' => 'array',
+        'height' => 'array',
+        'length' => 'array',
+    ];
 
     public function category(): BelongsTo
     {

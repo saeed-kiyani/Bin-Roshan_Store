@@ -116,6 +116,70 @@
         $product->length ?? []
     );
 
+
+    
+    $cosmeticBrands = [
+        'Maybelline' => 'Maybelline',
+        "L'Oréal Paris" => "L'Oréal Paris",
+        'MAC' => 'MAC',
+        'Huda Beauty' => 'Huda Beauty',
+        'NYX Professional Makeup' => 'NYX Professional Makeup',
+        'The Ordinary' => 'The Ordinary',
+        'CeraVe' => 'CeraVe',
+        'NARS' => 'NARS',
+        'Revlon' => 'Revlon',
+        'Wet n Wild' => 'Wet n Wild',
+        'Essence' => 'Essence',
+        'Garnier' => 'Garnier',
+        'Neutrogena' => 'Neutrogena',
+        'Lakmé' => 'Lakmé',
+        'Fenty Beauty' => 'Fenty Beauty',
+        'Rare Beauty' => 'Rare Beauty',
+        'e.l.f. Cosmetics' => 'e.l.f. Cosmetics',
+        'Makeup Revolution' => 'Makeup Revolution',
+        'Dove' => 'Dove',
+        'Other' => 'Other',
+    ];
+
+    $cosmeticProductTypes = [
+        'makeup' => 'Makeup',
+        'skincare' => 'Skincare',
+        'haircare' => 'Haircare',
+        'fragrance' => 'Fragrance',
+        'body_care' => 'Body Care',
+        'nail_care' => 'Nail Care',
+    ];
+
+    $cosmeticSkinTypes = [
+        'all_skin_types' => 'All Skin Types',
+        'oily' => 'Oily',
+        'dry' => 'Dry',
+        'combination' => 'Combination',
+        'sensitive' => 'Sensitive',
+    ];
+
+    $cosmeticConcerns = [
+        'hydration' => 'Hydration',
+        'brightening' => 'Brightening',
+        'acne_blemishes' => 'Acne & Blemishes',
+        'oil_control' => 'Oil Control',
+        'anti_aging' => 'Anti-Aging',
+        'sun_protection' => 'Sun Protection',
+        'hair_fall' => 'Hair Fall',
+        'frizz_control' => 'Frizz Control',
+    ];
+
+    $cosmeticProductForms = [
+        'cream' => 'Cream',
+        'gel' => 'Gel',
+        'serum' => 'Serum',
+        'lotion' => 'Lotion',
+        'powder' => 'Powder',
+        'liquid' => 'Liquid',
+        'spray' => 'Spray',
+        'stick' => 'Stick',
+    ];
+
 @endphp
 
 
@@ -779,6 +843,248 @@
 
 </div>
 {{-- END LACE INFORMATION --}}
+
+{{-- =========================================================
+     COSMETICS INFORMATION
+========================================================= --}}
+
+<div
+    id="cosmetics-filter"
+    data-filter-section="cosmetics"
+    class="mt-7 border-t border-gray-200 pt-7 hidden"
+>
+
+    <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
+        Cosmetics Information
+    </p>
+
+
+    {{-- BRAND --}}
+
+    <div>
+
+        <label
+            for="cosmetic_brand"
+            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
+        >
+            Brand
+        </label>
+
+        <select
+            id="cosmetic_brand"
+            name="brand"
+            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
+        >
+
+            <option value="">
+                Select Brand
+            </option>
+
+            @foreach($cosmeticBrands as $value => $label)
+
+                <option
+                    value="{{ $value }}"
+                    {{ old('brand', $product->brand ?? '') === $value ? 'selected' : '' }}
+                >
+                    {{ $label }}
+                </option>
+
+            @endforeach
+
+        </select>
+
+    </div>
+
+
+    {{-- PRODUCT TYPE --}}
+
+    <div class="mt-7">
+
+        <label
+            for="cosmetic_product_type"
+            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
+        >
+            Product Type
+        </label>
+
+        <select
+            id="cosmetic_product_type"
+            name="cosmetic_product_type"
+            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
+        >
+
+            <option value="">
+                Select Product Type
+            </option>
+
+            @foreach($cosmeticProductTypes as $value => $label)
+
+                <option
+                    value="{{ $value }}"
+                    {{ old('cosmetic_product_type', $product->cosmetic_product_type ?? '') === $value ? 'selected' : '' }}
+                >
+                    {{ $label }}
+                </option>
+
+            @endforeach
+
+        </select>
+
+    </div>
+
+
+    {{-- SKIN TYPE --}}
+
+    @php
+        $selectedSkinTypes = old(
+            'skin_types',
+            $product->skin_types ?? []
+        );
+
+        if (is_string($selectedSkinTypes)) {
+            $selectedSkinTypes = json_decode($selectedSkinTypes, true) ?? [];
+        }
+    @endphp
+
+    <div class="mt-7 border-t border-gray-200 pt-7">
+
+        <label class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+            Skin Type
+        </label>
+
+        <p class="mt-2 text-xs text-gray-400">
+            Select all skin types that apply.
+        </p>
+
+        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+            @foreach($cosmeticSkinTypes as $value => $label)
+
+                <label class="flex items-center gap-3 cursor-pointer">
+
+                    <input
+                        type="checkbox"
+                        name="skin_types[]"
+                        value="{{ $value }}"
+                        {{ in_array($value, $selectedSkinTypes) ? 'checked' : '' }}
+                        class="w-4 h-4"
+                    >
+
+                    <span class="text-sm text-gray-600">
+                        {{ $label }}
+                    </span>
+
+                </label>
+
+            @endforeach
+
+        </div>
+
+    </div>
+
+
+    {{-- CONCERN / BENEFIT --}}
+
+    @php
+        $selectedConcerns = old(
+            'concerns',
+            $product->concerns ?? []
+        );
+
+        if (is_string($selectedConcerns)) {
+            $selectedConcerns = json_decode($selectedConcerns, true) ?? [];
+        }
+    @endphp
+
+    <div class="mt-7 border-t border-gray-200 pt-7">
+
+        <label class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+            Concern / Benefit
+        </label>
+
+        <p class="mt-2 text-xs text-gray-400">
+            Select all benefits that apply to this product.
+        </p>
+
+        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+            @foreach($cosmeticConcerns as $value => $label)
+
+                <label class="flex items-center gap-3 cursor-pointer">
+
+                    <input
+                        type="checkbox"
+                        name="concerns[]"
+                        value="{{ $value }}"
+                        {{ in_array($value, $selectedConcerns) ? 'checked' : '' }}
+                        class="w-4 h-4"
+                    >
+
+                    <span class="text-sm text-gray-600">
+                        {{ $label }}
+                    </span>
+
+                </label>
+
+            @endforeach
+
+        </div>
+
+    </div>
+
+
+    {{-- PRODUCT FORM --}}
+
+    @php
+        $selectedProductForms = old(
+            'product_forms',
+            $product->product_forms ?? []
+        );
+
+        if (is_string($selectedProductForms)) {
+            $selectedProductForms = json_decode($selectedProductForms, true) ?? [];
+        }
+    @endphp
+
+    <div class="mt-7 border-t border-gray-200 pt-7">
+
+        <label class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+            Product Form
+        </label>
+
+        <p class="mt-2 text-xs text-gray-400">
+            Select all forms that apply to this product.
+        </p>
+
+        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+            @foreach($cosmeticProductForms as $value => $label)
+
+                <label class="flex items-center gap-3 cursor-pointer">
+
+                    <input
+                        type="checkbox"
+                        name="product_forms[]"
+                        value="{{ $value }}"
+                        {{ in_array($value, $selectedProductForms) ? 'checked' : '' }}
+                        class="w-4 h-4"
+                    >
+
+                    <span class="text-sm text-gray-600">
+                        {{ $label }}
+                    </span>
+
+                </label>
+
+            @endforeach
+
+        </div>
+
+    </div>
+
+</div>
+
+{{-- END COSMETICS INFORMATION --}}
 
             {{-- DESCRIPTION --}}
 
