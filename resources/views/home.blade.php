@@ -21,12 +21,10 @@
         muted
         loop
         playsinline
-        class="absolute inset-0 w-full h-full object-cover"
-    >
+        class="absolute inset-0 w-full h-full object-cover">
         <source
             src="{{ asset('videos/hero.mp4') }}"
-            type="video/mp4"
-        >
+            type="video/mp4">
 
         Your browser does not support the video tag.
     </video>
@@ -57,22 +55,19 @@
 
                     <a
                         href="{{ route('home') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:opacity-60 transition"
-                    >
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
                         Home
                     </a>
 
                     <a
                         href="{{ route('shop') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:opacity-60 transition"
-                    >
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
                         Shop
                     </a>
 
                     <a
                         href="{{ route('categories') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:opacity-60 transition"
-                    >
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
                         Categories
                     </a>
 
@@ -85,14 +80,12 @@
 
                 <a
                     href="{{ route('home') }}"
-                    class="absolute left-1/2 -translate-x-1/2 top-5"
-                >
+                    class="absolute left-1/2 -translate-x-1/2 top-5">
 
                     <img
                         src="{{ asset('images/logo/logo.png') }}"
                         alt="Bin Ismail"
-                        class="h-14 lg:h-16 w-auto object-contain"
-                    >
+                        class="h-16 lg:h-35 w-auto object-contain">
 
                 </a>
 
@@ -103,15 +96,13 @@
 
                     <a
                         href="{{ route('about') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:opacity-60 transition"
-                    >
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
                         About
                     </a>
 
                     <a
                         href="{{ route('contact') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:opacity-60 transition"
-                    >
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
                         Contact
                     </a>
 
@@ -122,27 +113,23 @@
                         type="button"
                         onclick="openSearch()"
                         aria-label="Search"
-                        class="text-white hover:opacity-60 transition"
-                    >
+                        class="text-white hover:text-[#BE8B3E] transition">
 
                         <svg
                             class="w-6 h-6"
                             fill="none"
                             stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
+                            viewBox="0 0 24 24">
                             <circle
                                 cx="11"
                                 cy="11"
                                 r="7"
-                                stroke-width="1.7"
-                            />
+                                stroke-width="1.7"/>
 
                             <path
                                 d="m20 20-4-4"
                                 stroke-width="1.7"
-                                stroke-linecap="round"
-                            />
+                                stroke-linecap="round"/>
                         </svg>
 
                     </button>
@@ -154,27 +141,23 @@
                         type="button"
                         onclick="openCart()"
                         aria-label="Shopping bag"
-                        class="relative text-white hover:opacity-60 transition"
-                    >
+                        class="relative text-white hover:text-[#BE8B3E] transition">
 
                         <svg
                             class="w-6 h-6"
                             fill="none"
                             stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
+                            viewBox="0 0 24 24">
 
                             <path
                                 d="M6 8h12l1 13H5L6 8Z"
                                 stroke-width="1.5"
-                                stroke-linejoin="round"
-                            />
+                                stroke-linejoin="round"/>
 
                             <path
                                 d="M9 8V6a3 3 0 0 1 6 0v2"
                                 stroke-width="1.5"
-                                stroke-linecap="round"
-                            />
+                                stroke-linecap="round"/>
 
                         </svg>
 
@@ -183,8 +166,7 @@
 
                         <span
                             id="cart-count"
-                            class="absolute -top-2 -right-3 min-w-[17px] h-[17px] px-1 rounded-full bg-white text-black text-[9px] flex items-center justify-center font-semibold"
-                        >
+                            class="absolute -top-2 -right-3 min-w-[17px] h-[17px] px-1 rounded-full bg-white text-black text-[9px] flex items-center justify-center font-semibold">
                             0
                         </span>
 
@@ -201,21 +183,18 @@
                     type="button"
                     onclick="openMobileMenu()"
                     class="lg:hidden text-white"
-                    aria-label="Open menu"
-                >
+                    aria-label="Open menu">
 
                     <svg
                         class="w-7 h-7"
                         fill="none"
                         stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
+                        viewBox="0 0 24 24">
 
                         <path
                             d="M4 7h16M4 12h16M4 17h16"
                             stroke-width="1.5"
-                            stroke-linecap="round"
-                        />
+                            stroke-linecap="round"/>
 
                     </svg>
 
@@ -228,34 +207,29 @@
                     type="button"
                     onclick="openCart()"
                     class="lg:hidden relative text-white"
-                    aria-label="Shopping bag"
-                >
+                    aria-label="Shopping bag">
 
                     <svg
                         class="w-6 h-6"
                         fill="none"
                         stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
+                        viewBox="0 0 24 24">
 
                         <path
                             d="M6 8h12l1 13H5L6 8Z"
                             stroke-width="1.5"
-                            stroke-linejoin="round"
-                        />
+                            stroke-linejoin="round"/>
 
                         <path
                             d="M9 8V6a3 3 0 0 1 6 0v2"
                             stroke-width="1.5"
-                            stroke-linecap="round"
-                        />
+                            stroke-linecap="round"/>
 
                     </svg>
 
                     <span
                         id="cart-count-mobile"
-                        class="absolute -top-2 -right-3 min-w-[17px] h-[17px] px-1 rounded-full bg-white text-black text-[9px] flex items-center justify-center font-semibold"
-                    >
+                        class="absolute -top-2 -right-3 min-w-[17px] h-[17px] px-1 rounded-full bg-white text-black text-[9px] flex items-center justify-center font-semibold">
                         0
                     </span>
 
@@ -281,19 +255,16 @@
                 {{-- SMALL LABEL --}}
 
                 <p class="text-xs sm:text-sm uppercase tracking-[0.4em] font-medium opacity-90">
-                    Welcome to Bin Ismail
+                    Welcome to <span class="text-[#BE8B3E]">Bin Roshan</span>
                 </p>
 
 
                 {{-- MAIN HEADING --}}
 
                 <h1 class="mt-4 text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-light leading-[0.95] tracking-tight">
-
                     Elegance
                     <br>
-
                     That Speaks.
-
                 </h1>
 
 
@@ -315,8 +286,7 @@
 
                     <a
                         href="{{ route('shop') }}"
-                        class="inline-flex items-center justify-center px-7 py-4 bg-white text-black text-xs uppercase tracking-[0.2em] font-semibold hover:bg-black hover:text-white transition duration-300"
-                    >
+                        class="inline-flex items-center justify-center px-7 py-4 bg-[#BE8B3E] text-white text-xs uppercase tracking-[0.2em] font-semibold border border-[#BE8B3E]/80 hover:bg-transparent hover:text-[#BE8B3E] transition duration-300">
                         Shop Collection
                     </a>
 
@@ -325,8 +295,7 @@
                         href="https://wa.me/{{ config('store.whatsapp') }}"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="inline-flex items-center justify-center px-7 py-4 border border-white/80 text-white text-xs uppercase tracking-[0.2em] font-semibold hover:bg-white hover:text-black transition duration-300"
-                    >
+                        class="inline-flex items-center justify-center px-7 py-4 border border-[#BE8B3E]/80 text-[#BE8B3E] text-xs uppercase tracking-[0.2em] font-semibold hover:bg-[#BE8B3E] hover:text-white transition duration-300">
                         WhatsApp Us
                     </a>
 
@@ -433,8 +402,7 @@
     {{-- VIEW ALL - RIGHT SIDE --}}
     <a
         href="{{ route('categories') }}"
-        class="absolute right-0 top-1/2 -translate-y-1/2 hidden sm:inline-flex items-center gap-3 text-sm uppercase tracking-wider border-b border-black pb-2 hover:opacity-60 transition"
-    >
+        class="absolute right-0 top-1/2 -translate-y-1/2 hidden sm:inline-flex items-center gap-3 text-sm uppercase tracking-wider border-b border-black pb-2 hover:opacity-60 transition">
         View All
     </a>
 
@@ -459,13 +427,11 @@
 
         <a
             href="{{ route('category.show', $category->slug) }}"
-            class="group relative overflow-hidden aspect-[3/4] bg-gray-100"
-        >
+            class="group relative overflow-hidden aspect-[3/4] bg-gray-100">
 
             <div
                 class="absolute inset-0 bg-cover bg-center transition duration-700 group-hover:scale-105"
-                style="background-image: url('{{ $image }}');"
-            ></div>
+                style="background-image: url('{{ $image }}');"></div>
 
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
 
@@ -555,13 +521,11 @@
 
             <a
                 href="{{ route('product.show', $product->slug) }}"
-                class="block overflow-hidden bg-white aspect-[4/5]"
-            >
+                class="block overflow-hidden bg-white aspect-[4/5]">
 
                 <div
                     class="w-full h-full bg-cover bg-center transition duration-700 group-hover:scale-105"
-                    style="background-image: url('{{ $image }}');"
-                ></div>
+                    style="background-image: url('{{ $image }}');"></div>
 
             </a>
 
@@ -625,8 +589,7 @@
 
         <div
             class="absolute inset-0 bg-cover bg-center"
-            style="background-image: url('https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1800&q=85');"
-        ></div>
+            style="background-image: url('https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1800&q=85');"></div>
 
     </div>
 
@@ -635,7 +598,7 @@
     <div class="relative max-w-5xl mx-auto px-6 py-28 text-center">
 
         <p class="text-xs uppercase tracking-[0.5em] text-[#d4af37]">
-            The Bin Ismail Edit
+            The Bin Roshan Edit
         </p>
 
         <h2 class="mt-6 text-4xl sm:text-6xl font-light">

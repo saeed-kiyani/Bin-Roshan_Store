@@ -574,6 +574,9 @@
 {{-- =========================================================
      JEWELRY INFORMATION
 ========================================================= --}}
+{{-- =========================================================
+     JEWELRY INFORMATION
+========================================================= --}}
 <div
     id="jewelry-filter"
     data-filter-section="jewelry"
@@ -583,10 +586,185 @@
         Jewelry Information
     </p>
 
-    <p class="text-sm text-gray-500">
-        Jewelry filters will be added here.
-    </p>
+    {{-- GENDER --}}
+    <div>
+        <p class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+            Gender
+        </p>
+        <div class="mt-4 flex flex-wrap gap-6">
+            @php
+                $selectedJewelryGender = old('jewelry_gender', []);
+                if (is_string($selectedJewelryGender)) {
+                    $selectedJewelryGender = json_decode($selectedJewelryGender, true) ?? [];
+                }
+            @endphp
+
+            @foreach(['men' => 'Men', 'women' => 'Women'] as $value => $label)
+                <label class="flex items-center gap-2 cursor-pointer">
+                    <input
+                        type="checkbox"
+                        name="jewelry_gender[]"
+                        value="{{ $value }}"
+                        {{ in_array($value, $selectedJewelryGender) ? 'checked' : '' }}
+                        class="w-4 h-4"
+                    >
+                    <span class="text-sm text-gray-700">{{ $label }}</span>
+                </label>
+            @endforeach
+        </div>
+    </div>
+
+    {{-- JEWELRY TYPE --}}
+    <div class="mt-7">
+        <label
+            for="jewelry_type"
+            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
+        >
+            Jewelry Type
+        </label>
+
+        <select
+            id="jewelry_type"
+            name="jewelry_type"
+            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
+        >
+            <option value="">Select Jewelry Type</option>
+            <option value="earrings" {{ old('jewelry_type', '') === 'earrings' ? 'selected' : '' }}>Earrings</option>
+            <option value="necklaces" {{ old('jewelry_type', '') === 'necklaces' ? 'selected' : '' }}>Necklaces</option>
+            <option value="rings" {{ old('jewelry_type', '') === 'rings' ? 'selected' : '' }}>Rings</option>
+            <option value="bracelets" {{ old('jewelry_type', '') === 'bracelets' ? 'selected' : '' }}>Bracelets</option>
+        </select>
+    </div>
+
+    {{-- DYNAMIC SUBCATEGORIES --}}
+    <div id="jewelry-subcategories-container" class="mt-7 hidden">
+        <p class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+            Subcategories
+        </p>
+        <p class="mt-2 text-xs text-gray-400">
+            Select all subcategories that apply to this jewelry type.
+        </p>
+        <div
+            id="jewelry-subcategories"
+            class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4"
+        ></div>
+    </div>
+
+    {{-- QUALITY --}}
+    <div class="mt-7 border-t border-gray-200 pt-7">
+        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
+            Product Type / Quality
+        </p>
+        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            @php
+                $selectedJewelryQuality = old('jewelry_quality', []);
+                if (is_string($selectedJewelryQuality)) {
+                    $selectedJewelryQuality = json_decode($selectedJewelryQuality, true) ?? [];
+                }
+            @endphp
+
+            @foreach([
+                'fine' => 'Fine Jewelry (Real Gold / Diamonds)',
+                'demi_fine' => 'Demi-Fine (Gold-plated / Silver)',
+                'fashion' => 'Fashion / Artificial Jewelry'
+            ] as $value => $label)
+                <label class="flex items-start gap-3 cursor-pointer">
+                    <input
+                        type="checkbox"
+                        name="jewelry_quality[]"
+                        value="{{ $value }}"
+                        {{ in_array($value, $selectedJewelryQuality) ? 'checked' : '' }}
+                        class="w-4 h-4 mt-0.5"
+                    >
+                    <span class="text-sm text-gray-700">{{ $label }}</span>
+                </label>
+            @endforeach
+        </div>
+    </div>
+
+    {{-- RING SIZE --}}
+    <div class="mt-7 border-t border-gray-200 pt-7 jewelry-size-group" data-jewelry-size="rings">
+        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
+            Ring Size
+        </p>
+        <p class="mt-2 text-xs text-gray-400">Select the available Pakistani ring sizes.</p>
+        @php
+            $selectedRingSizes = old('ring_sizes', []);
+            if (is_string($selectedRingSizes)) {
+                $selectedRingSizes = json_decode($selectedRingSizes, true) ?? [];
+            }
+        @endphp
+        <div class="mt-5 grid grid-cols-3 sm:grid-cols-6 gap-4">
+            @foreach(range(4, 30) as $size)
+                <label class="flex items-center gap-2 cursor-pointer">
+                    <input
+                        type="checkbox"
+                        name="ring_sizes[]"
+                        value="{{ $size }}"
+                        {{ in_array((string)$size, array_map('strval', $selectedRingSizes)) ? 'checked' : '' }}
+                        class="w-4 h-4"
+                    >
+                    <span class="text-sm text-gray-700">{{ $size }}</span>
+                </label>
+            @endforeach
+        </div>
+    </div>
+
+    {{-- NECKLACE LENGTH --}}
+    <div class="mt-7 border-t border-gray-200 pt-7 jewelry-size-group" data-jewelry-size="necklaces">
+        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
+            Chain / Necklace Length
+        </p>
+        @php
+            $selectedNecklaceLengths = old('necklace_lengths', []);
+            if (is_string($selectedNecklaceLengths)) {
+                $selectedNecklaceLengths = json_decode($selectedNecklaceLengths, true) ?? [];
+            }
+        @endphp
+        <div class="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-4">
+            @foreach(['14 inch (Choker)', '16 inch', '18 inch', '20 inch', '22 inch', '24 inch', '26 inch', '28 inch'] as $length)
+                <label class="flex items-center gap-3 cursor-pointer">
+                    <input
+                        type="checkbox"
+                        name="necklace_lengths[]"
+                        value="{{ $length }}"
+                        {{ in_array($length, $selectedNecklaceLengths) ? 'checked' : '' }}
+                        class="w-4 h-4"
+                    >
+                    <span class="text-sm text-gray-700">{{ $length }}</span>
+                </label>
+            @endforeach
+        </div>
+    </div>
+
+    {{-- BRACELET / BANGLE SIZE --}}
+    <div class="mt-7 border-t border-gray-200 pt-7 jewelry-size-group" data-jewelry-size="bracelets">
+        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
+            Bracelet / Bangle Size
+        </p>
+        @php
+            $selectedBraceletSizes = old('bracelet_sizes', []);
+            if (is_string($selectedBraceletSizes)) {
+                $selectedBraceletSizes = json_decode($selectedBraceletSizes, true) ?? [];
+            }
+        @endphp
+        <div class="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-4">
+            @foreach(['Small', 'Medium', 'Large', '2.4 inch', '2.6 inch', '2.8 inch', '3.0 inch'] as $size)
+                <label class="flex items-center gap-3 cursor-pointer">
+                    <input
+                        type="checkbox"
+                        name="bracelet_sizes[]"
+                        value="{{ $size }}"
+                        {{ in_array($size, $selectedBraceletSizes) ? 'checked' : '' }}
+                        class="w-4 h-4"
+                    >
+                    <span class="text-sm text-gray-700">{{ $size }}</span>
+                </label>
+            @endforeach
+        </div>
+    </div>
 </div>
+
 
 {{-- =========================================================
      COSMETICS INFORMATION
@@ -733,9 +911,70 @@
         Watches Information
     </p>
 
-    <p class="text-sm text-gray-500">
-        Watch filters will be added here.
-    </p>
+    {{-- GENDER --}}
+    <div>
+        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
+            Gender
+        </p>
+
+        <div class="mt-4 flex flex-wrap gap-6">
+            @foreach(['men' => 'Men', 'women' => 'Women', 'kids' => 'Kids'] as $value => $label)
+                <label class="flex items-center gap-3 cursor-pointer">
+                    <input
+                        type="checkbox"
+                        name="watch_gender[]"
+                        value="{{ $value }}"
+                        {{ in_array($value, old('watch_gender', [])) ? 'checked' : '' }}
+                        class="w-4 h-4"
+                    >
+                    <span class="text-sm text-gray-700">{{ $label }}</span>
+                </label>
+            @endforeach
+        </div>
+    </div>
+
+    {{-- STRAP MATERIAL --}}
+    <div class="mt-7">
+        <label
+            for="strap_material"
+            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
+        >
+            Strap Material
+        </label>
+
+        <select
+            id="strap_material"
+            name="strap_material"
+            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
+        >
+            <option value="">Select Strap Material</option>
+            <option value="stainless_steel" {{ old('strap_material') === 'stainless_steel' ? 'selected' : '' }}>Stainless Steel</option>
+            <option value="leather" {{ old('strap_material') === 'leather' ? 'selected' : '' }}>Leather (Patty)</option>
+            <option value="silicone_rubber" {{ old('strap_material') === 'silicone_rubber' ? 'selected' : '' }}>Silicone / Rubber</option>
+        </select>
+    </div>
+
+    {{-- WATCH TYPE --}}
+    <div class="mt-7">
+        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
+            Watch Type
+        </p>
+
+        <div class="mt-4 space-y-3">
+            @foreach(['analog' => 'Analog', 'digital' => 'Digital', 'smartwatch' => 'Smartwatch', 'chronograph' => 'Chronograph'] as $value => $label)
+                <label class="flex items-center gap-3 cursor-pointer">
+                    <input
+                        type="radio"
+                        name="watch_type"
+                        value="{{ $value }}"
+                        {{ old('watch_type') === $value ? 'checked' : '' }}
+                        class="w-4 h-4"
+                    >
+                    <span class="text-sm text-gray-700">{{ $label }}</span>
+                </label>
+            @endforeach
+        </div>
+    </div>
 </div>
 
 {{-- =========================================================
@@ -1328,3 +1567,94 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 @endsection
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const jewelryType = document.getElementById('jewelry_type');
+    const jewelryContainer = document.getElementById('jewelry-subcategories-container');
+    const jewelrySubcategories = document.getElementById('jewelry-subcategories');
+
+    if (!jewelryType || !jewelryContainer || !jewelrySubcategories) return;
+
+    const jewelryMap = {
+        earrings: [
+            ['hoops', 'Hoops'],
+            ['studs', 'Studs'],
+            ['drop', 'Drop Earrings'],
+            ['dangle', 'Dangle Earrings'],
+            ['chandelier', 'Chandelier Earrings'],
+            ['huggies', 'Huggies'],
+            ['jhumka', 'Jhumka']
+        ],
+        necklaces: [
+            ['chokers', 'Chokers'],
+            ['pendants', 'Pendant Necklaces'],
+            ['chains', 'Chains'],
+            ['layered', 'Layered Necklaces'],
+            ['statement', 'Statement Necklaces'],
+            ['pearl', 'Pearl Necklaces']
+        ],
+        rings: [
+            ['bands', 'Bands'],
+            ['solitaire', 'Solitaire Rings'],
+            ['cocktail', 'Cocktail Rings'],
+            ['stackable', 'Stackable Rings'],
+            ['signet', 'Signet Rings'],
+            ['adjustable', 'Adjustable Rings']
+        ],
+        bracelets: [
+            ['chain', 'Chain Bracelets'],
+            ['cuff', 'Cuff Bracelets'],
+            ['bangles', 'Bangles'],
+            ['charm', 'Charm Bracelets'],
+            ['tennis', 'Tennis Bracelets'],
+            ['kada', 'Kada']
+        ]
+    };
+
+    const existing = @json(old('jewelry_subcategories', []));
+    const selected = Array.isArray(existing) ? existing : [];
+
+    function renderJewelrySubcategories() {
+        const type = jewelryType.value;
+        jewelrySubcategories.innerHTML = '';
+
+        if (!type || !jewelryMap[type]) {
+            jewelryContainer.classList.add('hidden');
+            return;
+        }
+
+        jewelryContainer.classList.remove('hidden');
+
+        jewelryMap[type].forEach(function (item) {
+            const value = item[0];
+            const label = item[1];
+            const wrapper = document.createElement('label');
+            wrapper.className = 'flex items-center gap-3 cursor-pointer';
+            wrapper.innerHTML = `
+                <input type="checkbox" name="jewelry_subcategories[]" value="${value}" class="w-4 h-4" ${selected.includes(value) ? 'checked' : ''}>
+                <span class="text-sm text-gray-700">${label}</span>
+            `;
+            jewelrySubcategories.appendChild(wrapper);
+        });
+    }
+
+    jewelryType.addEventListener('change', function () {
+        selected.length = 0;
+        renderJewelrySubcategories();
+    });
+
+    renderJewelrySubcategories();
+
+    // Only show the sizing group relevant to the selected jewelry type.
+    function updateJewelrySizing() {
+        document.querySelectorAll('.jewelry-size-group').forEach(function (group) {
+            const active = group.dataset.jewelrySize === jewelryType.value;
+            group.classList.toggle('hidden', !active);
+        });
+    }
+
+    jewelryType.addEventListener('change', updateJewelrySizing);
+    updateJewelrySizing();
+});
+</script>

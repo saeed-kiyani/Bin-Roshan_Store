@@ -428,6 +428,53 @@ class ProductController extends Controller
             ],
 
 
+
+            /*
+            |--------------------------------------------------------------------------
+            | JEWELRY FILTERS
+            |--------------------------------------------------------------------------
+            */
+
+            'jewelry_gender' => ['nullable', 'array'],
+            'jewelry_gender.*' => ['string', 'in:men,women'],
+
+            'jewelry_type' => [
+                'nullable',
+                'string',
+                'in:earrings,necklaces,rings,bracelets',
+            ],
+            'jewelry_subcategories' => ['nullable', 'array'],
+            'jewelry_subcategories.*' => ['string', 'max:100'],
+            'jewelry_quality' => ['nullable', 'array'],
+            'jewelry_quality.*' => ['string', 'in:fine,demi_fine,fashion'],
+            'ring_sizes' => ['nullable', 'array'],
+            'ring_sizes.*' => ['string', 'max:50'],
+            'necklace_lengths' => ['nullable', 'array'],
+            'necklace_lengths.*' => ['string', 'max:50'],
+            'bracelet_sizes' => ['nullable', 'array'],
+            'bracelet_sizes.*' => ['string', 'max:50'],
+
+            /*
+            |--------------------------------------------------------------------------
+            | WATCH FILTERS
+            |--------------------------------------------------------------------------
+            */
+
+            'watch_gender' => ['nullable', 'array'],
+            'watch_gender.*' => ['string', 'in:men,women,kids'],
+
+            'strap_material' => [
+                'nullable',
+                'string',
+                'in:stainless_steel,leather,silicone_rubber',
+            ],
+
+            'watch_type' => [
+                'nullable',
+                'string',
+                'in:analog,digital,smartwatch,chronograph',
+            ],
+
             /*
             |--------------------------------------------------------------------------
             | PRODUCT DETAILS
@@ -599,6 +646,17 @@ $laceWidth = null;
 $laceHeight = null;
 $laceLength = null;
 
+$jewelryGender = null;
+$jewelryType = null;
+$jewelrySubcategories = null;
+$jewelryQuality = null;
+$ringSizes = null;
+$necklaceLengths = null;
+$braceletSizes = null;
+$watchGender = null;
+$strapMaterial = null;
+$watchType = null;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -642,6 +700,24 @@ if ($categoryType === 'cosmetics') {
         }
 
 
+        if ($categoryType === 'jewelry') {
+
+            $jewelryGender = $validated['jewelry_gender'] ?? null;
+            $jewelryType = $validated['jewelry_type'] ?? null;
+            $jewelrySubcategories = $validated['jewelry_subcategories'] ?? null;
+            $jewelryQuality = $validated['jewelry_quality'] ?? null;
+            $ringSizes = $validated['ring_sizes'] ?? null;
+            $necklaceLengths = $validated['necklace_lengths'] ?? null;
+            $braceletSizes = $validated['bracelet_sizes'] ?? null;
+        }
+
+        if ($categoryType === 'watches') {
+            $watchGender = $validated['watch_gender'] ?? null;
+            $strapMaterial = $validated['strap_material'] ?? null;
+            $watchType = $validated['watch_type'] ?? null;
+        }
+
+
         /*
         |--------------------------------------------------------------------------
         | CREATE PRODUCT
@@ -671,6 +747,20 @@ if ($categoryType === 'cosmetics') {
     'width' => $validated['width'] ?? null,
     'height' => $validated['height'] ?? null,
     'length' => $validated['length'] ?? null,
+
+    // Jewelry filters
+    'jewelry_gender' => $jewelryGender,
+    'jewelry_type' => $jewelryType,
+    'jewelry_subcategories' => $jewelrySubcategories,
+    'jewelry_quality' => $jewelryQuality,
+    'ring_sizes' => $ringSizes,
+    'necklace_lengths' => $necklaceLengths,
+    'bracelet_sizes' => $braceletSizes,
+
+    // Watch filters
+    'watch_gender' => $watchGender,
+    'strap_material' => $strapMaterial,
+    'watch_type' => $watchType,
 
     'description' => $validated['description'] ?? null,
     'price' => $validated['price'],
@@ -941,6 +1031,53 @@ if ($categoryType === 'cosmetics') {
             ],
 
 
+
+            /*
+            |--------------------------------------------------------------------------
+            | JEWELRY FILTERS
+            |--------------------------------------------------------------------------
+            */
+
+            'jewelry_gender' => ['nullable', 'array'],
+            'jewelry_gender.*' => ['string', 'in:men,women'],
+
+            'jewelry_type' => [
+                'nullable',
+                'string',
+                'in:earrings,necklaces,rings,bracelets',
+            ],
+            'jewelry_subcategories' => ['nullable', 'array'],
+            'jewelry_subcategories.*' => ['string', 'max:100'],
+            'jewelry_quality' => ['nullable', 'array'],
+            'jewelry_quality.*' => ['string', 'in:fine,demi_fine,fashion'],
+            'ring_sizes' => ['nullable', 'array'],
+            'ring_sizes.*' => ['string', 'max:50'],
+            'necklace_lengths' => ['nullable', 'array'],
+            'necklace_lengths.*' => ['string', 'max:50'],
+            'bracelet_sizes' => ['nullable', 'array'],
+            'bracelet_sizes.*' => ['string', 'max:50'],
+
+            /*
+            |--------------------------------------------------------------------------
+            | WATCH FILTERS
+            |--------------------------------------------------------------------------
+            */
+
+            'watch_gender' => ['nullable', 'array'],
+            'watch_gender.*' => ['string', 'in:men,women,kids'],
+
+            'strap_material' => [
+                'nullable',
+                'string',
+                'in:stainless_steel,leather,silicone_rubber',
+            ],
+
+            'watch_type' => [
+                'nullable',
+                'string',
+                'in:analog,digital,smartwatch,chronograph',
+            ],
+
             /*
             |--------------------------------------------------------------------------
             | PRODUCT DETAILS
@@ -1096,6 +1233,18 @@ $laceWidth = null;
 $laceHeight = null;
 $laceLength = null;
 
+$jewelryGender = null;
+$jewelryType = null;
+$jewelrySubcategories = null;
+$jewelryQuality = null;
+$ringSizes = null;
+$necklaceLengths = null;
+$braceletSizes = null;
+
+$watchGender = null;
+$strapMaterial = null;
+$watchType = null;
+
 
         if ($categoryType === 'clothing') {
 
@@ -1122,6 +1271,24 @@ $laceLength = null;
             $laceHeight = $validated['height'] ?? null;
 
             $laceLength = $validated['length'] ?? null;
+        }
+
+
+        if ($categoryType === 'jewelry') {
+
+            $jewelryGender = $validated['jewelry_gender'] ?? null;
+            $jewelryType = $validated['jewelry_type'] ?? null;
+            $jewelrySubcategories = $validated['jewelry_subcategories'] ?? null;
+            $jewelryQuality = $validated['jewelry_quality'] ?? null;
+            $ringSizes = $validated['ring_sizes'] ?? null;
+            $necklaceLengths = $validated['necklace_lengths'] ?? null;
+            $braceletSizes = $validated['bracelet_sizes'] ?? null;
+        }
+
+        if ($categoryType === 'watches') {
+            $watchGender = $validated['watch_gender'] ?? null;
+            $strapMaterial = $validated['strap_material'] ?? null;
+            $watchType = $validated['watch_type'] ?? null;
         }
 
 
@@ -1178,6 +1345,20 @@ $laceLength = null;
             'height' => $laceHeight,
 
             'length' => $laceLength,
+
+            // Jewelry filters
+            'jewelry_gender' => $jewelryGender,
+            'jewelry_type' => $jewelryType,
+            'jewelry_subcategories' => $jewelrySubcategories,
+            'jewelry_quality' => $jewelryQuality,
+            'ring_sizes' => $ringSizes,
+            'necklace_lengths' => $necklaceLengths,
+            'bracelet_sizes' => $braceletSizes,
+
+            // Watch filters
+            'watch_gender' => $watchGender,
+            'strap_material' => $strapMaterial,
+            'watch_type' => $watchType,
 
 
             /*

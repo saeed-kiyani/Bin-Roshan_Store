@@ -12,10 +12,18 @@ class Product extends Model
     protected $fillable = [
         'category_id',
 
-        // Clothing filters
+        // Common product fields
         'name',
         'slug',
         'sku',
+        'description',
+        'price',
+        'sale_price',
+        'stock',
+        'is_featured',
+        'is_active',
+
+        // Clothing filters
         'gender',
         'sizes',
         'brand',
@@ -33,12 +41,19 @@ class Product extends Model
         'height',
         'length',
 
-        'description',
-        'price',
-        'sale_price',
-        'stock',
-        'is_featured',
-        'is_active',
+        // Jewelry filters
+        'jewelry_gender',
+        'jewelry_type',
+        'jewelry_subcategories',
+        'jewelry_quality',
+        'ring_sizes',
+        'necklace_lengths',
+        'bracelet_sizes',
+
+        // Watches filters
+        'watch_gender',
+        'strap_material',
+        'watch_type',
     ];
 
     protected $casts = [
@@ -61,6 +76,17 @@ class Product extends Model
         'width' => 'array',
         'height' => 'array',
         'length' => 'array',
+
+        // Jewelry
+        'jewelry_gender' => 'array',
+        'jewelry_subcategories' => 'array',
+        'jewelry_quality' => 'array',
+        'ring_sizes' => 'array',
+        'necklace_lengths' => 'array',
+        'bracelet_sizes' => 'array',
+
+        // Watches
+        'watch_gender' => 'array',
     ];
 
     public function category(): BelongsTo

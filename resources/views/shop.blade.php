@@ -34,6 +34,18 @@
     $selectedHeights = request()->input('height', []);
     $selectedLengths = request()->input('length', []);
 
+    $selectedJewelryGenders = request()->input('jewelry_gender', []);
+    $selectedJewelryType = request()->input('jewelry_type', '');
+    $selectedJewelrySubcategories = request()->input('jewelry_subcategories', []);
+    $selectedJewelryQuality = request()->input('jewelry_quality', []);
+    $selectedRingSizes = request()->input('ring_sizes', []);
+    $selectedNecklaceLengths = request()->input('necklace_lengths', []);
+    $selectedBraceletSizes = request()->input('bracelet_sizes', []);
+
+    $selectedWatchGenders = request()->input('watch_gender', []);
+    $selectedStrapMaterial = request()->input('strap_material', '');
+    $selectedWatchType = request()->input('watch_type', '');
+
     if (!is_array($selectedGenders)) {
         $selectedGenders = [$selectedGenders];
     }
@@ -72,6 +84,34 @@
 
     if (!is_array($selectedLengths)) {
         $selectedLengths = [$selectedLengths];
+    }
+
+    if (!is_array($selectedJewelryGenders)) {
+        $selectedJewelryGenders = [$selectedJewelryGenders];
+    }
+
+    if (!is_array($selectedJewelrySubcategories)) {
+        $selectedJewelrySubcategories = [$selectedJewelrySubcategories];
+    }
+
+    if (!is_array($selectedJewelryQuality)) {
+        $selectedJewelryQuality = [$selectedJewelryQuality];
+    }
+
+    if (!is_array($selectedRingSizes)) {
+        $selectedRingSizes = [$selectedRingSizes];
+    }
+
+    if (!is_array($selectedNecklaceLengths)) {
+        $selectedNecklaceLengths = [$selectedNecklaceLengths];
+    }
+
+    if (!is_array($selectedBraceletSizes)) {
+        $selectedBraceletSizes = [$selectedBraceletSizes];
+    }
+
+    if (!is_array($selectedWatchGenders)) {
+        $selectedWatchGenders = [$selectedWatchGenders];
     }
 @endphp
 
@@ -401,11 +441,8 @@
                     Shop Products
                 </h2>
 
-                <p
-                    id="shop-product-count"
-                    class="mt-2 text-sm text-gray-500"
-                >
-                    Showing {{ $products->count() }} products
+                <p class="mt-2 text-sm text-gray-500">
+                    Showing <span id="shop-products-count">{{ $products->count() }}</span> products
                 </p>
 
             </div>
@@ -447,7 +484,6 @@
 
                 <select
                     name="sort"
-                    onchange="this.form.requestSubmit()"
                     class="border border-gray-300 bg-white px-5 py-3 text-sm focus:outline-none focus:border-black"
                 >
 
@@ -745,6 +781,189 @@
 
                             </div>
 
+                        </div>
+
+                    @endif
+
+
+                    {{-- =================================================
+                         JEWELRY FILTERS
+                    ================================================== --}}
+                    @if($categoryType === 'jewelry')
+
+                        <div class="mt-7 border-t border-gray-200 pt-7">
+                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
+                                Gender
+                            </p>
+                            <div class="space-y-3">
+                                @foreach(['men' => 'Men', 'women' => 'Women'] as $value => $label)
+                                    <label class="flex items-center gap-3 cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            name="jewelry_gender[]"
+                                            value="{{ $value }}"
+                                            {{ in_array($value, $selectedJewelryGenders) ? 'checked' : '' }}
+                                            class="w-4 h-4"
+                                        >
+                                        <span class="text-sm text-gray-700">{{ $label }}</span>
+                                    </label>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div class="mt-7 border-t border-gray-200 pt-7">
+                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
+                                Jewelry Type
+                            </p>
+                            <select
+                                name="jewelry_type"
+                                id="jewelry_type"
+                                class="w-full border border-gray-200 bg-white px-3 py-3 text-sm focus:outline-none focus:border-black"
+                            >
+                                <option value="">All Jewelry Types</option>
+                                <option value="earrings" {{ $selectedJewelryType === 'earrings' ? 'selected' : '' }}>Earrings</option>
+                                <option value="necklaces" {{ $selectedJewelryType === 'necklaces' ? 'selected' : '' }}>Necklaces</option>
+                                <option value="rings" {{ $selectedJewelryType === 'rings' ? 'selected' : '' }}>Rings</option>
+                                <option value="bracelets" {{ $selectedJewelryType === 'bracelets' ? 'selected' : '' }}>Bracelets</option>
+                            </select>
+                        </div>
+
+                        <div id="shop-jewelry-subcategories" class="mt-7 border-t border-gray-200 pt-7 {{ $selectedJewelryType ? '' : 'hidden' }}">
+                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
+                                Subcategories
+                            </p>
+                            <div id="shop-jewelry-subcategory-list" class="space-y-3"></div>
+                        </div>
+
+                        <div class="mt-7 border-t border-gray-200 pt-7">
+                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
+                                Product Type / Quality
+                            </p>
+                            <div class="space-y-3">
+                                @foreach($jewelryQualities as $value => $label)
+                                    <label class="flex items-start gap-3 cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            name="jewelry_quality[]"
+                                            value="{{ $value }}"
+                                            {{ in_array($value, $selectedJewelryQuality) ? 'checked' : '' }}
+                                            class="w-4 h-4 mt-0.5"
+                                        >
+                                        <span class="text-sm text-gray-700">{{ $label }}</span>
+                                    </label>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div class="mt-7 border-t border-gray-200 pt-7 {{ $selectedJewelryType === 'rings' ? '' : 'hidden' }}" data-shop-jewelry-size="rings">
+                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">Ring Size</p>
+                            <div class="grid grid-cols-3 gap-3">
+                                @forelse($jewelryRingSizes as $size)
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="checkbox" name="ring_sizes[]" value="{{ $size }}" {{ in_array($size, $selectedRingSizes) ? 'checked' : '' }} class="w-4 h-4">
+                                        <span class="text-sm text-gray-700">{{ $size }}</span>
+                                    </label>
+                                @empty
+                                    <p class="text-sm text-gray-400 col-span-3">No ring sizes available.</p>
+                                @endforelse
+                            </div>
+                        </div>
+
+                        <div class="mt-7 border-t border-gray-200 pt-7 {{ $selectedJewelryType === 'necklaces' ? '' : 'hidden' }}" data-shop-jewelry-size="necklaces">
+                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">Chain / Necklace Length</p>
+                            <div class="space-y-3">
+                                @forelse($jewelryNecklaceLengths as $length)
+                                    <label class="flex items-center gap-3 cursor-pointer">
+                                        <input type="checkbox" name="necklace_lengths[]" value="{{ $length }}" {{ in_array($length, $selectedNecklaceLengths) ? 'checked' : '' }} class="w-4 h-4">
+                                        <span class="text-sm text-gray-700">{{ $length }}</span>
+                                    </label>
+                                @empty
+                                    <p class="text-sm text-gray-400">No necklace lengths available.</p>
+                                @endforelse
+                            </div>
+                        </div>
+
+                        <div class="mt-7 border-t border-gray-200 pt-7 {{ $selectedJewelryType === 'bracelets' ? '' : 'hidden' }}" data-shop-jewelry-size="bracelets">
+                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">Bracelet / Bangle Size</p>
+                            <div class="space-y-3">
+                                @forelse($jewelryBraceletSizes as $size)
+                                    <label class="flex items-center gap-3 cursor-pointer">
+                                        <input type="checkbox" name="bracelet_sizes[]" value="{{ $size }}" {{ in_array($size, $selectedBraceletSizes) ? 'checked' : '' }} class="w-4 h-4">
+                                        <span class="text-sm text-gray-700">{{ $size }}</span>
+                                    </label>
+                                @empty
+                                    <p class="text-sm text-gray-400">No bracelet/bangle sizes available.</p>
+                                @endforelse
+                            </div>
+                        </div>
+
+                    @endif
+
+
+                    {{-- =================================================
+                         WATCH FILTERS
+                    ================================================== --}}
+                    @if($categoryType === 'watches')
+
+                        <div class="mt-7 border-t border-gray-200 pt-7">
+                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
+                                Gender
+                            </p>
+
+                            <div class="space-y-3">
+                                @foreach(['men' => 'Men', 'women' => 'Women', 'kids' => 'Kids'] as $value => $label)
+                                    <label class="flex items-center gap-3 cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            name="watch_gender[]"
+                                            value="{{ $value }}"
+                                            {{ in_array($value, $selectedWatchGenders) ? 'checked' : '' }}
+                                            class="w-4 h-4"
+                                        >
+                                        <span class="text-sm text-gray-700">{{ $label }}</span>
+                                    </label>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div class="mt-7 border-t border-gray-200 pt-7">
+                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
+                                Strap Material
+                            </p>
+
+                            <select
+                                name="strap_material"
+                                id="shop-strap-material"
+                                class="w-full border border-gray-200 bg-white px-3 py-3 text-sm focus:outline-none focus:border-black"
+                            >
+                                <option value="">All Strap Materials</option>
+                                @foreach($watchStrapMaterials as $value => $label)
+                                    <option value="{{ $value }}" {{ $selectedStrapMaterial === $value ? 'selected' : '' }}>
+                                        {{ $label }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="mt-7 border-t border-gray-200 pt-7">
+                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
+                                Watch Type
+                            </p>
+
+                            <div class="space-y-3">
+                                @foreach($watchTypes as $value => $label)
+                                    <label class="flex items-center gap-3 cursor-pointer">
+                                        <input
+                                            type="radio"
+                                            name="watch_type"
+                                            value="{{ $value }}"
+                                            {{ $selectedWatchType === $value ? 'checked' : '' }}
+                                            class="w-4 h-4"
+                                        >
+                                        <span class="text-sm text-gray-700">{{ $label }}</span>
+                                    </label>
+                                @endforeach
+                            </div>
                         </div>
 
                     @endif
@@ -1287,6 +1506,13 @@
                             'width',
                             'height',
                             'length',
+                            'jewelry_gender',
+                            'jewelry_type',
+                            'jewelry_subcategories',
+                            'jewelry_quality',
+                            'ring_sizes',
+                            'necklace_lengths',
+                            'bracelet_sizes',
                             'sort'
                         ])
                     )
@@ -1295,7 +1521,7 @@
                             href="{{ $selectedCategory
                                 ? route('shop', ['category' => $selectedCategory->slug])
                                 : route('shop') }}"
-                            class="block text-center mt-4 text-xs uppercase tracking-widest text-gray-500 hover:text-black shop-clear-filters"
+                            class="js-ajax-clear-filters block text-center mt-4 text-xs uppercase tracking-widest text-gray-500 hover:text-black"
                         >
                             Clear Filters
                         </a>
@@ -1311,9 +1537,243 @@
                  PRODUCT GRID
             ================================================== --}}
 
-            <div id="product-results">
+            <div
+                id="shop-products-content"
+                class="relative min-h-[120px] transition-opacity duration-200"
+            >
 
-                @include('partials.shop-product-results')
+                @if($products->count())
+
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-x-4 sm:gap-x-6 gap-y-12">
+
+                        @foreach($products as $product)
+
+                            @php
+
+                                $productPrice = $product->sale_price
+                                    ?? $product->price;
+
+                                $image = optional(
+                                    $product->primaryImage
+                                )->image;
+
+                                $imageUrl = $image
+                                    ? asset(
+                                        'storage/' .
+                                        ltrim($image, '/')
+                                    )
+                                    : asset(
+                                        'images/placeholder.jpg'
+                                    );
+
+                            @endphp
+
+
+                            @php
+                                $productSkinTypes = is_array($product->skin_types) ? $product->skin_types : [];
+                                $productConcerns = is_array($product->concerns) ? $product->concerns : [];
+                                $productForms = is_array($product->product_forms) ? $product->product_forms : [];
+                            @endphp
+
+                            <article
+                                class="group product-card"
+                                data-cosmetic-product-type="{{ $product->cosmetic_product_type ?? '' }}"
+                                data-cosmetic-skin-types="{{ implode(',', $productSkinTypes) }}"
+                                data-cosmetic-concerns="{{ implode(',', $productConcerns) }}"
+                                data-cosmetic-product-forms="{{ implode(',', $productForms) }}"
+                                data-brand="{{ $product->brand ?? '' }}"
+                            >
+
+                                {{-- IMAGE --}}
+
+                                <div class="relative overflow-hidden bg-gray-100 aspect-[4/5]">
+
+                                    <a
+                                        href="{{ route(
+                                            'product.show',
+                                            $product->slug
+                                        ) }}"
+                                        class="block w-full h-full"
+                                    >
+
+                                        <img
+                                            src="{{ $imageUrl }}"
+                                            alt="{{ $product->name }}"
+                                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105"
+                                            loading="lazy"
+                                            onerror="this.onerror=null;this.src='{{ asset('images/placeholder.jpg') }}';"
+                                        >
+
+                                    </a>
+
+
+                                    {{-- FEATURED --}}
+
+                                    @if($product->is_featured)
+
+                                        <span
+                                            class="absolute top-4 left-4 bg-black text-white text-[10px] uppercase tracking-widest px-3 py-2"
+                                        >
+                                            Featured
+                                        </span>
+
+                                    @endif
+
+
+                                    {{-- SALE --}}
+
+                                    @if(
+                                        $product->sale_price &&
+                                        $product->price > $product->sale_price
+                                    )
+
+                                        <span
+                                            class="absolute top-4 right-4 bg-[#b38b2c] text-white text-[10px] uppercase tracking-widest px-3 py-2"
+                                        >
+                                            Sale
+                                        </span>
+
+                                    @endif
+
+
+                                    {{-- ADD TO BAG --}}
+
+                                    <button
+                                        type="button"
+                                        onclick='addToCart({
+                                            id: {{ $product->id }},
+                                            name: @json($product->name),
+                                            price: {{ (float) $productPrice }},
+                                            image: @json($imageUrl)
+                                        })'
+                                        class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur text-black py-3 text-xs font-semibold uppercase tracking-widest opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition duration-300"
+                                    >
+                                        Add to Bag
+                                    </button>
+
+                                </div>
+
+
+                                {{-- DETAILS --}}
+
+                                <div class="pt-5">
+
+                                    <p class="text-[10px] uppercase tracking-widest text-gray-400">
+                                        {{ $product->category?->name ?? 'Product' }}
+                                    </p>
+
+                                    <h3 class="mt-2 text-sm font-medium text-gray-900">
+                                        <a
+                                            href="{{ route(
+                                                'product.show',
+                                                $product->slug
+                                            ) }}"
+                                            class="hover:opacity-60 transition"
+                                        >
+                                            {{ $product->name }}
+                                        </a>
+                                    </h3>
+
+
+                                    <div class="mt-2">
+
+                                        @if(
+                                            $product->sale_price &&
+                                            $product->price > $product->sale_price
+                                        )
+
+                                            <span class="text-sm text-black">
+                                                PKR {{ number_format($product->sale_price) }}
+                                            </span>
+
+                                            <span class="ml-2 text-xs text-gray-400 line-through">
+                                                PKR {{ number_format($product->price) }}
+                                            </span>
+
+                                        @else
+
+                                            <span class="text-sm text-gray-600">
+                                                PKR {{ number_format($product->price) }}
+                                            </span>
+
+                                        @endif
+
+                                    </div>
+
+
+                                    {{-- WHATSAPP --}}
+
+                                    <button
+                                        type="button"
+                                        onclick="orderOnWhatsApp(@json($product->name))"
+                                        class="mt-4 text-[10px] uppercase tracking-widest text-gray-400 hover:text-black transition"
+                                    >
+                                        Order on WhatsApp
+                                    </button>
+
+                                </div>
+
+                            </article>
+
+                        @endforeach
+
+                    </div>
+
+                @else
+
+                    {{-- =================================================
+                         NO PRODUCTS
+                    ================================================== --}}
+
+                    <div class="py-24 text-center">
+
+                        <div class="mx-auto w-16 h-16 border border-gray-300 rounded-full flex items-center justify-center">
+
+                            <svg
+                                class="w-6 h-6 text-gray-400"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <circle
+                                    cx="11"
+                                    cy="11"
+                                    r="7"
+                                    stroke-width="1.5"
+                                />
+
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-width="1.5"
+                                    d="m20 20-4-4"
+                                />
+
+                            </svg>
+
+                        </div>
+
+                        <h3 class="mt-6 text-xl font-light">
+                            No products found
+                        </h3>
+
+                        <p class="mt-2 text-sm text-gray-500">
+                            Try changing or clearing your filters.
+                        </p>
+
+                        <a
+                            href="{{ $selectedCategory
+                                ? route('shop', ['category' => $selectedCategory->slug])
+                                : route('shop') }}"
+                            class="js-ajax-clear-filters inline-flex mt-7 border border-black px-6 py-3 text-xs uppercase tracking-widest hover:bg-black hover:text-white transition"
+                        >
+                            Clear Filters
+                        </a>
+
+                    </div>
+
+                @endif
+
+            </div>
 
         </div>
 
@@ -1380,6 +1840,79 @@
     </svg>
 
 </a>
+
+
+{{-- =========================================================
+     JEWELRY CATEGORY JAVASCRIPT
+========================================================= --}}
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const typeSelect = document.getElementById('jewelry_type');
+    const container = document.getElementById('shop-jewelry-subcategories');
+    const list = document.getElementById('shop-jewelry-subcategory-list');
+
+    if (!typeSelect || !container || !list) return;
+
+    const map = {
+        earrings: {
+            hoops: 'Hoops', studs: 'Studs', drop: 'Drop Earrings', dangle: 'Dangle Earrings',
+            chandelier: 'Chandelier Earrings', huggies: 'Huggies', jhumka: 'Jhumka'
+        },
+        necklaces: {
+            chokers: 'Chokers', pendants: 'Pendant Necklaces', chains: 'Chains',
+            layered: 'Layered Necklaces', statement: 'Statement Necklaces', pearl: 'Pearl Necklaces'
+        },
+        rings: {
+            bands: 'Bands', solitaire: 'Solitaire Rings', cocktail: 'Cocktail Rings',
+            stackable: 'Stackable Rings', signet: 'Signet Rings', adjustable: 'Adjustable Rings'
+        },
+        bracelets: {
+            chain: 'Chain Bracelets', cuff: 'Cuff Bracelets', bangles: 'Bangles',
+            charm: 'Charm Bracelets', tennis: 'Tennis Bracelets', kada: 'Kada'
+        }
+    };
+
+    const selected = @json($selectedJewelrySubcategories);
+
+    function renderJewelrySubcategories() {
+        const type = typeSelect.value;
+        list.innerHTML = '';
+
+        if (!type || !map[type]) {
+            container.classList.add('hidden');
+            return;
+        }
+
+        container.classList.remove('hidden');
+
+        Object.entries(map[type]).forEach(function ([value, label]) {
+            const wrapper = document.createElement('label');
+            wrapper.className = 'flex items-center gap-3 cursor-pointer';
+            wrapper.innerHTML = `
+                <input type="checkbox" name="jewelry_subcategories[]" value="${value}" class="w-4 h-4" ${selected.includes(value) ? 'checked' : ''}>
+                <span class="text-sm text-gray-700">${label}</span>
+            `;
+            list.appendChild(wrapper);
+        });
+    }
+
+    function updateJewelrySizes() {
+        document.querySelectorAll('[data-shop-jewelry-size]').forEach(function (group) {
+            group.classList.toggle('hidden', group.dataset.shopJewelrySize !== typeSelect.value);
+        });
+    }
+
+    typeSelect.addEventListener('change', function () {
+        selected.length = 0;
+        renderJewelrySubcategories();
+        updateJewelrySizes();
+    });
+
+    renderJewelrySubcategories();
+    updateJewelrySizes();
+});
+</script>
 
 
 {{-- =========================================================
@@ -1457,8 +1990,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         updateLaceSubcategories();
 
-        if (filterForm && typeof window.applyShopFilters === 'function') {
-            window.applyShopFilters();
+        if (filterForm && typeof window.submitShopFiltersAjax === 'function') {
+            window.submitShopFiltersAjax(filterForm);
         }
     });
 
@@ -1490,16 +2023,23 @@ document.addEventListener('DOMContentLoaded', function () {
         'form[action="{{ route('shop') }}"] select[name="sort"]'
     )?.closest('form');
 
-    const resultsContainer = document.getElementById('product-results');
-    const productCount = document.getElementById('shop-product-count');
+    const productsContent = document.getElementById('shop-products-content');
+    const productsCount = document.getElementById('shop-products-count');
 
-    if (!filterForm || !resultsContainer) {
+    if (!filterForm || !productsContent) {
         return;
     }
 
-    let requestController = null;
+    let activeController = null;
+    let requestSequence = 0;
 
-    function buildUrl(form) {
+    function setLoading(isLoading) {
+        productsContent.setAttribute('aria-busy', isLoading ? 'true' : 'false');
+        productsContent.classList.toggle('opacity-50', isLoading);
+        productsContent.classList.toggle('pointer-events-none', isLoading);
+    }
+
+    function buildQueryString(form) {
         const formData = new FormData(form);
         const params = new URLSearchParams();
 
@@ -1509,102 +2049,204 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        return '{{ route('shop') }}' + (params.toString() ? '?' + params.toString() : '');
+        return params.toString();
     }
 
-    async function loadShopResults(form, updateHistory = true) {
-
-        const url = buildUrl(form);
-
-        if (requestController) {
-            requestController.abort();
+    async function submitShopFiltersAjax(form, options = {}) {
+        if (!form) {
+            return;
         }
 
-        requestController = new AbortController();
+        const queryString = buildQueryString(form);
+        const targetUrl = queryString
+            ? '{{ route('shop') }}?' + queryString
+            : '{{ route('shop') }}';
 
-        resultsContainer.style.opacity = '0.55';
-        resultsContainer.style.pointerEvents = 'none';
+        if (activeController) {
+            activeController.abort();
+        }
+
+        activeController = new AbortController();
+        const currentSequence = ++requestSequence;
+
+        setLoading(true);
 
         try {
-            const response = await fetch(url, {
+            const response = await fetch(targetUrl, {
                 method: 'GET',
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest',
-                    'Accept': 'text/html'
+                    'Accept': 'application/json',
                 },
-                signal: requestController.signal
+                signal: activeController.signal,
+                credentials: 'same-origin',
             });
 
             if (!response.ok) {
-                throw new Error('Filter request failed.');
+                throw new Error('Filter request failed with status ' + response.status);
             }
 
             const data = await response.json();
 
-            if (!data.html) {
-                throw new Error('Product results were not returned.');
+            if (currentSequence !== requestSequence) {
+                return;
             }
 
-            resultsContainer.innerHTML = data.html;
+            const parsed = new DOMParser().parseFromString(data.html, 'text/html');
+            const nextProducts = parsed.getElementById('shop-products-content');
 
-            if (productCount) {
-                productCount.textContent =
-                    'Showing ' + Number(data.count || 0).toLocaleString() + ' products';
+            if (!nextProducts) {
+                throw new Error('Product section was not found in the server response.');
             }
 
-            if (updateHistory) {
-                window.history.pushState({}, '', url);
+            productsContent.innerHTML = nextProducts.innerHTML;
+
+            if (productsCount && typeof data.count !== 'undefined') {
+                productsCount.textContent = data.count;
             }
 
-            window.scrollTo({
-                top: document.querySelector('#product-results')?.getBoundingClientRect().top + window.scrollY - 120 || window.scrollY,
-                behavior: 'smooth'
-            });
+            if (!options.skipUrlUpdate) {
+                window.history.pushState(
+                    { shopFilters: true },
+                    '',
+                    targetUrl
+                );
+            }
+
+            setLoading(false);
+
+            // Keep the browser at the same scroll position. The product grid
+            // changes in place instead of causing a page jump/reload.
+            return data;
 
         } catch (error) {
-            if (error.name !== 'AbortError') {
-                console.error(error);
+            if (error.name === 'AbortError') {
+                return;
             }
-        } finally {
-            resultsContainer.style.opacity = '';
-            resultsContainer.style.pointerEvents = '';
+
+            console.error('Bin Ismail shop filter error:', error);
+            setLoading(false);
+
+            // If AJAX fails, keep the current products visible rather than
+            // navigating away or losing the user's selected filters.
         }
     }
 
-    window.applyShopFilters = function () {
-        loadShopResults(filterForm, true);
-    };
+    window.submitShopFiltersAjax = submitShopFiltersAjax;
 
-    filterForm.querySelectorAll('input[type="checkbox"]').forEach(function (input) {
-        input.addEventListener('change', function () {
-            window.applyShopFilters();
-        });
-    });
+    /*
+    |--------------------------------------------------------------------------
+    | CHECKBOXES / DYNAMIC CHECKBOXES
+    |--------------------------------------------------------------------------
+    |
+    | Event delegation is intentional here. Jewelry subcategory checkboxes
+    | are created dynamically after the initial page load.
+    |--------------------------------------------------------------------------
+    */
+    filterForm.addEventListener('change', function (event) {
+        const target = event.target;
 
-    filterForm.querySelectorAll('select').forEach(function (select) {
-        if (select.id === 'lace_category') {
+        if (!(target instanceof HTMLInputElement) && !(target instanceof HTMLSelectElement)) {
             return;
         }
 
-        select.addEventListener('change', function () {
-            window.applyShopFilters();
-        });
+        if (target.id === 'lace_category') {
+            return;
+        }
+
+        submitShopFiltersAjax(filterForm);
     });
 
+    /*
+    |--------------------------------------------------------------------------
+    | FILTER FORM SUBMIT
+    |--------------------------------------------------------------------------
+    */
+    filterForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        submitShopFiltersAjax(filterForm);
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | SORT WITHOUT RELOAD
+    |--------------------------------------------------------------------------
+    */
     if (sortForm) {
         sortForm.addEventListener('submit', function (event) {
             event.preventDefault();
-            loadShopResults(sortForm, true);
+            submitShopFiltersAjax(sortForm);
         });
+
+        const sortSelect = sortForm.querySelector('select[name="sort"]');
+
+        if (sortSelect) {
+            sortSelect.addEventListener('change', function () {
+                submitShopFiltersAjax(sortForm);
+            });
+        }
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | CLEAR FILTERS WITHOUT RELOAD
+    |--------------------------------------------------------------------------
+    */
+    document.addEventListener('click', function (event) {
+        const clearLink = event.target.closest('.js-ajax-clear-filters');
+
+        if (!clearLink) {
+            return;
+        }
+
+        event.preventDefault();
+
+        const clearUrl = clearLink.getAttribute('href') || '{{ route('shop') }}';
+
+        // Reset the sidebar controls first so the UI and URL stay in sync.
+        filterForm.reset();
+
+        const priceSlider = document.getElementById('price-slider');
+        const maxInput = document.getElementById('max-price-input');
+
+        if (priceSlider) {
+            priceSlider.value = priceSlider.max;
+        }
+
+        if (maxInput && priceSlider) {
+            maxInput.value = priceSlider.max;
+        }
+
+        const clearForm = document.createElement('form');
+        clearForm.method = 'GET';
+        clearForm.action = clearUrl;
+
+        const url = new URL(clearUrl, window.location.origin);
+
+        url.searchParams.forEach(function (value, key) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = value;
+            clearForm.appendChild(input);
+        });
+
+        document.body.appendChild(clearForm);
+        submitShopFiltersAjax(clearForm);
+        clearForm.remove();
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | PRICE SLIDER
+    |--------------------------------------------------------------------------
+    */
     const priceSlider = document.getElementById('price-slider');
     const maxInput = document.getElementById('max-price-input');
     const rangeLabel = document.getElementById('price-range-label');
     const activeTrack = document.getElementById('price-active-track');
 
     if (priceSlider && maxInput) {
-
         const absoluteMin = Number(priceSlider.min);
         const absoluteMax = Number(priceSlider.max);
         let priceSubmitTimer = null;
@@ -1627,86 +2269,93 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        priceSlider.addEventListener('input', updatePriceSlider);
-
-        priceSlider.addEventListener('change', function () {
+        function submitPriceFilter() {
+            updatePriceSlider();
             clearTimeout(priceSubmitTimer);
 
             priceSubmitTimer = setTimeout(function () {
-                window.applyShopFilters();
-            }, 100);
-        });
+                submitShopFiltersAjax(filterForm);
+            }, 150);
+        }
 
-        updatePriceSlider();
+        priceSlider.addEventListener('input', updatePriceSlider);
+        priceSlider.addEventListener('change', submitPriceFilter);
     }
 
-    const clearFiltersLink = document.querySelector('.shop-clear-filters');
-
-    if (clearFiltersLink) {
-        clearFiltersLink.addEventListener('click', function (event) {
-            event.preventDefault();
-
-            const url = this.href;
-
-            window.history.pushState({}, '', url);
-
-            fetch(url, {
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'Accept': 'text/html'
-                }
-            })
-            .then(function (response) {
-                if (!response.ok) {
-                    throw new Error('Could not clear filters.');
-                }
-                return response.json();
-            })
-            .then(function (data) {
-                if (data.html) {
-                    resultsContainer.innerHTML = data.html;
-                }
-
-                if (productCount) {
-                    productCount.textContent =
-                        'Showing ' + Number(data.count || 0).toLocaleString() + ' products';
-                }
-            })
-            .catch(function (error) {
-                console.error(error);
-            });
-        });
-    }
-
+    /*
+    |--------------------------------------------------------------------------
+    | BACK / FORWARD BUTTONS
+    |--------------------------------------------------------------------------
+    */
     window.addEventListener('popstate', function () {
-        fetch(window.location.href, {
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'Accept': 'text/html'
-            }
-        })
-        .then(function (response) {
-            if (!response.ok) {
-                throw new Error('Could not restore filters.');
-            }
-            return response.json();
-        })
-        .then(function (data) {
-            if (data.html) {
-                resultsContainer.innerHTML = data.html;
-            }
+        const url = new URL(window.location.href);
 
-            if (productCount) {
-                productCount.textContent =
-                    'Showing ' + Number(data.count || 0).toLocaleString() + ' products';
-            }
-        })
-        .catch(function (error) {
-            console.error(error);
+        const params = url.searchParams;
+
+        // Rebuild the filter form from the URL without changing the existing
+        // sidebar markup or theme.
+        filterForm.querySelectorAll('[data-ajax-generated-state="true"]').forEach(function (input) {
+            input.remove();
         });
-    });
-});
 
+        const existingNames = new Set();
+        filterForm.querySelectorAll('input, select').forEach(function (control) {
+            if (control.name) {
+                existingNames.add(control.name.replace(/\[\]$/, ''));
+            }
+        });
+
+        filterForm.querySelectorAll('input[type="checkbox"]').forEach(function (checkbox) {
+            const key = checkbox.name.replace(/\[\]$/, '');
+            checkbox.checked = params.getAll(key).includes(checkbox.value);
+        });
+
+        filterForm.querySelectorAll('select').forEach(function (select) {
+            const value = params.get(select.name);
+            if (value !== null) {
+                select.value = value;
+            }
+        });
+
+        filterForm.querySelectorAll('input[type="radio"]').forEach(function (radio) {
+            const value = params.get(radio.name);
+            radio.checked = value !== null && value === radio.value;
+        });
+
+        if (priceSlider && params.get('max_price') !== null) {
+            priceSlider.value = params.get('max_price');
+            updatePriceSliderIfAvailable();
+        }
+
+        submitShopFiltersAjax(filterForm, { skipUrlUpdate: true });
+    });
+
+    function updatePriceSliderIfAvailable() {
+        const slider = document.getElementById('price-slider');
+        const input = document.getElementById('max-price-input');
+        const label = document.getElementById('price-range-label');
+        const track = document.getElementById('price-active-track');
+
+        if (!slider || !input) return;
+
+        const min = Number(slider.min);
+        const max = Number(slider.max);
+        const value = Number(slider.value);
+
+        input.value = value;
+
+        if (label) {
+            label.textContent = 'Up to PKR ' + value.toLocaleString();
+        }
+
+        if (track && max > min) {
+            track.style.width = (((value - min) / (max - min)) * 100) + '%';
+        }
+    }
+
+    updatePriceSliderIfAvailable();
+
+});
 
 /*
 |--------------------------------------------------------------------------

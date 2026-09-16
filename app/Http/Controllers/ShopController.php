@@ -61,6 +61,13 @@ class ShopController extends Controller
                 $categoryType = 'clothing';
             } elseif (str_contains($categoryText, 'cosmetic')) {
                 $categoryType = 'cosmetics';
+            } elseif (
+                str_contains($categoryText, 'jewelry') ||
+                str_contains($categoryText, 'jewellery')
+            ) {
+                $categoryType = 'jewelry';
+            } elseif (str_contains($categoryText, 'watch')) {
+                $categoryType = 'watches';
             }
         }
 
@@ -256,6 +263,100 @@ class ShopController extends Controller
 
         /*
         |--------------------------------------------------------------------------
+        | JEWELRY FILTERS
+        |--------------------------------------------------------------------------
+        */
+        if ($categoryType === 'jewelry') {
+            $jewelryGenders = $this->arrayInput($request->input('jewelry_gender', []));
+            $jewelryType = $request->input('jewelry_type');
+            $jewelrySubcategories = $this->arrayInput($request->input('jewelry_subcategories', []));
+            $jewelryQuality = $this->arrayInput($request->input('jewelry_quality', []));
+            $ringSizes = $this->arrayInput($request->input('ring_sizes', []));
+            $necklaceLengths = $this->arrayInput($request->input('necklace_lengths', []));
+            $braceletSizes = $this->arrayInput($request->input('bracelet_sizes', []));
+
+            if (!empty($jewelryGenders)) {
+                $products->where(function ($query) use ($jewelryGenders) {
+                    foreach ($jewelryGenders as $gender) {
+                        $query->orWhereJsonContains('jewelry_gender', $gender);
+                    }
+                });
+            }
+
+            if (!empty($jewelryType)) {
+                $products->where('jewelry_type', $jewelryType);
+            }
+
+            if (!empty($jewelrySubcategories)) {
+                $products->where(function ($query) use ($jewelrySubcategories) {
+                    foreach ($jewelrySubcategories as $subcategory) {
+                        $query->orWhereJsonContains('jewelry_subcategories', $subcategory);
+                    }
+                });
+            }
+
+            if (!empty($jewelryQuality)) {
+                $products->where(function ($query) use ($jewelryQuality) {
+                    foreach ($jewelryQuality as $quality) {
+                        $query->orWhereJsonContains('jewelry_quality', $quality);
+                    }
+                });
+            }
+
+            if (!empty($ringSizes)) {
+                $products->where(function ($query) use ($ringSizes) {
+                    foreach ($ringSizes as $size) {
+                        $query->orWhereJsonContains('ring_sizes', $size);
+                    }
+                });
+            }
+
+            if (!empty($necklaceLengths)) {
+                $products->where(function ($query) use ($necklaceLengths) {
+                    foreach ($necklaceLengths as $length) {
+                        $query->orWhereJsonContains('necklace_lengths', $length);
+                    }
+                });
+            }
+
+            if (!empty($braceletSizes)) {
+                $products->where(function ($query) use ($braceletSizes) {
+                    foreach ($braceletSizes as $size) {
+                        $query->orWhereJsonContains('bracelet_sizes', $size);
+                    }
+                });
+            }
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | WATCH FILTERS
+        |--------------------------------------------------------------------------
+        */
+        if ($categoryType === 'watches') {
+            $watchGenders = $this->arrayInput($request->input('watch_gender', []));
+            $strapMaterial = $request->input('strap_material');
+            $watchType = $request->input('watch_type');
+
+            if (!empty($watchGenders)) {
+                $products->where(function ($query) use ($watchGenders) {
+                    foreach ($watchGenders as $gender) {
+                        $query->orWhereJsonContains('watch_gender', $gender);
+                    }
+                });
+            }
+
+            if (!empty($strapMaterial)) {
+                $products->where('strap_material', $strapMaterial);
+            }
+
+            if (!empty($watchType)) {
+                $products->where('watch_type', $watchType);
+            }
+        }
+
+        /*
+        |--------------------------------------------------------------------------
         | FILTER OPTIONS
         |--------------------------------------------------------------------------
         |
@@ -282,6 +383,16 @@ class ShopController extends Controller
             'width',
             'height',
             'length',
+            'jewelry_gender',
+            'jewelry_type',
+            'jewelry_subcategories',
+            'jewelry_quality',
+            'ring_sizes',
+            'necklace_lengths',
+            'bracelet_sizes',
+            'watch_gender',
+            'strap_material',
+            'watch_type',
             'price',
             'sale_price',
         ]);
@@ -292,6 +403,22 @@ class ShopController extends Controller
         $laceWidths = collect();
         $laceHeights = collect();
         $laceLengths = collect();
+        $jewelrySubcategories = collect();
+        $jewelryQualities = collect();
+        $jewelryRingSizes = collect();
+        $jewelryNecklaceLengths = collect();
+        $jewelryBraceletSizes = collect();
+        $watchStrapMaterials = collect([
+            'stainless_steel' => 'Stainless Steel',
+            'leather' => 'Leather (Patty)',
+            'silicone_rubber' => 'Silicone / Rubber',
+        ]);
+        $watchTypes = collect([
+            'analog' => 'Analog',
+            'digital' => 'Digital',
+            'smartwatch' => 'Smartwatch',
+            'chronograph' => 'Chronograph',
+        ]);
 
         if ($categoryType === 'clothing') {
             $clothingBrands = $filterProducts
@@ -355,6 +482,34 @@ class ShopController extends Controller
                 ->unique()
                 ->sortBy(fn ($value) => $this->dimensionSortValue($value))
                 ->values();
+        }
+
+        if ($categoryType === 'jewelry') {
+            $jewelrySubcategories = $filterProducts
+                ->pluck('jewelry_subcategories')->flatten()
+                ->filter(fn ($value) => filled($value))->map(fn ($value) => trim($value))
+                ->filter()->unique()->sort()->values();
+
+            $jewelryQualities = collect([
+                'fine' => 'Fine Jewelry (Real Gold / Diamonds)',
+                'demi_fine' => 'Demi-Fine (Gold-plated / Silver)',
+                'fashion' => 'Fashion / Artificial Jewelry',
+            ]);
+
+            $jewelryRingSizes = $filterProducts
+                ->pluck('ring_sizes')->flatten()
+                ->filter(fn ($value) => filled($value))->map(fn ($value) => trim((string) $value))
+                ->filter()->unique()->sortBy(fn ($value) => $this->dimensionSortValue($value))->values();
+
+            $jewelryNecklaceLengths = $filterProducts
+                ->pluck('necklace_lengths')->flatten()
+                ->filter(fn ($value) => filled($value))->map(fn ($value) => trim($value))
+                ->filter()->unique()->sortBy(fn ($value) => $this->dimensionSortValue($value))->values();
+
+            $jewelryBraceletSizes = $filterProducts
+                ->pluck('bracelet_sizes')->flatten()
+                ->filter(fn ($value) => filled($value))->map(fn ($value) => trim($value))
+                ->filter()->unique()->sortBy(fn ($value) => $this->dimensionSortValue($value))->values();
         }
 
         /*
@@ -436,19 +591,7 @@ class ShopController extends Controller
 
         $products = $products->get();
 
-        // AJAX filter requests return only the product results.
-        // This prevents a full browser/page reload when filters change.
-        if ($request->ajax()) {
-            return response()->json([
-                'html' => view('partials.shop-product-results', [
-                    'products' => $products,
-                    'selectedCategory' => $selectedCategory,
-                ])->render(),
-                'count' => $products->count(),
-            ]);
-        }
-
-        return view('shop', compact(
+        $viewData = compact(
             'products',
             'categories',
             'selectedCategory',
@@ -459,11 +602,37 @@ class ShopController extends Controller
             'laceWidths',
             'laceHeights',
             'laceLengths',
+            'jewelrySubcategories',
+            'jewelryQualities',
+            'jewelryRingSizes',
+            'jewelryNecklaceLengths',
+            'jewelryBraceletSizes',
+            'watchStrapMaterials',
+            'watchTypes',
             'priceMin',
             'priceMax',
             'selectedMinPrice',
             'selectedMaxPrice'
-        ));
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | AJAX FILTER RESPONSE
+        |--------------------------------------------------------------------------
+        |
+        | Normal shop visits still return the complete page exactly as before.
+        | AJAX filter requests return the rendered shop HTML as JSON so the
+        | browser can replace only the product area without a full page reload.
+        |--------------------------------------------------------------------------
+        */
+        if ($request->ajax()) {
+            return response()->json([
+                'html' => view('shop', $viewData)->render(),
+                'count' => $products->count(),
+            ]);
+        }
+
+        return view('shop', $viewData);
     }
 
     /**
