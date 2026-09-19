@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Shop | Bin Ismail')
+@section('title', 'Shop | Bin Roshan')
 
 @section(
     'description',
-    'Explore clothing, jewelry, laces, watches and accessories at Bin Ismail.'
+    'Explore clothing, jewelry, laces, watches and accessories at Bin Roshan.'
 )
 
 @section('content')
@@ -150,64 +150,63 @@
 
             <nav class="h-24 flex items-center justify-between">
 
-                {{-- LEFT --}}
+                {{-- LEFT SIDE --}}
+
                 <div class="hidden lg:flex items-center gap-10 flex-1">
 
                     <a
                         href="{{ route('home') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:opacity-60 transition"
-                    >
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
                         Home
                     </a>
 
                     <a
                         href="{{ route('shop') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:opacity-60 transition"
-                    >
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
                         Shop
                     </a>
 
                     <a
                         href="{{ route('categories') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:opacity-60 transition"
-                    >
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
                         Categories
                     </a>
 
                 </div>
 
 
-                {{-- CENTER LOGO --}}
+                {{-- =================================================
+                     CENTER LOGO
+                ================================================== --}}
 
                 <a
                     href="{{ route('home') }}"
-                    class="absolute left-1/2 -translate-x-1/2 top-5"
-                >
+                    class="absolute left-1/2 -translate-x-1/2 top-5">
+
                     <img
                         src="{{ asset('images/logo/logo.png') }}"
                         alt="Bin Ismail"
-                        class="h-14 lg:h-16 w-auto object-contain"
-                    >
+                        class="h-16 lg:h-35 w-auto object-contain">
+
                 </a>
 
 
-                {{-- RIGHT --}}
+                {{-- RIGHT SIDE --}}
 
                 <div class="hidden lg:flex items-center justify-end gap-10 flex-1">
 
                     <a
                         href="{{ route('about') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:opacity-60 transition"
-                    >
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
                         About
                     </a>
 
                     <a
                         href="{{ route('contact') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:opacity-60 transition"
-                    >
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
                         Contact
                     </a>
+
 
                     {{-- SEARCH --}}
 
@@ -215,27 +214,25 @@
                         type="button"
                         onclick="openSearch()"
                         aria-label="Search"
-                        class="text-white hover:opacity-60 transition"
-                    >
+                        class="text-white hover:text-[#BE8B3E] transition cursor-pointer">
+
                         <svg
                             class="w-6 h-6"
                             fill="none"
                             stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
+                            viewBox="0 0 24 24">
                             <circle
                                 cx="11"
                                 cy="11"
                                 r="7"
-                                stroke-width="1.7"
-                            />
+                                stroke-width="1.7"/>
 
                             <path
                                 d="m20 20-4-4"
                                 stroke-width="1.7"
-                                stroke-linecap="round"
-                            />
+                                stroke-linecap="round"/>
                         </svg>
+
                     </button>
 
 
@@ -245,58 +242,63 @@
                         type="button"
                         onclick="openCart()"
                         aria-label="Shopping bag"
-                        class="relative text-white hover:opacity-60 transition"
-                    >
+                        class="relative text-white hover:text-[#BE8B3E] transition cursor-pointer">
+
                         <svg
                             class="w-6 h-6"
                             fill="none"
                             stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
+                            viewBox="0 0 24 24">
+
                             <path
                                 d="M6 8h12l1 13H5L6 8Z"
                                 stroke-width="1.5"
-                                stroke-linejoin="round"
-                            />
+                                stroke-linejoin="round"/>
 
                             <path
                                 d="M9 8V6a3 3 0 0 1 6 0v2"
                                 stroke-width="1.5"
-                                stroke-linecap="round"
-                            />
+                                stroke-linecap="round"/>
+
                         </svg>
+
+
+                        {{-- CART COUNT --}}
 
                         <span
                             id="cart-count"
-                            class="absolute -top-2 -right-3 min-w-[17px] h-[17px] px-1 rounded-full bg-white text-black text-[9px] flex items-center justify-center font-semibold"
-                        >
+                            class="absolute -top-2 -right-3 min-w-[17px] h-[17px] px-1 rounded-full bg-white text-black text-[9px] flex items-center justify-center font-semibold">
                             0
                         </span>
+
                     </button>
 
                 </div>
 
 
-                {{-- MOBILE MENU --}}
+                {{-- =================================================
+                     MOBILE MENU BUTTON
+                ================================================== --}}
 
                 <button
                     type="button"
                     onclick="openMobileMenu()"
                     class="lg:hidden text-white"
-                    aria-label="Open menu"
-                >
+                    aria-label="Open menu">
+
                     <svg
                         class="w-7 h-7"
                         fill="none"
                         stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
+                        viewBox="0 0 24 24">
+
                         <path
                             d="M4 7h16M4 12h16M4 17h16"
                             stroke-width="1.5"
-                            stroke-linecap="round"
-                        />
+                            stroke-linecap="round"/>
+
                     </svg>
+
                 </button>
 
 
@@ -306,33 +308,32 @@
                     type="button"
                     onclick="openCart()"
                     class="lg:hidden relative text-white"
-                    aria-label="Shopping bag"
-                >
+                    aria-label="Shopping bag">
+
                     <svg
                         class="w-6 h-6"
                         fill="none"
                         stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
+                        viewBox="0 0 24 24">
+
                         <path
                             d="M6 8h12l1 13H5L6 8Z"
                             stroke-width="1.5"
-                            stroke-linejoin="round"
-                        />
+                            stroke-linejoin="round"/>
 
                         <path
                             d="M9 8V6a3 3 0 0 1 6 0v2"
                             stroke-width="1.5"
-                            stroke-linecap="round"
-                        />
+                            stroke-linecap="round"/>
+
                     </svg>
 
                     <span
                         id="cart-count-mobile"
-                        class="absolute -top-2 -right-3 min-w-[17px] h-[17px] px-1 rounded-full bg-white text-black text-[9px] flex items-center justify-center font-semibold"
-                    >
+                        class="absolute -top-2 -right-3 min-w-[17px] h-[17px] px-1 rounded-full bg-white text-black text-[9px] flex items-center justify-center font-semibold">
                         0
                     </span>
+
                 </button>
 
             </nav>
@@ -350,12 +351,12 @@
 
         <div class="text-center max-w-4xl">
 
-            <p class="text-xs sm:text-sm uppercase tracking-[0.45em] font-medium mb-6">
+            <!-- <p class="text-xs sm:text-sm uppercase tracking-[0.45em] font-medium mb-6">
                 The Collection
-            </p>
+            </p> -->
 
             <h1 class="text-6xl sm:text-7xl lg:text-8xl font-light tracking-tight">
-                Shop
+                Shop <span class="text-[#BE8B3E] font-serif italic">Collections</span>
             </h1>
 
             <p class="mt-8 max-w-3xl mx-auto text-sm sm:text-base lg:text-lg leading-8 text-white/90">
@@ -374,7 +375,7 @@
      CATEGORY NAVIGATION
 ========================================================= --}}
 
-<section class="bg-white border-b border-gray-200 sticky top-0 z-30">
+<section class="bg-black border-b border-gray-200 sticky top-0 z-30">
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -386,9 +387,8 @@
                 href="{{ route('shop') }}"
                 class="whitespace-nowrap px-4 py-2 text-xs uppercase tracking-widest font-semibold
                 {{ !$selectedCategory
-                    ? 'text-black border-b-2 border-black'
-                    : 'text-gray-500 hover:text-black' }}"
-            >
+                    ? 'text-[#BE8B3E] border-b-2 border-[#BE8B3E]'
+                    : 'text-[#BE8B3E] hover:text-white' }}">
                 All
             </a>
 
@@ -401,9 +401,8 @@
                     href="{{ route('shop', ['category' => $category->slug]) }}"
                     class="whitespace-nowrap px-4 py-2 text-xs uppercase tracking-widest
                     {{ $selectedCategory?->id === $category->id
-                        ? 'text-black font-semibold border-b-2 border-black'
-                        : 'text-gray-500 hover:text-black' }}"
-                >
+                        ? 'text-[#BE8B3E] font-semibold border-b-2 border-[#BE8B3E]'
+                        : 'text-[#BE8B3E] hover:text-white' }}">
                     {{ $category->name }}
                 </a>
 
@@ -420,7 +419,7 @@
      SHOP AREA
 ========================================================= --}}
 
-<section class="py-16 sm:py-20 bg-white">
+<section class="py-16 sm:py-20 bg-[#f8f7f4]">
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -433,7 +432,7 @@
 
             <div>
 
-                <p class="text-xs uppercase tracking-[0.35em] text-[#a47c15] font-semibold">
+                <p class="text-xs uppercase tracking-[0.35em] text-[#BE8B3E] font-semibold">
                     {{ $selectedCategory?->name ?? 'All Collection' }}
                 </p>
 
@@ -453,23 +452,20 @@
             <form
                 method="GET"
                 action="{{ route('shop') }}"
-                class="flex items-center gap-3"
-            >
+                class="flex items-center gap-3">
 
                 @if(request('category'))
                     <input
                         type="hidden"
                         name="category"
-                        value="{{ request('category') }}"
-                    >
+                        value="{{ request('category') }}">
                 @endif
 
                 @if(request('search'))
                     <input
                         type="hidden"
                         name="search"
-                        value="{{ request('search') }}"
-                    >
+                        value="{{ request('search') }}">
                 @endif
 
                 @foreach(request()->except(['sort', 'page', 'category', 'search']) as $key => $value)
@@ -484,41 +480,35 @@
 
                 <select
                     name="sort"
-                    class="border border-gray-300 bg-white px-5 py-3 text-sm focus:outline-none focus:border-black"
-                >
+                    class="border border-gray-300 bg-white px-5 py-3 text-sm focus:outline-none focus:border-black rounded-lg">
 
                     <option
                         value=""
-                        {{ !request('sort') ? 'selected' : '' }}
-                    >
+                        {{ !request('sort') ? 'selected' : '' }}>
                         Sort: Latest
                     </option>
 
                     <option
                         value="featured"
-                        {{ request('sort') === 'featured' ? 'selected' : '' }}
-                    >
+                        {{ request('sort') === 'featured' ? 'selected' : '' }}>
                         Sort: Featured
                     </option>
 
                     <option
                         value="price_low"
-                        {{ in_array(request('sort'), ['price_low', 'low']) ? 'selected' : '' }}
-                    >
+                        {{ in_array(request('sort'), ['price_low', 'low']) ? 'selected' : '' }}>
                         Price: Low to High
                     </option>
 
                     <option
                         value="price_high"
-                        {{ in_array(request('sort'), ['price_high', 'high']) ? 'selected' : '' }}
-                    >
+                        {{ in_array(request('sort'), ['price_high', 'high']) ? 'selected' : '' }}>
                         Price: High to Low
                     </option>
 
                     <option
                         value="name"
-                        {{ request('sort') === 'name' ? 'selected' : '' }}
-                    >
+                        {{ request('sort') === 'name' ? 'selected' : '' }}>
                         Name: A-Z
                     </option>
 
@@ -545,8 +535,7 @@
                 <form
                     method="GET"
                     action="{{ route('shop') }}"
-                    class="border border-gray-200 p-6 bg-white sticky top-28"
-                >
+                    class="border border-gray-200 p-6 bg-white sticky top-28 rounded-lg">
 
                     {{-- KEEP CATEGORY --}}
 
@@ -555,8 +544,7 @@
                         <input
                             type="hidden"
                             name="category"
-                            value="{{ $selectedCategory->slug }}"
-                        >
+                            value="{{ $selectedCategory->slug }}">
 
                     @endif
 
@@ -568,19 +556,17 @@
                         <input
                             type="hidden"
                             name="search"
-                            value="{{ request('search') }}"
-                        >
+                            value="{{ request('search') }}">
 
                     @endif
 
 
-                                        @if(request('sort'))
+                    @if(request('sort'))
 
                         <input
                             type="hidden"
                             name="sort"
-                            value="{{ request('sort') }}"
-                        >
+                            value="{{ request('sort') }}">
 
                     @endif
 
@@ -590,7 +576,7 @@
 
                         <div>
 
-                            <p class="text-xs uppercase tracking-[0.3em] text-gray-400">
+                            <p class="text-xs uppercase tracking-[0.3em] text-[#BE8B3E]">
                                 Refine
                             </p>
 
@@ -604,8 +590,8 @@
 
 
                     {{-- =================================================
-     PRICE RANGE
-================================================== --}}
+                         PRICE RANGE
+                    ================================================== --}}
 
 <div class="border-t border-gray-200 pt-6">
     <div class="flex items-center justify-between">
@@ -615,8 +601,7 @@
 
         <span
             id="price-range-label"
-            class="text-xs text-gray-500"
-        >
+            class="text-xs text-[#BE8B3E]">
             Up to PKR {{ number_format($selectedMaxPrice) }}
         </span>
     </div>
@@ -624,13 +609,11 @@
     {{-- SINGLE PRICE SLIDER --}}
     <div class="relative mt-7 h-5">
         <div
-            class="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -translate-y-1/2 rounded-full"
-        ></div>
+            class="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -translate-y-1/2 rounded-full"></div>
 
         <div
             id="price-active-track"
-            class="absolute top-1/2 left-0 h-1 bg-black -translate-y-1/2 rounded-full"
-        ></div>
+            class="absolute top-1/2 left-0 h-1 bg-[#BE8B3E] -translate-y-1/2 rounded-full"></div>
 
         <input
             type="range"
@@ -639,16 +622,14 @@
             max="{{ $priceMax }}"
             value="{{ $selectedMaxPrice }}"
             step="1"
-            class="price-slider absolute inset-0 w-full appearance-none bg-transparent"
-        >
+            class="price-slider absolute inset-0 w-full appearance-none bg-transparent">
     </div>
 
     <input
         type="hidden"
         name="max_price"
         id="max-price-input"
-        value="{{ $selectedMaxPrice }}"
-    >
+        value="{{ $selectedMaxPrice }}">
 
     <div class="flex items-center justify-between mt-3">
         <span class="text-[10px] uppercase tracking-widest text-gray-400">
@@ -660,6 +641,67 @@
         </span>
     </div>
 </div>
+
+
+                    @if(!$selectedCategory)
+
+                    {{-- =================================================
+                         CATEGORY PRIORITY FILTERS
+                    ================================================== --}}
+
+                    <div class="mt-7 border-t border-gray-200 pt-7">
+                        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
+                            Categories
+                        </p>
+
+                        <div class="space-y-3">
+                            @foreach($categories as $category)
+                                <label class="flex items-center gap-3 cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        class="shop-category-filter w-4 h-4 gender-checkbox"
+                                        data-category-slug="{{ $category->slug }}">
+                                    <span class="text-sm text-gray-700">
+                                        {{ $category->name }}
+                                    </span>
+                                </label>
+                            @endforeach
+                        </div>
+                    </div>
+
+
+                    {{-- =================================================
+                         FEATURED / SALE FILTERS
+                    ================================================== --}}
+
+                    <div class="mt-7 border-t border-gray-200 pt-7">
+                        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
+                            Highlights
+                        </p>
+
+                        <div class="space-y-3">
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input
+                                    type="radio"
+                                    name="shop-highlight-filter"
+                                    value="featured"
+                                    class="shop-highlight-filter w-4 h-4 gender-checkbox">
+                                <span class="text-sm text-gray-700">Featured</span>
+                            </label>
+
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input
+                                    type="radio"
+                                    name="shop-highlight-filter"
+                                    value="sale"
+                                    class="shop-highlight-filter w-4 h-4 gender-checkbox">
+                                <span class="text-sm text-gray-700">Sale</span>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    @endif
 
 
                     {{-- =================================================
@@ -689,8 +731,7 @@
                                             name="gender[]"
                                             value="{{ $value }}"
                                             {{ in_array($value, $selectedGenders) ? 'checked' : '' }}
-                                            class="w-4 h-4"
-                                        >
+                                            class="gender-checkbox w-4 h-4">
 
                                         <span class="text-sm text-gray-700">
                                             {{ $label }}
@@ -724,8 +765,7 @@
                                             name="brand[]"
                                             value="{{ $brand }}"
                                             {{ in_array($brand, $selectedBrands) ? 'checked' : '' }}
-                                            class="w-4 h-4"
-                                        >
+                                            class="gender-checkbox w-4 h-4">
 
                                         <span class="text-sm text-gray-700">
                                             {{ $brand }}
@@ -765,13 +805,11 @@
                                             name="sizes[]"
                                             value="{{ $size }}"
                                             {{ in_array($size, $selectedSizes) ? 'checked' : '' }}
-                                            class="peer sr-only"
-                                        >
+                                            class="peer sr-only">
 
                                         <span
                                             class="inline-flex min-w-[45px] justify-center border border-gray-300 px-4 py-2 text-xs
-                                            peer-checked:bg-black peer-checked:text-white peer-checked:border-black"
-                                        >
+                                            peer-checked:bg-[#BE8B3E] peer-checked:text-white peer-checked:border-[#BE8B3E]">
                                             {{ $size }}
                                         </span>
 
@@ -803,8 +841,7 @@
                                             name="jewelry_gender[]"
                                             value="{{ $value }}"
                                             {{ in_array($value, $selectedJewelryGenders) ? 'checked' : '' }}
-                                            class="w-4 h-4"
-                                        >
+                                            class="gender-checkbox w-4 h-4">
                                         <span class="text-sm text-gray-700">{{ $label }}</span>
                                     </label>
                                 @endforeach
@@ -818,8 +855,7 @@
                             <select
                                 name="jewelry_type"
                                 id="jewelry_type"
-                                class="w-full border border-gray-200 bg-white px-3 py-3 text-sm focus:outline-none focus:border-black"
-                            >
+                                class="w-full border border-gray-200 bg-white px-3 py-3 text-sm focus:outline-none focus:border-black rounded-lg">
                                 <option value="">All Jewelry Types</option>
                                 <option value="earrings" {{ $selectedJewelryType === 'earrings' ? 'selected' : '' }}>Earrings</option>
                                 <option value="necklaces" {{ $selectedJewelryType === 'necklaces' ? 'selected' : '' }}>Necklaces</option>
@@ -832,7 +868,7 @@
                             <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
                                 Subcategories
                             </p>
-                            <div id="shop-jewelry-subcategory-list" class="space-y-3"></div>
+                            <div id="shop-jewelry-subcategory-list" class="space-y-3 gender-checkbox"></div>
                         </div>
 
                         <div class="mt-7 border-t border-gray-200 pt-7">
@@ -847,8 +883,7 @@
                                             name="jewelry_quality[]"
                                             value="{{ $value }}"
                                             {{ in_array($value, $selectedJewelryQuality) ? 'checked' : '' }}
-                                            class="w-4 h-4 mt-0.5"
-                                        >
+                                            class="gender-checkbox w-4 h-4 mt-0.5">
                                         <span class="text-sm text-gray-700">{{ $label }}</span>
                                     </label>
                                 @endforeach
@@ -918,8 +953,7 @@
                                             name="watch_gender[]"
                                             value="{{ $value }}"
                                             {{ in_array($value, $selectedWatchGenders) ? 'checked' : '' }}
-                                            class="w-4 h-4"
-                                        >
+                                            class="gender-checkbox w-4 h-4">
                                         <span class="text-sm text-gray-700">{{ $label }}</span>
                                     </label>
                                 @endforeach
@@ -934,8 +968,8 @@
                             <select
                                 name="strap_material"
                                 id="shop-strap-material"
-                                class="w-full border border-gray-200 bg-white px-3 py-3 text-sm focus:outline-none focus:border-black"
-                            >
+                                class="w-full border border-gray-200 bg-white px-3 py-3 text-sm focus:outline-none focus:border-black">
+
                                 <option value="">All Strap Materials</option>
                                 @foreach($watchStrapMaterials as $value => $label)
                                     <option value="{{ $value }}" {{ $selectedStrapMaterial === $value ? 'selected' : '' }}>
@@ -958,8 +992,7 @@
                                             name="watch_type"
                                             value="{{ $value }}"
                                             {{ $selectedWatchType === $value ? 'checked' : '' }}
-                                            class="w-4 h-4"
-                                        >
+                                            class="gender-checkbox w-4 h-4">
                                         <span class="text-sm text-gray-700">{{ $label }}</span>
                                     </label>
                                 @endforeach
@@ -996,7 +1029,7 @@
                             <div class="space-y-3">
                                 @forelse($cosmeticBrands as $brand)
                                     <label class="flex items-center gap-3 cursor-pointer">
-                                        <input type="checkbox" name="brand[]" value="{{ $brand }}" {{ in_array($brand, $selectedBrands) ? 'checked' : '' }} class="w-4 h-4">
+                                        <input type="checkbox" name="brand[]" value="{{ $brand }}" {{ in_array($brand, $selectedBrands) ? 'checked' : '' }} class="gender-checkbox w-4 h-4">
                                         <span class="text-sm text-gray-700">{{ $brand }}</span>
                                     </label>
                                 @empty
@@ -1021,7 +1054,7 @@
                                 <div class="space-y-3">
                                     @foreach($data['options'] as $value => $label)
                                         <label class="flex items-center gap-3 cursor-pointer">
-                                            <input type="checkbox" name="{{ $field }}[]" value="{{ $value }}" {{ in_array($value, $data['selected']) ? 'checked' : '' }} class="w-4 h-4">
+                                            <input type="checkbox" name="{{ $field }}[]" value="{{ $value }}" {{ in_array($value, $data['selected']) ? 'checked' : '' }} class="gender-checkbox w-4 h-4">
                                             <span class="text-sm text-gray-700">{{ $label }}</span>
                                         </label>
                                     @endforeach
@@ -1050,16 +1083,14 @@
 
                             <label
                                 for="lace_category"
-                                class="block text-xs text-gray-500 mb-2"
-                            >
+                                class="block text-xs text-gray-500 mb-2">
                                 Lace Category
                             </label>
 
                             <select
                                 name="lace_category"
                                 id="lace_category"
-                                class="w-full border border-gray-200 bg-white px-3 py-3 text-sm focus:outline-none focus:border-black"
-                            >
+                                class="w-full border border-gray-200 bg-white px-3 py-3 text-sm focus:outline-none focus:border-black">
 
                                 <option value="">
                                     Select Lace Category
@@ -1067,43 +1098,37 @@
 
                                 <option
                                     value="basic_everyday"
-                                    {{ request('lace_category') === 'basic_everyday' ? 'selected' : '' }}
-                                >
+                                    {{ request('lace_category') === 'basic_everyday' ? 'selected' : '' }}>
                                     Basic & Everyday Laces
                                 </option>
 
                                 <option
                                     value="embroidered"
-                                    {{ request('lace_category') === 'embroidered' ? 'selected' : '' }}
-                                >
+                                    {{ request('lace_category') === 'embroidered' ? 'selected' : '' }}>
                                     Embroidered Laces
                                 </option>
 
                                 <option
                                     value="fancy"
-                                    {{ request('lace_category') === 'fancy' ? 'selected' : '' }}
-                                >
+                                    {{ request('lace_category') === 'fancy' ? 'selected' : '' }}>
                                     Fancy Laces
                                 </option>
 
                                 <option
                                     value="traditional"
-                                    {{ request('lace_category') === 'traditional' ? 'selected' : '' }}
-                                >
+                                    {{ request('lace_category') === 'traditional' ? 'selected' : '' }}>
                                     Traditional Laces
                                 </option>
 
                                 <option
                                     value="suit_specific"
-                                    {{ request('lace_category') === 'suit_specific' ? 'selected' : '' }}
-                                >
+                                    {{ request('lace_category') === 'suit_specific' ? 'selected' : '' }}>
                                     Suit-Specific Laces
                                 </option>
 
                                 <option
                                     value="premium_bridal"
-                                    {{ request('lace_category') === 'premium_bridal' ? 'selected' : '' }}
-                                >
+                                    {{ request('lace_category') === 'premium_bridal' ? 'selected' : '' }}>
                                     Premium / Bridal
                                 </option>
 
@@ -1116,8 +1141,7 @@
 
                             <div
                                 id="lace-subcategories-container"
-                                class="mt-6"
-                            >
+                                class="mt-6">
 
                                 <p class="text-xs text-gray-400 mb-4">
                                     Select subcategories
@@ -1127,8 +1151,7 @@
                                 {{-- BASIC --}}
                                 <div
                                     data-lace-group="basic_everyday"
-                                    class="lace-subcategory-group hidden"
-                                >
+                                    class="lace-subcategory-group hidden">
 
                                     @foreach([
                                         'cotton' => 'Cotton',
@@ -1144,8 +1167,7 @@
                                                 name="lace_subcategories[]"
                                                 value="{{ $value }}"
                                                 {{ in_array($value, $selectedLaceSubcategories) ? 'checked' : '' }}
-                                                class="w-4 h-4"
-                                            >
+                                                class="w-4 h-4 gender-checkbox">
 
                                             <span class="text-sm text-gray-700">
                                                 {{ $label }}
@@ -1161,8 +1183,7 @@
                                 {{-- EMBROIDERED --}}
                                 <div
                                     data-lace-group="embroidered"
-                                    class="lace-subcategory-group hidden"
-                                >
+                                    class="lace-subcategory-group hidden">
 
                                     @foreach([
                                         'embroidery' => 'Embroidery',
@@ -1180,8 +1201,7 @@
                                                 name="lace_subcategories[]"
                                                 value="{{ $value }}"
                                                 {{ in_array($value, $selectedLaceSubcategories) ? 'checked' : '' }}
-                                                class="w-4 h-4"
-                                            >
+                                                class="w-4 h-4 gender-checkbox">
 
                                             <span class="text-sm text-gray-700">
                                                 {{ $label }}
@@ -1197,8 +1217,7 @@
                                 {{-- FANCY --}}
                                 <div
                                     data-lace-group="fancy"
-                                    class="lace-subcategory-group hidden"
-                                >
+                                    class="lace-subcategory-group hidden">
 
                                     @foreach([
                                         'sequin' => 'Sequin',
@@ -1218,8 +1237,7 @@
                                                 name="lace_subcategories[]"
                                                 value="{{ $value }}"
                                                 {{ in_array($value, $selectedLaceSubcategories) ? 'checked' : '' }}
-                                                class="w-4 h-4"
-                                            >
+                                                class="w-4 h-4 gender-checkbox">
 
                                             <span class="text-sm text-gray-700">
                                                 {{ $label }}
@@ -1235,8 +1253,7 @@
                                 {{-- TRADITIONAL --}}
                                 <div
                                     data-lace-group="traditional"
-                                    class="lace-subcategory-group hidden"
-                                >
+                                    class="lace-subcategory-group hidden">
 
                                     @foreach([
                                         'gota' => 'Gota',
@@ -1255,8 +1272,7 @@
                                                 name="lace_subcategories[]"
                                                 value="{{ $value }}"
                                                 {{ in_array($value, $selectedLaceSubcategories) ? 'checked' : '' }}
-                                                class="w-4 h-4"
-                                            >
+                                                class="w-4 h-4 gender-checkbox">
 
                                             <span class="text-sm text-gray-700">
                                                 {{ $label }}
@@ -1272,8 +1288,7 @@
                                 {{-- SUIT SPECIFIC --}}
                                 <div
                                     data-lace-group="suit_specific"
-                                    class="lace-subcategory-group hidden"
-                                >
+                                    class="lace-subcategory-group hidden">
 
                                     @foreach([
                                         'daman' => 'Daman',
@@ -1292,8 +1307,7 @@
                                                 name="lace_subcategories[]"
                                                 value="{{ $value }}"
                                                 {{ in_array($value, $selectedLaceSubcategories) ? 'checked' : '' }}
-                                                class="w-4 h-4"
-                                            >
+                                                class="w-4 h-4 gender-checkbox">
 
                                             <span class="text-sm text-gray-700">
                                                 {{ $label }}
@@ -1309,8 +1323,7 @@
                                 {{-- PREMIUM / BRIDAL --}}
                                 <div
                                     data-lace-group="premium_bridal"
-                                    class="lace-subcategory-group hidden"
-                                >
+                                    class="lace-subcategory-group hidden">
 
                                     @foreach([
                                         'bridal' => 'Bridal',
@@ -1325,8 +1338,7 @@
                                                 name="lace_subcategories[]"
                                                 value="{{ $value }}"
                                                 {{ in_array($value, $selectedLaceSubcategories) ? 'checked' : '' }}
-                                                class="w-4 h-4"
-                                            >
+                                                class="w-4 h-4 gender-checkbox">
 
                                             <span class="text-sm text-gray-700">
                                                 {{ $label }}
@@ -1362,8 +1374,7 @@
                                                 name="width[]"
                                                 value="{{ $width }}"
                                                 {{ in_array($width, $selectedWidths) ? 'checked' : '' }}
-                                                class="w-4 h-4"
-                                            >
+                                                class="w-4 h-4 gender-checkbox">
 
                                             <span class="text-sm text-gray-700">
                                                 {{ $width }}
@@ -1405,8 +1416,7 @@
                                                 name="height[]"
                                                 value="{{ $height }}"
                                                 {{ in_array($height, $selectedHeights) ? 'checked' : '' }}
-                                                class="w-4 h-4"
-                                            >
+                                                class="w-4 h-4 gender-checkbox">
 
                                             <span class="text-sm text-gray-700">
                                                 {{ $height }}
@@ -1448,8 +1458,7 @@
                                                 name="length[]"
                                                 value="{{ $length }}"
                                                 {{ in_array($length, $selectedLengths) ? 'checked' : '' }}
-                                                class="w-4 h-4"
-                                            >
+                                                class="w-4 h-4 gender-checkbox">
 
                                             <span class="text-sm text-gray-700">
                                                 {{ $length }}
@@ -1490,8 +1499,7 @@
 
                     {{-- CLEAR --}}
 
-                    @if(
-                        request()->hasAny([
+                    @if(request()->hasAny([
                             'min_price',
                             'max_price',
                             'gender',
@@ -1539,8 +1547,7 @@
 
             <div
                 id="shop-products-content"
-                class="relative min-h-[120px] transition-opacity duration-200"
-            >
+                class="relative min-h-[120px] transition-opacity duration-200">
 
                 @if($products->count())
 
@@ -1582,27 +1589,28 @@
                                 data-cosmetic-concerns="{{ implode(',', $productConcerns) }}"
                                 data-cosmetic-product-forms="{{ implode(',', $productForms) }}"
                                 data-brand="{{ $product->brand ?? '' }}"
-                            >
+                                data-category-slug="{{ $product->category?->slug ?? '' }}"
+                                data-price="{{ (float) $productPrice }}"
+                                data-featured="{{ $product->is_featured ? '1' : '0' }}"
+                                data-sale="{{ ($product->sale_price && $product->price > $product->sale_price) ? '1' : '0' }}">
 
                                 {{-- IMAGE --}}
 
-                                <div class="relative overflow-hidden bg-gray-100 aspect-[4/5]">
+                                <div class="relative overflow-hidden bg-gray-100 aspect-[4/5] rounded-lg">
 
                                     <a
                                         href="{{ route(
                                             'product.show',
                                             $product->slug
                                         ) }}"
-                                        class="block w-full h-full"
-                                    >
+                                        class="block w-full h-full">
 
                                         <img
                                             src="{{ $imageUrl }}"
                                             alt="{{ $product->name }}"
-                                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105"
+                                            class="w-full h-full rounded-xl object-cover transition duration-700 group-hover:scale-105"
                                             loading="lazy"
-                                            onerror="this.onerror=null;this.src='{{ asset('images/placeholder.jpg') }}';"
-                                        >
+                                            onerror="this.onerror=null;this.src='{{ asset('images/placeholder.jpg') }}';">
 
                                     </a>
 
@@ -1612,8 +1620,7 @@
                                     @if($product->is_featured)
 
                                         <span
-                                            class="absolute top-4 left-4 bg-black text-white text-[10px] uppercase tracking-widest px-3 py-2"
-                                        >
+                                            class="absolute top-4 left-4 bg-black text-white text-[10px] uppercase tracking-widest px-3 py-2">
                                             Featured
                                         </span>
 
@@ -1646,8 +1653,7 @@
                                             price: {{ (float) $productPrice }},
                                             image: @json($imageUrl)
                                         })'
-                                        class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur text-black py-3 text-xs font-semibold uppercase tracking-widest opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition duration-300"
-                                    >
+                                        class="absolute bottom-4 left-4 right-4 border border-[#BE8B3E] backdrop-blur text-[#BE8B3E] hover:bg-[#BE8B3E] hover:text-white cursor-pointer rounded-full py-3 text-xs font-semibold uppercase tracking-widest opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition duration-300">
                                         Add to Bag
                                     </button>
 
@@ -1658,7 +1664,7 @@
 
                                 <div class="pt-5">
 
-                                    <p class="text-[10px] uppercase tracking-widest text-gray-400">
+                                    <p class="text-[10px] uppercase tracking-widest text-[#BE8B3E]">
                                         {{ $product->category?->name ?? 'Product' }}
                                     </p>
 
@@ -1706,8 +1712,7 @@
                                     <button
                                         type="button"
                                         onclick="orderOnWhatsApp(@json($product->name))"
-                                        class="mt-4 text-[10px] uppercase tracking-widest text-gray-400 hover:text-black transition"
-                                    >
+                                        class="mt-4 text-[10px] uppercase cursor-pointer tracking-widest text-gray-400 hover:text-[#25D366] transition">
                                         Order on WhatsApp
                                     </button>
 
@@ -1781,62 +1786,23 @@
 
 </section>
 
-
 {{-- =========================================================
-     WHATSAPP CTA
-========================================================= --}}
-
-<section class="bg-[#f7f5f0]">
-
-    <div class="max-w-5xl mx-auto px-6 py-20 text-center">
-
-        <p class="text-xs uppercase tracking-[0.45em] text-[#a47c15] font-semibold">
-            Need help choosing?
-        </p>
-
-        <h2 class="mt-5 text-3xl sm:text-4xl font-light">
-            Shop With Us on WhatsApp
-        </h2>
-
-        <p class="mt-5 max-w-xl mx-auto text-gray-600 leading-7">
-            Ask about product availability, sizes, prices or anything else.
-            Our team is ready to help.
-        </p>
-
-        <a
-            href="https://wa.me/{{ config('store.whatsapp') }}?text={{ urlencode('Hello Bin Ismail, I need help choosing a product.') }}"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex mt-8 bg-black text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-[#a47c15] transition"
-        >
-            Chat on WhatsApp
-        </a>
-
-    </div>
-
-</section>
-
-
-{{-- =========================================================
-     FLOATING WHATSAPP
+     FLOATING WHATSAPP BUTTON
 ========================================================= --}}
 
 <a
-    href="https://wa.me/{{ config('store.whatsapp') }}?text={{ urlencode('Hello Bin Ismail, I would like to know more about your products.') }}"
+    href="https://wa.me/{{ config('store.whatsapp') }}?text={{ urlencode('Hello Bin Roshan, I would like to know more about your products.') }}"
     target="_blank"
     rel="noopener noreferrer"
-    aria-label="Chat with Bin Ismail on WhatsApp"
-    class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] text-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition duration-300"
->
+    aria-label="Chat with Bin Roshan on WhatsApp"
+    class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#BE8B3E] text-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition duration-300">
 
-    <svg
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        class="w-7 h-7"
-    >
-        <path
-            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.1-.471-.149-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.1-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51-.173-.008-.372-.01-.57-.01-.198 0-.52.075-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"
-        />
+    <svg viewBox="0 0 24 24"
+         fill="currentColor"
+         class="w-7 h-7">
+
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.1-.471-.149-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.1-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51-.173-.008-.372-.01-.57-.01-.198 0-.52.075-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982 1-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.437-9.884 9.89-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.002 5.45-4.438 9.884-9.889 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.304-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.478-8.413"/>
+
     </svg>
 
 </a>
@@ -2009,7 +1975,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /*
 |--------------------------------------------------------------------------
-| AJAX FILTERING + PRICE SLIDER
+| AJAX FILTERING + PRICE SLIDER + PRIORITY FILTERS
 |--------------------------------------------------------------------------
 */
 
@@ -2032,6 +1998,88 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let activeController = null;
     let requestSequence = 0;
+    let selectedPriorityCategory = null;
+    let selectedHighlight = null;
+
+    function getProductGrid() {
+        return productsContent.querySelector('.grid');
+    }
+
+    function getProductCards() {
+        const grid = getProductGrid();
+        return grid ? Array.from(grid.querySelectorAll('.product-card')) : [];
+    }
+
+    function rememberOriginalOrder() {
+        getProductCards().forEach(function (card, index) {
+            if (typeof card.dataset.originalIndex === 'undefined') {
+                card.dataset.originalIndex = String(index);
+            }
+        });
+    }
+
+    function applyClientSideFilters() {
+        const grid = getProductGrid();
+
+        if (!grid) {
+            if (productsCount) {
+                productsCount.textContent = '0';
+            }
+            return;
+        }
+
+        rememberOriginalOrder();
+
+        const cards = getProductCards();
+        const slider = document.getElementById('price-slider');
+        const maxPrice = slider ? Number(slider.value) : Infinity;
+
+        cards.forEach(function (card) {
+            const price = Number(card.dataset.price || 0);
+            const withinPrice = !Number.isFinite(maxPrice) || price <= maxPrice;
+            card.style.display = withinPrice ? '' : 'none';
+        });
+
+        cards.sort(function (a, b) {
+            const aCategory = selectedPriorityCategory &&
+                a.dataset.categorySlug === selectedPriorityCategory ? 1 : 0;
+            const bCategory = selectedPriorityCategory &&
+                b.dataset.categorySlug === selectedPriorityCategory ? 1 : 0;
+
+            if (aCategory !== bCategory) {
+                return bCategory - aCategory;
+            }
+
+            const aHighlight = selectedHighlight === 'featured'
+                ? a.dataset.featured === '1'
+                : selectedHighlight === 'sale'
+                    ? a.dataset.sale === '1'
+                    : false;
+
+            const bHighlight = selectedHighlight === 'featured'
+                ? b.dataset.featured === '1'
+                : selectedHighlight === 'sale'
+                    ? b.dataset.sale === '1'
+                    : false;
+
+            if (aHighlight !== bHighlight) {
+                return Number(bHighlight) - Number(aHighlight);
+            }
+
+            return Number(a.dataset.originalIndex) - Number(b.dataset.originalIndex);
+        });
+
+        cards.forEach(function (card) {
+            grid.appendChild(card);
+        });
+
+        if (productsCount) {
+            const visibleCount = cards.filter(function (card) {
+                return card.style.display !== 'none';
+            }).length;
+            productsCount.textContent = String(visibleCount);
+        }
+    }
 
     function setLoading(isLoading) {
         productsContent.setAttribute('aria-busy', isLoading ? 'true' : 'false');
@@ -2101,9 +2149,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             productsContent.innerHTML = nextProducts.innerHTML;
 
-            if (productsCount && typeof data.count !== 'undefined') {
-                productsCount.textContent = data.count;
-            }
+            // The server may return a different product set after one of the
+            // existing filters changes. Re-apply our instant client-side
+            // price/category/highlight state to that fresh product set.
+            applyClientSideFilters();
 
             if (!options.skipUrlUpdate) {
                 window.history.pushState(
@@ -2115,8 +2164,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             setLoading(false);
 
-            // Keep the browser at the same scroll position. The product grid
-            // changes in place instead of causing a page jump/reload.
             return data;
 
         } catch (error) {
@@ -2126,9 +2173,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             console.error('Bin Ismail shop filter error:', error);
             setLoading(false);
-
-            // If AJAX fails, keep the current products visible rather than
-            // navigating away or losing the user's selected filters.
         }
     }
 
@@ -2136,17 +2180,65 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /*
     |--------------------------------------------------------------------------
-    | CHECKBOXES / DYNAMIC CHECKBOXES
+    | CATEGORY PRIORITY FILTER
     |--------------------------------------------------------------------------
     |
-    | Event delegation is intentional here. Jewelry subcategory checkboxes
-    | are created dynamically after the initial page load.
+    | Exactly one category can be selected. This is a priority filter, not a
+    | hard category filter: selected-category products move to the front while
+    | products from every other category remain visible.
+    |--------------------------------------------------------------------------
+    */
+    document.querySelectorAll('.shop-category-filter').forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            if (checkbox.checked) {
+                document.querySelectorAll('.shop-category-filter').forEach(function (other) {
+                    if (other !== checkbox) {
+                        other.checked = false;
+                    }
+                });
+
+                selectedPriorityCategory = checkbox.dataset.categorySlug || null;
+            } else {
+                selectedPriorityCategory = null;
+            }
+
+            applyClientSideFilters();
+        });
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | FEATURED / SALE PRIORITY FILTER
+    |--------------------------------------------------------------------------
+    |
+    | Native radio-button grouping guarantees only one can be selected.
+    | Clicking the selected radio again is intentionally not required; the
+    | normal browser radio behavior is preserved.
+    |--------------------------------------------------------------------------
+    */
+    document.querySelectorAll('.shop-highlight-filter').forEach(function (radio) {
+        radio.addEventListener('change', function () {
+            selectedHighlight = radio.checked ? radio.value : null;
+            applyClientSideFilters();
+        });
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | CHECKBOXES / DYNAMIC CHECKBOXES
     |--------------------------------------------------------------------------
     */
     filterForm.addEventListener('change', function (event) {
         const target = event.target;
 
         if (!(target instanceof HTMLInputElement) && !(target instanceof HTMLSelectElement)) {
+            return;
+        }
+
+        if (
+            target.classList.contains('shop-category-filter') ||
+            target.classList.contains('shop-highlight-filter')
+        ) {
             return;
         }
 
@@ -2203,8 +2295,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const clearUrl = clearLink.getAttribute('href') || '{{ route('shop') }}';
 
-        // Reset the sidebar controls first so the UI and URL stay in sync.
         filterForm.reset();
+
+        selectedPriorityCategory = null;
+        selectedHighlight = null;
 
         const priceSlider = document.getElementById('price-slider');
         const maxInput = document.getElementById('max-price-input');
@@ -2216,6 +2310,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (maxInput && priceSlider) {
             maxInput.value = priceSlider.max;
         }
+
+        updatePriceSliderIfAvailable();
 
         const clearForm = document.createElement('form');
         clearForm.method = 'GET';
@@ -2240,6 +2336,11 @@ document.addEventListener('DOMContentLoaded', function () {
     |--------------------------------------------------------------------------
     | PRICE SLIDER
     |--------------------------------------------------------------------------
+    |
+    | Price is handled instantly on the already-rendered product cards. We do
+    | not wait for the server, so moving the slider immediately hides products
+    | above the selected maximum.
+    |--------------------------------------------------------------------------
     */
     const priceSlider = document.getElementById('price-slider');
     const maxInput = document.getElementById('max-price-input');
@@ -2247,39 +2348,51 @@ document.addEventListener('DOMContentLoaded', function () {
     const activeTrack = document.getElementById('price-active-track');
 
     if (priceSlider && maxInput) {
-        const absoluteMin = Number(priceSlider.min);
-        const absoluteMax = Number(priceSlider.max);
-        let priceSubmitTimer = null;
-
         function updatePriceSlider() {
-            const maxValue = Number(priceSlider.value);
+            const min = Number(priceSlider.min);
+            const max = Number(priceSlider.max);
+            const value = Number(priceSlider.value);
 
-            maxInput.value = maxValue;
+            maxInput.value = value;
 
             if (rangeLabel) {
                 rangeLabel.textContent =
-                    'Up to PKR ' + maxValue.toLocaleString();
+                    'Up to PKR ' + value.toLocaleString();
             }
 
-            const range = absoluteMax - absoluteMin;
-
-            if (activeTrack && range > 0) {
-                const maxPercent = ((maxValue - absoluteMin) / range) * 100;
-                activeTrack.style.width = maxPercent + '%';
+            if (activeTrack && max > min) {
+                activeTrack.style.width =
+                    (((value - min) / (max - min)) * 100) + '%';
             }
-        }
 
-        function submitPriceFilter() {
-            updatePriceSlider();
-            clearTimeout(priceSubmitTimer);
-
-            priceSubmitTimer = setTimeout(function () {
-                submitShopFiltersAjax(filterForm);
-            }, 150);
+            applyClientSideFilters();
         }
 
         priceSlider.addEventListener('input', updatePriceSlider);
-        priceSlider.addEventListener('change', submitPriceFilter);
+        priceSlider.addEventListener('change', updatePriceSlider);
+    }
+
+    function updatePriceSliderIfAvailable() {
+        const slider = document.getElementById('price-slider');
+        const input = document.getElementById('max-price-input');
+        const label = document.getElementById('price-range-label');
+        const track = document.getElementById('price-active-track');
+
+        if (!slider || !input) return;
+
+        const min = Number(slider.min);
+        const max = Number(slider.max);
+        const value = Number(slider.value);
+
+        input.value = value;
+
+        if (label) {
+            label.textContent = 'Up to PKR ' + value.toLocaleString();
+        }
+
+        if (track && max > min) {
+            track.style.width = (((value - min) / (max - min)) * 100) + '%';
+        }
     }
 
     /*
@@ -2289,20 +2402,10 @@ document.addEventListener('DOMContentLoaded', function () {
     */
     window.addEventListener('popstate', function () {
         const url = new URL(window.location.href);
-
         const params = url.searchParams;
 
-        // Rebuild the filter form from the URL without changing the existing
-        // sidebar markup or theme.
         filterForm.querySelectorAll('[data-ajax-generated-state="true"]').forEach(function (input) {
             input.remove();
-        });
-
-        const existingNames = new Set();
-        filterForm.querySelectorAll('input, select').forEach(function (control) {
-            if (control.name) {
-                existingNames.add(control.name.replace(/\[\]$/, ''));
-            }
         });
 
         filterForm.querySelectorAll('input[type="checkbox"]').forEach(function (checkbox) {
@@ -2330,38 +2433,11 @@ document.addEventListener('DOMContentLoaded', function () {
         submitShopFiltersAjax(filterForm, { skipUrlUpdate: true });
     });
 
-    function updatePriceSliderIfAvailable() {
-        const slider = document.getElementById('price-slider');
-        const input = document.getElementById('max-price-input');
-        const label = document.getElementById('price-range-label');
-        const track = document.getElementById('price-active-track');
-
-        if (!slider || !input) return;
-
-        const min = Number(slider.min);
-        const max = Number(slider.max);
-        const value = Number(slider.value);
-
-        input.value = value;
-
-        if (label) {
-            label.textContent = 'Up to PKR ' + value.toLocaleString();
-        }
-
-        if (track && max > min) {
-            track.style.width = (((value - min) / (max - min)) * 100) + '%';
-        }
-    }
-
     updatePriceSliderIfAvailable();
+    rememberOriginalOrder();
+    applyClientSideFilters();
 
 });
-
-/*
-|--------------------------------------------------------------------------
-| PRICE SLIDER STYLES
-|--------------------------------------------------------------------------
-*/
 
 /*
 |--------------------------------------------------------------------------
@@ -2400,22 +2476,26 @@ function orderOnWhatsApp(productName) {
         width: 18px;
         height: 18px;
         border-radius: 9999px;
-        background: #000;
+        background: #BE8B3E;
         cursor: pointer;
         pointer-events: auto;
         border: 2px solid #fff;
-        box-shadow: 0 0 0 1px #000;
+        box-shadow: 0 0 0 1px #BE8B3E;
     }
 
     .price-slider::-moz-range-thumb {
         width: 18px;
         height: 18px;
         border-radius: 9999px;
-        background: #000;
+        background: #BE8B3E;
         cursor: pointer;
         pointer-events: auto;
         border: 2px solid #fff;
-        box-shadow: 0 0 0 1px #000;
+        box-shadow: 0 0 0 1px #BE8B3E;
+    }
+
+    .gender-checkbox {
+        accent-color: #BE8B3E;
     }
 </style>
 

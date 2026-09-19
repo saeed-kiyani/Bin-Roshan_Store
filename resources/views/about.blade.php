@@ -1,8 +1,12 @@
+@php
+    use Illuminate\Support\Facades\Storage;
+@endphp
+
 @extends('layouts.app')
 
-@section('title', 'About Us | Bin Ismail')
+@section('title', 'About Us | Bin Roshan')
 
-@section('description', 'Discover the story behind Bin Ismail — fashion, jewelry, laces, watches and accessories.')
+@section('description', 'Discover the story behind Bin Roshan — fashion, jewelry, laces, watches and accessories.')
 
 @section('content')
 
@@ -15,7 +19,6 @@
      {{-- =====================================================
          TRANSPARENT NAVIGATION
     ====================================================== --}}
-
     <header class="absolute top-0 left-0 right-0 z-40">
 
         <div class="max-w-[1500px] mx-auto px-6 lg:px-12">
@@ -28,39 +31,38 @@
 
                     <a
                         href="{{ route('home') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:opacity-60 transition"
-                    >
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
                         Home
                     </a>
 
                     <a
                         href="{{ route('shop') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:opacity-60 transition"
-                    >
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
                         Shop
                     </a>
 
                     <a
                         href="{{ route('categories') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:opacity-60 transition"
-                    >
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
                         Categories
                     </a>
 
                 </div>
 
 
-                {{-- CENTER LOGO --}}
+                {{-- =================================================
+                     CENTER LOGO
+                ================================================== --}}
 
                 <a
                     href="{{ route('home') }}"
-                    class="absolute left-1/2 -translate-x-1/2 top-5"
-                >
+                    class="absolute left-1/2 -translate-x-1/2 top-5">
+
                     <img
                         src="{{ asset('images/logo/logo.png') }}"
-                        alt="Bin Ismail"
-                        class="h-14 lg:h-16 w-auto object-contain"
-                    >
+                        alt="Bin Roshan"
+                        class="h-16 lg:h-35 w-auto object-contain">
+
                 </a>
 
 
@@ -70,15 +72,13 @@
 
                     <a
                         href="{{ route('about') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:opacity-60 transition"
-                    >
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
                         About
                     </a>
 
                     <a
                         href="{{ route('contact') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:opacity-60 transition"
-                    >
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
                         Contact
                     </a>
 
@@ -89,27 +89,25 @@
                         type="button"
                         onclick="openSearch()"
                         aria-label="Search"
-                        class="text-white hover:opacity-60 transition"
-                    >
+                        class="text-white hover:text-[#BE8B3E] transition cursor-pointer">
+
                         <svg
                             class="w-6 h-6"
                             fill="none"
                             stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
+                            viewBox="0 0 24 24">
                             <circle
                                 cx="11"
                                 cy="11"
                                 r="7"
-                                stroke-width="1.7"
-                            />
+                                stroke-width="1.7"/>
 
                             <path
                                 d="m20 20-4-4"
                                 stroke-width="1.7"
-                                stroke-linecap="round"
-                            />
+                                stroke-linecap="round"/>
                         </svg>
+
                     </button>
 
 
@@ -119,58 +117,63 @@
                         type="button"
                         onclick="openCart()"
                         aria-label="Shopping bag"
-                        class="relative text-white hover:opacity-60 transition"
-                    >
+                        class="relative text-white hover:text-[#BE8B3E] transition cursor-pointer">
+
                         <svg
                             class="w-6 h-6"
                             fill="none"
                             stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
+                            viewBox="0 0 24 24">
+
                             <path
                                 d="M6 8h12l1 13H5L6 8Z"
                                 stroke-width="1.5"
-                                stroke-linejoin="round"
-                            />
+                                stroke-linejoin="round"/>
 
                             <path
                                 d="M9 8V6a3 3 0 0 1 6 0v2"
                                 stroke-width="1.5"
-                                stroke-linecap="round"
-                            />
+                                stroke-linecap="round"/>
+
                         </svg>
+
+
+                        {{-- CART COUNT --}}
 
                         <span
                             id="cart-count"
-                            class="absolute -top-2 -right-3 min-w-[17px] h-[17px] px-1 rounded-full bg-white text-black text-[9px] flex items-center justify-center font-semibold"
-                        >
+                            class="absolute -top-2 -right-3 min-w-[17px] h-[17px] px-1 rounded-full bg-white text-black text-[9px] flex items-center justify-center font-semibold">
                             0
                         </span>
+
                     </button>
 
                 </div>
 
 
-                {{-- MOBILE MENU --}}
+                {{-- =================================================
+                     MOBILE MENU BUTTON
+                ================================================== --}}
 
                 <button
                     type="button"
                     onclick="openMobileMenu()"
                     class="lg:hidden text-white"
-                    aria-label="Open menu"
-                >
+                    aria-label="Open menu">
+
                     <svg
                         class="w-7 h-7"
                         fill="none"
                         stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
+                        viewBox="0 0 24 24">
+
                         <path
                             d="M4 7h16M4 12h16M4 17h16"
                             stroke-width="1.5"
-                            stroke-linecap="round"
-                        />
+                            stroke-linecap="round"/>
+
                     </svg>
+
                 </button>
 
 
@@ -180,33 +183,32 @@
                     type="button"
                     onclick="openCart()"
                     class="lg:hidden relative text-white"
-                    aria-label="Shopping bag"
-                >
+                    aria-label="Shopping bag">
+
                     <svg
                         class="w-6 h-6"
                         fill="none"
                         stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
+                        viewBox="0 0 24 24">
+
                         <path
                             d="M6 8h12l1 13H5L6 8Z"
                             stroke-width="1.5"
-                            stroke-linejoin="round"
-                        />
+                            stroke-linejoin="round"/>
 
                         <path
                             d="M9 8V6a3 3 0 0 1 6 0v2"
                             stroke-width="1.5"
-                            stroke-linecap="round"
-                        />
+                            stroke-linecap="round"/>
+
                     </svg>
 
                     <span
                         id="cart-count-mobile"
-                        class="absolute -top-2 -right-3 min-w-[17px] h-[17px] px-1 rounded-full bg-white text-black text-[9px] flex items-center justify-center font-semibold"
-                    >
+                        class="absolute -top-2 -right-3 min-w-[17px] h-[17px] px-1 rounded-full bg-white text-black text-[9px] flex items-center justify-center font-semibold">
                         0
                     </span>
+
                 </button>
 
             </nav>
@@ -216,25 +218,16 @@
     </header>
     
     <img
-        src="https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1800&q=90"
-        alt="Bin Ismail fashion collection"
-        class="absolute inset-0 w-full h-full object-cover"
-    >
+        src="{{ asset('images/banners/BinRoshanfashioncollection.jpeg') }}"
+        alt="Bin Roshan fashion collection"
+        class="absolute inset-0 w-full h-full object-cover">
 
     <div class="absolute inset-0 bg-black/55"></div>
 
     <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
 
-        <p class="text-xs uppercase tracking-[0.5em] text-white/70">
-            The Bin Ismail Story
-        </p>
-
         <h1 class="mt-7 text-5xl sm:text-6xl lg:text-8xl font-light leading-none">
-            Elegance.
-            <br>
-            Tradition.
-            <br>
-            <span class="italic">Style.</span>
+            The <span class="text-[#BE8B3E] font-serif italic">Bin Roshan Story</span>
         </h1>
 
         <p class="mt-8 max-w-2xl mx-auto text-white/80 leading-8">
@@ -253,7 +246,7 @@
      INTRODUCTION
 ========================================================= --}}
 
-<section class="py-24 lg:py-32 bg-white">
+<section class="py-24 lg:py-32 bg-[#f8f7f4]">
 
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -261,12 +254,12 @@
 
             <div>
 
-                <p class="text-xs uppercase tracking-[0.4em] text-[#a47c15] font-semibold">
-                    About Bin Ismail
+                <p class="text-xs uppercase tracking-[0.4em] text-[#BE8B3E] font-semibold">
+                    About Bin Roshan
                 </p>
 
                 <h2 class="mt-6 text-4xl sm:text-5xl lg:text-6xl font-light leading-tight">
-                    Where timeless style meets modern expression.
+                    Where <span class="italic font-mono text-[#BE8B3E]">Timeless Style</span> Meets <span class="font-serif font-medium text-[#BE8B3E]">Modern Expression.</span>
                 </h2>
 
             </div>
@@ -275,7 +268,7 @@
             <div class="text-gray-600 leading-8 space-y-6">
 
                 <p>
-                    Bin Ismail is built around a simple idea:
+                    <span class="italic text-[#BE8B3E]">Bin Roshan</span> is built around a simple idea:
                     bringing beautiful products together in one
                     refined destination.
                 </p>
@@ -307,7 +300,7 @@
      IMAGE + STORY
 ========================================================= --}}
 
-<section class="bg-[#f7f5f0] py-24 lg:py-32">
+<section class="bg-black py-24 lg:py-32">
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -317,21 +310,20 @@
 
                 <img
                     src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=90"
-                    alt="Bin Ismail fashion"
-                    class="w-full h-full object-cover"
-                >
+                    alt="Bin Roshan fashion"
+                    class="w-full h-full object-cover rounded-full">
 
             </div>
 
 
             <div class="lg:pr-10">
 
-                <p class="text-xs uppercase tracking-[0.4em] text-[#a47c15] font-semibold">
+                <p class="text-xs uppercase tracking-[0.4em] text-[#BE8B3E] font-semibold">
                     Our Philosophy
                 </p>
 
-                <h2 class="mt-6 text-4xl sm:text-5xl font-light leading-tight">
-                    Designed for people who appreciate the details.
+                <h2 class="mt-6 text-4xl sm:text-5xl font-light leading-tight text-white">
+                    Designed For People Who Appreciate The Details.
                 </h2>
 
                 <div class="mt-8 space-y-6 text-gray-600 leading-8">
@@ -344,7 +336,7 @@
                     </p>
 
                     <p>
-                        That's why Bin Ismail brings together
+                        That's why <span class="italic font-serif text-[#BE8B3E]">Bin Roshan</span> brings together
                         different categories while maintaining one
                         consistent standard of sophistication.
                     </p>
@@ -356,11 +348,11 @@
 
                     <div>
 
-                        <p class="text-3xl font-light">
+                        <p class="text-3xl font-light text-[#BE8B3E]">
                             01
                         </p>
 
-                        <p class="mt-2 text-sm font-medium">
+                        <p class="mt-2 text-sm font-medium text-white">
                             Curated Selection
                         </p>
 
@@ -369,11 +361,11 @@
 
                     <div>
 
-                        <p class="text-3xl font-light">
+                        <p class="text-3xl font-light text-[#BE8B3E]">
                             02
                         </p>
 
-                        <p class="mt-2 text-sm font-medium">
+                        <p class="mt-2 text-sm font-medium text-white">
                             Personal Service
                         </p>
 
@@ -382,11 +374,11 @@
 
                     <div>
 
-                        <p class="text-3xl font-light">
+                        <p class="text-3xl font-light text-[#BE8B3E]">
                             03
                         </p>
 
-                        <p class="mt-2 text-sm font-medium">
+                        <p class="mt-2 text-sm font-medium text-white">
                             Timeless Style
                         </p>
 
@@ -395,11 +387,11 @@
 
                     <div>
 
-                        <p class="text-3xl font-light">
+                        <p class="text-3xl font-light text-[#BE8B3E]">
                             04
                         </p>
 
-                        <p class="mt-2 text-sm font-medium">
+                        <p class="mt-2 text-sm font-medium text-white">
                             Customer First
                         </p>
 
@@ -421,103 +413,150 @@
      CATEGORIES
 ========================================================= --}}
 
-<section class="py-24 lg:py-32">
+<section class="py-24 lg:py-32 bg-[#f8f7f4]">
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div class="text-center max-w-2xl mx-auto">
 
-            <p class="text-xs uppercase tracking-[0.4em] text-[#a47c15] font-semibold">
+            <p class="text-xs uppercase tracking-[0.4em] text-[#BE8B3E] font-semibold">
                 What We Offer
             </p>
 
             <h2 class="mt-5 text-4xl sm:text-5xl font-light">
-                Something for every expression.
+                Something For
+                <span class="italic font-serif text-[#BE8B3E]">
+                    Every Expression.
+                </span>
             </h2>
 
         </div>
 
+        {{-- =================================================
+             CATEGORY CAROUSEL
+        ================================================== --}}
 
-        <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 mt-14">
+        @if($aboutCategories->count())
 
-            @php
+            <div class="relative mt-14">
 
-                $aboutCategories = [
+                <div
+                    id="aboutCategoryViewport"
+                    class="overflow-hidden">
 
-                    [
-                        'name' => 'Clothing',
-                        'slug' => 'clothing',
-                        'image' => 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=700&q=85',
-                    ],
+                    <div
+                        id="aboutCategoryTrack"
+                        class="flex gap-4 transition-transform duration-700 ease-in-out">
 
-                    [
-                        'name' => 'Jewelry',
-                        'slug' => 'jewelry',
-                        'image' => 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=700&q=85',
-                    ],
+                        @foreach($aboutCategories as $category)
 
-                    [
-                        'name' => 'Laces',
-                        'slug' => 'laces',
-                        'image' => 'https://images.unsplash.com/photo-1590736704728-f4730bb30770?auto=format&fit=crop&w=700&q=85',
-                    ],
+                            <a
+                                href="{{ route('category.show', $category->slug) }}"
+                                class="about-category-card group relative aspect-[3/4] overflow-hidden flex-shrink-0 rounded-full">
 
-                    [
-                        'name' => 'Watches',
-                        'slug' => 'watches',
-                        'image' => 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=700&q=85',
-                    ],
+                                {{-- IMAGE --}}
 
-                    [
-                        'name' => 'Accessories',
-                        'slug' => 'accessories',
-                        'image' => 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=85',
-                    ],
+                                @if($category->image)
 
-                ];
+                            <img
+                                src="{{ Storage::url($category->image) }}"
+                                alt="{{ $category->name }}"
+                                class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-105">
 
-            @endphp
+                            @else
+
+                            <div class="absolute inset-0 bg-gray-300"></div>
+
+                            @endif
+
+                                {{-- OVERLAY --}}
+
+                                <div
+                                    class="absolute inset-0 bg-black/60 group-hover:bg-black/45 transition duration-500">
+                                </div>
 
 
-            @foreach($aboutCategories as $category)
+                                {{-- CONTENT --}}
 
-                <a
-                    href="{{ route('category.show', $category['slug']) }}"
-                    class="group relative aspect-[3/4] overflow-hidden"
-                >
+                                <div class="absolute inset-x-0 bottom-0 p-5 text-white text-center">
 
-                    <img
-                        src="{{ $category['image'] }}"
-                        alt="{{ $category['name'] }}"
-                        class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-105"
-                    >
+                                    <h3 class="text-xl font-light">
+                                        {{ $category->name }}
+                                    </h3>
 
-                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/45 transition">
-                    </div>
+                                    <span
+                                        class="block mt-2 text-[10px] uppercase tracking-widest text-[#BE8B3E]">
+                                        Explore →
+                                    </span>
 
-                    <div class="absolute inset-x-0 bottom-0 p-5 text-white">
+                                </div>
 
-                        <h3 class="text-xl font-light">
-                            {{ $category['name'] }}
-                        </h3>
 
-                        <span class="inline-block mt-2 text-[10px] uppercase tracking-widest">
-                            Explore →
-                        </span>
+                            </a>
+
+                        @endforeach
 
                     </div>
 
-                </a>
+                </div>
 
-            @endforeach
 
-        </div>
+                {{-- =================================================
+                     CAROUSEL BUTTON
+                ================================================== --}}
+
+                @if($aboutCategories->count() > 5)
+
+    <button
+        type="button"
+        id="aboutCategoryNext"
+        aria-label="Next categories"
+        class="absolute right-0 top-1/2 -translate-y-1/2 z-30
+               w-12 h-12
+               bg-black text-white
+               rounded-full
+               flex items-center justify-center
+               shadow-xl
+               hover:bg-[#BE8B3E]
+               transition duration-300
+               translate-x-1/2"
+    >
+
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+        >
+
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M9 5l7 7-7 7"
+            />
+
+        </svg>
+
+    </button>
+
+@endif
+
+
+            </div>
+
+        @else
+
+            <p class="mt-14 text-center text-gray-500">
+                No categories available.
+            </p>
+
+        @endif
 
     </div>
 
 </section>
-
-
 
 {{-- =========================================================
      VALUES
@@ -531,7 +570,7 @@
 
             <div>
 
-                <div class="mx-auto w-14 h-14 rounded-full border border-white/20 flex items-center justify-center text-[#c8a64b]">
+                <div class="mx-auto w-14 h-14 rounded-full border border-[#BE8B3E] flex items-center justify-center text-[#BE8B3E]">
                     01
                 </div>
 
@@ -549,7 +588,7 @@
 
             <div>
 
-                <div class="mx-auto w-14 h-14 rounded-full border border-white/20 flex items-center justify-center text-[#c8a64b]">
+                <div class="mx-auto w-14 h-14 rounded-full border border-[#BE8B3E] flex items-center justify-center text-[#BE8B3E]">
                     02
                 </div>
 
@@ -567,7 +606,7 @@
 
             <div>
 
-                <div class="mx-auto w-14 h-14 rounded-full border border-white/20 flex items-center justify-center text-[#c8a64b]">
+                <div class="mx-auto w-14 h-14 rounded-full border border-white/[#BE8B3E] flex items-center justify-center text-[#BE8B3E]">
                     03
                 </div>
 
@@ -594,16 +633,16 @@
      WHATSAPP CTA
 ========================================================= --}}
 
-<section class="py-24 bg-[#f7f5f0]">
+<section class="py-24 bg-[#f8f7f4]">
 
     <div class="max-w-4xl mx-auto px-4 text-center">
 
-        <p class="text-xs uppercase tracking-[0.4em] text-[#a47c15] font-semibold">
+        <p class="text-xs uppercase tracking-[0.4em] text-[#BE8B3E] font-semibold">
             Let's Connect
         </p>
 
         <h2 class="mt-5 text-4xl sm:text-5xl font-light">
-            Have a question?
+            Have a Question?
         </h2>
 
         <p class="mt-6 text-gray-600 leading-7">
@@ -615,7 +654,7 @@
             href="https://wa.me/{{ config('store.whatsapp') }}"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex mt-8 bg-black text-white px-9 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-[#a47c15] transition"
+            class="inline-flex mt-8 border border-[#BE8B3E] bg-transparent text-[#BE8B3E] px-9 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-[#BE8B3E] hover:text-white rounded-full transition"
         >
             Chat on WhatsApp
         </a>
@@ -624,4 +663,156 @@
 
 </section>
 
+{{-- =========================================================
+     FLOATING WHATSAPP BUTTON
+========================================================= --}}
+
+<a
+    href="https://wa.me/{{ config('store.whatsapp') }}?text={{ urlencode('Hello Bin Roshan, I would like to know more about your products.') }}"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Chat with Bin Roshan on WhatsApp"
+    class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#BE8B3E] text-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition duration-300">
+
+    <svg viewBox="0 0 24 24"
+         fill="currentColor"
+         class="w-7 h-7">
+
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.1-.471-.149-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.1-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51-.173-.008-.372-.01-.57-.01-.198 0-.52.075-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982 1-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.437-9.884 9.89-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.002 5.45-4.438 9.884-9.889 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.304-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.478-8.413"/>
+
+    </svg>
+
+</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const viewport = document.getElementById('aboutCategoryViewport');
+    const track = document.getElementById('aboutCategoryTrack');
+    const nextButton = document.getElementById('aboutCategoryNext');
+
+    if (!viewport || !track || !nextButton) {
+        return;
+    }
+
+    const cards = Array.from(
+        track.querySelectorAll('.about-category-card')
+    );
+
+    if (cards.length <= 5) {
+        nextButton.style.display = 'none';
+        return;
+    }
+
+    let currentIndex = 0;
+
+
+    function getVisibleCards() {
+
+        if (window.innerWidth < 640) {
+            return 2;
+        }
+
+        if (window.innerWidth < 1024) {
+            return 3;
+        }
+
+        return 5;
+    }
+
+
+    function updateCarousel() {
+
+        const visibleCards = getVisibleCards();
+
+        const maxIndex = Math.max(
+            0,
+            cards.length - visibleCards
+        );
+
+        if (currentIndex > maxIndex) {
+            currentIndex = maxIndex;
+        }
+
+        const cardWidth = cards[0].getBoundingClientRect().width;
+
+        const gap = parseFloat(
+            window.getComputedStyle(track).columnGap ||
+            window.getComputedStyle(track).gap ||
+            0
+        );
+
+        const moveAmount = (cardWidth + gap) * currentIndex;
+
+        track.style.transform =
+            `translateX(-${moveAmount}px)`;
+
+    }
+
+
+    nextButton.addEventListener('click', function () {
+
+        const visibleCards = getVisibleCards();
+
+        const maxIndex = Math.max(
+            0,
+            cards.length - visibleCards
+        );
+
+        if (currentIndex < maxIndex) {
+
+            currentIndex++;
+
+        } else {
+
+            // Start again from first card
+            currentIndex = 0;
+
+        }
+
+        updateCarousel();
+
+    });
+
+
+    window.addEventListener('resize', function () {
+        updateCarousel();
+    });
+
+
+    updateCarousel();
+
+});
+</script>
+
 @endsection
+
+<style>
+
+    .about-category-card {
+        width: calc(
+            (100% - 64px) / 5
+        );
+    }
+
+    @media (max-width: 1023px) {
+
+        .about-category-card {
+            width: calc(
+                (100% - 32px) / 3
+            );
+        }
+
+    }
+
+    @media (max-width: 639px) {
+
+        .about-category-card {
+            width: calc(
+                (100% - 16px) / 2
+            );
+        }
+
+    }
+
+</style>

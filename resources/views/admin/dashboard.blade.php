@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Admin Dashboard | Bin Ismail')
+@section('title', 'Admin Dashboard | Bin Roshan')
 
 @section('content')
 
@@ -19,7 +19,7 @@
                 <div>
 
                     <p class="text-[10px] uppercase tracking-[0.4em] text-[#a47c15] font-semibold">
-                        Bin Ismail
+                        Bin Roshan
                     </p>
 
                     <h1 class="mt-3 text-3xl sm:text-4xl font-light text-gray-900">
@@ -37,15 +37,13 @@
 
                     <a
                         href="{{ route('admin.products.create') }}"
-                        class="inline-flex items-center justify-center bg-black text-white px-6 py-3 text-xs uppercase tracking-widest font-semibold hover:bg-[#a47c15] transition"
-                    >
+                        class="inline-flex items-center justify-center border border-[#BE8B3E] rounded-full text-[#BE8B3E] px-6 py-3 text-xs uppercase tracking-widest font-semibold hover:bg-[#BE8B3E] hover:text-white transition">
                         + Add Product
                     </a>
 
                     <a
                         href="{{ route('admin.categories.create') }}"
-                        class="inline-flex items-center justify-center border border-gray-300 bg-white text-gray-900 px-6 py-3 text-xs uppercase tracking-widest font-semibold hover:border-black transition"
-                    >
+                        class="inline-flex items-center justify-center bg-[#BE8B3E] rounded-full text-white px-6 py-3 text-xs uppercase tracking-widest font-semibold hover:bg-transparent border border-[#BE8B3E] hover:text-[#BE8B3E] transition">
                         + Add Category
                     </a>
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Bin Ismail | Fashion, Jewelry & Accessories')
+@section('title', 'Bin Roshan | Fashion, Jewelry & Accessories')
 
 @section('description', 'Discover elegant clothing, jewelry, laces, watches and accessories at Bin Ismail.')
 
@@ -113,7 +113,7 @@
                         type="button"
                         onclick="openSearch()"
                         aria-label="Search"
-                        class="text-white hover:text-[#BE8B3E] transition">
+                        class="text-white hover:text-[#BE8B3E] transition cursor-pointer">
 
                         <svg
                             class="w-6 h-6"
@@ -141,7 +141,7 @@
                         type="button"
                         onclick="openCart()"
                         aria-label="Shopping bag"
-                        class="relative text-white hover:text-[#BE8B3E] transition">
+                        class="relative text-white hover:text-[#BE8B3E] transition cursor-pointer">
 
                         <svg
                             class="w-6 h-6"
@@ -255,7 +255,7 @@
                 {{-- SMALL LABEL --}}
 
                 <p class="text-xs sm:text-sm uppercase tracking-[0.4em] font-medium opacity-90">
-                    Welcome to <span class="text-[#BE8B3E]">Bin Roshan</span>
+                    Welcome to <span class="text-[#BE8B3E] font-bold">Bin Roshan</span>
                 </p>
 
 
@@ -264,7 +264,7 @@
                 <h1 class="mt-4 text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-light leading-[0.95] tracking-tight">
                     Elegance
                     <br>
-                    That Speaks.
+                    That <span class="text-[#BE8B3E] font-serif italic">Speaks.</span>
                 </h1>
 
 
@@ -282,24 +282,34 @@
 
                 {{-- BUTTONS --}}
 
-                <div class="mt-8 flex flex-wrap gap-3">
+                <div class="mt-8 inline-flex overflow-hidden rounded-full border border-[#BE8B3E]/80">
 
-                    <a
-                        href="{{ route('shop') }}"
-                        class="inline-flex items-center justify-center px-7 py-4 bg-[#BE8B3E] text-white text-xs uppercase tracking-[0.2em] font-semibold border border-[#BE8B3E]/80 hover:bg-transparent hover:text-[#BE8B3E] transition duration-300">
-                        Shop Collection
-                    </a>
+    <a
+        href="{{ route('shop') }}"
+        class="flex items-center justify-center
+               min-w-[190px] px-8 py-4
+               text-white bg-[#BE8B3E]
+               text-xs uppercase tracking-[0.18em] font-semibold
+               border-r border-[#BE8B3E]/80
+               hover:bg-transparent hover:text-[#BE8B3E]
+               transition-all duration-300">
+        Shop Collection
+    </a>
 
+    <a
+        href="https://wa.me/{{ config('store.whatsapp') }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center justify-center
+               min-w-[170px] px-8 py-4
+               text-[#BE8B3E]
+               text-xs uppercase tracking-[0.18em] font-semibold
+               hover:bg-[#BE8B3E] hover:text-white
+               transition-all duration-300">
+        WhatsApp Us
+    </a>
 
-                    <a
-                        href="https://wa.me/{{ config('store.whatsapp') }}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="inline-flex items-center justify-center px-7 py-4 border border-[#BE8B3E]/80 text-[#BE8B3E] text-xs uppercase tracking-[0.2em] font-semibold hover:bg-[#BE8B3E] hover:text-white transition duration-300">
-                        WhatsApp Us
-                    </a>
-
-                </div>
+</div>
 
 
                 {{-- SMALL FEATURES --}}
@@ -312,7 +322,7 @@
                             01
                         </p>
 
-                        <p class="mt-1 text-xs uppercase tracking-widest">
+                        <p class="mt-1 text-xs uppercase tracking-widest text-[#BE8B3E]">
                             Quality
                         </p>
 
@@ -325,7 +335,7 @@
                             02
                         </p>
 
-                        <p class="mt-1 text-xs uppercase tracking-widest">
+                        <p class="mt-1 text-xs uppercase tracking-widest text-[#BE8B3E]">
                             Elegance
                         </p>
 
@@ -338,7 +348,7 @@
                             03
                         </p>
 
-                        <p class="mt-1 text-xs uppercase tracking-widest">
+                        <p class="mt-1 text-xs uppercase tracking-widest text-[#BE8B3E]">
                             Variety
                         </p>
 
@@ -358,13 +368,13 @@
          SCROLL INDICATOR
     ====================================================== --}}
 
-    <div class="absolute bottom-8 right-8 lg:right-12 z-20 hidden sm:flex flex-col items-center gap-3 text-white">
+    <div class="absolute bottom-8 right-8 lg:right-12 z-20 hidden sm:flex flex-col items-center gap-3 text-[#BE8B3E]">
 
         <span class="text-[9px] uppercase tracking-[0.3em] rotate-90 origin-center">
             Scroll
         </span>
 
-        <div class="w-px h-16 bg-white/50"></div>
+        <div class="w-px h-16 bg-[#BE8B3E]/50"></div>
 
     </div>
 
@@ -376,7 +386,7 @@
      CATEGORY SECTION
 ========================================================= --}}
 
-<section class="py-24 bg-white">
+<section class="py-24 bg-black">
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -385,11 +395,11 @@
     {{-- CENTER CONTENT --}}
     <div class="text-center">
 
-        <p class="text-xs uppercase tracking-[0.4em] text-[#a47c15] font-semibold">
+        <p class="text-xs uppercase tracking-[0.4em] text-[#BE8B3E] font-semibold">
             Explore
         </p>
 
-        <h2 class="mt-4 text-4xl sm:text-5xl font-light">
+        <h2 class="mt-4 text-4xl sm:text-5xl font-light text-white">
             Shop by Category
         </h2>
 
@@ -402,7 +412,7 @@
     {{-- VIEW ALL - RIGHT SIDE --}}
     <a
         href="{{ route('categories') }}"
-        class="absolute right-0 top-1/2 -translate-y-1/2 hidden sm:inline-flex items-center gap-3 text-sm uppercase tracking-wider border-b border-black pb-2 hover:opacity-60 transition">
+        class="absolute right-0 -translate-y-1/2 sm:inline-flex items-center gap-3 text-sm uppercase tracking-wider border-b border-[#BE8B3E] pb-2 text-[#BE8B3E] hover:text-white hover:border-white transition">
         View All
     </a>
 
@@ -427,7 +437,7 @@
 
         <a
             href="{{ route('category.show', $category->slug) }}"
-            class="group relative overflow-hidden aspect-[3/4] bg-gray-100">
+            class="group relative overflow-hidden aspect-[3/4] bg-gray-100 rounded-xl">
 
             <div
                 class="absolute inset-0 bg-cover bg-center transition duration-700 group-hover:scale-105"
@@ -445,7 +455,7 @@
                     {{ $category->name }}
                 </h3>
 
-                <span class="inline-block mt-3 text-xs uppercase tracking-widest border-b border-white pb-1">
+                <span class="inline-block mt-3 text-xs uppercase tracking-widest text-[#BE8B3E] font-boldborder-b border-[#BE8B3E] pb-1">
                     Explore
                 </span>
 
@@ -481,7 +491,7 @@
 
             <div>
 
-                <p class="text-xs uppercase tracking-[0.4em] text-[#a47c15] font-semibold">
+                <p class="text-xs uppercase tracking-[0.4em] text-[#BE8B3E] font-semibold">
                     Curated for you
                 </p>
 
@@ -492,7 +502,7 @@
             </div>
 
             <a href="{{ url('/shop') }}"
-               class="text-sm uppercase tracking-widest border-b border-black pb-2 w-fit">
+               class="text-sm uppercase tracking-widest text-[#BE8B3E] hover:text-black border-b border-[#BE8B3E] hover:border-black pb-2 w-fit">
                 View All
             </a>
 
@@ -521,7 +531,7 @@
 
             <a
                 href="{{ route('product.show', $product->slug) }}"
-                class="block overflow-hidden bg-white aspect-[4/5]">
+                class="block overflow-hidden bg-white aspect-[4/5] rounded-xl">
 
                 <div
                     class="w-full h-full bg-cover bg-center transition duration-700 group-hover:scale-105"
@@ -531,7 +541,7 @@
 
             <div class="pt-5">
 
-                <p class="text-[10px] uppercase tracking-widest text-gray-400">
+                <p class="text-[10px] uppercase tracking-widest text-[#BE8B3E]">
                     {{ $product->category?->name ?? 'Collection' }}
                 </p>
 
@@ -543,7 +553,7 @@
 
                     @if($product->sale_price)
 
-                        <span class="text-black">
+                        <span class="text-[#BE8B3E]">
                             PKR {{ number_format($product->sale_price) }}
                         </span>
 
@@ -583,7 +593,7 @@
      PROMOTIONAL BANNER
 ========================================================= --}}
 
-<section class="relative overflow-hidden bg-black text-white">
+<section class="relative overflow-hidden bg-black ">
 
     <div class="absolute inset-0 opacity-30">
 
@@ -597,13 +607,13 @@
 
     <div class="relative max-w-5xl mx-auto px-6 py-28 text-center">
 
-        <p class="text-xs uppercase tracking-[0.5em] text-[#d4af37]">
+        <p class="text-xs uppercase tracking-[0.5em] text-[#BE8B3E]">
             The Bin Roshan Edit
         </p>
 
-        <h2 class="mt-6 text-4xl sm:text-6xl font-light">
+        <h2 class="mt-6 text-4xl sm:text-6xl font-light text-white">
             Make Every Detail
-            <span class="italic font-serif">
+            <span class="italic font-serif text-[#BE8B3E]">
                 Count.
             </span>
         </h2>
@@ -615,8 +625,7 @@
 
         <a
             href="{{ url('/shop') }}"
-            class="inline-flex mt-9 border border-white px-8 py-4 text-sm uppercase tracking-widest hover:bg-white hover:text-black transition"
-        >
+            class="inline-flex mt-9 border border-[#BE8B3E] px-8 py-4 text-sm uppercase tracking-widest text-[#BE8B3E] hover:bg-[#BE8B3E] hover:text-white rounded-full transition">
             Discover More
         </a>
 
@@ -630,13 +639,13 @@
      NEW ARRIVALS
 ========================================================= --}}
 
-<section class="py-24 bg-white">
+<section class="py-24 bg-[#f8f7f4]">
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div class="text-center mb-14">
 
-            <p class="text-xs uppercase tracking-[0.4em] text-[#a47c15] font-semibold">
+            <p class="text-xs uppercase tracking-[0.4em] text-[#BE8B3E] font-semibold">
                 Just arrived
             </p>
 
@@ -663,21 +672,15 @@
             }
         @endphp
 
-        <a
-            href="{{ route('product.show', $product->slug) }}"
-            class="group relative overflow-hidden bg-gray-100 aspect-[4/5]"
-        >
+        <a href="{{ route('product.show', $product->slug) }}" class="group relative overflow-hidden bg-gray-100 aspect-[4/5] rounded-xl">
 
-            <div
-                class="absolute inset-0 bg-cover bg-center transition duration-700 group-hover:scale-105"
-                style="background-image: url('{{ $image }}');"
-            ></div>
+            <div class="absolute inset-0 bg-cover bg-center transition duration-700 group-hover:scale-105" style="background-image: url('{{ $image }}');"></div>
 
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
 
             <div class="absolute bottom-0 left-0 p-8 text-white">
 
-                <p class="text-xs uppercase tracking-widest text-gray-300">
+                <p class="text-xs uppercase tracking-widest">
                     New
                 </p>
 
@@ -687,7 +690,7 @@
 
                 @if($product->category)
 
-                    <p class="mt-2 text-xs uppercase tracking-widest text-gray-300">
+                    <p class="mt-2 text-xs uppercase tracking-widest text-[#BE8B3E] font-extrabold">
                         {{ $product->category->name }}
                     </p>
 
@@ -717,17 +720,17 @@
      WHY BIN ISMAIL
 ========================================================= --}}
 
-<section class="py-24 bg-[#f7f5f0]">
+<section class="py-24 bg-black">
 
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div class="text-center mb-16">
 
-            <p class="text-xs uppercase tracking-[0.4em] text-[#a47c15] font-semibold">
-                The Bin Ismail Difference
+            <p class="text-xs uppercase tracking-[0.4em] text-[#BE8B3E] font-semibold">
+                The Bin Roshan Difference
             </p>
 
-            <h2 class="mt-4 text-4xl sm:text-5xl font-light">
+            <h2 class="mt-4 text-4xl sm:text-5xl font-light text-white">
                 Why Shop With Us?
             </h2>
 
@@ -741,13 +744,13 @@
 
                 <div class="mx-auto w-14 h-14 border border-[#b38b2c] rounded-full flex items-center justify-center">
 
-                    <span class="font-serif text-xl">
+                    <span class="font-serif text-xl text-[#BE8B3E]">
                         I
                     </span>
 
                 </div>
 
-                <h3 class="mt-6 text-lg font-medium">
+                <h3 class="mt-6 text-lg font-medium text-white">
                     Carefully Selected
                 </h3>
 
@@ -763,13 +766,13 @@
 
                 <div class="mx-auto w-14 h-14 border border-[#b38b2c] rounded-full flex items-center justify-center">
 
-                    <span class="font-serif text-xl">
+                    <span class="font-serif text-xl text-[#BE8B3E]">
                         II
                     </span>
 
                 </div>
 
-                <h3 class="mt-6 text-lg font-medium">
+                <h3 class="mt-6 text-lg font-medium text-white">
                     Something for Everyone
                 </h3>
 
@@ -785,13 +788,13 @@
 
                 <div class="mx-auto w-14 h-14 border border-[#b38b2c] rounded-full flex items-center justify-center">
 
-                    <span class="font-serif text-xl">
+                    <span class="font-serif text-xl text-[#BE8B3E]">
                         III
                     </span>
 
                 </div>
 
-                <h3 class="mt-6 text-lg font-medium">
+                <h3 class="mt-6 text-lg font-medium text-white">
                     Easy WhatsApp Ordering
                 </h3>
 
@@ -814,13 +817,13 @@
      WHATSAPP CTA
 ========================================================= --}}
 
-<section class="bg-black text-white">
+<section class="bg-[#f8f7f4] text-white">
 
     <div class="max-w-5xl mx-auto px-6 py-24 text-center">
 
-        <div class="mx-auto w-16 h-16 border border-[#d4af37] rounded-full flex items-center justify-center">
+        <div class="mx-auto w-16 h-16 border border-[#BE8B3E] rounded-full flex items-center justify-center">
 
-            <svg class="w-7 h-7 text-[#d4af37]"
+            <svg class="w-7 h-7 text-[#BE8B3E]"
                  fill="currentColor"
                  viewBox="0 0 24 24">
 
@@ -830,11 +833,11 @@
 
         </div>
 
-        <p class="mt-8 text-xs uppercase tracking-[0.5em] text-[#d4af37]">
+        <p class="mt-8 text-xs uppercase tracking-[0.5em] text-[#BE8B3E]">
             Shop directly with us
         </p>
 
-        <h2 class="mt-5 text-4xl sm:text-5xl font-light">
+        <h2 class="mt-5 text-4xl sm:text-5xl font-light text-black">
             Found Something You Love?
         </h2>
 
@@ -847,8 +850,7 @@
             href="https://wa.me/{{ config('store.whatsapp') }}?text={{ urlencode('Hello Bin Ismail, I would like to know more about your products.') }}"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center mt-9 bg-white text-black px-9 py-4 text-sm font-semibold hover:bg-[#d4af37] transition"
-        >
+            class="inline-flex border border-[#BE8B3E] text-[#BE8B3E] hover:bg-[#BE8B3E] hover:text-white rounded-full items-center mt-9 bg-transparent px-9 py-4 text-sm font-semibold transition">
             Chat on WhatsApp
         </a>
 
@@ -863,12 +865,11 @@
 ========================================================= --}}
 
 <a
-    href="https://wa.me/{{ config('store.whatsapp') }}?text={{ urlencode('Hello Bin Ismail, I would like to know more about your products.') }}"
+    href="https://wa.me/{{ config('store.whatsapp') }}?text={{ urlencode('Hello Bin Roshan, I would like to know more about your products.') }}"
     target="_blank"
     rel="noopener noreferrer"
-    aria-label="Chat with Bin Ismail on WhatsApp"
-    class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] text-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition duration-300"
->
+    aria-label="Chat with Bin Roshan on WhatsApp"
+    class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#BE8B3E] text-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition duration-300">
 
     <svg viewBox="0 0 24 24"
          fill="currentColor"

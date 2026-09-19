@@ -6,6 +6,8 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminAuthController;
+use App\Models\Category;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -148,8 +150,17 @@ Route::get('/categories/{slug}', [CategoryController::class, 'show'])
 */
 
 Route::get('/about', function () {
-    return view('about');
+
+    $aboutCategories = Category::query()
+        ->where('is_active', true)
+        ->orderBy('sort_order')
+        ->orderBy('id')
+        ->get();
+
+    return view('about', compact('aboutCategories'));
+
 })->name('about');
+
 
 
 /*

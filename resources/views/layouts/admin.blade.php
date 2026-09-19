@@ -7,11 +7,10 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+        content="width=device-width, initial-scale=1.0">
 
     <title>
-        @yield('title', 'Admin Panel | Bin Ismail')
+        @yield('title', 'Admin Panel | Bin Roshan')
     </title>
 
     @vite([
@@ -31,8 +30,7 @@
 
     <div
         id="admin-overlay"
-        class="fixed inset-0 bg-black/40 z-40 hidden lg:hidden"
-    ></div>
+        class="fixed inset-0 bg-black/40 z-40 hidden lg:hidden"></div>
 
 
 
@@ -42,8 +40,7 @@
 
     <aside
         id="admin-sidebar"
-        class="fixed inset-y-0 left-0 z-50 w-72 bg-black text-white transform -translate-x-full lg:translate-x-0 transition-transform duration-300"
-    >
+        class="fixed bg-gray-200 inset-y-0 left-0 z-50 w-65 bg-black text-white transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
 
         {{-- LOGO / BRAND --}}
 
@@ -51,24 +48,24 @@
 
             <a
                 href="{{ route('admin.dashboard') }}"
-                class="flex items-center gap-3"
-            >
+                class="flex items-center">
 
-                <div class="w-10 h-10 border border-[#a47c15] flex items-center justify-center">
+                <div class="w-25 h-25 flex items-center justify-center">
 
-                    <span class="text-[#a47c15] text-lg font-serif">
-                        B
-                    </span>
+                    <img
+                        src="{{ asset('images/logo/logo.png') }}"
+                        alt="Bin Ismail"
+                        class="h-16 lg:h-35 w-auto object-contain">
 
                 </div>
 
                 <div>
 
-                    <p class="text-white text-lg font-light tracking-wide">
-                        Bin Ismail
+                    <p class="text-black text-lg font-light tracking-wide">
+                        Bin Roshan
                     </p>
 
-                    <p class="text-[8px] uppercase tracking-[0.35em] text-[#a47c15]">
+                    <p class="text-[8px] uppercase tracking-[0.35em] text-[#BE8B3E]">
                         Admin Panel
                     </p>
 
@@ -84,7 +81,7 @@
 
         <nav class="px-4 py-7">
 
-            <p class="px-3 mb-3 text-[9px] uppercase tracking-[0.35em] text-gray-500 font-semibold">
+            <p class="px-3 mb-3 text-[9px] uppercase tracking-[0.35em] text-black font-semibold">
                 Main Menu
             </p>
 
@@ -95,22 +92,20 @@
                 href="{{ route('admin.dashboard') }}"
                 class="group flex items-center gap-4 px-4 py-3.5 mb-1 text-sm transition
                 {{ request()->routeIs('admin.dashboard')
-                    ? 'bg-[#a47c15] text-white'
-                    : 'text-gray-300 hover:bg-white/5 hover:text-white' }}"
-            >
+                    ? 'bg-[#BE8B3E] rounded-lg text-white'
+                    : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
 
                 <svg
                     class="w-5 h-5 flex-shrink-0"
                     fill="none"
                     stroke="currentColor"
                     stroke-width="1.5"
-                    viewBox="0 0 24 24"
-                >
+                    viewBox="0 0 24 24">
                     <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         d="M3 13h8V3H3v10zm10 8h8V11h-8v10zM3 21h8v-4H3v4zm10-10h8V3h-8v8z"
-                    />
+/>
                 </svg>
 
                 <span>
@@ -123,75 +118,72 @@
 
             {{-- PRODUCTS --}}
 
-            <a
-                href="{{ route('admin.products.index') }}"
-                class="group flex items-center gap-4 px-4 py-3.5 mb-1 text-sm transition
-                {{ request()->routeIs('admin.products.*')
-                    ? 'bg-[#a47c15] text-white'
-                    : 'text-gray-300 hover:bg-white/5 hover:text-white' }}"
-            >
+<a
+    href="{{ route('admin.products.index') }}"
+    class="group flex items-center gap-4 px-4 py-3.5 mb-1 text-sm border border-[#BE8B3E] rounded-lg transition
+    {{ request()->routeIs('admin.products.*')
+        ? 'bg-[#BE8B3E] text-white'
+        : 'text-[#BE8B3E] hover:bg-[#BE8B3E] hover:text-white' }}"
+>
 
-                <svg
-                    class="w-5 h-5 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M20 7l-8-4-8 4m16 0v10l-8 4-8-4V7m16 0l-8 4m-8-4l8 4m0 0v10"
-                    />
-                </svg>
+    <svg
+        class="w-5 h-5 flex-shrink-0 transition"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        viewBox="0 0 24 24"
+    >
+        <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M20 7l-8-4-8 4m16 0v10l-8 4-8-4V7m16 0l-8 4m-8-4l8 4m0 0v10"
+        />
+    </svg>
 
-                <span>
-                    Products
-                </span>
+    <span>
+        Products
+    </span>
 
-            </a>
+</a>
 
 
+{{-- CATEGORIES --}}
 
-            {{-- CATEGORIES --}}
+<a
+    href="{{ route('admin.categories.index') }}"
+    class="group flex items-center gap-4 px-4 py-3.5 mb-1 text-sm border border-[#BE8B3E] rounded-lg transition
+    {{ request()->routeIs('admin.categories.*')
+        ? 'bg-[#BE8B3E] text-white'
+        : 'text-[#BE8B3E] hover:bg-[#BE8B3E] hover:text-white' }}">
 
-            <a
-                href="{{ route('admin.categories.index') }}"
-                class="group flex items-center gap-4 px-4 py-3.5 mb-1 text-sm transition
-                {{ request()->routeIs('admin.categories.*')
-                    ? 'bg-[#a47c15] text-white'
-                    : 'text-gray-300 hover:bg-white/5 hover:text-white' }}"
-            >
+    <svg
+        class="w-5 h-5 flex-shrink-0 transition"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        viewBox="0 0 24 24">
+        <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4 5h6v6H4V5zm10 0h6v6h-6V5zM4 15h6v6H4v-6zm10 0h6v6h-6v-6z"
+        />
+    </svg>
 
-                <svg
-                    class="w-5 h-5 flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M4 5h6v6H4V5zm10 0h6v6h-6V5zM4 15h6v6H4v-6zm10 0h6v6h-6v-6z"
-                    />
-                </svg>
+    <span>
+        Categories
+    </span>
 
-                <span>
-                    Categories
-                </span>
-
-            </a>
+</a>
 
 
 
             {{-- DIVIDER --}}
 
-            <div class="my-7 border-t border-white/10"></div>
+            <div class="my-7 border-t border-[#BE8B3E]"></div>
 
 
 
-            <p class="px-3 mb-3 text-[9px] uppercase tracking-[0.35em] text-gray-500 font-semibold">
+            <p class="px-3 mb-3 text-[9px] uppercase tracking-[0.35em] text-black font-semibold">
                 Store
             </p>
 
@@ -200,29 +192,25 @@
             {{-- VIEW STORE --}}
 
             <a
-                href="{{ route('shop') }}"
+                href="{{ route('home') }}"
                 target="_blank"
-                class="flex items-center gap-4 px-4 py-3.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition"
-            >
+                class="flex items-center border border-[#BE8B3E] rounded-lg bg-[#BE8B3E] gap-4 px-4 py-3.5 text-sm text-white hover:bg-white/5 hover:text-[#BE8B3E] transition">
 
                 <svg
                     class="w-5 h-5 flex-shrink-0"
                     fill="none"
                     stroke="currentColor"
                     stroke-width="1.5"
-                    viewBox="0 0 24 24"
-                >
+                    viewBox="0 0 24 24">
                     <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
-                        d="M2.5 12s3.5-5 9.5-5 9.5 5 9.5 5-3.5 5-9.5 5-9.5-5-9.5-5z"
-                    />
+                        d="M2.5 12s3.5-5 9.5-5 9.5 5 9.5 5-3.5 5-9.5 5-9.5-5-9.5-5z"/>
 
                     <circle
                         cx="12"
                         cy="12"
-                        r="2.5"
-                    />
+                        r="2.5"/>
                 </svg>
 
                 <span>
@@ -234,8 +222,7 @@
                     fill="none"
                     stroke="currentColor"
                     stroke-width="1.5"
-                    viewBox="0 0 24 24"
-                >
+                    viewBox="0 0 24 24">
                     <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -246,39 +233,6 @@
             </a>
 
         </nav>
-
-
-
-        {{-- SIDEBAR BOTTOM --}}
-
-        <div class="absolute bottom-0 left-0 right-0 border-t border-white/10 p-5">
-
-            <div class="flex items-center gap-3">
-
-                <div class="w-9 h-9 bg-white/10 flex items-center justify-center">
-
-                    <span class="text-xs text-[#a47c15]">
-                        BI
-                    </span>
-
-                </div>
-
-
-                <div class="min-w-0">
-
-                    <p class="text-xs text-white truncate">
-                        Bin Ismail
-                    </p>
-
-                    <p class="text-[9px] uppercase tracking-widest text-gray-500">
-                        Administrator
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
 
     </aside>
 
