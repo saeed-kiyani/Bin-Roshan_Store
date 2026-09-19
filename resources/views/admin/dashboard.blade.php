@@ -10,7 +10,7 @@
         DASHBOARD HEADER
     ====================================================== --}}
 
-    <section class="border-b border-gray-200 bg-white">
+    <section class="border-b border-[#BE8B3E] rounded-lg bg-white">
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
@@ -73,13 +73,13 @@
 
             {{-- TOTAL PRODUCTS --}}
 
-            <div class="bg-white border border-gray-200 p-6 hover:border-gray-400 transition">
+            <div class="bg-white border border-[#BE8B3E] p-6 rounded-lg hover:border-gray-400 transition">
 
                 <div class="flex items-start justify-between">
 
                     <div>
 
-                        <p class="text-[10px] uppercase tracking-[0.25em] text-gray-400 font-semibold">
+                        <p class="text-[10px] uppercase tracking-[0.25em] text-[#BE8B3E] font-semibold">
                             Total Products
                         </p>
 
@@ -89,16 +89,14 @@
 
                     </div>
 
-                    <div class="w-10 h-10 border border-gray-200 flex items-center justify-center text-gray-700">
+                    <div class="w-10 h-10 border border-gray-200 rounded-full flex items-center justify-center text-gray-700">
                         <span class="text-lg">□</span>
                     </div>
 
                 </div>
 
-                <a
-                    href="{{ route('admin.products.index') }}"
-                    class="inline-block mt-6 text-[10px] uppercase tracking-widest font-semibold text-[#a47c15] hover:text-black transition"
-                >
+                <a href="{{ route('admin.products.index') }}"
+                   class="inline-block mt-6 text-[10px] uppercase tracking-widest font-semibold text-[#BE8B3E] hover:text-black transition">
                     Manage Products →
                 </a>
 
@@ -108,13 +106,13 @@
 
             {{-- CATEGORIES --}}
 
-            <div class="bg-white border border-gray-200 p-6 hover:border-gray-400 transition">
+            <div class="bg-white border border-[#BE8B3E] rounded-lg p-6 hover:border-gray-400 transition">
 
                 <div class="flex items-start justify-between">
 
                     <div>
 
-                        <p class="text-[10px] uppercase tracking-[0.25em] text-gray-400 font-semibold">
+                        <p class="text-[10px] uppercase tracking-[0.25em] text-[#BE8B3E] font-semibold">
                             Categories
                         </p>
 
@@ -124,16 +122,14 @@
 
                     </div>
 
-                    <div class="w-10 h-10 border border-gray-200 flex items-center justify-center text-gray-700">
+                    <div class="w-10 h-10 border border-gray-200 rounded-full flex items-center justify-center text-gray-700">
                         <span class="text-lg">◇</span>
                     </div>
 
                 </div>
 
-                <a
-                    href="{{ route('admin.categories.index') }}"
-                    class="inline-block mt-6 text-[10px] uppercase tracking-widest font-semibold text-[#a47c15] hover:text-black transition"
-                >
+                <a href="{{ route('admin.categories.index') }}"
+                   class="inline-block mt-6 text-[10px] uppercase tracking-widest font-semibold text-[#BE8B3E] hover:text-black transition">
                     Manage Categories →
                 </a>
 
@@ -143,13 +139,13 @@
 
             {{-- ACTIVE PRODUCTS --}}
 
-            <div class="bg-white border border-gray-200 p-6 hover:border-gray-400 transition">
+            <div class="bg-white border border-[#BE8B3E] rounded-lg p-6 hover:border-gray-400 transition">
 
                 <div class="flex items-start justify-between">
 
                     <div>
 
-                        <p class="text-[10px] uppercase tracking-[0.25em] text-gray-400 font-semibold">
+                        <p class="text-[10px] uppercase tracking-[0.25em] text-[#BE8B3E] font-semibold">
                             Active Products
                         </p>
 
@@ -159,7 +155,7 @@
 
                     </div>
 
-                    <div class="w-10 h-10 border border-green-200 bg-green-50 flex items-center justify-center">
+                    <div class="w-10 h-10 border border-green-200 rounded-full bg-green-50 flex items-center justify-center">
                         <span class="w-2 h-2 bg-green-500 rounded-full"></span>
                     </div>
 
@@ -175,13 +171,13 @@
 
             {{-- FEATURED --}}
 
-            <div class="bg-white border border-gray-200 p-6 hover:border-gray-400 transition">
+            <div class="bg-white border border-[#BE8B3E] rounded-lg p-6 hover:border-gray-400 transition">
 
                 <div class="flex items-start justify-between">
 
                     <div>
 
-                        <p class="text-[10px] uppercase tracking-[0.25em] text-gray-400 font-semibold">
+                        <p class="text-[10px] uppercase tracking-[0.25em] text-[#BE8B3E] font-semibold">
                             Featured
                         </p>
 
@@ -191,13 +187,13 @@
 
                     </div>
 
-                    <div class="w-10 h-10 border border-[#a47c15]/30 bg-[#a47c15]/5 flex items-center justify-center">
-                        <span class="text-[#a47c15] text-lg">★</span>
+                    <div class="w-10 h-10 border border-[#BE8B3E]/30 rounded-full bg-[#BE8B3E]/5 flex items-center justify-center">
+                        <span class="text-[#BE8B3E] text-lg">★</span>
                     </div>
 
                 </div>
 
-                <p class="mt-6 text-[10px] uppercase tracking-widest text-[#a47c15] font-semibold">
+                <p class="mt-6 text-[10px] uppercase tracking-widest text-[#BE8B3E] font-semibold">
                     Featured products
                 </p>
 
@@ -216,13 +212,13 @@
 
             {{-- LOW STOCK --}}
 
-            <div class="bg-white border border-gray-200 p-6">
+            <div class="bg-white border border-[#BE8B3E] rounded-lg p-6">
 
                 <div class="flex items-center justify-between">
 
                     <div>
 
-                        <p class="text-[10px] uppercase tracking-[0.25em] text-gray-400 font-semibold">
+                        <p class="text-[10px] uppercase tracking-[0.25em] text-[#BE8B3E] font-semibold">
                             Inventory Alert
                         </p>
 
@@ -232,7 +228,7 @@
 
                     </div>
 
-                    <div class="w-11 h-11 border border-amber-200 bg-amber-50 flex items-center justify-center">
+                    <div class="w-11 h-11 border border-amber-200 rounded-full bg-amber-50 flex items-center justify-center">
                         <span class="text-amber-600">!</span>
                     </div>
 
@@ -247,7 +243,7 @@
                             {{ $lowStockProducts }}
                         </span>
 
-                        <span class="ml-2 text-xs text-gray-400">
+                        <span class="ml-2 text-xs text-[#BE8B3E]">
                             products
                         </span>
 
@@ -265,13 +261,13 @@
 
             {{-- OUT OF STOCK --}}
 
-            <div class="bg-white border border-gray-200 p-6">
+            <div class="bg-white border border-[#BE8B3E] rounded-lg p-6">
 
                 <div class="flex items-center justify-between">
 
                     <div>
 
-                        <p class="text-[10px] uppercase tracking-[0.25em] text-gray-400 font-semibold">
+                        <p class="text-[10px] uppercase tracking-[0.25em] text-[#BE8B3E] font-semibold">
                             Inventory Alert
                         </p>
 
@@ -281,7 +277,7 @@
 
                     </div>
 
-                    <div class="w-11 h-11 border border-red-200 bg-red-50 flex items-center justify-center">
+                    <div class="w-11 h-11 border border-red-200 rounded-full bg-red-50 flex items-center justify-center">
                         <span class="text-red-600">×</span>
                     </div>
 
@@ -296,7 +292,7 @@
                             {{ $outOfStockProducts }}
                         </span>
 
-                        <span class="ml-2 text-xs text-gray-400">
+                        <span class="ml-2 text-xs text-[#BE8B3E]">
                             products
                         </span>
 
@@ -324,7 +320,7 @@
 
                 <div>
 
-                    <p class="text-[10px] uppercase tracking-[0.3em] text-[#a47c15] font-semibold">
+                    <p class="text-[10px] uppercase tracking-[0.3em] text-[#BE8B3E] font-semibold">
                         Shortcuts
                     </p>
 
@@ -339,11 +335,8 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
-
-                <a
-                    href="{{ route('admin.products.create') }}"
-                    class="group bg-black text-white p-6 hover:bg-[#a47c15] transition"
-                >
+                <a href="{{ route('admin.products.create') }}"
+                    class="group bg-black rounded-lg text-white p-6 hover:bg-[#BE8B3E] transition">
 
                     <div class="text-2xl font-light">
                         +
@@ -359,18 +352,14 @@
 
                 </a>
 
+                <a href="{{ route('admin.products.index') }}"
+                   class="group bg-white border border-[#BE8B3E] rounded-lg p-6 hover:border-black transition">
 
-
-                <a
-                    href="{{ route('admin.products.index') }}"
-                    class="group bg-white border border-gray-200 p-6 hover:border-black transition"
-                >
-
-                    <div class="text-2xl font-light">
+                    <div class="text-2xl font-light text-[#BE8B3E] hover:text-black">
                         →
                     </div>
 
-                    <p class="mt-5 text-xs uppercase tracking-widest font-semibold text-gray-900">
+                    <p class="mt-5 text-xs uppercase tracking-widest font-semibold text-[#BE8B3E] hover:text-black">
                         Manage Products
                     </p>
 
@@ -382,16 +371,14 @@
 
 
 
-                <a
-                    href="{{ route('admin.categories.create') }}"
-                    class="group bg-white border border-gray-200 p-6 hover:border-black transition"
-                >
+                <a href="{{ route('admin.categories.create') }}"
+                   class="group bg-white border border-[#BE8B3E] rounded-lg p-6 hover:border-black transition">
 
-                    <div class="text-2xl font-light">
+                    <div class="text-2xl font-light text-[#BE8B3E] hover:text-black">
                         +
                     </div>
 
-                    <p class="mt-5 text-xs uppercase tracking-widest font-semibold text-gray-900">
+                    <p class="mt-5 text-xs uppercase tracking-widest font-semibold text-[#BE8B3E] hover:text-black">
                         Add Category
                     </p>
 
@@ -403,16 +390,14 @@
 
 
 
-                <a
-                    href="{{ route('admin.categories.index') }}"
-                    class="group bg-white border border-gray-200 p-6 hover:border-black transition"
-                >
+                <a href="{{ route('admin.categories.index') }}"
+                   class="group bg-white border border-[#BE8B3E] rounded-lg p-6 hover:border-black transition">
 
-                    <div class="text-2xl font-light">
+                    <div class="text-2xl font-light text-[#BE8B3E] hover:text-black">
                         ◇
                     </div>
 
-                    <p class="mt-5 text-xs uppercase tracking-widest font-semibold text-gray-900">
+                    <p class="mt-5 text-xs uppercase tracking-widest font-semibold text-[#BE8B3E] hover:text-black">
                         Manage Categories
                     </p>
 
@@ -438,7 +423,7 @@
 
                 <div>
 
-                    <p class="text-[10px] uppercase tracking-[0.3em] text-[#a47c15] font-semibold">
+                    <p class="text-[10px] uppercase tracking-[0.3em] text-[#BE8B3E] font-semibold">
                         Inventory
                     </p>
 
@@ -448,47 +433,45 @@
 
                 </div>
 
-                <a
-                    href="{{ route('admin.products.index') }}"
-                    class="text-[10px] uppercase tracking-widest font-semibold text-gray-500 hover:text-black transition"
-                >
+                <a href="{{ route('admin.products.index') }}"
+                   class="text-[10px] uppercase tracking-widest font-semibold text-[#BE8B3E] hover:text-black transition">
                     View All →
                 </a>
 
             </div>
 
 
-            <div class="bg-white border border-gray-200 overflow-hidden">
+            <div class="bg-white border border-[#BE8B3E] rounded-lg  overflow-hidden">
 
                 <div class="overflow-x-auto">
 
                     <table class="w-full min-w-[800px]">
 
-                        <thead class="border-b border-gray-200 bg-gray-50">
+                        <thead class="border-b border-[#BE8B3E] bg-black">
 
                             <tr>
 
-                                <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-gray-400 font-semibold">
+                                <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E] font-semibold">
                                     Product
                                 </th>
 
-                                <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-gray-400 font-semibold">
+                                <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E] font-semibold">
                                     SKU
                                 </th>
 
-                                <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-gray-400 font-semibold">
+                                <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E] font-semibold">
                                     Category
                                 </th>
 
-                                <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-gray-400 font-semibold">
+                                <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E] font-semibold">
                                     Price
                                 </th>
 
-                                <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-gray-400 font-semibold">
+                                <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E] font-semibold">
                                     Stock
                                 </th>
 
-                                <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-gray-400 font-semibold">
+                                <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E] font-semibold">
                                     Status
                                 </th>
 
@@ -497,7 +480,7 @@
                         </thead>
 
 
-                        <tbody class="divide-y divide-gray-100">
+                        <tbody class="divide-y divide-[#BE8B3E]/50">
 
                             @forelse($recentProducts as $product)
 
@@ -526,8 +509,7 @@
                                                 <img
                                                     src="{{ $image }}"
                                                     alt="{{ $product->name }}"
-                                                    class="w-12 h-14 object-cover bg-gray-100"
-                                                >
+                                                    class="w-12 h-14 object-cover bg-gray-100">
 
                                             @else
 
@@ -676,8 +658,7 @@
 
                                     <td
                                         colspan="6"
-                                        class="px-6 py-16 text-center"
-                                    >
+                                        class="px-6 py-16 text-center">
 
                                         <p class="text-sm text-gray-400">
                                             No products found.
@@ -685,8 +666,7 @@
 
                                         <a
                                             href="{{ route('admin.products.create') }}"
-                                            class="inline-flex mt-5 bg-black text-white px-6 py-3 text-[10px] uppercase tracking-widest font-semibold"
-                                        >
+                                            class="inline-flex mt-5 bg-black text-white px-6 py-3 text-[10px] uppercase tracking-widest font-semibold">
                                             Add First Product
                                         </a>
 
@@ -718,7 +698,7 @@
 
                 <div>
 
-                    <p class="text-[10px] uppercase tracking-[0.3em] text-[#a47c15] font-semibold">
+                    <p class="text-[10px] uppercase tracking-[0.3em] text-[#BE8B3E] font-semibold">
                         Organization
                     </p>
 
@@ -728,35 +708,33 @@
 
                 </div>
 
-                <a
-                    href="{{ route('admin.categories.index') }}"
-                    class="text-[10px] uppercase tracking-widest font-semibold text-gray-500 hover:text-black transition"
-                >
+                <a href="{{ route('admin.categories.index') }}"
+                   class="text-[10px] uppercase tracking-widest font-semibold text-[#BE8B3E] hover:text-black transition">
                     View All →
                 </a>
 
             </div>
 
 
-            <div class="bg-white border border-gray-200 overflow-hidden">
+            <div class="bg-white border border-[#BE8B3E] rounded-lg overflow-hidden">
 
                 <div class="overflow-x-auto">
 
                     <table class="w-full">
 
-                        <thead class="border-b border-gray-200 bg-gray-50">
+                        <thead class="border-b border-[#BE8B3E] bg-black">
 
                             <tr>
 
-                                <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-gray-400 font-semibold">
+                                <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E] font-semibold">
                                     Category
                                 </th>
 
-                                <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-gray-400 font-semibold">
+                                <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E] font-semibold">
                                     Slug
                                 </th>
 
-                                <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-gray-400 font-semibold">
+                                <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E] font-semibold">
                                     Status
                                 </th>
 
@@ -765,7 +743,7 @@
                         </thead>
 
 
-                        <tbody class="divide-y divide-gray-100">
+                        <tbody class="divide-y divide-[#BE8B3E]/50">
 
                             @forelse($recentCategories as $category)
 

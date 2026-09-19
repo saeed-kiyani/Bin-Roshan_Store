@@ -9,7 +9,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>Admin Login | Bin Ismail</title>
+    <title>Admin Login | Bin Roshan</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('images/logo/favicon.ico') }}">
 
     @vite([
