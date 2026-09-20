@@ -978,21 +978,172 @@
 </div>
 
 {{-- =========================================================
-     TAILOR ACCESSORIES INFORMATION
+     OTHER ACCESSORIES INFORMATION
 ========================================================= --}}
 <div
-    id="tailor-accessories-filter"
-    data-filter-section="tailor_accessories"
+    id="other-accessories-filter"
+    data-filter-section="other_accessories"
     class="hidden mt-7 border-t border-gray-200 pt-7"
 >
     <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
-        Tailor Accessories Information
+        Other Accessories Information
     </p>
 
-    <p class="text-sm text-gray-500">
-        Tailor accessories filters will be added here.
-    </p>
+
+    {{-- BUTTONS --}}
+    <div>
+        <label
+            for="buttons"
+            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
+        >
+            Buttons
+        </label>
+
+        <select
+            id="buttons"
+            name="buttons"
+            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
+        >
+            <option value="">
+                Select Buttons
+            </option>
+
+            <option
+                value="fancy_buttons"
+                {{ old('buttons') === 'fancy_buttons' ? 'selected' : '' }}
+            >
+                Fancy Buttons
+            </option>
+
+            <option
+                value="simple_buttons"
+                {{ old('buttons') === 'simple_buttons' ? 'selected' : '' }}
+            >
+                Simple Buttons
+            </option>
+
+            <option
+                value="pearls_buttons"
+                {{ old('buttons') === 'pearls_buttons' ? 'selected' : '' }}
+            >
+                Pearls Buttons
+            </option>
+
+            <option
+                value="pearls_clothes_buttons"
+                {{ old('buttons') === 'pearls_clothes_buttons' ? 'selected' : '' }}
+            >
+                Pearls Clothes Buttons
+            </option>
+
+            <option
+                value="button_patti"
+                {{ old('buttons') === 'button_patti' ? 'selected' : '' }}
+            >
+                Button Patti
+            </option>
+        </select>
+    </div>
+
+
+    {{-- PIPING CLOTHES --}}
+    <div class="mt-7">
+        <label
+            for="piping_clothes"
+            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
+        >
+            Piping Clothes
+        </label>
+
+        <select
+            id="piping_clothes"
+            name="piping_clothes"
+            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
+        >
+            <option value="">
+                Select Piping Clothes
+            </option>
+
+            <option
+                value="aparna_shamooz_silk_piping"
+                {{ old('piping_clothes') === 'aparna_shamooz_silk_piping' ? 'selected' : '' }}
+            >
+                Aparna / Shamooz Silk Piping
+            </option>
+
+            <option
+                value="katan_silk_dori_piping"
+                {{ old('piping_clothes') === 'katan_silk_dori_piping' ? 'selected' : '' }}
+            >
+                Katan Silk / Dori Piping
+            </option>
+
+            <option
+                value="cotton_lawn_piping"
+                {{ old('piping_clothes') === 'cotton_lawn_piping' ? 'selected' : '' }}
+            >
+                Cotton / Lawn Piping
+            </option>
+
+            <option
+                value="velvet_piping"
+                {{ old('piping_clothes') === 'velvet_piping' ? 'selected' : '' }}
+            >
+                Velvet Piping
+            </option>
+
+            <option
+                value="metallic_zari_piping"
+                {{ old('piping_clothes') === 'metallic_zari_piping' ? 'selected' : '' }}
+            >
+                Metallic / Zari Piping
+            </option>
+        </select>
+    </div>
+
+
+    {{-- ACCESSORY TYPE --}}
+    <div class="mt-7">
+        <p class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+            Accessory Type
+        </p>
+
+        <div class="mt-4 space-y-3">
+
+            <label class="flex items-center gap-3 cursor-pointer">
+                <input
+                    type="radio"
+                    name="accessory_type"
+                    value="tailor_accessories"
+                    {{ old('accessory_type') === 'tailor_accessories' ? 'checked' : '' }}
+                    class="w-4 h-4"
+                >
+
+                <span class="text-sm text-gray-700">
+                    Tailor Accessories
+                </span>
+            </label>
+
+
+            <label class="flex items-center gap-3 cursor-pointer">
+                <input
+                    type="radio"
+                    name="accessory_type"
+                    value="other_accessories"
+                    {{ old('accessory_type') === 'other_accessories' ? 'checked' : '' }}
+                    class="w-4 h-4"
+                >
+
+                <span class="text-sm text-gray-700">
+                    Other Accessories
+                </span>
+            </label>
+
+        </div>
+    </div>
+
 </div>
+{{-- END OTHER ACCESSORIES INFORMATION --}}
 
             {{-- DESCRIPTION --}}
 
@@ -1209,109 +1360,113 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function getFilterType(slug) {
 
-        slug = (slug || '').toLowerCase().trim();
+    slug = (slug || '').toLowerCase().trim();
 
-        /*
-        |--------------------------------------------------------------------------
-        | CLOTHING
-        |--------------------------------------------------------------------------
-        */
+    /*
+    |--------------------------------------------------------------------------
+    | CLOTHING
+    |--------------------------------------------------------------------------
+    */
 
-        if (
-            slug === 'clothing' ||
-            slug === 'ladies-clothing' ||
-            slug === 'mens-clothing' ||
-            slug === 'men-clothing' ||
-            slug === 'womens-clothing' ||
-            slug === 'women-clothing' ||
-            slug === 'kids-clothing'
-        ) {
-            return 'clothing';
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | LACES
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            slug === 'laces' ||
-            slug === 'lace' ||
-            slug === 'ladies-laces' ||
-            slug === 'ladies-suit-laces' ||
-            slug.includes('lace')
-        ) {
-            return 'laces';
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | JEWELRY
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            slug === 'jewelry' ||
-            slug === 'jewellery'
-        ) {
-            return 'jewelry';
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | COSMETICS
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            slug === 'cosmetics' ||
-            slug === 'cosmetic'
-        ) {
-            return 'cosmetics';
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | WATCHES
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            slug === 'watches' ||
-            slug === 'watch'
-        ) {
-            return 'watches';
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | TAILOR ACCESSORIES
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            slug === 'tailor-accessories' ||
-            slug === 'tailor-accessory' ||
-            slug === 'tailoring-accessories'
-        ) {
-            return 'tailor_accessories';
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | DEFAULT
-        |--------------------------------------------------------------------------
-        */
-
-        return null;
+    if (
+        slug === 'clothing' ||
+        slug === 'ladies-clothing' ||
+        slug === 'mens-clothing' ||
+        slug === 'men-clothing' ||
+        slug === 'womens-clothing' ||
+        slug === 'women-clothing' ||
+        slug === 'kids-clothing'
+    ) {
+        return 'clothing';
     }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | LACES
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+        slug === 'laces' ||
+        slug === 'lace' ||
+        slug === 'ladies-laces' ||
+        slug === 'ladies-suit-laces' ||
+        slug.includes('lace')
+    ) {
+        return 'laces';
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | JEWELRY
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+        slug === 'jewelry' ||
+        slug === 'jewellery'
+    ) {
+        return 'jewelry';
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | COSMETICS
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+        slug === 'cosmetics' ||
+        slug === 'cosmetic'
+    ) {
+        return 'cosmetics';
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | WATCHES
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+        slug === 'watches' ||
+        slug === 'watch'
+    ) {
+        return 'watches';
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | OTHER ACCESSORIES
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+        slug === 'other-accessories' ||
+        slug === 'other-accessory' ||
+        slug === 'other_accessories' ||
+        slug === 'other_accessory' ||
+        slug === 'tailor-accessories' ||
+        slug === 'tailor-accessory' ||
+        slug === 'tailoring-accessories'
+    ) {
+        return 'other_accessories';
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | DEFAULT
+    |--------------------------------------------------------------------------
+    */
+
+    return null;
+}
 
 
     /*

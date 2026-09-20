@@ -46,6 +46,10 @@
     $selectedStrapMaterial = request()->input('strap_material', '');
     $selectedWatchType = request()->input('watch_type', '');
 
+    $selectedOtherAccessoryButtons = request()->input('buttons', '');
+    $selectedOtherAccessoryPipingClothes = request()->input('piping_clothes', '');
+    $selectedOtherAccessoryType = request()->input('accessory_type', '');
+
     if (!is_array($selectedGenders)) {
         $selectedGenders = [$selectedGenders];
     }
@@ -120,7 +124,7 @@
      SHOP HERO
 ========================================================= --}}
 
-<section class="relative h-[55vh] min-h-[500px] w-full overflow-hidden text-white">
+<section class="relative h-[55vh] min-h-[420px] sm:min-h-[500px] w-full overflow-hidden text-white">
 
     {{-- VIDEO --}}
     <video
@@ -146,9 +150,9 @@
 
     <header class="absolute top-0 left-0 right-0 z-40">
 
-        <div class="max-w-[1500px] mx-auto px-6 lg:px-12">
+        <div class="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-12">
 
-            <nav class="h-24 flex items-center justify-between">
+            <nav class="h-20 sm:h-24 flex items-center justify-between">
 
                 {{-- LEFT SIDE --}}
 
@@ -181,12 +185,12 @@
 
                 <a
                     href="{{ route('home') }}"
-                    class="absolute left-1/2 -translate-x-1/2 top-5">
+                    class="absolute left-1/2 -translate-x-1/2 top-3 sm:top-5 max-w-[145px] sm:max-w-none">
 
                     <img
                         src="{{ asset('images/logo/logo.png') }}"
                         alt="Bin Ismail"
-                        class="h-16 lg:h-35 w-auto object-contain">
+                        class="h-14 sm:h-16 lg:h-35 w-auto object-contain">
 
                 </a>
 
@@ -221,6 +225,7 @@
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24">
+
                             <circle
                                 cx="11"
                                 cy="11"
@@ -231,6 +236,7 @@
                                 d="m20 20-4-4"
                                 stroke-width="1.7"
                                 stroke-linecap="round"/>
+
                         </svg>
 
                     </button>
@@ -283,11 +289,11 @@
                 <button
                     type="button"
                     onclick="openMobileMenu()"
-                    class="lg:hidden text-white"
+                    class="lg:hidden text-white shrink-0"
                     aria-label="Open menu">
 
                     <svg
-                        class="w-7 h-7"
+                        class="w-6 h-6 sm:w-7 sm:h-7"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24">
@@ -307,7 +313,7 @@
                 <button
                     type="button"
                     onclick="openCart()"
-                    class="lg:hidden relative text-white"
+                    class="lg:hidden relative text-white shrink-0"
                     aria-label="Shopping bag">
 
                     <svg
@@ -347,19 +353,19 @@
          HERO CONTENT
     ====================================================== --}}
 
-    <div class="relative z-20 h-full flex items-center justify-center px-6">
+    <div class="relative z-20 h-full flex items-center justify-center px-4 sm:px-6">
 
-        <div class="text-center max-w-4xl">
+        <div class="text-center max-w-4xl w-full">
 
             <!-- <p class="text-xs sm:text-sm uppercase tracking-[0.45em] font-medium mb-6">
                 The Collection
             </p> -->
 
-            <h1 class="text-6xl sm:text-7xl lg:text-8xl font-light tracking-tight">
+            <h1 class="text-4xl sm:text-6xl lg:text-8xl font-light tracking-tight leading-tight">
                 Shop <span class="text-[#BE8B3E] font-serif italic">Collections</span>
             </h1>
 
-            <p class="mt-8 max-w-3xl mx-auto text-sm sm:text-base lg:text-lg leading-8 text-white/90">
+            <p class="mt-5 sm:mt-8 max-w-3xl mx-auto text-sm sm:text-base lg:text-lg leading-7 sm:leading-8 text-white/90 px-2">
                 Explore our collection of clothing, jewelry, laces, watches
                 and accessories — carefully selected for timeless style.
             </p>
@@ -377,15 +383,15 @@
 
 <section class="bg-black border-b border-gray-200 sticky top-0 z-30">
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
 
-        <div class="flex items-center justify-center gap-2 sm:gap-8 overflow-x-auto py-5">
+        <div class="flex items-center justify-start sm:justify-center gap-1 sm:gap-8 overflow-x-auto py-3 sm:py-5 scrollbar-hide">
 
             {{-- ALL --}}
 
             <a
                 href="{{ route('shop') }}"
-                class="whitespace-nowrap px-4 py-2 text-xs uppercase tracking-widest font-semibold
+                class="whitespace-nowrap shrink-0 px-3 sm:px-4 py-2 text-[10px] sm:text-xs uppercase tracking-widest font-semibold
                 {{ !$selectedCategory
                     ? 'text-[#BE8B3E] border-b-2 border-[#BE8B3E]'
                     : 'text-[#BE8B3E] hover:text-white' }}">
@@ -399,7 +405,7 @@
 
                 <a
                     href="{{ route('shop', ['category' => $category->slug]) }}"
-                    class="whitespace-nowrap px-4 py-2 text-xs uppercase tracking-widest
+                    class="whitespace-nowrap shrink-0 px-3 sm:px-4 py-2 text-[10px] sm:text-xs uppercase tracking-widest
                     {{ $selectedCategory?->id === $category->id
                         ? 'text-[#BE8B3E] font-semibold border-b-2 border-[#BE8B3E]'
                         : 'text-[#BE8B3E] hover:text-white' }}">
@@ -419,7 +425,7 @@
      SHOP AREA
 ========================================================= --}}
 
-<section class="py-16 sm:py-20 bg-[#f8f7f4]">
+<section class="py-12 sm:py-16 lg:py-20 bg-[#f8f7f4]">
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -428,19 +434,19 @@
              TOP BAR
         ====================================================== --}}
 
-        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-10">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 sm:gap-6 mb-8 sm:mb-10">
 
-            <div>
+            <div class="min-w-0">
 
-                <p class="text-xs uppercase tracking-[0.35em] text-[#BE8B3E] font-semibold">
+                <p class="text-[10px] sm:text-xs uppercase tracking-[0.3em] sm:tracking-[0.35em] text-[#BE8B3E] font-semibold">
                     {{ $selectedCategory?->name ?? 'All Collection' }}
                 </p>
 
-                <h2 class="mt-3 text-3xl sm:text-4xl font-light">
+                <h2 class="mt-2 sm:mt-3 text-2xl sm:text-3xl lg:text-4xl font-light">
                     Shop Products
                 </h2>
 
-                <p class="mt-2 text-sm text-gray-500">
+                <p class="mt-2 text-xs sm:text-sm text-gray-500">
                     Showing <span id="shop-products-count">{{ $products->count() }}</span> products
                 </p>
 
@@ -452,7 +458,7 @@
             <form
                 method="GET"
                 action="{{ route('shop') }}"
-                class="flex items-center gap-3">
+                class="flex items-center gap-3 w-full lg:w-auto">
 
                 @if(request('category'))
                     <input
@@ -480,7 +486,7 @@
 
                 <select
                     name="sort"
-                    class="border border-gray-300 bg-white px-5 py-3 text-sm focus:outline-none focus:border-black rounded-lg">
+                    class="w-full lg:w-auto min-w-0 border border-gray-300 bg-white px-4 sm:px-5 py-3 text-sm focus:outline-none focus:border-black rounded-lg">
 
                     <option
                         value=""
@@ -523,19 +529,19 @@
              FILTER + PRODUCTS
         ====================================================== --}}
 
-        <div class="grid grid-cols-1 lg:grid-cols-[270px_1fr] gap-10">
+        <div class="grid grid-cols-1 lg:grid-cols-[270px_minmax(0,1fr)] gap-8 sm:gap-10">
 
 
             {{-- =================================================
                  FILTER SIDEBAR
             ================================================== --}}
 
-            <aside>
+            <aside class="min-w-0">
 
                 <form
                     method="GET"
                     action="{{ route('shop') }}"
-                    class="border border-gray-200 p-6 bg-white sticky top-28 rounded-lg">
+                    class="border border-gray-200 p-4 sm:p-6 bg-white lg:sticky lg:top-28 rounded-lg">
 
                     {{-- KEEP CATEGORY --}}
 
@@ -570,17 +576,18 @@
 
                     @endif
 
-{{-- FILTER TITLE --}}
 
-                    <div class="flex items-center justify-between mb-7">
+                    {{-- FILTER TITLE --}}
+
+                    <div class="flex items-center justify-between mb-6 sm:mb-7">
 
                         <div>
 
-                            <p class="text-xs uppercase tracking-[0.3em] text-[#BE8B3E]">
+                            <p class="text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#BE8B3E]">
                                 Refine
                             </p>
 
-                            <h3 class="mt-2 text-lg font-medium">
+                            <h3 class="mt-2 text-base sm:text-lg font-medium">
                                 Filters
                             </h3>
 
@@ -593,54 +600,65 @@
                          PRICE RANGE
                     ================================================== --}}
 
-<div class="border-t border-gray-200 pt-6">
-    <div class="flex items-center justify-between">
-        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Price
-        </p>
+                    <div class="border-t border-gray-200 pt-5 sm:pt-6">
 
-        <span
-            id="price-range-label"
-            class="text-xs text-[#BE8B3E]">
-            Up to PKR {{ number_format($selectedMaxPrice) }}
-        </span>
-    </div>
+                        <div class="flex items-start justify-between gap-3">
 
-    {{-- SINGLE PRICE SLIDER --}}
-    <div class="relative mt-7 h-5">
-        <div
-            class="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -translate-y-1/2 rounded-full"></div>
+                            <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700">
+                                Price
+                            </p>
 
-        <div
-            id="price-active-track"
-            class="absolute top-1/2 left-0 h-1 bg-[#BE8B3E] -translate-y-1/2 rounded-full"></div>
+                            <span
+                                id="price-range-label"
+                                class="text-[10px] sm:text-xs text-[#BE8B3E] text-right">
+                                Up to PKR {{ number_format($selectedMaxPrice) }}
+                            </span>
 
-        <input
-            type="range"
-            id="price-slider"
-            min="{{ $priceMin }}"
-            max="{{ $priceMax }}"
-            value="{{ $selectedMaxPrice }}"
-            step="1"
-            class="price-slider absolute inset-0 w-full appearance-none bg-transparent">
-    </div>
+                        </div>
 
-    <input
-        type="hidden"
-        name="max_price"
-        id="max-price-input"
-        value="{{ $selectedMaxPrice }}">
+                        {{-- SINGLE PRICE SLIDER --}}
 
-    <div class="flex items-center justify-between mt-3">
-        <span class="text-[10px] uppercase tracking-widest text-gray-400">
-            PKR {{ number_format($priceMin) }}
-        </span>
+                        <div class="relative mt-6 sm:mt-7 h-5">
 
-        <span class="text-[10px] uppercase tracking-widest text-gray-400">
-            PKR {{ number_format($priceMax) }}
-        </span>
-    </div>
-</div>
+                            <div
+                                class="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -translate-y-1/2 rounded-full">
+                            </div>
+
+                            <div
+                                id="price-active-track"
+                                class="absolute top-1/2 left-0 h-1 bg-[#BE8B3E] -translate-y-1/2 rounded-full">
+                            </div>
+
+                            <input
+                                type="range"
+                                id="price-slider"
+                                min="{{ $priceMin }}"
+                                max="{{ $priceMax }}"
+                                value="{{ $selectedMaxPrice }}"
+                                step="1"
+                                class="price-slider absolute inset-0 w-full appearance-none bg-transparent">
+
+                        </div>
+
+                        <input
+                            type="hidden"
+                            name="max_price"
+                            id="max-price-input"
+                            value="{{ $selectedMaxPrice }}">
+
+                        <div class="flex items-center justify-between mt-3 gap-2">
+
+                            <span class="text-[9px] sm:text-[10px] uppercase tracking-widest text-gray-400">
+                                PKR {{ number_format($priceMin) }}
+                            </span>
+
+                            <span class="text-[9px] sm:text-[10px] uppercase tracking-widest text-gray-400 text-right">
+                                PKR {{ number_format($priceMax) }}
+                            </span>
+
+                        </div>
+
+                    </div>
 
 
                     @if(!$selectedCategory)
@@ -649,24 +667,33 @@
                          CATEGORY PRIORITY FILTERS
                     ================================================== --}}
 
-                    <div class="mt-7 border-t border-gray-200 pt-7">
-                        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
+                    <div class="mt-6 sm:mt-7 border-t border-gray-200 pt-6 sm:pt-7">
+
+                        <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4 sm:mb-5">
                             Categories
                         </p>
 
                         <div class="space-y-3">
+
                             @foreach($categories as $category)
-                                <label class="flex items-center gap-3 cursor-pointer">
+
+                                <label class="flex items-start gap-3 cursor-pointer">
+
                                     <input
                                         type="checkbox"
-                                        class="shop-category-filter w-4 h-4 gender-checkbox"
+                                        class="shop-category-filter w-4 h-4 shrink-0 gender-checkbox"
                                         data-category-slug="{{ $category->slug }}">
-                                    <span class="text-sm text-gray-700">
+
+                                    <span class="text-sm text-gray-700 min-w-0 break-words">
                                         {{ $category->name }}
                                     </span>
+
                                 </label>
+
                             @endforeach
+
                         </div>
+
                     </div>
 
 
@@ -674,30 +701,44 @@
                          FEATURED / SALE FILTERS
                     ================================================== --}}
 
-                    <div class="mt-7 border-t border-gray-200 pt-7">
-                        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
+                    <div class="mt-6 sm:mt-7 border-t border-gray-200 pt-6 sm:pt-7">
+
+                        <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4 sm:mb-5">
                             Highlights
                         </p>
 
                         <div class="space-y-3">
+
                             <label class="flex items-center gap-3 cursor-pointer">
+
                                 <input
                                     type="radio"
                                     name="shop-highlight-filter"
                                     value="featured"
-                                    class="shop-highlight-filter w-4 h-4 gender-checkbox">
-                                <span class="text-sm text-gray-700">Featured</span>
+                                    class="shop-highlight-filter w-4 h-4 shrink-0 gender-checkbox">
+
+                                <span class="text-sm text-gray-700">
+                                    Featured
+                                </span>
+
                             </label>
 
                             <label class="flex items-center gap-3 cursor-pointer">
+
                                 <input
                                     type="radio"
                                     name="shop-highlight-filter"
                                     value="sale"
-                                    class="shop-highlight-filter w-4 h-4 gender-checkbox">
-                                <span class="text-sm text-gray-700">Sale</span>
+                                    class="shop-highlight-filter w-4 h-4 shrink-0 gender-checkbox">
+
+                                <span class="text-sm text-gray-700">
+                                    Sale
+                                </span>
+
                             </label>
+
                         </div>
+
                     </div>
 
 
@@ -710,9 +751,9 @@
 
                     @if($categoryType === 'clothing')
 
-                        <div class="mt-7 border-t border-gray-200 pt-7">
+                        <div class="mt-6 sm:mt-7 border-t border-gray-200 pt-6 sm:pt-7">
 
-                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
+                            <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4 sm:mb-5">
                                 Gender
                             </p>
 
@@ -731,7 +772,7 @@
                                             name="gender[]"
                                             value="{{ $value }}"
                                             {{ in_array($value, $selectedGenders) ? 'checked' : '' }}
-                                            class="gender-checkbox w-4 h-4">
+                                            class="gender-checkbox w-4 h-4 shrink-0">
 
                                         <span class="text-sm text-gray-700">
                                             {{ $label }}
@@ -748,9 +789,9 @@
 
                         {{-- BRAND --}}
 
-                        <div class="mt-7 border-t border-gray-200 pt-7">
+                        <div class="mt-6 sm:mt-7 border-t border-gray-200 pt-6 sm:pt-7">
 
-                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
+                            <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4 sm:mb-5">
                                 Brand
                             </p>
 
@@ -758,16 +799,16 @@
 
                                 @forelse($clothingBrands as $brand)
 
-                                    <label class="flex items-center gap-3 cursor-pointer">
+                                    <label class="flex items-start gap-3 cursor-pointer">
 
                                         <input
                                             type="checkbox"
                                             name="brand[]"
                                             value="{{ $brand }}"
                                             {{ in_array($brand, $selectedBrands) ? 'checked' : '' }}
-                                            class="gender-checkbox w-4 h-4">
+                                            class="gender-checkbox w-4 h-4 shrink-0">
 
-                                        <span class="text-sm text-gray-700">
+                                        <span class="text-sm text-gray-700 min-w-0 break-words">
                                             {{ $brand }}
                                         </span>
 
@@ -788,9 +829,9 @@
 
                         {{-- SIZE --}}
 
-                        <div class="mt-7 border-t border-gray-200 pt-7">
+                        <div class="mt-6 sm:mt-7 border-t border-gray-200 pt-6 sm:pt-7">
 
-                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
+                            <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4 sm:mb-5">
                                 Size
                             </p>
 
@@ -808,7 +849,7 @@
                                             class="peer sr-only">
 
                                         <span
-                                            class="inline-flex min-w-[45px] justify-center border border-gray-300 px-4 py-2 text-xs
+                                            class="inline-flex min-w-[42px] sm:min-w-[45px] justify-center border border-gray-300 px-3 sm:px-4 py-2 text-xs
                                             peer-checked:bg-[#BE8B3E] peer-checked:text-white peer-checked:border-[#BE8B3E]">
                                             {{ $size }}
                                         </span>
@@ -827,109 +868,234 @@
                     {{-- =================================================
                          JEWELRY FILTERS
                     ================================================== --}}
+
                     @if($categoryType === 'jewelry')
 
-                        <div class="mt-7 border-t border-gray-200 pt-7">
-                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
+                        <div class="mt-6 sm:mt-7 border-t border-gray-200 pt-6 sm:pt-7">
+
+                            <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4 sm:mb-5">
                                 Gender
                             </p>
+
                             <div class="space-y-3">
+
                                 @foreach(['men' => 'Men', 'women' => 'Women'] as $value => $label)
+
                                     <label class="flex items-center gap-3 cursor-pointer">
+
                                         <input
                                             type="checkbox"
                                             name="jewelry_gender[]"
                                             value="{{ $value }}"
                                             {{ in_array($value, $selectedJewelryGenders) ? 'checked' : '' }}
-                                            class="gender-checkbox w-4 h-4">
-                                        <span class="text-sm text-gray-700">{{ $label }}</span>
+                                            class="gender-checkbox w-4 h-4 shrink-0">
+
+                                        <span class="text-sm text-gray-700">
+                                            {{ $label }}
+                                        </span>
+
                                     </label>
+
                                 @endforeach
+
                             </div>
+
                         </div>
 
-                        <div class="mt-7 border-t border-gray-200 pt-7">
-                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
+                        <div class="mt-6 sm:mt-7 border-t border-gray-200 pt-6 sm:pt-7">
+
+                            <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4 sm:mb-5">
                                 Jewelry Type
                             </p>
+
                             <select
                                 name="jewelry_type"
                                 id="jewelry_type"
-                                class="w-full border border-gray-200 bg-white px-3 py-3 text-sm focus:outline-none focus:border-black rounded-lg">
+                                class="w-full min-w-0 border border-gray-200 bg-white px-3 py-3 text-sm focus:outline-none focus:border-black rounded-lg">
+
                                 <option value="">All Jewelry Types</option>
-                                <option value="earrings" {{ $selectedJewelryType === 'earrings' ? 'selected' : '' }}>Earrings</option>
-                                <option value="necklaces" {{ $selectedJewelryType === 'necklaces' ? 'selected' : '' }}>Necklaces</option>
-                                <option value="rings" {{ $selectedJewelryType === 'rings' ? 'selected' : '' }}>Rings</option>
-                                <option value="bracelets" {{ $selectedJewelryType === 'bracelets' ? 'selected' : '' }}>Bracelets</option>
+
+                                <option value="earrings" {{ $selectedJewelryType === 'earrings' ? 'selected' : '' }}>
+                                    Earrings
+                                </option>
+
+                                <option value="necklaces" {{ $selectedJewelryType === 'necklaces' ? 'selected' : '' }}>
+                                    Necklaces
+                                </option>
+
+                                <option value="rings" {{ $selectedJewelryType === 'rings' ? 'selected' : '' }}>
+                                    Rings
+                                </option>
+
+                                <option value="bracelets" {{ $selectedJewelryType === 'bracelets' ? 'selected' : '' }}>
+                                    Bracelets
+                                </option>
+
                             </select>
+
                         </div>
 
-                        <div id="shop-jewelry-subcategories" class="mt-7 border-t border-gray-200 pt-7 {{ $selectedJewelryType ? '' : 'hidden' }}">
-                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
+                        <div
+                            id="shop-jewelry-subcategories"
+                            class="mt-6 sm:mt-7 border-t border-gray-200 pt-6 sm:pt-7 {{ $selectedJewelryType ? '' : 'hidden' }}">
+
+                            <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4 sm:mb-5">
                                 Subcategories
                             </p>
-                            <div id="shop-jewelry-subcategory-list" class="space-y-3 gender-checkbox"></div>
+
+                            <div
+                                id="shop-jewelry-subcategory-list"
+                                class="space-y-3">
+                            </div>
+
                         </div>
 
-                        <div class="mt-7 border-t border-gray-200 pt-7">
-                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
+                        <div class="mt-6 sm:mt-7 border-t border-gray-200 pt-6 sm:pt-7">
+
+                            <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4 sm:mb-5">
                                 Product Type / Quality
                             </p>
+
                             <div class="space-y-3">
+
                                 @foreach($jewelryQualities as $value => $label)
+
                                     <label class="flex items-start gap-3 cursor-pointer">
+
                                         <input
                                             type="checkbox"
                                             name="jewelry_quality[]"
                                             value="{{ $value }}"
                                             {{ in_array($value, $selectedJewelryQuality) ? 'checked' : '' }}
-                                            class="gender-checkbox w-4 h-4 mt-0.5">
-                                        <span class="text-sm text-gray-700">{{ $label }}</span>
+                                            class="gender-checkbox w-4 h-4 mt-0.5 shrink-0">
+
+                                        <span class="text-sm text-gray-700 min-w-0 break-words">
+                                            {{ $label }}
+                                        </span>
+
                                     </label>
+
                                 @endforeach
+
                             </div>
+
                         </div>
 
-                        <div class="mt-7 border-t border-gray-200 pt-7 {{ $selectedJewelryType === 'rings' ? '' : 'hidden' }}" data-shop-jewelry-size="rings">
-                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">Ring Size</p>
-                            <div class="grid grid-cols-3 gap-3">
+                        <div
+                            class="mt-6 sm:mt-7 border-t border-gray-200 pt-6 sm:pt-7 {{ $selectedJewelryType === 'rings' ? '' : 'hidden' }}"
+                            data-shop-jewelry-size="rings">
+
+                            <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4 sm:mb-5">
+                                Ring Size
+                            </p>
+
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+
                                 @forelse($jewelryRingSizes as $size)
-                                    <label class="flex items-center gap-2 cursor-pointer">
-                                        <input type="checkbox" name="ring_sizes[]" value="{{ $size }}" {{ in_array($size, $selectedRingSizes) ? 'checked' : '' }} class="w-4 h-4">
-                                        <span class="text-sm text-gray-700">{{ $size }}</span>
+
+                                    <label class="flex items-center gap-2 cursor-pointer min-w-0">
+
+                                        <input
+                                            type="checkbox"
+                                            name="ring_sizes[]"
+                                            value="{{ $size }}"
+                                            {{ in_array($size, $selectedRingSizes) ? 'checked' : '' }}
+                                            class="w-4 h-4 shrink-0">
+
+                                        <span class="text-sm text-gray-700 break-words">
+                                            {{ $size }}
+                                        </span>
+
                                     </label>
+
                                 @empty
-                                    <p class="text-sm text-gray-400 col-span-3">No ring sizes available.</p>
+
+                                    <p class="text-sm text-gray-400 col-span-2 sm:col-span-3">
+                                        No ring sizes available.
+                                    </p>
+
                                 @endforelse
+
                             </div>
+
                         </div>
 
-                        <div class="mt-7 border-t border-gray-200 pt-7 {{ $selectedJewelryType === 'necklaces' ? '' : 'hidden' }}" data-shop-jewelry-size="necklaces">
-                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">Chain / Necklace Length</p>
+                        <div
+                            class="mt-6 sm:mt-7 border-t border-gray-200 pt-6 sm:pt-7 {{ $selectedJewelryType === 'necklaces' ? '' : 'hidden' }}"
+                            data-shop-jewelry-size="necklaces">
+
+                            <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4 sm:mb-5">
+                                Chain / Necklace Length
+                            </p>
+
                             <div class="space-y-3">
+
                                 @forelse($jewelryNecklaceLengths as $length)
+
                                     <label class="flex items-center gap-3 cursor-pointer">
-                                        <input type="checkbox" name="necklace_lengths[]" value="{{ $length }}" {{ in_array($length, $selectedNecklaceLengths) ? 'checked' : '' }} class="w-4 h-4">
-                                        <span class="text-sm text-gray-700">{{ $length }}</span>
+
+                                        <input
+                                            type="checkbox"
+                                            name="necklace_lengths[]"
+                                            value="{{ $length }}"
+                                            {{ in_array($length, $selectedNecklaceLengths) ? 'checked' : '' }}
+                                            class="w-4 h-4 shrink-0">
+
+                                        <span class="text-sm text-gray-700">
+                                            {{ $length }}
+                                        </span>
+
                                     </label>
+
                                 @empty
-                                    <p class="text-sm text-gray-400">No necklace lengths available.</p>
+
+                                    <p class="text-sm text-gray-400">
+                                        No necklace lengths available.
+                                    </p>
+
                                 @endforelse
+
                             </div>
+
                         </div>
 
-                        <div class="mt-7 border-t border-gray-200 pt-7 {{ $selectedJewelryType === 'bracelets' ? '' : 'hidden' }}" data-shop-jewelry-size="bracelets">
-                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">Bracelet / Bangle Size</p>
+                        <div
+                            class="mt-6 sm:mt-7 border-t border-gray-200 pt-6 sm:pt-7 {{ $selectedJewelryType === 'bracelets' ? '' : 'hidden' }}"
+                            data-shop-jewelry-size="bracelets">
+
+                            <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4 sm:mb-5">
+                                Bracelet / Bangle Size
+                            </p>
+
                             <div class="space-y-3">
+
                                 @forelse($jewelryBraceletSizes as $size)
+
                                     <label class="flex items-center gap-3 cursor-pointer">
-                                        <input type="checkbox" name="bracelet_sizes[]" value="{{ $size }}" {{ in_array($size, $selectedBraceletSizes) ? 'checked' : '' }} class="w-4 h-4">
-                                        <span class="text-sm text-gray-700">{{ $size }}</span>
+
+                                        <input
+                                            type="checkbox"
+                                            name="bracelet_sizes[]"
+                                            value="{{ $size }}"
+                                            {{ in_array($size, $selectedBraceletSizes) ? 'checked' : '' }}
+                                            class="w-4 h-4 shrink-0">
+
+                                        <span class="text-sm text-gray-700">
+                                            {{ $size }}
+                                        </span>
+
                                     </label>
+
                                 @empty
-                                    <p class="text-sm text-gray-400">No bracelet/bangle sizes available.</p>
+
+                                    <p class="text-sm text-gray-400">
+                                        No bracelet/bangle sizes available.
+                                    </p>
+
                                 @endforelse
+
                             </div>
+
                         </div>
 
                     @endif
@@ -938,65 +1104,204 @@
                     {{-- =================================================
                          WATCH FILTERS
                     ================================================== --}}
+
                     @if($categoryType === 'watches')
 
-                        <div class="mt-7 border-t border-gray-200 pt-7">
-                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
+                        <div class="mt-6 sm:mt-7 border-t border-gray-200 pt-6 sm:pt-7">
+
+                            <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4 sm:mb-5">
                                 Gender
                             </p>
 
                             <div class="space-y-3">
+
                                 @foreach(['men' => 'Men', 'women' => 'Women', 'kids' => 'Kids'] as $value => $label)
+
                                     <label class="flex items-center gap-3 cursor-pointer">
+
                                         <input
                                             type="checkbox"
                                             name="watch_gender[]"
                                             value="{{ $value }}"
                                             {{ in_array($value, $selectedWatchGenders) ? 'checked' : '' }}
-                                            class="gender-checkbox w-4 h-4">
-                                        <span class="text-sm text-gray-700">{{ $label }}</span>
+                                            class="gender-checkbox w-4 h-4 shrink-0">
+
+                                        <span class="text-sm text-gray-700">
+                                            {{ $label }}
+                                        </span>
+
                                     </label>
+
                                 @endforeach
+
                             </div>
+
                         </div>
 
-                        <div class="mt-7 border-t border-gray-200 pt-7">
-                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
+                        <div class="mt-6 sm:mt-7 border-t border-gray-200 pt-6 sm:pt-7">
+
+                            <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4 sm:mb-5">
                                 Strap Material
                             </p>
 
                             <select
                                 name="strap_material"
                                 id="shop-strap-material"
-                                class="w-full border border-gray-200 bg-white px-3 py-3 text-sm focus:outline-none focus:border-black">
+                                class="w-full min-w-0 border border-gray-200 bg-white px-3 py-3 text-sm focus:outline-none focus:border-black">
 
-                                <option value="">All Strap Materials</option>
+                                <option value="">
+                                    All Strap Materials
+                                </option>
+
                                 @foreach($watchStrapMaterials as $value => $label)
-                                    <option value="{{ $value }}" {{ $selectedStrapMaterial === $value ? 'selected' : '' }}>
+
+                                    <option
+                                        value="{{ $value }}"
+                                        {{ $selectedStrapMaterial === $value ? 'selected' : '' }}>
                                         {{ $label }}
                                     </option>
+
                                 @endforeach
+
                             </select>
+
                         </div>
 
-                        <div class="mt-7 border-t border-gray-200 pt-7">
-                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
+                        <div class="mt-6 sm:mt-7 border-t border-gray-200 pt-6 sm:pt-7">
+
+                            <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4 sm:mb-5">
                                 Watch Type
                             </p>
 
                             <div class="space-y-3">
+
                                 @foreach($watchTypes as $value => $label)
-                                    <label class="flex items-center gap-3 cursor-pointer">
+
+                                    <label class="flex items-start gap-3 cursor-pointer">
+
                                         <input
                                             type="radio"
                                             name="watch_type"
                                             value="{{ $value }}"
                                             {{ $selectedWatchType === $value ? 'checked' : '' }}
-                                            class="gender-checkbox w-4 h-4">
-                                        <span class="text-sm text-gray-700">{{ $label }}</span>
+                                            class="gender-checkbox w-4 h-4 shrink-0">
+
+                                        <span class="text-sm text-gray-700 min-w-0 break-words">
+                                            {{ $label }}
+                                        </span>
+
                                     </label>
+
                                 @endforeach
+
                             </div>
+
+                        </div>
+
+                    @endif
+
+
+                    {{-- =================================================
+                         OTHER ACCESSORIES FILTERS
+                    ================================================== --}}
+
+                    @if($categoryType === 'other_accessories')
+
+                        {{-- BUTTONS --}}
+
+                        <div class="mt-6 sm:mt-7 border-t border-gray-200 pt-6 sm:pt-7">
+
+                            <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4 sm:mb-5">
+                                Buttons
+                            </p>
+
+                            <select
+                                name="buttons"
+                                id="shop-buttons"
+                                class="w-full min-w-0 border border-gray-200 bg-white px-3 py-3 text-sm focus:outline-none focus:border-black">
+
+                                <option value="">
+                                    All Buttons
+                                </option>
+
+                                @foreach($otherAccessoryButtons as $value => $label)
+
+                                    <option
+                                        value="{{ $value }}"
+                                        {{ $selectedOtherAccessoryButtons === $value ? 'selected' : '' }}>
+                                        {{ $label }}
+                                    </option>
+
+                                @endforeach
+
+                            </select>
+
+                        </div>
+
+
+                        {{-- PIPING CLOTHES --}}
+
+                        <div class="mt-6 sm:mt-7 border-t border-gray-200 pt-6 sm:pt-7">
+
+                            <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4 sm:mb-5">
+                                Piping Clothes
+                            </p>
+
+                            <select
+                                name="piping_clothes"
+                                id="shop-piping-clothes"
+                                class="w-full min-w-0 border border-gray-200 bg-white px-3 py-3 text-sm focus:outline-none focus:border-black">
+
+                                <option value="">
+                                    All Piping Clothes
+                                </option>
+
+                                @foreach($otherAccessoryPipingClothes as $value => $label)
+
+                                    <option
+                                        value="{{ $value }}"
+                                        {{ $selectedOtherAccessoryPipingClothes === $value ? 'selected' : '' }}>
+                                        {{ $label }}
+                                    </option>
+
+                                @endforeach
+
+                            </select>
+
+                        </div>
+
+
+                        {{-- ACCESSORY TYPE --}}
+
+                        <div class="mt-6 sm:mt-7 border-t border-gray-200 pt-6 sm:pt-7">
+
+                            <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4 sm:mb-5">
+                                Accessory Type
+                            </p>
+
+                            <div class="space-y-3">
+
+                                @foreach($otherAccessoryTypes as $value => $label)
+
+                                    <label class="flex items-start gap-3 cursor-pointer">
+
+                                        <input
+                                            type="radio"
+                                            name="accessory_type"
+                                            value="{{ $value }}"
+                                            {{ $selectedOtherAccessoryType === $value ? 'checked' : '' }}
+                                            class="gender-checkbox w-4 h-4 shrink-0">
+
+                                        <span class="text-sm text-gray-700 min-w-0 break-words">
+                                            {{ $label }}
+                                        </span>
+
+                                    </label>
+
+                                @endforeach
+
+                            </div>
+
                         </div>
 
                     @endif
@@ -1005,12 +1310,21 @@
                     {{-- =================================================
                          COSMETICS FILTERS
                     ================================================== --}}
+
                     @if($categoryType === 'cosmetics')
 
-                        <div class="mt-7 border-t border-gray-200 pt-7">
-                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">Product Type</p>
-                            <select name="cosmetic_product_type" class="w-full border border-gray-200 bg-white px-3 py-3 text-sm focus:outline-none focus:border-black">
+                        <div class="mt-6 sm:mt-7 border-t border-gray-200 pt-6 sm:pt-7">
+
+                            <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4 sm:mb-5">
+                                Product Type
+                            </p>
+
+                            <select
+                                name="cosmetic_product_type"
+                                class="w-full min-w-0 border border-gray-200 bg-white px-3 py-3 text-sm focus:outline-none focus:border-black">
+
                                 <option value="">All Product Types</option>
+
                                 @foreach([
                                     'makeup' => 'Makeup',
                                     'skincare' => 'Skincare',
@@ -1019,50 +1333,133 @@
                                     'body_care' => 'Body Care',
                                     'nail_care' => 'Nail Care'
                                 ] as $value => $label)
-                                    <option value="{{ $value }}" {{ $selectedCosmeticProductType === $value ? 'selected' : '' }}>{{ $label }}</option>
+
+                                    <option
+                                        value="{{ $value }}"
+                                        {{ $selectedCosmeticProductType === $value ? 'selected' : '' }}>
+                                        {{ $label }}
+                                    </option>
+
                                 @endforeach
+
                             </select>
+
                         </div>
 
-                        <div class="mt-7 border-t border-gray-200 pt-7">
-                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">Brand</p>
+                        <div class="mt-6 sm:mt-7 border-t border-gray-200 pt-6 sm:pt-7">
+
+                            <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4 sm:mb-5">
+                                Brand
+                            </p>
+
                             <div class="space-y-3">
+
                                 @forelse($cosmeticBrands as $brand)
-                                    <label class="flex items-center gap-3 cursor-pointer">
-                                        <input type="checkbox" name="brand[]" value="{{ $brand }}" {{ in_array($brand, $selectedBrands) ? 'checked' : '' }} class="gender-checkbox w-4 h-4">
-                                        <span class="text-sm text-gray-700">{{ $brand }}</span>
+
+                                    <label class="flex items-start gap-3 cursor-pointer">
+
+                                        <input
+                                            type="checkbox"
+                                            name="brand[]"
+                                            value="{{ $brand }}"
+                                            {{ in_array($brand, $selectedBrands) ? 'checked' : '' }}
+                                            class="gender-checkbox w-4 h-4 shrink-0">
+
+                                        <span class="text-sm text-gray-700 min-w-0 break-words">
+                                            {{ $brand }}
+                                        </span>
+
                                     </label>
+
                                 @empty
-                                    <p class="text-sm text-gray-400">No brands available.</p>
+
+                                    <p class="text-sm text-gray-400">
+                                        No brands available.
+                                    </p>
+
                                 @endforelse
+
                             </div>
+
                         </div>
 
                         @foreach([
-                            'skin_types' => ['title' => 'Skin Type', 'options' => [
-                                'all_skin_types' => 'All Skin Types', 'oily' => 'Oily', 'dry' => 'Dry', 'combination' => 'Combination', 'sensitive' => 'Sensitive'
-                            ], 'selected' => $selectedSkinTypes],
-                            'concerns' => ['title' => 'Concern / Benefit', 'options' => [
-                                'hydration' => 'Hydration', 'brightening' => 'Brightening', 'acne_blemishes' => 'Acne & Blemishes', 'oil_control' => 'Oil Control', 'anti_aging' => 'Anti-Aging', 'sun_protection' => 'Sun Protection', 'hair_fall' => 'Hair Fall', 'frizz_control' => 'Frizz Control'
-                            ], 'selected' => $selectedConcerns],
-                            'product_forms' => ['title' => 'Product Form', 'options' => [
-                                'cream' => 'Cream', 'gel' => 'Gel', 'serum' => 'Serum', 'lotion' => 'Lotion', 'powder' => 'Powder', 'liquid' => 'Liquid', 'spray' => 'Spray', 'stick' => 'Stick'
-                            ], 'selected' => $selectedProductForms]
+                            'skin_types' => [
+                                'title' => 'Skin Type',
+                                'options' => [
+                                    'all_skin_types' => 'All Skin Types',
+                                    'oily' => 'Oily',
+                                    'dry' => 'Dry',
+                                    'combination' => 'Combination',
+                                    'sensitive' => 'Sensitive'
+                                ],
+                                'selected' => $selectedSkinTypes
+                            ],
+                            'concerns' => [
+                                'title' => 'Concern / Benefit',
+                                'options' => [
+                                    'hydration' => 'Hydration',
+                                    'brightening' => 'Brightening',
+                                    'acne_blemishes' => 'Acne & Blemishes',
+                                    'oil_control' => 'Oil Control',
+                                    'anti_aging' => 'Anti-Aging',
+                                    'sun_protection' => 'Sun Protection',
+                                    'hair_fall' => 'Hair Fall',
+                                    'frizz_control' => 'Frizz Control'
+                                ],
+                                'selected' => $selectedConcerns
+                            ],
+                            'product_forms' => [
+                                'title' => 'Product Form',
+                                'options' => [
+                                    'cream' => 'Cream',
+                                    'gel' => 'Gel',
+                                    'serum' => 'Serum',
+                                    'lotion' => 'Lotion',
+                                    'powder' => 'Powder',
+                                    'liquid' => 'Liquid',
+                                    'spray' => 'Spray',
+                                    'stick' => 'Stick'
+                                ],
+                                'selected' => $selectedProductForms
+                            ]
                         ] as $field => $data)
-                            <div class="mt-7 border-t border-gray-200 pt-7">
-                                <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">{{ $data['title'] }}</p>
+
+                            <div class="mt-6 sm:mt-7 border-t border-gray-200 pt-6 sm:pt-7">
+
+                                <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4 sm:mb-5">
+                                    {{ $data['title'] }}
+                                </p>
+
                                 <div class="space-y-3">
+
                                     @foreach($data['options'] as $value => $label)
-                                        <label class="flex items-center gap-3 cursor-pointer">
-                                            <input type="checkbox" name="{{ $field }}[]" value="{{ $value }}" {{ in_array($value, $data['selected']) ? 'checked' : '' }} class="gender-checkbox w-4 h-4">
-                                            <span class="text-sm text-gray-700">{{ $label }}</span>
+
+                                        <label class="flex items-start gap-3 cursor-pointer">
+
+                                            <input
+                                                type="checkbox"
+                                                name="{{ $field }}[]"
+                                                value="{{ $value }}"
+                                                {{ in_array($value, $data['selected']) ? 'checked' : '' }}
+                                                class="gender-checkbox w-4 h-4 shrink-0">
+
+                                            <span class="text-sm text-gray-700 min-w-0 break-words">
+                                                {{ $label }}
+                                            </span>
+
                                         </label>
+
                                     @endforeach
+
                                 </div>
+
                             </div>
+
                         @endforeach
 
                     @endif
+
 
                     {{-- =================================================
                          LACE FILTERS
@@ -1070,16 +1467,14 @@
 
                     @if($categoryType === 'lace')
 
-                        <div class="mt-7 border-t border-gray-200 pt-7">
+                        <div class="mt-6 sm:mt-7 border-t border-gray-200 pt-6 sm:pt-7">
 
-                            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-5">
+                            <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4 sm:mb-5">
                                 Lace Information
                             </p>
 
 
-                            {{-- =================================================
-                                 LACE CATEGORY DROPDOWN
-                            ================================================== --}}
+                            {{-- LACE CATEGORY DROPDOWN --}}
 
                             <label
                                 for="lace_category"
@@ -1090,7 +1485,7 @@
                             <select
                                 name="lace_category"
                                 id="lace_category"
-                                class="w-full border border-gray-200 bg-white px-3 py-3 text-sm focus:outline-none focus:border-black">
+                                class="w-full min-w-0 border border-gray-200 bg-white px-3 py-3 text-sm focus:outline-none focus:border-black">
 
                                 <option value="">
                                     Select Lace Category
@@ -1135,13 +1530,11 @@
                             </select>
 
 
-                            {{-- =================================================
-                                 SUBCATEGORIES
-                            ================================================== --}}
+                            {{-- SUBCATEGORIES --}}
 
                             <div
                                 id="lace-subcategories-container"
-                                class="mt-6">
+                                class="mt-5 sm:mt-6">
 
                                 <p class="text-xs text-gray-400 mb-4">
                                     Select subcategories
@@ -1149,6 +1542,7 @@
 
 
                                 {{-- BASIC --}}
+
                                 <div
                                     data-lace-group="basic_everyday"
                                     class="lace-subcategory-group hidden">
@@ -1167,7 +1561,7 @@
                                                 name="lace_subcategories[]"
                                                 value="{{ $value }}"
                                                 {{ in_array($value, $selectedLaceSubcategories) ? 'checked' : '' }}
-                                                class="w-4 h-4 gender-checkbox">
+                                                class="w-4 h-4 shrink-0 gender-checkbox">
 
                                             <span class="text-sm text-gray-700">
                                                 {{ $label }}
@@ -1181,6 +1575,7 @@
 
 
                                 {{-- EMBROIDERED --}}
+
                                 <div
                                     data-lace-group="embroidered"
                                     class="lace-subcategory-group hidden">
@@ -1201,7 +1596,7 @@
                                                 name="lace_subcategories[]"
                                                 value="{{ $value }}"
                                                 {{ in_array($value, $selectedLaceSubcategories) ? 'checked' : '' }}
-                                                class="w-4 h-4 gender-checkbox">
+                                                class="w-4 h-4 shrink-0 gender-checkbox">
 
                                             <span class="text-sm text-gray-700">
                                                 {{ $label }}
@@ -1215,6 +1610,7 @@
 
 
                                 {{-- FANCY --}}
+
                                 <div
                                     data-lace-group="fancy"
                                     class="lace-subcategory-group hidden">
@@ -1237,7 +1633,7 @@
                                                 name="lace_subcategories[]"
                                                 value="{{ $value }}"
                                                 {{ in_array($value, $selectedLaceSubcategories) ? 'checked' : '' }}
-                                                class="w-4 h-4 gender-checkbox">
+                                                class="w-4 h-4 shrink-0 gender-checkbox">
 
                                             <span class="text-sm text-gray-700">
                                                 {{ $label }}
@@ -1251,6 +1647,7 @@
 
 
                                 {{-- TRADITIONAL --}}
+
                                 <div
                                     data-lace-group="traditional"
                                     class="lace-subcategory-group hidden">
@@ -1272,7 +1669,7 @@
                                                 name="lace_subcategories[]"
                                                 value="{{ $value }}"
                                                 {{ in_array($value, $selectedLaceSubcategories) ? 'checked' : '' }}
-                                                class="w-4 h-4 gender-checkbox">
+                                                class="w-4 h-4 shrink-0 gender-checkbox">
 
                                             <span class="text-sm text-gray-700">
                                                 {{ $label }}
@@ -1286,6 +1683,7 @@
 
 
                                 {{-- SUIT SPECIFIC --}}
+
                                 <div
                                     data-lace-group="suit_specific"
                                     class="lace-subcategory-group hidden">
@@ -1307,7 +1705,7 @@
                                                 name="lace_subcategories[]"
                                                 value="{{ $value }}"
                                                 {{ in_array($value, $selectedLaceSubcategories) ? 'checked' : '' }}
-                                                class="w-4 h-4 gender-checkbox">
+                                                class="w-4 h-4 shrink-0 gender-checkbox">
 
                                             <span class="text-sm text-gray-700">
                                                 {{ $label }}
@@ -1321,6 +1719,7 @@
 
 
                                 {{-- PREMIUM / BRIDAL --}}
+
                                 <div
                                     data-lace-group="premium_bridal"
                                     class="lace-subcategory-group hidden">
@@ -1338,7 +1737,7 @@
                                                 name="lace_subcategories[]"
                                                 value="{{ $value }}"
                                                 {{ in_array($value, $selectedLaceSubcategories) ? 'checked' : '' }}
-                                                class="w-4 h-4 gender-checkbox">
+                                                class="w-4 h-4 shrink-0 gender-checkbox">
 
                                             <span class="text-sm text-gray-700">
                                                 {{ $label }}
@@ -1353,13 +1752,11 @@
                             </div>
 
 
-                            {{-- =================================================
-                                 WIDTH
-                            ================================================== --}}
+                            {{-- WIDTH --}}
 
-                            <div class="mt-7">
+                            <div class="mt-6 sm:mt-7">
 
-                                <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4">
+                                <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4">
                                     Width
                                 </p>
 
@@ -1367,16 +1764,16 @@
 
                                     @forelse($laceWidths as $width)
 
-                                        <label class="flex items-center gap-3 cursor-pointer">
+                                        <label class="flex items-start gap-3 cursor-pointer">
 
                                             <input
                                                 type="checkbox"
                                                 name="width[]"
                                                 value="{{ $width }}"
                                                 {{ in_array($width, $selectedWidths) ? 'checked' : '' }}
-                                                class="w-4 h-4 gender-checkbox">
+                                                class="w-4 h-4 shrink-0 gender-checkbox">
 
-                                            <span class="text-sm text-gray-700">
+                                            <span class="text-sm text-gray-700 min-w-0 break-words">
                                                 {{ $width }}
                                             </span>
 
@@ -1395,13 +1792,11 @@
                             </div>
 
 
-                            {{-- =================================================
-                                 HEIGHT
-                            ================================================== --}}
+                            {{-- HEIGHT --}}
 
-                            <div class="mt-7">
+                            <div class="mt-6 sm:mt-7">
 
-                                <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4">
+                                <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4">
                                     Height
                                 </p>
 
@@ -1409,16 +1804,16 @@
 
                                     @forelse($laceHeights as $height)
 
-                                        <label class="flex items-center gap-3 cursor-pointer">
+                                        <label class="flex items-start gap-3 cursor-pointer">
 
                                             <input
                                                 type="checkbox"
                                                 name="height[]"
                                                 value="{{ $height }}"
                                                 {{ in_array($height, $selectedHeights) ? 'checked' : '' }}
-                                                class="w-4 h-4 gender-checkbox">
+                                                class="w-4 h-4 shrink-0 gender-checkbox">
 
-                                            <span class="text-sm text-gray-700">
+                                            <span class="text-sm text-gray-700 min-w-0 break-words">
                                                 {{ $height }}
                                             </span>
 
@@ -1437,13 +1832,11 @@
                             </div>
 
 
-                            {{-- =================================================
-                                 LENGTH
-                            ================================================== --}}
+                            {{-- LENGTH --}}
 
-                            <div class="mt-7">
+                            <div class="mt-6 sm:mt-7">
 
-                                <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4">
+                                <p class="text-[10px] sm:text-xs uppercase tracking-widest font-semibold text-gray-700 mb-4">
                                     Length
                                 </p>
 
@@ -1451,16 +1844,16 @@
 
                                     @forelse($laceLengths as $length)
 
-                                        <label class="flex items-center gap-3 cursor-pointer">
+                                        <label class="flex items-start gap-3 cursor-pointer">
 
                                             <input
                                                 type="checkbox"
                                                 name="length[]"
                                                 value="{{ $length }}"
                                                 {{ in_array($length, $selectedLengths) ? 'checked' : '' }}
-                                                class="w-4 h-4 gender-checkbox">
+                                                class="w-4 h-4 shrink-0 gender-checkbox">
 
-                                            <span class="text-sm text-gray-700">
+                                            <span class="text-sm text-gray-700 min-w-0 break-words">
                                                 {{ $length }}
                                             </span>
 
@@ -1484,20 +1877,8 @@
 
 
                     {{-- =================================================
-                         APPLY BUTTON
+                         CLEAR
                     ================================================== --}}
-
-                    @if(
-                        $categoryType !== 'other'
-                        || request('min_price')
-                        || request('max_price')
-                    )
-
-
-                    @endif
-
-
-                    {{-- CLEAR --}}
 
                     @if(request()->hasAny([
                             'min_price',
@@ -1521,6 +1902,9 @@
                             'ring_sizes',
                             'necklace_lengths',
                             'bracelet_sizes',
+                            'buttons',
+                            'piping_clothes',
+                            'accessory_type',
                             'sort'
                         ])
                     )
@@ -1529,8 +1913,7 @@
                             href="{{ $selectedCategory
                                 ? route('shop', ['category' => $selectedCategory->slug])
                                 : route('shop') }}"
-                            class="js-ajax-clear-filters block text-center mt-4 text-xs uppercase tracking-widest text-gray-500 hover:text-black"
-                        >
+                            class="js-ajax-clear-filters block text-center mt-4 text-xs uppercase tracking-widest text-gray-500 hover:text-black">
                             Clear Filters
                         </a>
 
@@ -1547,11 +1930,11 @@
 
             <div
                 id="shop-products-content"
-                class="relative min-h-[120px] transition-opacity duration-200">
+                class="relative min-h-[120px] min-w-0 transition-opacity duration-200">
 
                 @if($products->count())
 
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-x-4 sm:gap-x-6 gap-y-12">
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-x-3 sm:gap-x-6 gap-y-10 sm:gap-y-12">
 
                         @foreach($products as $product)
 
@@ -1577,13 +1960,23 @@
 
 
                             @php
-                                $productSkinTypes = is_array($product->skin_types) ? $product->skin_types : [];
-                                $productConcerns = is_array($product->concerns) ? $product->concerns : [];
-                                $productForms = is_array($product->product_forms) ? $product->product_forms : [];
+
+                                $productSkinTypes = is_array($product->skin_types)
+                                    ? $product->skin_types
+                                    : [];
+
+                                $productConcerns = is_array($product->concerns)
+                                    ? $product->concerns
+                                    : [];
+
+                                $productForms = is_array($product->product_forms)
+                                    ? $product->product_forms
+                                    : [];
+
                             @endphp
 
                             <article
-                                class="group product-card"
+                                class="group product-card min-w-0"
                                 data-cosmetic-product-type="{{ $product->cosmetic_product_type ?? '' }}"
                                 data-cosmetic-skin-types="{{ implode(',', $productSkinTypes) }}"
                                 data-cosmetic-concerns="{{ implode(',', $productConcerns) }}"
@@ -1620,7 +2013,7 @@
                                     @if($product->is_featured)
 
                                         <span
-                                            class="absolute top-4 left-4 bg-black text-white text-[10px] uppercase tracking-widest px-3 py-2">
+                                            class="absolute top-2 left-2 sm:top-4 sm:left-4 bg-black text-white text-[8px] sm:text-[10px] uppercase tracking-widest px-2 sm:px-3 py-1.5 sm:py-2">
                                             Featured
                                         </span>
 
@@ -1635,8 +2028,7 @@
                                     )
 
                                         <span
-                                            class="absolute top-4 right-4 bg-[#b38b2c] text-white text-[10px] uppercase tracking-widest px-3 py-2"
-                                        >
+                                            class="absolute top-2 right-2 sm:top-4 sm:right-4 bg-[#b38b2c] text-white text-[8px] sm:text-[10px] uppercase tracking-widest px-2 sm:px-3 py-1.5 sm:py-2">
                                             Sale
                                         </span>
 
@@ -1653,7 +2045,7 @@
                                             price: {{ (float) $productPrice }},
                                             image: @json($imageUrl)
                                         })'
-                                        class="absolute bottom-4 left-4 right-4 border border-[#BE8B3E] backdrop-blur text-[#BE8B3E] hover:bg-[#BE8B3E] hover:text-white cursor-pointer rounded-full py-3 text-xs font-semibold uppercase tracking-widest opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition duration-300">
+                                        class="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 border border-[#BE8B3E] backdrop-blur text-[#BE8B3E] hover:bg-[#BE8B3E] hover:text-white cursor-pointer rounded-full py-2.5 sm:py-3 text-[9px] sm:text-xs font-semibold uppercase tracking-widest opacity-100 translate-y-0 sm:opacity-0 sm:translate-y-3 sm:group-hover:opacity-100 sm:group-hover:translate-y-0 transition duration-300">
                                         Add to Bag
                                     </button>
 
@@ -1662,43 +2054,44 @@
 
                                 {{-- DETAILS --}}
 
-                                <div class="pt-5">
+                                <div class="pt-4 sm:pt-5 min-w-0">
 
-                                    <p class="text-[10px] uppercase tracking-widest text-[#BE8B3E]">
+                                    <p class="text-[9px] sm:text-[10px] uppercase tracking-widest text-[#BE8B3E] truncate">
                                         {{ $product->category?->name ?? 'Product' }}
                                     </p>
 
-                                    <h3 class="mt-2 text-sm font-medium text-gray-900">
+                                    <h3 class="mt-1.5 sm:mt-2 text-xs sm:text-sm font-medium text-gray-900 leading-5 min-w-0">
+
                                         <a
                                             href="{{ route(
                                                 'product.show',
                                                 $product->slug
                                             ) }}"
-                                            class="hover:opacity-60 transition"
-                                        >
+                                            class="hover:opacity-60 transition break-words">
                                             {{ $product->name }}
                                         </a>
+
                                     </h3>
 
 
-                                    <div class="mt-2">
+                                    <div class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1">
 
                                         @if(
                                             $product->sale_price &&
                                             $product->price > $product->sale_price
                                         )
 
-                                            <span class="text-sm text-black">
+                                            <span class="text-xs sm:text-sm text-black">
                                                 PKR {{ number_format($product->sale_price) }}
                                             </span>
 
-                                            <span class="ml-2 text-xs text-gray-400 line-through">
+                                            <span class="text-[10px] sm:text-xs text-gray-400 line-through">
                                                 PKR {{ number_format($product->price) }}
                                             </span>
 
                                         @else
 
-                                            <span class="text-sm text-gray-600">
+                                            <span class="text-xs sm:text-sm text-gray-600">
                                                 PKR {{ number_format($product->price) }}
                                             </span>
 
@@ -1712,7 +2105,7 @@
                                     <button
                                         type="button"
                                         onclick="orderOnWhatsApp(@json($product->name))"
-                                        class="mt-4 text-[10px] uppercase cursor-pointer tracking-widest text-gray-400 hover:text-[#25D366] transition">
+                                        class="mt-3 sm:mt-4 text-[9px] sm:text-[10px] uppercase cursor-pointer tracking-widest text-gray-400 hover:text-[#25D366] transition text-left">
                                         Order on WhatsApp
                                     </button>
 
@@ -1730,38 +2123,36 @@
                          NO PRODUCTS
                     ================================================== --}}
 
-                    <div class="py-24 text-center">
+                    <div class="py-20 sm:py-24 text-center px-4">
 
-                        <div class="mx-auto w-16 h-16 border border-gray-300 rounded-full flex items-center justify-center">
+                        <div class="mx-auto w-14 h-14 sm:w-16 sm:h-16 border border-gray-300 rounded-full flex items-center justify-center">
 
                             <svg
-                                class="w-6 h-6 text-gray-400"
+                                class="w-5 h-5 sm:w-6 sm:h-6 text-gray-400"
                                 fill="none"
                                 stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
+                                viewBox="0 0 24 24">
+
                                 <circle
                                     cx="11"
                                     cy="11"
                                     r="7"
-                                    stroke-width="1.5"
-                                />
+                                    stroke-width="1.5"/>
 
                                 <path
                                     stroke-linecap="round"
                                     stroke-width="1.5"
-                                    d="m20 20-4-4"
-                                />
+                                    d="m20 20-4-4"/>
 
                             </svg>
 
                         </div>
 
-                        <h3 class="mt-6 text-xl font-light">
+                        <h3 class="mt-5 sm:mt-6 text-lg sm:text-xl font-light">
                             No products found
                         </h3>
 
-                        <p class="mt-2 text-sm text-gray-500">
+                        <p class="mt-2 text-xs sm:text-sm text-gray-500">
                             Try changing or clearing your filters.
                         </p>
 
@@ -1769,8 +2160,7 @@
                             href="{{ $selectedCategory
                                 ? route('shop', ['category' => $selectedCategory->slug])
                                 : route('shop') }}"
-                            class="js-ajax-clear-filters inline-flex mt-7 border border-black px-6 py-3 text-xs uppercase tracking-widest hover:bg-black hover:text-white transition"
-                        >
+                            class="js-ajax-clear-filters inline-flex mt-6 sm:mt-7 border border-black px-5 sm:px-6 py-3 text-[10px] sm:text-xs uppercase tracking-widest hover:bg-black hover:text-white transition">
                             Clear Filters
                         </a>
 
@@ -1786,6 +2176,7 @@
 
 </section>
 
+
 {{-- =========================================================
      FLOATING WHATSAPP BUTTON
 ========================================================= --}}
@@ -1795,11 +2186,12 @@
     target="_blank"
     rel="noopener noreferrer"
     aria-label="Chat with Bin Roshan on WhatsApp"
-    class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#BE8B3E] text-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition duration-300">
+    class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-12 h-12 sm:w-14 sm:h-14 bg-[#BE8B3E] text-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition duration-300">
 
-    <svg viewBox="0 0 24 24"
-         fill="currentColor"
-         class="w-7 h-7">
+    <svg
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="w-6 h-6 sm:w-7 sm:h-7">
 
         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.1-.471-.149-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.1-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51-.173-.008-.372-.01-.57-.01-.198 0-.52.075-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982 1-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.437-9.884 9.89-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.002 5.45-4.438 9.884-9.889 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.304-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.478-8.413"/>
 
@@ -1822,20 +2214,40 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const map = {
         earrings: {
-            hoops: 'Hoops', studs: 'Studs', drop: 'Drop Earrings', dangle: 'Dangle Earrings',
-            chandelier: 'Chandelier Earrings', huggies: 'Huggies', jhumka: 'Jhumka'
+            hoops: 'Hoops',
+            studs: 'Studs',
+            drop: 'Drop Earrings',
+            dangle: 'Dangle Earrings',
+            chandelier: 'Chandelier Earrings',
+            huggies: 'Huggies',
+            jhumka: 'Jhumka'
         },
+
         necklaces: {
-            chokers: 'Chokers', pendants: 'Pendant Necklaces', chains: 'Chains',
-            layered: 'Layered Necklaces', statement: 'Statement Necklaces', pearl: 'Pearl Necklaces'
+            chokers: 'Chokers',
+            pendants: 'Pendant Necklaces',
+            chains: 'Chains',
+            layered: 'Layered Necklaces',
+            statement: 'Statement Necklaces',
+            pearl: 'Pearl Necklaces'
         },
+
         rings: {
-            bands: 'Bands', solitaire: 'Solitaire Rings', cocktail: 'Cocktail Rings',
-            stackable: 'Stackable Rings', signet: 'Signet Rings', adjustable: 'Adjustable Rings'
+            bands: 'Bands',
+            solitaire: 'Solitaire Rings',
+            cocktail: 'Cocktail Rings',
+            stackable: 'Stackable Rings',
+            signet: 'Signet Rings',
+            adjustable: 'Adjustable Rings'
         },
+
         bracelets: {
-            chain: 'Chain Bracelets', cuff: 'Cuff Bracelets', bangles: 'Bangles',
-            charm: 'Charm Bracelets', tennis: 'Tennis Bracelets', kada: 'Kada'
+            chain: 'Chain Bracelets',
+            cuff: 'Cuff Bracelets',
+            bangles: 'Bangles',
+            charm: 'Charm Bracelets',
+            tennis: 'Tennis Bracelets',
+            kada: 'Kada'
         }
     };
 
@@ -1843,6 +2255,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function renderJewelrySubcategories() {
         const type = typeSelect.value;
+
         list.innerHTML = '';
 
         if (!type || !map[type]) {
@@ -1853,30 +2266,56 @@ document.addEventListener('DOMContentLoaded', function () {
         container.classList.remove('hidden');
 
         Object.entries(map[type]).forEach(function ([value, label]) {
+
             const wrapper = document.createElement('label');
-            wrapper.className = 'flex items-center gap-3 cursor-pointer';
+
+            wrapper.className =
+                'flex items-start gap-3 cursor-pointer';
+
             wrapper.innerHTML = `
-                <input type="checkbox" name="jewelry_subcategories[]" value="${value}" class="w-4 h-4" ${selected.includes(value) ? 'checked' : ''}>
-                <span class="text-sm text-gray-700">${label}</span>
+                <input
+                    type="checkbox"
+                    name="jewelry_subcategories[]"
+                    value="${value}"
+                    class="w-4 h-4 shrink-0"
+                    ${selected.includes(value) ? 'checked' : ''}>
+
+                <span class="text-sm text-gray-700 min-w-0 break-words">
+                    ${label}
+                </span>
             `;
+
             list.appendChild(wrapper);
+
         });
     }
 
     function updateJewelrySizes() {
-        document.querySelectorAll('[data-shop-jewelry-size]').forEach(function (group) {
-            group.classList.toggle('hidden', group.dataset.shopJewelrySize !== typeSelect.value);
-        });
+
+        document
+            .querySelectorAll('[data-shop-jewelry-size]')
+            .forEach(function (group) {
+
+                group.classList.toggle(
+                    'hidden',
+                    group.dataset.shopJewelrySize !== typeSelect.value
+                );
+
+            });
     }
 
     typeSelect.addEventListener('change', function () {
+
         selected.length = 0;
+
         renderJewelrySubcategories();
         updateJewelrySizes();
+
     });
 
     renderJewelrySubcategories();
     updateJewelrySizes();
+
 });
 </script>
 
@@ -1893,11 +2332,13 @@ document.addEventListener('DOMContentLoaded', function () {
         'aside form[action="{{ route('shop') }}"]'
     );
 
-    const laceCategory = document.getElementById('lace_category');
+    const laceCategory =
+        document.getElementById('lace_category');
 
-    const laceGroups = document.querySelectorAll(
-        '.lace-subcategory-group'
-    );
+    const laceGroups =
+        document.querySelectorAll(
+            '.lace-subcategory-group'
+        );
 
 
     if (!laceCategory) {
@@ -1949,16 +2390,28 @@ document.addEventListener('DOMContentLoaded', function () {
     laceCategory.addEventListener('change', function () {
 
         laceGroups.forEach(function (group) {
-            group.querySelectorAll('input[type="checkbox"]').forEach(function (checkbox) {
-                checkbox.checked = false;
-            });
+
+            group
+                .querySelectorAll('input[type="checkbox"]')
+                .forEach(function (checkbox) {
+
+                    checkbox.checked = false;
+
+                });
+
         });
 
         updateLaceSubcategories();
 
-        if (filterForm && typeof window.submitShopFiltersAjax === 'function') {
+        if (
+            filterForm &&
+            typeof window.submitShopFiltersAjax === 'function'
+        ) {
+
             window.submitShopFiltersAjax(filterForm);
+
         }
+
     });
 
 
@@ -1989,470 +2442,1057 @@ document.addEventListener('DOMContentLoaded', function () {
         'form[action="{{ route('shop') }}"] select[name="sort"]'
     )?.closest('form');
 
-    const productsContent = document.getElementById('shop-products-content');
-    const productsCount = document.getElementById('shop-products-count');
+    const productsContent =
+        document.getElementById('shop-products-content');
+
+    const productsCount =
+        document.getElementById('shop-products-count');
+
 
     if (!filterForm || !productsContent) {
         return;
     }
+
 
     let activeController = null;
     let requestSequence = 0;
     let selectedPriorityCategory = null;
     let selectedHighlight = null;
 
+
     function getProductGrid() {
+
         return productsContent.querySelector('.grid');
+
     }
+
 
     function getProductCards() {
+
         const grid = getProductGrid();
-        return grid ? Array.from(grid.querySelectorAll('.product-card')) : [];
+
+        return grid
+            ? Array.from(
+                grid.querySelectorAll('.product-card')
+            )
+            : [];
+
     }
+
 
     function rememberOriginalOrder() {
+
         getProductCards().forEach(function (card, index) {
-            if (typeof card.dataset.originalIndex === 'undefined') {
-                card.dataset.originalIndex = String(index);
+
+            if (
+                typeof card.dataset.originalIndex ===
+                'undefined'
+            ) {
+
+                card.dataset.originalIndex =
+                    String(index);
+
             }
+
         });
+
     }
 
+
     function applyClientSideFilters() {
+
         const grid = getProductGrid();
 
         if (!grid) {
+
             if (productsCount) {
                 productsCount.textContent = '0';
             }
+
             return;
         }
 
+
         rememberOriginalOrder();
 
+
         const cards = getProductCards();
-        const slider = document.getElementById('price-slider');
-        const maxPrice = slider ? Number(slider.value) : Infinity;
+
+        const slider =
+            document.getElementById('price-slider');
+
+        const maxPrice =
+            slider
+                ? Number(slider.value)
+                : Infinity;
+
 
         cards.forEach(function (card) {
-            const price = Number(card.dataset.price || 0);
-            const withinPrice = !Number.isFinite(maxPrice) || price <= maxPrice;
-            card.style.display = withinPrice ? '' : 'none';
+
+            const price =
+                Number(card.dataset.price || 0);
+
+            const withinPrice =
+                !Number.isFinite(maxPrice) ||
+                price <= maxPrice;
+
+            card.style.display =
+                withinPrice
+                    ? ''
+                    : 'none';
+
         });
+
 
         cards.sort(function (a, b) {
-            const aCategory = selectedPriorityCategory &&
-                a.dataset.categorySlug === selectedPriorityCategory ? 1 : 0;
-            const bCategory = selectedPriorityCategory &&
-                b.dataset.categorySlug === selectedPriorityCategory ? 1 : 0;
+
+            const aCategory =
+                selectedPriorityCategory &&
+                a.dataset.categorySlug ===
+                selectedPriorityCategory
+                    ? 1
+                    : 0;
+
+            const bCategory =
+                selectedPriorityCategory &&
+                b.dataset.categorySlug ===
+                selectedPriorityCategory
+                    ? 1
+                    : 0;
+
 
             if (aCategory !== bCategory) {
+
                 return bCategory - aCategory;
+
             }
 
-            const aHighlight = selectedHighlight === 'featured'
-                ? a.dataset.featured === '1'
-                : selectedHighlight === 'sale'
-                    ? a.dataset.sale === '1'
-                    : false;
 
-            const bHighlight = selectedHighlight === 'featured'
-                ? b.dataset.featured === '1'
-                : selectedHighlight === 'sale'
-                    ? b.dataset.sale === '1'
-                    : false;
+            const aHighlight =
+                selectedHighlight === 'featured'
+                    ? a.dataset.featured === '1'
+                    : selectedHighlight === 'sale'
+                        ? a.dataset.sale === '1'
+                        : false;
+
+            const bHighlight =
+                selectedHighlight === 'featured'
+                    ? b.dataset.featured === '1'
+                    : selectedHighlight === 'sale'
+                        ? b.dataset.sale === '1'
+                        : false;
+
 
             if (aHighlight !== bHighlight) {
-                return Number(bHighlight) - Number(aHighlight);
+
+                return Number(bHighlight) -
+                    Number(aHighlight);
+
             }
 
-            return Number(a.dataset.originalIndex) - Number(b.dataset.originalIndex);
+
+            return Number(a.dataset.originalIndex) -
+                Number(b.dataset.originalIndex);
+
         });
+
 
         cards.forEach(function (card) {
+
             grid.appendChild(card);
+
         });
 
+
         if (productsCount) {
-            const visibleCount = cards.filter(function (card) {
-                return card.style.display !== 'none';
-            }).length;
-            productsCount.textContent = String(visibleCount);
+
+            const visibleCount =
+                cards.filter(function (card) {
+
+                    return card.style.display !== 'none';
+
+                }).length;
+
+            productsCount.textContent =
+                String(visibleCount);
+
         }
+
     }
+
 
     function setLoading(isLoading) {
-        productsContent.setAttribute('aria-busy', isLoading ? 'true' : 'false');
-        productsContent.classList.toggle('opacity-50', isLoading);
-        productsContent.classList.toggle('pointer-events-none', isLoading);
+
+        productsContent.setAttribute(
+            'aria-busy',
+            isLoading ? 'true' : 'false'
+        );
+
+        productsContent.classList.toggle(
+            'opacity-50',
+            isLoading
+        );
+
+        productsContent.classList.toggle(
+            'pointer-events-none',
+            isLoading
+        );
+
     }
 
+
     function buildQueryString(form) {
-        const formData = new FormData(form);
-        const params = new URLSearchParams();
+
+        const formData =
+            new FormData(form);
+
+        const params =
+            new URLSearchParams();
+
 
         for (const [key, value] of formData.entries()) {
+
             if (value !== '') {
+
                 params.append(key, value);
+
             }
+
         }
 
         return params.toString();
+
     }
 
-    async function submitShopFiltersAjax(form, options = {}) {
+
+    async function submitShopFiltersAjax(
+        form,
+        options = {}
+    ) {
+
         if (!form) {
             return;
         }
 
-        const queryString = buildQueryString(form);
-        const targetUrl = queryString
-            ? '{{ route('shop') }}?' + queryString
-            : '{{ route('shop') }}';
+
+        const queryString =
+            buildQueryString(form);
+
+        const targetUrl =
+            queryString
+                ? '{{ route('shop') }}?' + queryString
+                : '{{ route('shop') }}';
+
 
         if (activeController) {
+
             activeController.abort();
+
         }
 
-        activeController = new AbortController();
-        const currentSequence = ++requestSequence;
+
+        activeController =
+            new AbortController();
+
+        const currentSequence =
+            ++requestSequence;
+
 
         setLoading(true);
 
+
         try {
-            const response = await fetch(targetUrl, {
-                method: 'GET',
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'Accept': 'application/json',
-                },
-                signal: activeController.signal,
-                credentials: 'same-origin',
-            });
+
+            const response =
+                await fetch(targetUrl, {
+
+                    method: 'GET',
+
+                    headers: {
+                        'X-Requested-With':
+                            'XMLHttpRequest',
+
+                        'Accept':
+                            'application/json',
+                    },
+
+                    signal:
+                        activeController.signal,
+
+                    credentials:
+                        'same-origin',
+
+                });
+
 
             if (!response.ok) {
-                throw new Error('Filter request failed with status ' + response.status);
+
+                throw new Error(
+                    'Filter request failed with status ' +
+                    response.status
+                );
+
             }
 
-            const data = await response.json();
 
-            if (currentSequence !== requestSequence) {
+            const data =
+                await response.json();
+
+
+            if (
+                currentSequence !==
+                requestSequence
+            ) {
+
                 return;
+
             }
 
-            const parsed = new DOMParser().parseFromString(data.html, 'text/html');
-            const nextProducts = parsed.getElementById('shop-products-content');
+
+            const parsed =
+                new DOMParser()
+                    .parseFromString(
+                        data.html,
+                        'text/html'
+                    );
+
+
+            const nextProducts =
+                parsed.getElementById(
+                    'shop-products-content'
+                );
+
 
             if (!nextProducts) {
-                throw new Error('Product section was not found in the server response.');
+
+                throw new Error(
+                    'Product section was not found in the server response.'
+                );
+
             }
 
-            productsContent.innerHTML = nextProducts.innerHTML;
 
-            // The server may return a different product set after one of the
-            // existing filters changes. Re-apply our instant client-side
-            // price/category/highlight state to that fresh product set.
+            productsContent.innerHTML =
+                nextProducts.innerHTML;
+
+
             applyClientSideFilters();
 
+
             if (!options.skipUrlUpdate) {
+
                 window.history.pushState(
-                    { shopFilters: true },
+                    {
+                        shopFilters: true
+                    },
                     '',
                     targetUrl
                 );
+
             }
+
 
             setLoading(false);
 
             return data;
 
+
         } catch (error) {
-            if (error.name === 'AbortError') {
+
+            if (
+                error.name ===
+                'AbortError'
+            ) {
+
                 return;
+
             }
 
-            console.error('Bin Ismail shop filter error:', error);
+
+            console.error(
+                'Bin Ismail shop filter error:',
+                error
+            );
+
             setLoading(false);
+
         }
+
     }
 
-    window.submitShopFiltersAjax = submitShopFiltersAjax;
+
+    window.submitShopFiltersAjax =
+        submitShopFiltersAjax;
+
 
     /*
     |--------------------------------------------------------------------------
     | CATEGORY PRIORITY FILTER
     |--------------------------------------------------------------------------
-    |
-    | Exactly one category can be selected. This is a priority filter, not a
-    | hard category filter: selected-category products move to the front while
-    | products from every other category remain visible.
-    |--------------------------------------------------------------------------
     */
-    document.querySelectorAll('.shop-category-filter').forEach(function (checkbox) {
-        checkbox.addEventListener('change', function () {
-            if (checkbox.checked) {
-                document.querySelectorAll('.shop-category-filter').forEach(function (other) {
-                    if (other !== checkbox) {
-                        other.checked = false;
+
+    document
+        .querySelectorAll(
+            '.shop-category-filter'
+        )
+        .forEach(function (checkbox) {
+
+            checkbox.addEventListener(
+                'change',
+                function () {
+
+                    if (checkbox.checked) {
+
+                        document
+                            .querySelectorAll(
+                                '.shop-category-filter'
+                            )
+                            .forEach(
+                                function (other) {
+
+                                    if (
+                                        other !==
+                                        checkbox
+                                    ) {
+
+                                        other.checked =
+                                            false;
+
+                                    }
+
+                                }
+                            );
+
+                        selectedPriorityCategory =
+                            checkbox.dataset.categorySlug ||
+                            null;
+
+                    } else {
+
+                        selectedPriorityCategory =
+                            null;
+
                     }
-                });
 
-                selectedPriorityCategory = checkbox.dataset.categorySlug || null;
-            } else {
-                selectedPriorityCategory = null;
-            }
 
-            applyClientSideFilters();
+                    applyClientSideFilters();
+
+                }
+            );
+
         });
-    });
+
 
     /*
     |--------------------------------------------------------------------------
     | FEATURED / SALE PRIORITY FILTER
     |--------------------------------------------------------------------------
-    |
-    | Native radio-button grouping guarantees only one can be selected.
-    | Clicking the selected radio again is intentionally not required; the
-    | normal browser radio behavior is preserved.
-    |--------------------------------------------------------------------------
     */
-    document.querySelectorAll('.shop-highlight-filter').forEach(function (radio) {
-        radio.addEventListener('change', function () {
-            selectedHighlight = radio.checked ? radio.value : null;
-            applyClientSideFilters();
+
+    document
+        .querySelectorAll(
+            '.shop-highlight-filter'
+        )
+        .forEach(function (radio) {
+
+            radio.addEventListener(
+                'change',
+                function () {
+
+                    selectedHighlight =
+                        radio.checked
+                            ? radio.value
+                            : null;
+
+                    applyClientSideFilters();
+
+                }
+            );
+
         });
-    });
+
 
     /*
     |--------------------------------------------------------------------------
     | CHECKBOXES / DYNAMIC CHECKBOXES
     |--------------------------------------------------------------------------
     */
-    filterForm.addEventListener('change', function (event) {
-        const target = event.target;
 
-        if (!(target instanceof HTMLInputElement) && !(target instanceof HTMLSelectElement)) {
-            return;
+    filterForm.addEventListener(
+        'change',
+        function (event) {
+
+            const target =
+                event.target;
+
+
+            if (
+                !(target instanceof HTMLInputElement) &&
+                !(target instanceof HTMLSelectElement)
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                target.classList.contains(
+                    'shop-category-filter'
+                ) ||
+                target.classList.contains(
+                    'shop-highlight-filter'
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                target.id ===
+                'lace_category'
+            ) {
+
+                return;
+
+            }
+
+
+            submitShopFiltersAjax(
+                filterForm
+            );
+
         }
+    );
 
-        if (
-            target.classList.contains('shop-category-filter') ||
-            target.classList.contains('shop-highlight-filter')
-        ) {
-            return;
-        }
-
-        if (target.id === 'lace_category') {
-            return;
-        }
-
-        submitShopFiltersAjax(filterForm);
-    });
 
     /*
     |--------------------------------------------------------------------------
     | FILTER FORM SUBMIT
     |--------------------------------------------------------------------------
     */
-    filterForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-        submitShopFiltersAjax(filterForm);
-    });
+
+    filterForm.addEventListener(
+        'submit',
+        function (event) {
+
+            event.preventDefault();
+
+            submitShopFiltersAjax(
+                filterForm
+            );
+
+        }
+    );
+
 
     /*
     |--------------------------------------------------------------------------
     | SORT WITHOUT RELOAD
     |--------------------------------------------------------------------------
     */
-    if (sortForm) {
-        sortForm.addEventListener('submit', function (event) {
-            event.preventDefault();
-            submitShopFiltersAjax(sortForm);
-        });
 
-        const sortSelect = sortForm.querySelector('select[name="sort"]');
+    if (sortForm) {
+
+        sortForm.addEventListener(
+            'submit',
+            function (event) {
+
+                event.preventDefault();
+
+                submitShopFiltersAjax(
+                    sortForm
+                );
+
+            }
+        );
+
+
+        const sortSelect =
+            sortForm.querySelector(
+                'select[name="sort"]'
+            );
+
 
         if (sortSelect) {
-            sortSelect.addEventListener('change', function () {
-                submitShopFiltersAjax(sortForm);
-            });
+
+            sortSelect.addEventListener(
+                'change',
+                function () {
+
+                    submitShopFiltersAjax(
+                        sortForm
+                    );
+
+                }
+            );
+
         }
+
     }
+
 
     /*
     |--------------------------------------------------------------------------
     | CLEAR FILTERS WITHOUT RELOAD
     |--------------------------------------------------------------------------
     */
-    document.addEventListener('click', function (event) {
-        const clearLink = event.target.closest('.js-ajax-clear-filters');
 
-        if (!clearLink) {
-            return;
+    document.addEventListener(
+        'click',
+        function (event) {
+
+            const clearLink =
+                event.target.closest(
+                    '.js-ajax-clear-filters'
+                );
+
+
+            if (!clearLink) {
+
+                return;
+
+            }
+
+
+            event.preventDefault();
+
+
+            const clearUrl =
+                clearLink.getAttribute('href') ||
+                '{{ route('shop') }}';
+
+
+            filterForm.reset();
+
+
+            selectedPriorityCategory =
+                null;
+
+            selectedHighlight =
+                null;
+
+
+            const priceSlider =
+                document.getElementById(
+                    'price-slider'
+                );
+
+            const maxInput =
+                document.getElementById(
+                    'max-price-input'
+                );
+
+
+            if (priceSlider) {
+
+                priceSlider.value =
+                    priceSlider.max;
+
+            }
+
+
+            if (
+                maxInput &&
+                priceSlider
+            ) {
+
+                maxInput.value =
+                    priceSlider.max;
+
+            }
+
+
+            updatePriceSliderIfAvailable();
+
+
+            const clearForm =
+                document.createElement(
+                    'form'
+                );
+
+
+            clearForm.method =
+                'GET';
+
+            clearForm.action =
+                clearUrl;
+
+
+            const url =
+                new URL(
+                    clearUrl,
+                    window.location.origin
+                );
+
+
+            url.searchParams.forEach(
+                function (value, key) {
+
+                    const input =
+                        document.createElement(
+                            'input'
+                        );
+
+                    input.type =
+                        'hidden';
+
+                    input.name =
+                        key;
+
+                    input.value =
+                        value;
+
+                    clearForm.appendChild(
+                        input
+                    );
+
+                }
+            );
+
+
+            document.body.appendChild(
+                clearForm
+            );
+
+
+            submitShopFiltersAjax(
+                clearForm
+            );
+
+
+            clearForm.remove();
+
         }
+    );
 
-        event.preventDefault();
-
-        const clearUrl = clearLink.getAttribute('href') || '{{ route('shop') }}';
-
-        filterForm.reset();
-
-        selectedPriorityCategory = null;
-        selectedHighlight = null;
-
-        const priceSlider = document.getElementById('price-slider');
-        const maxInput = document.getElementById('max-price-input');
-
-        if (priceSlider) {
-            priceSlider.value = priceSlider.max;
-        }
-
-        if (maxInput && priceSlider) {
-            maxInput.value = priceSlider.max;
-        }
-
-        updatePriceSliderIfAvailable();
-
-        const clearForm = document.createElement('form');
-        clearForm.method = 'GET';
-        clearForm.action = clearUrl;
-
-        const url = new URL(clearUrl, window.location.origin);
-
-        url.searchParams.forEach(function (value, key) {
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = key;
-            input.value = value;
-            clearForm.appendChild(input);
-        });
-
-        document.body.appendChild(clearForm);
-        submitShopFiltersAjax(clearForm);
-        clearForm.remove();
-    });
 
     /*
     |--------------------------------------------------------------------------
     | PRICE SLIDER
     |--------------------------------------------------------------------------
-    |
-    | Price is handled instantly on the already-rendered product cards. We do
-    | not wait for the server, so moving the slider immediately hides products
-    | above the selected maximum.
-    |--------------------------------------------------------------------------
     */
-    const priceSlider = document.getElementById('price-slider');
-    const maxInput = document.getElementById('max-price-input');
-    const rangeLabel = document.getElementById('price-range-label');
-    const activeTrack = document.getElementById('price-active-track');
 
-    if (priceSlider && maxInput) {
+    const priceSlider =
+        document.getElementById(
+            'price-slider'
+        );
+
+    const maxInput =
+        document.getElementById(
+            'max-price-input'
+        );
+
+    const rangeLabel =
+        document.getElementById(
+            'price-range-label'
+        );
+
+    const activeTrack =
+        document.getElementById(
+            'price-active-track'
+        );
+
+
+    if (
+        priceSlider &&
+        maxInput
+    ) {
+
         function updatePriceSlider() {
-            const min = Number(priceSlider.min);
-            const max = Number(priceSlider.max);
-            const value = Number(priceSlider.value);
 
-            maxInput.value = value;
+            const min =
+                Number(
+                    priceSlider.min
+                );
+
+            const max =
+                Number(
+                    priceSlider.max
+                );
+
+            const value =
+                Number(
+                    priceSlider.value
+                );
+
+
+            maxInput.value =
+                value;
+
 
             if (rangeLabel) {
+
                 rangeLabel.textContent =
-                    'Up to PKR ' + value.toLocaleString();
+                    'Up to PKR ' +
+                    value.toLocaleString();
+
             }
 
-            if (activeTrack && max > min) {
+
+            if (
+                activeTrack &&
+                max > min
+            ) {
+
                 activeTrack.style.width =
-                    (((value - min) / (max - min)) * 100) + '%';
+                    (
+                        (
+                            (value - min) /
+                            (max - min)
+                        ) *
+                        100
+                    ) +
+                    '%';
+
             }
+
 
             applyClientSideFilters();
+
         }
 
-        priceSlider.addEventListener('input', updatePriceSlider);
-        priceSlider.addEventListener('change', updatePriceSlider);
+
+        priceSlider.addEventListener(
+            'input',
+            updatePriceSlider
+        );
+
+        priceSlider.addEventListener(
+            'change',
+            updatePriceSlider
+        );
+
     }
+
 
     function updatePriceSliderIfAvailable() {
-        const slider = document.getElementById('price-slider');
-        const input = document.getElementById('max-price-input');
-        const label = document.getElementById('price-range-label');
-        const track = document.getElementById('price-active-track');
 
-        if (!slider || !input) return;
+        const slider =
+            document.getElementById(
+                'price-slider'
+            );
 
-        const min = Number(slider.min);
-        const max = Number(slider.max);
-        const value = Number(slider.value);
+        const input =
+            document.getElementById(
+                'max-price-input'
+            );
 
-        input.value = value;
+        const label =
+            document.getElementById(
+                'price-range-label'
+            );
+
+        const track =
+            document.getElementById(
+                'price-active-track'
+            );
+
+
+        if (
+            !slider ||
+            !input
+        ) {
+
+            return;
+
+        }
+
+
+        const min =
+            Number(slider.min);
+
+        const max =
+            Number(slider.max);
+
+        const value =
+            Number(slider.value);
+
+
+        input.value =
+            value;
+
 
         if (label) {
-            label.textContent = 'Up to PKR ' + value.toLocaleString();
+
+            label.textContent =
+                'Up to PKR ' +
+                value.toLocaleString();
+
         }
 
-        if (track && max > min) {
-            track.style.width = (((value - min) / (max - min)) * 100) + '%';
+
+        if (
+            track &&
+            max > min
+        ) {
+
+            track.style.width =
+                (
+                    (
+                        (value - min) /
+                        (max - min)
+                    ) *
+                    100
+                ) +
+                '%';
+
         }
+
     }
+
 
     /*
     |--------------------------------------------------------------------------
     | BACK / FORWARD BUTTONS
     |--------------------------------------------------------------------------
     */
-    window.addEventListener('popstate', function () {
-        const url = new URL(window.location.href);
-        const params = url.searchParams;
 
-        filterForm.querySelectorAll('[data-ajax-generated-state="true"]').forEach(function (input) {
-            input.remove();
-        });
+    window.addEventListener(
+        'popstate',
+        function () {
 
-        filterForm.querySelectorAll('input[type="checkbox"]').forEach(function (checkbox) {
-            const key = checkbox.name.replace(/\[\]$/, '');
-            checkbox.checked = params.getAll(key).includes(checkbox.value);
-        });
+            const url =
+                new URL(
+                    window.location.href
+                );
 
-        filterForm.querySelectorAll('select').forEach(function (select) {
-            const value = params.get(select.name);
-            if (value !== null) {
-                select.value = value;
+            const params =
+                url.searchParams;
+
+
+            filterForm
+                .querySelectorAll(
+                    '[data-ajax-generated-state="true"]'
+                )
+                .forEach(function (input) {
+
+                    input.remove();
+
+                });
+
+
+            filterForm
+                .querySelectorAll(
+                    'input[type="checkbox"]'
+                )
+                .forEach(function (checkbox) {
+
+                    const key =
+                        checkbox.name.replace(
+                            /\[\]$/,
+                            ''
+                        );
+
+                    checkbox.checked =
+                        params
+                            .getAll(key)
+                            .includes(
+                                checkbox.value
+                            );
+
+                });
+
+
+            filterForm
+                .querySelectorAll(
+                    'select'
+                )
+                .forEach(function (select) {
+
+                    const value =
+                        params.get(
+                            select.name
+                        );
+
+                    if (
+                        value !== null
+                    ) {
+
+                        select.value =
+                            value;
+
+                    }
+
+                });
+
+
+            filterForm
+                .querySelectorAll(
+                    'input[type="radio"]'
+                )
+                .forEach(function (radio) {
+
+                    const value =
+                        params.get(
+                            radio.name
+                        );
+
+                    radio.checked =
+                        value !== null &&
+                        value ===
+                            radio.value;
+
+                });
+
+
+            if (
+                priceSlider &&
+                params.get(
+                    'max_price'
+                ) !== null
+            ) {
+
+                priceSlider.value =
+                    params.get(
+                        'max_price'
+                    );
+
+                updatePriceSliderIfAvailable();
+
             }
-        });
 
-        filterForm.querySelectorAll('input[type="radio"]').forEach(function (radio) {
-            const value = params.get(radio.name);
-            radio.checked = value !== null && value === radio.value;
-        });
 
-        if (priceSlider && params.get('max_price') !== null) {
-            priceSlider.value = params.get('max_price');
-            updatePriceSliderIfAvailable();
+            submitShopFiltersAjax(
+                filterForm,
+                {
+                    skipUrlUpdate: true
+                }
+            );
+
         }
+    );
 
-        submitShopFiltersAjax(filterForm, { skipUrlUpdate: true });
-    });
 
     updatePriceSliderIfAvailable();
+
     rememberOriginalOrder();
+
     applyClientSideFilters();
 
 });
+</script>
 
-/*
-|--------------------------------------------------------------------------
-| WHATSAPP ORDER
-|--------------------------------------------------------------------------
-*/
+
+{{-- =========================================================
+     WHATSAPP ORDER
+========================================================= --}}
+
+<script>
 
 function orderOnWhatsApp(productName) {
 
-    const phone = "{{ config('store.whatsapp') }}";
+    const phone =
+        "{{ config('store.whatsapp') }}";
+
 
     const message =
         "Hello Bin Ismail! I am interested in: " +
         productName +
         ". Please share more details and availability.";
+
 
     const url =
         "https://wa.me/" +
@@ -2460,16 +3500,23 @@ function orderOnWhatsApp(productName) {
         "?text=" +
         encodeURIComponent(message);
 
-    window.open(url, '_blank');
+
+    window.open(
+        url,
+        '_blank'
+    );
 
 }
 
 </script>
 
+
 <style>
+
     .price-slider {
         height: 20px;
     }
+
 
     .price-slider::-webkit-slider-thumb {
         appearance: none;
@@ -2483,6 +3530,7 @@ function orderOnWhatsApp(productName) {
         box-shadow: 0 0 0 1px #BE8B3E;
     }
 
+
     .price-slider::-moz-range-thumb {
         width: 18px;
         height: 18px;
@@ -2494,9 +3542,48 @@ function orderOnWhatsApp(productName) {
         box-shadow: 0 0 0 1px #BE8B3E;
     }
 
+
     .gender-checkbox {
         accent-color: #BE8B3E;
     }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | MOBILE HORIZONTAL SCROLLBAR
+    |--------------------------------------------------------------------------
+    */
+
+    .scrollbar-hide {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | VERY SMALL PHONES
+    |--------------------------------------------------------------------------
+    */
+
+    @media (max-width: 380px) {
+
+        .price-slider::-webkit-slider-thumb {
+            width: 16px;
+            height: 16px;
+        }
+
+        .price-slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+        }
+
+    }
+
 </style>
 
 @endsection

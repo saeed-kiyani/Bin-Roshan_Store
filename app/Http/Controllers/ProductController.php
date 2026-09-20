@@ -270,6 +270,20 @@ class ProductController extends Controller
 
     /*
     |--------------------------------------------------------------------------
+    | OTHER ACCESSORIES
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+        Str::contains($categoryText, 'other-accessories') ||
+        Str::contains($categoryText, 'other accessories')
+    ) {
+        return 'other_accessories';
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
     | TAILOR ACCESSORIES
     |--------------------------------------------------------------------------
     */
@@ -477,6 +491,30 @@ class ProductController extends Controller
 
             /*
             |--------------------------------------------------------------------------
+            | OTHER ACCESSORIES FILTERS
+            |--------------------------------------------------------------------------
+            */
+
+            'buttons' => [
+                'nullable',
+                'string',
+                'in:fancy_buttons,simple_buttons,pearls_buttons,pearls_clothes_buttons,button_patti',
+            ],
+
+            'piping_clothes' => [
+                'nullable',
+                'string',
+                'in:aparna_shamooz_silk_piping,katan_silk_dori_piping,cotton_lawn_piping,velvet_piping,metallic_zari_piping',
+            ],
+
+            'accessory_type' => [
+                'nullable',
+                'string',
+                'in:tailor_accessories,other_accessories',
+            ],
+
+            /*
+            |--------------------------------------------------------------------------
             | PRODUCT DETAILS
             |--------------------------------------------------------------------------
             */
@@ -657,6 +695,10 @@ $watchGender = null;
 $strapMaterial = null;
 $watchType = null;
 
+$buttons = null;
+$pipingClothes = null;
+$accessoryType = null;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -718,6 +760,13 @@ if ($categoryType === 'cosmetics') {
         }
 
 
+        if ($categoryType === 'other_accessories') {
+            $buttons = $validated['buttons'] ?? null;
+            $pipingClothes = $validated['piping_clothes'] ?? null;
+            $accessoryType = $validated['accessory_type'] ?? null;
+        }
+
+
         /*
         |--------------------------------------------------------------------------
         | CREATE PRODUCT
@@ -761,6 +810,11 @@ if ($categoryType === 'cosmetics') {
     'watch_gender' => $watchGender,
     'strap_material' => $strapMaterial,
     'watch_type' => $watchType,
+
+    // Other Accessories filters
+    'buttons' => $buttons,
+    'piping_clothes' => $pipingClothes,
+    'accessory_type' => $accessoryType,
 
     'description' => $validated['description'] ?? null,
     'price' => $validated['price'],
@@ -1080,6 +1134,30 @@ if ($categoryType === 'cosmetics') {
 
             /*
             |--------------------------------------------------------------------------
+            | OTHER ACCESSORIES FILTERS
+            |--------------------------------------------------------------------------
+            */
+
+            'buttons' => [
+                'nullable',
+                'string',
+                'in:fancy_buttons,simple_buttons,pearls_buttons,pearls_clothes_buttons,button_patti',
+            ],
+
+            'piping_clothes' => [
+                'nullable',
+                'string',
+                'in:aparna_shamooz_silk_piping,katan_silk_dori_piping,cotton_lawn_piping,velvet_piping,metallic_zari_piping',
+            ],
+
+            'accessory_type' => [
+                'nullable',
+                'string',
+                'in:tailor_accessories,other_accessories',
+            ],
+
+            /*
+            |--------------------------------------------------------------------------
             | PRODUCT DETAILS
             |--------------------------------------------------------------------------
             */
@@ -1245,6 +1323,10 @@ $watchGender = null;
 $strapMaterial = null;
 $watchType = null;
 
+$buttons = null;
+$pipingClothes = null;
+$accessoryType = null;
+
 
         if ($categoryType === 'clothing') {
 
@@ -1289,6 +1371,13 @@ $watchType = null;
             $watchGender = $validated['watch_gender'] ?? null;
             $strapMaterial = $validated['strap_material'] ?? null;
             $watchType = $validated['watch_type'] ?? null;
+        }
+
+
+        if ($categoryType === 'other_accessories') {
+            $buttons = $validated['buttons'] ?? null;
+            $pipingClothes = $validated['piping_clothes'] ?? null;
+            $accessoryType = $validated['accessory_type'] ?? null;
         }
 
 
@@ -1359,6 +1448,11 @@ $watchType = null;
             'watch_gender' => $watchGender,
             'strap_material' => $strapMaterial,
             'watch_type' => $watchType,
+
+            // Other Accessories filters
+            'buttons' => $buttons,
+            'piping_clothes' => $pipingClothes,
+            'accessory_type' => $accessoryType,
 
 
             /*

@@ -416,12 +416,13 @@
             @endphp
 
             <option
-                value="{{ $categoryId }}"
-                data-slug="{{ $categorySlug }}"
-                {{ old('category_id', $product->category_id) == $categoryId ? 'selected' : '' }}
-            >
-                {{ $categoryName }}
-            </option>
+    value="{{ $categoryId }}"
+    data-slug="{{ strtolower(trim($categorySlug)) }}"
+    data-category-slug="{{ strtolower(trim($categorySlug)) }}"
+    {{ old('category_id', $product->category_id) == $categoryId ? 'selected' : '' }}
+>
+    {{ $categoryName }}
+</option>
 
         @endforeach
 
@@ -503,7 +504,7 @@
 <div
     id="clothing-filter"
     data-filter-section="clothing"
-    class="mt-7 border-t border-gray-200 pt-7">
+    class="hidden mt-7 border-t border-gray-200 pt-7">
 
     <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
         Clothing Information
@@ -650,7 +651,7 @@
 <div
     id="lace-filter"
     data-filter-section="laces"
-    class="mt-7 border-t border-gray-200 pt-7">
+    class="hidden mt-7 border-t border-gray-200 pt-7">
 
     <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
         Lace Information
@@ -1119,6 +1120,187 @@
 </div>
 
 {{-- =========================================================
+     OTHER ACCESSORIES INFORMATION
+========================================================= --}}
+
+<div
+    id="other-accessories-filter"
+    data-filter-section="other_accessories"
+    class="hidden mt-7 border-t border-gray-200 pt-7"
+>
+    <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
+        Other Accessories Information
+    </p>
+
+
+    {{-- BUTTONS --}}
+
+    <div>
+
+        <label
+            for="buttons"
+            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
+        >
+            Buttons
+        </label>
+
+        <select
+            id="buttons"
+            name="buttons"
+            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
+        >
+            <option value="">
+                Select Buttons
+            </option>
+
+            <option
+                value="fancy_buttons"
+                {{ old('buttons', $product->buttons ?? '') === 'fancy_buttons' ? 'selected' : '' }}
+            >
+                Fancy Buttons
+            </option>
+
+            <option
+                value="simple_buttons"
+                {{ old('buttons', $product->buttons ?? '') === 'simple_buttons' ? 'selected' : '' }}
+            >
+                Simple Buttons
+            </option>
+
+            <option
+                value="pearls_buttons"
+                {{ old('buttons', $product->buttons ?? '') === 'pearls_buttons' ? 'selected' : '' }}
+            >
+                Pearls Buttons
+            </option>
+
+            <option
+                value="pearls_clothes_buttons"
+                {{ old('buttons', $product->buttons ?? '') === 'pearls_clothes_buttons' ? 'selected' : '' }}
+            >
+                Pearls Clothes Buttons
+            </option>
+
+            <option
+                value="button_patti"
+                {{ old('buttons', $product->buttons ?? '') === 'button_patti' ? 'selected' : '' }}
+            >
+                Button Patti
+            </option>
+        </select>
+
+    </div>
+
+
+    {{-- PIPING CLOTHES --}}
+
+    <div class="mt-7">
+
+        <label
+            for="piping_clothes"
+            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
+        >
+            Piping Clothes
+        </label>
+
+        <select
+            id="piping_clothes"
+            name="piping_clothes"
+            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
+        >
+            <option value="">
+                Select Piping Clothes
+            </option>
+
+            <option
+                value="aparna_shamooz_silk_piping"
+                {{ old('piping_clothes', $product->piping_clothes ?? '') === 'aparna_shamooz_silk_piping' ? 'selected' : '' }}
+            >
+                Aparna / Shamooz Silk Piping
+            </option>
+
+            <option
+                value="katan_silk_dori_piping"
+                {{ old('piping_clothes', $product->piping_clothes ?? '') === 'katan_silk_dori_piping' ? 'selected' : '' }}
+            >
+                Katan Silk / Dori Piping
+            </option>
+
+            <option
+                value="cotton_lawn_piping"
+                {{ old('piping_clothes', $product->piping_clothes ?? '') === 'cotton_lawn_piping' ? 'selected' : '' }}
+            >
+                Cotton / Lawn Piping
+            </option>
+
+            <option
+                value="velvet_piping"
+                {{ old('piping_clothes', $product->piping_clothes ?? '') === 'velvet_piping' ? 'selected' : '' }}
+            >
+                Velvet Piping
+            </option>
+
+            <option
+                value="metallic_zari_piping"
+                {{ old('piping_clothes', $product->piping_clothes ?? '') === 'metallic_zari_piping' ? 'selected' : '' }}
+            >
+                Metallic / Zari Piping
+            </option>
+        </select>
+
+    </div>
+
+
+    {{-- ACCESSORY TYPE --}}
+
+    <div class="mt-7">
+
+        <p class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+            Accessory Type
+        </p>
+
+        <div class="mt-4 space-y-3">
+
+            <label class="flex items-center gap-3 cursor-pointer">
+
+                <input
+                    type="radio"
+                    name="accessory_type"
+                    value="tailor_accessories"
+                    {{ old('accessory_type', $product->accessory_type ?? '') === 'tailor_accessories' ? 'checked' : '' }}
+                    class="w-4 h-4"
+                >
+
+                <span class="text-sm text-gray-700">
+                    Tailor Accessories
+                </span>
+
+            </label>
+
+
+            <label class="flex items-center gap-3 cursor-pointer">
+
+                <input
+                    type="radio"
+                    name="accessory_type"
+                    value="other_accessories"
+                    {{ old('accessory_type', $product->accessory_type ?? '') === 'other_accessories' ? 'checked' : '' }}
+                    class="w-4 h-4"
+                >
+
+                <span class="text-sm text-gray-700">
+                    Other Accessories
+                </span>
+
+            </label>
+
+        </div>
+
+    </div>
+
+</div>
+
+{{-- =========================================================
      COSMETICS INFORMATION
 ========================================================= --}}
 
@@ -1554,7 +1736,8 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
 
-    const categorySelect = document.getElementById('category_id');
+    const categorySelect =
+        document.getElementById('category_id');
 
     if (!categorySelect) {
         return;
@@ -1567,9 +1750,8 @@ document.addEventListener('DOMContentLoaded', function () {
     |--------------------------------------------------------------------------
     */
 
-    const filterSections = document.querySelectorAll(
-        '[data-filter-section]'
-    );
+    const filterSections =
+        document.querySelectorAll('[data-filter-section]');
 
 
     /*
@@ -1594,12 +1776,11 @@ document.addEventListener('DOMContentLoaded', function () {
     /*
     |--------------------------------------------------------------------------
     | EXISTING SAVED LACE SUBCATEGORIES
-    |
-    | These are loaded from the Edit Product.
     |--------------------------------------------------------------------------
     */
 
-    const existingLaceSubcategories = @json($selectedLaceSubcategories);
+    const existingLaceSubcategories =
+        @json($selectedLaceSubcategories);
 
 
     /*
@@ -1674,7 +1855,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function getFilterType(slug) {
 
-        slug = (slug || '').toLowerCase().trim();
+        slug =
+            String(slug || '')
+                .toLowerCase()
+                .trim();
 
 
         /*
@@ -1729,20 +1913,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         /*
         |--------------------------------------------------------------------------
-        | COSMETICS
-        |--------------------------------------------------------------------------
-        */
-
-        if (
-            slug === 'cosmetics' ||
-            slug === 'cosmetic'
-        ) {
-            return 'cosmetics';
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
         | WATCHES
         |--------------------------------------------------------------------------
         */
@@ -1757,16 +1927,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
         /*
         |--------------------------------------------------------------------------
-        | TAILOR ACCESSORIES
+        | OTHER ACCESSORIES
         |--------------------------------------------------------------------------
         */
 
         if (
-            slug === 'tailor-accessories' ||
-            slug === 'tailor-accessory' ||
-            slug === 'tailoring-accessories'
+            slug === 'other-accessories' ||
+            slug === 'other-accessory' ||
+            slug === 'other_accessories' ||
+            slug === 'other_accessory'
         ) {
-            return 'tailor_accessories';
+            return 'other_accessories';
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | COSMETICS
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+            slug === 'cosmetics' ||
+            slug === 'cosmetic'
+        ) {
+            return 'cosmetics';
         }
 
 
@@ -1782,16 +1967,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function setSectionEnabled(section, enabled) {
 
-        const fields = section.querySelectorAll(
-            'input, select, textarea'
-        );
+        const fields =
+            section.querySelectorAll(
+                'input, select, textarea'
+            );
 
         fields.forEach(function (field) {
 
             field.disabled = !enabled;
 
         });
-
     }
 
 
@@ -1802,10 +1987,6 @@ document.addEventListener('DOMContentLoaded', function () {
     */
 
     function updateLaceSubcategories() {
-
-        /*
-        | If Lace elements don't exist, stop.
-        */
 
         if (
             !laceCategorySelect ||
@@ -1831,12 +2012,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         /*
         |--------------------------------------------------------------------------
-        | NO LACE CATEGORY SELECTED
-        |
-        | Hide:
-        | - Lace Subcategories
-        | - Select all subcategories text
-        | - Checkboxes
+        | NO LACE CATEGORY
         |--------------------------------------------------------------------------
         */
 
@@ -1870,7 +2046,6 @@ document.addEventListener('DOMContentLoaded', function () {
             laceSubcategories[selectedCategory]
         ).forEach(function ([value, labelText]) {
 
-
             const label =
                 document.createElement('label');
 
@@ -1895,8 +2070,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             /*
             |--------------------------------------------------------------------------
-            | EDIT PAGE:
-            | CHECK SAVED SUBCATEGORY
+            | CHECK SAVED VALUE
             |--------------------------------------------------------------------------
             */
 
@@ -1904,9 +2078,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 Array.isArray(existingLaceSubcategories) &&
                 existingLaceSubcategories.includes(value)
             ) {
-
                 checkbox.checked = true;
-
             }
 
 
@@ -1927,7 +2099,6 @@ document.addEventListener('DOMContentLoaded', function () {
             laceSubcategoryWrapper.appendChild(label);
 
         });
-
     }
 
 
@@ -1947,23 +2118,32 @@ document.addEventListener('DOMContentLoaded', function () {
 
         /*
         |--------------------------------------------------------------------------
-        | CATEGORY IS AN ARRAY
-        |
-        | Therefore the option contains:
-        |
-        | data-slug="{{ $category['slug'] ?? '' }}"
+        | GET CATEGORY SLUG
         |--------------------------------------------------------------------------
         */
 
-        const slug =
-            selectedOption
-                ? (
-                    selectedOption.dataset.slug ||
-                    selectedOption.dataset.categorySlug ||
-                    ''
-                )
-                : '';
+        let slug = '';
 
+        if (selectedOption) {
+
+            slug =
+                selectedOption.getAttribute('data-slug') ||
+                selectedOption.getAttribute('data-category-slug') ||
+                '';
+
+        }
+
+        slug =
+            String(slug)
+                .toLowerCase()
+                .trim();
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | GET FILTER TYPE
+        |--------------------------------------------------------------------------
+        */
 
         const filterType =
             getFilterType(slug);
@@ -1971,14 +2151,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
         /*
         |--------------------------------------------------------------------------
-        | SHOW / HIDE FILTER SECTIONS
+        | DEBUG
+        |--------------------------------------------------------------------------
+        */
+
+        console.log('EDIT PRODUCT CATEGORY:', {
+            categoryId: categorySelect.value,
+            categoryName: selectedOption
+                ? selectedOption.textContent.trim()
+                : '',
+            slug: slug,
+            filterType: filterType
+        });
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | SHOW ONLY SELECTED CATEGORY SECTION
         |--------------------------------------------------------------------------
         */
 
         filterSections.forEach(function (section) {
 
             const sectionType =
-                section.dataset.filterSection;
+                String(
+                    section.getAttribute(
+                        'data-filter-section'
+                    ) || ''
+                )
+                .toLowerCase()
+                .trim();
 
 
             const shouldShow =
@@ -2010,39 +2212,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
         /*
         |--------------------------------------------------------------------------
-        | LACE FILTER
+        | LACE SUBCATEGORY HANDLING
         |--------------------------------------------------------------------------
         */
 
         if (filterType === 'laces') {
 
-            /*
-             * Show Lace Information
-             */
-
-            if (laceFilter) {
-
-                laceFilter.classList.remove('hidden');
-
-            }
-
-
-            /*
-             * Update Lace Subcategories
-             */
-
             updateLaceSubcategories();
 
         } else {
 
-            /*
-             * If category is NOT Laces,
-             * hide Lace Subcategories completely.
-             */
-
             if (laceSubcategoryContainer) {
 
-                laceSubcategoryContainer.classList.add('hidden');
+                laceSubcategoryContainer.classList.add(
+                    'hidden'
+                );
 
             }
 
@@ -2079,11 +2263,6 @@ document.addEventListener('DOMContentLoaded', function () {
             'change',
             function () {
 
-                /*
-                 * When admin changes Lace Category,
-                 * regenerate the correct subcategories.
-                 */
-
                 updateLaceSubcategories();
 
             }
@@ -2095,21 +2274,10 @@ document.addEventListener('DOMContentLoaded', function () {
     /*
     |--------------------------------------------------------------------------
     | INITIAL PAGE LOAD
-    |
-    | VERY IMPORTANT FOR EDIT PAGE
     |--------------------------------------------------------------------------
     */
 
     updateFilterSections();
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | INITIAL LACE SUBCATEGORY LOAD
-    |--------------------------------------------------------------------------
-    */
-
-    updateLaceSubcategories();
 
 });
 </script>

@@ -54,6 +54,11 @@ class Product extends Model
         'watch_gender',
         'strap_material',
         'watch_type',
+
+        // Other Accessories
+        'buttons',
+        'piping_clothes',
+        'accessory_type',
     ];
 
     protected $casts = [

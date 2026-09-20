@@ -68,6 +68,11 @@ class ShopController extends Controller
                 $categoryType = 'jewelry';
             } elseif (str_contains($categoryText, 'watch')) {
                 $categoryType = 'watches';
+            } elseif (
+                str_contains($categoryText, 'other-accessories') ||
+                str_contains($categoryText, 'other accessories')
+            ) {
+                $categoryType = 'other_accessories';
             }
         }
 
@@ -357,6 +362,29 @@ class ShopController extends Controller
 
         /*
         |--------------------------------------------------------------------------
+        | OTHER ACCESSORIES FILTERS
+        |--------------------------------------------------------------------------
+        */
+        if ($categoryType === 'other_accessories') {
+            $buttons = $request->input('buttons');
+            $pipingClothes = $request->input('piping_clothes');
+            $accessoryType = $request->input('accessory_type');
+
+            if (!empty($buttons)) {
+                $products->where('buttons', $buttons);
+            }
+
+            if (!empty($pipingClothes)) {
+                $products->where('piping_clothes', $pipingClothes);
+            }
+
+            if (!empty($accessoryType)) {
+                $products->where('accessory_type', $accessoryType);
+            }
+        }
+
+        /*
+        |--------------------------------------------------------------------------
         | FILTER OPTIONS
         |--------------------------------------------------------------------------
         |
@@ -393,6 +421,9 @@ class ShopController extends Controller
             'watch_gender',
             'strap_material',
             'watch_type',
+            'buttons',
+            'piping_clothes',
+            'accessory_type',
             'price',
             'sale_price',
         ]);
@@ -418,6 +449,27 @@ class ShopController extends Controller
             'digital' => 'Digital',
             'smartwatch' => 'Smartwatch',
             'chronograph' => 'Chronograph',
+        ]);
+
+        $otherAccessoryButtons = collect([
+            'fancy_buttons' => 'Fancy Buttons',
+            'simple_buttons' => 'Simple Buttons',
+            'pearls_buttons' => 'Pearls Buttons',
+            'pearls_clothes_buttons' => 'Pearls Clothes Buttons',
+            'button_patti' => 'Button Patti',
+        ]);
+
+        $otherAccessoryPipingClothes = collect([
+            'aparna_shamooz_silk_piping' => 'Aparna / Shamooz Silk Piping',
+            'katan_silk_dori_piping' => 'Katan Silk / Dori Piping',
+            'cotton_lawn_piping' => 'Cotton / Lawn Piping',
+            'velvet_piping' => 'Velvet Piping',
+            'metallic_zari_piping' => 'Metallic / Zari Piping',
+        ]);
+
+        $otherAccessoryTypes = collect([
+            'tailor_accessories' => 'Tailor Accessories',
+            'other_accessories' => 'Other Accessories',
         ]);
 
         if ($categoryType === 'clothing') {
@@ -609,6 +661,9 @@ class ShopController extends Controller
             'jewelryBraceletSizes',
             'watchStrapMaterials',
             'watchTypes',
+            'otherAccessoryButtons',
+            'otherAccessoryPipingClothes',
+            'otherAccessoryTypes',
             'priceMin',
             'priceMax',
             'selectedMinPrice',
