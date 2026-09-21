@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $product->name . ' | Bin Ismail')
+@section('title', $product->name . ' | Bin Roshan')
 
 @section('description', Str::limit(strip_tags($product->description), 160))
 
@@ -10,7 +10,7 @@
      PRODUCT DETAIL
 ========================================================= --}}
 
-<section class="bg-white">
+<section class="bg-[#f8f7f4]">
 
     {{-- Breadcrumb --}}
     <div class="border-b border-gray-100">
@@ -25,8 +25,9 @@
 
                 <span>/</span>
 
-                <a href="{{ route('category.show', $product->category->slug) }}"
-                   class="hover:text-black transition">
+                {{-- Categories --}}
+                <a href="{{ route('categories') }}"
+                    class="hover:text-black transition">
                     Categories
                 </a>
 
@@ -56,61 +57,148 @@
 
 
             {{-- =================================================
-                 LEFT - PRODUCT IMAGE
-            ================================================== --}}
+     LEFT - PRODUCT IMAGE
+================================================== --}}
 
-            <div>
+<div>
 
-                @if($product->primaryImage)
+    @if($product->primaryImage)
 
-                    <div class="bg-gray-50 overflow-hidden">
+        <div
+            id="product-image-gallery"
+            class="bg-gray-50 overflow-hidden rounded-lg relative">
 
-                        <img
-                            src="{{ Storage::url($product->primaryImage->image) }}"
-                            alt="{{ $product->name }}"
-                            class="w-full aspect-square object-contain"
-                        >
+            {{-- Main Image --}}
+            <img
+                id="main-product-image"
+                src="{{ Storage::url($product->primaryImage->image) }}"
+                alt="{{ $product->name }}"
+                class="w-full aspect-square object-contain transition-transform duration-300"
+                style="transform: scale(1);">
 
-                    </div>
+            {{-- LEFT ARROW --}}
+            @if($product->images->count() > 1)
 
-                @else
+                <button
+                    type="button"
+                    id="prev-image"
+                    class="absolute left-3 top-1/2 -translate-y-1/2
+                           w-10 h-10
+                           flex items-center justify-center
+                           bg-[#BE8B3E] border border-[#BE8B3E] hover:bg-white hover:text-[#BE8B3E] cursor-pointer
+                           rounded-full
+                           shadow-sm
+                           text-xl text-white
+                           transition
+                           z-10"
+                    aria-label="Previous image">
+                    ‹
+                </button>
 
-                    <div class="w-full aspect-square bg-gray-100 flex items-center justify-center">
+                {{-- RIGHT ARROW --}}
+                <button
+                    type="button"
+                    id="next-image"
+                    class="absolute right-3 top-1/2 -translate-y-1/2
+                           w-10 h-10
+                           flex items-center justify-center
+                           bg-[#BE8B3E] border border-[#BE8B3E] hover:bg-white hover:text-[#BE8B3E] cursor-pointer
+                           rounded-full
+                           shadow-sm
+                           text-xl text-white
+                           transition
+                           z-10"
+                    aria-label="Next image"
+                >
+                    ›
+                </button>
 
-                        <span class="text-sm text-gray-400">
-                            No image available
-                        </span>
-
-                    </div>
-
-                @endif
+            @endif
 
 
-                {{-- Other Images --}}
-                @if($product->images->count() > 1)
+            {{-- ZOOM CONTROLS --}}
+            <div
+                class="absolute bottom-3 right-3
+                       flex items-center gap-1
+                       bg-white/90
+                       rounded-lg
+                       shadow-sm
+                       overflow-hidden
+                       z-10">
 
-                    <div class="grid grid-cols-5 gap-3 mt-4">
+                <button
+                    type="button"
+                    id="zoom-out"
+                    class="w-9 h-9 flex items-center justify-center
+                           text-lg text-gray-700
+                           hover:bg-[#BE8B3E] hover:text-white cursor-pointer transition"
+                    aria-label="Zoom out">
+                    −
+                </button>
 
-                        @foreach($product->images->sortBy('sort_order') as $image)
+                <button
+                    type="button"
+                    id="zoom-reset"
+                    class="w-9 h-9 flex items-center justify-center
+                           text-xs text-gray-600
+                           hover:bg-[#BE8B3E] hover:text-white cursor-pointer transition"
+                    aria-label="Reset zoom">
+                    1×
+                </button>
 
-                            <div class="bg-gray-50 overflow-hidden">
-
-                                <img
-                                    src="{{ Storage::url($image->image) }}"
-                                    alt="{{ $product->name }}"
-                                    class="w-full aspect-square object-contain"
-                                >
-
-                            </div>
-
-                        @endforeach
-
-                    </div>
-
-                @endif
+                <button
+                    type="button"
+                    id="zoom-in"
+                    class="w-9 h-9 flex items-center justify-center
+                           text-lg text-gray-700
+                           hover:bg-[#BE8B3E] hover:text-white cursor-pointer transition"
+                    aria-label="Zoom in">
+                    +
+                </button>
 
             </div>
 
+        </div>
+
+    @else
+
+        <div class="w-full aspect-square bg-gray-100 flex items-center justify-center">
+
+            <span class="text-sm text-gray-400">
+                No image available
+            </span>
+
+        </div>
+
+    @endif
+
+
+    {{-- Other Images --}}
+    @if($product->images->count() > 1)
+
+        <div class="grid grid-cols-5 gap-3 mt-4">
+
+            @foreach($product->images->sortBy('sort_order') as $image)
+
+                <button
+                    type="button"
+                    class="product-thumbnail bg-gray-50 overflow-hidden text-left rounded-full cursor-pointer"
+                    data-image="{{ Storage::url($image->image) }}">
+
+                    <img
+                        src="{{ Storage::url($image->image) }}"
+                        alt="{{ $product->name }}"
+                        class="w-full aspect-square object-contain">
+
+                </button>
+
+            @endforeach
+
+        </div>
+
+    @endif
+
+</div>
 
             {{-- =================================================
                  RIGHT - PRODUCT INFORMATION
@@ -122,7 +210,7 @@
                 {{-- Category --}}
                 <div class="mb-5">
 
-                    <span class="text-[10px] tracking-[0.35em] uppercase text-[#b08a3c]">
+                    <span class="text-[10px] tracking-[0.35em] uppercase text-[#BE8B3E]">
                         {{ $product->category->name }}
                     </span>
 
@@ -263,8 +351,7 @@
         href="https://wa.me/923121353516?text={{ urlencode($whatsappMessage) }}"
         target="_blank"
         rel="noopener noreferrer"
-        class="mt-8 w-full bg-black text-white py-4 px-6 text-center text-xs font-semibold tracking-widest uppercase hover:bg-gray-800 transition"
-    >
+        class="mt-8 w-full border border-[#BE8B3E] text-[#BE8B3E] rounded-full py-4 px-6 text-center text-xs font-semibold tracking-widest uppercase hover:bg-[#BE8B3E] hover:text-white transition">
 
         Order on WhatsApp
 
@@ -278,8 +365,7 @@
 
                     <a
                         href="{{ route('shop') }}"
-                        class="inline-flex items-center gap-2 text-sm text-gray-700 border-b border-gray-700 pb-1 hover:text-black hover:border-black transition"
-                    >
+                        class="inline-flex items-center gap-2 text-sm text-gray-700 border-b border-gray-700 pb-1 hover:text-[#BE8B3E] hover:border-[#BE8B3E] transition">
 
                         ← Back to Shop
 
@@ -294,5 +380,279 @@
     </div>
 
 </section>
+
+{{-- =================================================
+     PRODUCT IMAGE GALLERY SCRIPT
+================================================== --}}
+
+@if($product->primaryImage)
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const mainImage = document.getElementById('main-product-image');
+    const prevButton = document.getElementById('prev-image');
+    const nextButton = document.getElementById('next-image');
+
+    const zoomInButton = document.getElementById('zoom-in');
+    const zoomOutButton = document.getElementById('zoom-out');
+    const zoomResetButton = document.getElementById('zoom-reset');
+
+    const thumbnails = Array.from(
+        document.querySelectorAll('.product-thumbnail')
+    );
+
+    if (!mainImage) {
+        return;
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Images
+    |--------------------------------------------------------------------------
+    */
+
+    const images = thumbnails.map(function (thumbnail) {
+        return thumbnail.dataset.image;
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Find Primary Image
+    |--------------------------------------------------------------------------
+    */
+
+    let currentIndex = images.indexOf(mainImage.src);
+
+    if (currentIndex === -1) {
+        currentIndex = 0;
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Zoom
+    |--------------------------------------------------------------------------
+    */
+
+    let zoomLevel = 1;
+
+    const minZoom = 1;
+    const maxZoom = 3;
+    const zoomStep = 0.25;
+
+
+    function updateZoom() {
+
+    mainImage.style.transform = `scale(${zoomLevel})`;
+
+    if (zoomResetButton) {
+        zoomResetButton.textContent = `${zoomLevel}×`;
+    }
+
+    }
+
+
+    function updateImage(index) {
+
+        if (!images.length) {
+            return;
+        }
+
+        currentIndex = index;
+
+        if (currentIndex < 0) {
+            currentIndex = images.length - 1;
+        }
+
+        if (currentIndex >= images.length) {
+            currentIndex = 0;
+        }
+
+
+        mainImage.src = images[currentIndex];
+
+
+        /*
+        | Reset zoom whenever image changes
+        */
+
+        zoomLevel = 1;
+        updateZoom();
+
+
+        /*
+        | Highlight current thumbnail
+        */
+
+        thumbnails.forEach(function (thumbnail, index) {
+
+            if (index === currentIndex) {
+
+                thumbnail.classList.add('ring-2', 'ring-[#BE8B3E]');
+
+            } else {
+
+                thumbnail.classList.remove('ring-2', 'ring-[#BE8B3E]');
+
+            }
+
+        });
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Previous Image
+    |--------------------------------------------------------------------------
+    */
+
+    if (prevButton) {
+
+        prevButton.addEventListener('click', function () {
+
+            updateImage(currentIndex - 1);
+
+        });
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Next Image
+    |--------------------------------------------------------------------------
+    */
+
+    if (nextButton) {
+
+        nextButton.addEventListener('click', function () {
+
+            updateImage(currentIndex + 1);
+
+        });
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Thumbnail Click
+    |--------------------------------------------------------------------------
+    */
+
+    thumbnails.forEach(function (thumbnail, index) {
+
+        thumbnail.addEventListener('click', function () {
+
+            updateImage(index);
+
+        });
+
+    });
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Zoom In
+    |--------------------------------------------------------------------------
+    */
+
+    if (zoomInButton) {
+
+        zoomInButton.addEventListener('click', function () {
+
+            if (zoomLevel < maxZoom) {
+
+                zoomLevel += zoomStep;
+
+                updateZoom();
+
+            }
+
+        });
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Zoom Out
+    |--------------------------------------------------------------------------
+    */
+
+    if (zoomOutButton) {
+
+        zoomOutButton.addEventListener('click', function () {
+
+            if (zoomLevel > minZoom) {
+
+                zoomLevel -= zoomStep;
+
+                updateZoom();
+
+            }
+
+        });
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Reset Zoom
+    |--------------------------------------------------------------------------
+    */
+
+    if (zoomResetButton) {
+
+        zoomResetButton.addEventListener('click', function () {
+
+            zoomLevel = 1;
+
+            updateZoom();
+
+        });
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Keyboard Navigation
+    |--------------------------------------------------------------------------
+    */
+
+    document.addEventListener('keydown', function (event) {
+
+        if (event.key === 'ArrowLeft') {
+
+            updateImage(currentIndex - 1);
+
+        }
+
+        if (event.key === 'ArrowRight') {
+
+            updateImage(currentIndex + 1);
+
+        }
+
+    });
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Initial Thumbnail Highlight
+    |--------------------------------------------------------------------------
+    */
+
+    updateImage(currentIndex);
+
+});
+</script>
+
+@endif
 
 @endsection

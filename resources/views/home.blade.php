@@ -80,12 +80,12 @@
 
                 <a
                     href="{{ route('home') }}"
-                    class="absolute left-1/2 -translate-x-1/2 top-5">
+                    class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 -mt-2">
 
                     <img
                         src="{{ asset('images/logo/logo.png') }}"
                         alt="Bin Ismail"
-                        class="h-14 sm:h-16 lg:h-35 w-auto max-w-[150px] sm:max-w-none object-contain">
+                        class="h-14 sm:h-16 lg:h-35 max-w-[150px] sm:max-w-none w-auto object-contain">
 
                 </a>
 
@@ -120,6 +120,7 @@
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24">
+
                             <circle
                                 cx="11"
                                 cy="11"
@@ -130,6 +131,7 @@
                                 d="m20 20-4-4"
                                 stroke-width="1.7"
                                 stroke-linecap="round"/>
+
                         </svg>
 
                     </button>
@@ -248,7 +250,7 @@
 
     <div class="absolute inset-x-0 bottom-0 z-20">
 
-        <div class="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-12 pb-8 sm:pb-12 lg:pb-16">
+        <div class="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-12 pb-8 sm:pb-12 lg:pb-8">
 
             <div class="max-w-xl text-white min-w-0">
 
@@ -282,16 +284,16 @@
 
                 {{-- BUTTONS --}}
 
-                <div class="mt-6 sm:mt-8 flex flex-col xs:flex-row w-full sm:w-fit overflow-hidden rounded-2xl xs:rounded-full border border-[#BE8B3E]/80">
+                <div class="mt-6 sm:mt-8 flex flex-col lg:flex-row w-full sm:w-fit overflow-hidden rounded-2xl lg:rounded-full border border-[#BE8B3E]/80">
 
                     <a
                         href="{{ route('shop') }}"
                         class="flex items-center justify-center
-                               w-full xs:min-w-[190px] px-6 sm:px-8 py-3.5 sm:py-4
+                               w-full lg:min-w-[190px] px-6 sm:px-8 py-3.5 sm:py-4
                                text-white bg-[#BE8B3E]
                                text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.18em] font-semibold
-                               border-b xs:border-b-0 xs:border-r border-[#BE8B3E]/80
-                               hover:bg-transparent hover:text-[#BE8B3E]
+                               border-b lg:border-b-0 lg:border-r border-[#BE8B3E]/80
+                               hover:bg-transparent whitespace-nowrap hover:text-[#BE8B3E]
                                transition-all duration-300">
                         Shop Collection
                     </a>
@@ -301,7 +303,7 @@
                         target="_blank"
                         rel="noopener noreferrer"
                         class="flex items-center justify-center
-                               w-full xs:min-w-[170px] px-6 sm:px-8 py-3.5 sm:py-4
+                               w-full lg:min-w-[170px] px-6 sm:px-8 py-3.5 sm:py-4
                                text-[#BE8B3E]
                                text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.18em] font-semibold
                                hover:bg-[#BE8B3E] hover:text-white
@@ -314,7 +316,7 @@
 
                 {{-- SMALL FEATURES --}}
 
-                <div class="mt-7 sm:mt-10 flex flex-wrap items-center gap-x-6 gap-y-4 sm:gap-x-12">
+                <div class="mt-7 sm:mt-10 flex flex-wrap items-center gap-x-10 gap-y-4 sm:gap-x-12">
 
                     <div class="min-w-[65px]">
 

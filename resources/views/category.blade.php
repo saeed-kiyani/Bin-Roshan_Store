@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $category->name . ' | Bin Ismail')
+@section('title', $category->name . ' | Bin Roshan')
 
 @section('description', $category->description)
 
@@ -24,11 +24,213 @@
 
 <section class="relative h-[55vh] min-h-[450px] overflow-hidden">
 
+    {{-- =====================================================
+         TRANSPARENT NAVIGATION
+    ====================================================== --}}
+    <header class="absolute top-0 left-0 right-0 z-40">
+
+        <div class="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-12">
+
+            <nav class="h-24 flex items-center justify-between">
+
+                {{-- LEFT SIDE --}}
+
+                <div class="hidden lg:flex items-center gap-10 flex-1">
+
+                    <a
+                        href="{{ route('home') }}"
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                        Home
+                    </a>
+
+                    <a
+                        href="{{ route('shop') }}"
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                        Shop
+                    </a>
+
+                    <a
+                        href="{{ route('categories') }}"
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                        Categories
+                    </a>
+
+                </div>
+
+
+                {{-- =================================================
+                     CENTER LOGO
+                ================================================== --}}
+
+                <a
+                    href="{{ route('home') }}"
+                    class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 -mt-2">
+
+                    <img
+                        src="{{ asset('images/logo/logo.png') }}"
+                        alt="Bin Ismail"
+                        class="h-14 sm:h-16 lg:h-35 max-w-[150px] sm:max-w-none w-auto object-contain">
+
+                </a>
+
+
+                {{-- RIGHT SIDE --}}
+
+                <div class="hidden lg:flex items-center justify-end gap-10 flex-1">
+
+                    <a
+                        href="{{ route('about') }}"
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                        About
+                    </a>
+
+                    <a
+                        href="{{ route('contact') }}"
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                        Contact
+                    </a>
+
+
+                    {{-- SEARCH --}}
+
+                    <button
+                        type="button"
+                        onclick="openSearch()"
+                        aria-label="Search"
+                        class="text-white hover:text-[#BE8B3E] transition cursor-pointer">
+
+                        <svg
+                            class="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24">
+
+                            <circle
+                                cx="11"
+                                cy="11"
+                                r="7"
+                                stroke-width="1.7"/>
+
+                            <path
+                                d="m20 20-4-4"
+                                stroke-width="1.7"
+                                stroke-linecap="round"/>
+
+                        </svg>
+
+                    </button>
+
+
+                    {{-- CART --}}
+
+                    <button
+                        type="button"
+                        onclick="openCart()"
+                        aria-label="Shopping bag"
+                        class="relative text-white hover:text-[#BE8B3E] transition cursor-pointer">
+
+                        <svg
+                            class="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24">
+
+                            <path
+                                d="M6 8h12l1 13H5L6 8Z"
+                                stroke-width="1.5"
+                                stroke-linejoin="round"/>
+
+                            <path
+                                d="M9 8V6a3 3 0 0 1 6 0v2"
+                                stroke-width="1.5"
+                                stroke-linecap="round"/>
+
+                        </svg>
+
+
+                        {{-- CART COUNT --}}
+
+                        <span
+                            id="cart-count"
+                            class="absolute -top-2 -right-3 min-w-[17px] h-[17px] px-1 rounded-full bg-white text-black text-[9px] flex items-center justify-center font-semibold">
+                            0
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                {{-- =================================================
+                     MOBILE MENU BUTTON
+                ================================================== --}}
+
+                <button
+                    type="button"
+                    onclick="openMobileMenu()"
+                    class="lg:hidden text-white shrink-0"
+                    aria-label="Open menu">
+
+                    <svg
+                        class="w-7 h-7"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24">
+
+                        <path
+                            d="M4 7h16M4 12h16M4 17h16"
+                            stroke-width="1.5"
+                            stroke-linecap="round"/>
+
+                    </svg>
+
+                </button>
+
+
+                {{-- MOBILE CART --}}
+
+                <button
+                    type="button"
+                    onclick="openCart()"
+                    class="lg:hidden relative text-white shrink-0"
+                    aria-label="Shopping bag">
+
+                    <svg
+                        class="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24">
+
+                        <path
+                            d="M6 8h12l1 13H5L6 8Z"
+                            stroke-width="1.5"
+                            stroke-linejoin="round"/>
+
+                        <path
+                            d="M9 8V6a3 3 0 0 1 6 0v2"
+                            stroke-width="1.5"
+                            stroke-linecap="round"/>
+
+                    </svg>
+
+                    <span
+                        id="cart-count-mobile"
+                        class="absolute -top-2 -right-3 min-w-[17px] h-[17px] px-1 rounded-full bg-white text-black text-[9px] flex items-center justify-center font-semibold">
+                        0
+                    </span>
+
+                </button>
+
+            </nav>
+
+        </div>
+
+    </header>
+
     <img
         src="{{ $categoryImage }}"
         alt="{{ $category->name }}"
-        class="absolute inset-0 w-full h-full object-cover"
-    >
+        class="absolute inset-0 w-full h-full object-cover">
 
     <div class="absolute inset-0 bg-black/45"></div>
 
@@ -37,7 +239,7 @@
         <div>
 
             <p class="text-xs uppercase tracking-[0.45em] text-white/70">
-                Bin Ismail Collection
+                Bin Roshan Collection
             </p>
 
             <h1 class="mt-6 text-5xl sm:text-6xl lg:text-7xl font-light">
@@ -67,8 +269,7 @@
 
             <a
                 href="{{ route('home') }}"
-                class="hover:text-black transition"
-            >
+                class="hover:text-black transition">
                 Home
             </a>
 
@@ -76,8 +277,7 @@
 
             <a
                 href="{{ route('categories') }}"
-                class="hover:text-black transition"
-            >
+                class="hover:text-black transition">
                 Categories
             </a>
 
@@ -98,7 +298,7 @@
      PRODUCTS
 ========================================================= --}}
 
-<section class="py-20 lg:py-28">
+<section class="py-20 lg:py-28 bg-[#f8f7f4]">
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -108,7 +308,7 @@
 
             <div>
 
-                <p class="text-xs uppercase tracking-[0.4em] text-[#a47c15] font-semibold">
+                <p class="text-xs uppercase tracking-[0.4em] text-[#BE8B3E] font-semibold">
                     {{ $category->name }}
                 </p>
 
@@ -141,8 +341,7 @@
 
                 <a
                     href="{{ route('shop') }}"
-                    class="inline-flex mt-8 bg-black text-white px-7 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#a47c15] transition"
-                >
+                    class="inline-flex mt-8 bg-black text-white px-7 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#a47c15] transition">
                     Continue Shopping
                 </a>
 
@@ -172,25 +371,23 @@
 
                     <a
                         href="{{ route('product.show', $product->slug) }}"
-                        class="group"
-                    >
+                        class="group">
 
                         {{-- Image --}}
 
-                        <div class="relative aspect-[4/5] bg-gray-100 overflow-hidden">
+                        <div class="relative aspect-[4/5] bg-gray-100 overflow-hidden rounded-lg">
 
                             <img
                                 src="{{ $productImage }}"
                                 alt="{{ $product->name }}"
                                 loading="lazy"
-                                class="w-full h-full object-cover transition duration-700 group-hover:scale-105"
-                            >
+                                class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
 
                             {{-- Featured Badge --}}
 
                             @if($product->is_featured)
 
-                                <span class="absolute top-4 left-4 bg-black text-white text-[9px] uppercase tracking-widest px-3 py-2">
+                                <span class="absolute top-4 rounded-full left-4 bg-black text-white text-[9px] uppercase tracking-widest px-3 py-2">
                                     Featured
                                 </span>
 
@@ -201,7 +398,7 @@
 
                             @if($product->sale_price !== null && (float) $product->sale_price < (float) $product->price)
 
-                                <span class="absolute top-4 right-4 bg-white text-black text-[9px] uppercase tracking-widest px-3 py-2">
+                                <span class="absolute top-4 rounded-full right-4 bg-[#BE8B3E] text-white text-[9px] uppercase tracking-widest px-3 py-2">
                                     Sale
                                 </span>
 
@@ -212,7 +409,7 @@
 
                             <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition duration-300">
 
-                                <div class="bg-white/95 py-4 text-center text-xs uppercase tracking-widest font-semibold">
+                                <div class="bg-[#BE8B3E]/95 py-4 text-white text-center text-xs uppercase tracking-widest font-semibold">
                                     View Product
                                 </div>
 
@@ -225,7 +422,7 @@
 
                         <div class="mt-5">
 
-                            <p class="text-[10px] uppercase tracking-[0.25em] text-gray-400">
+                            <p class="text-[10px] uppercase tracking-[0.25em] text-[#BE8B3E]">
                                 {{ $category->name }}
                             </p>
 
@@ -277,11 +474,11 @@
      WHATSAPP CTA
 ========================================================= --}}
 
-<section class="bg-[#f7f5f0] py-20">
+<section class="bg-black/20 py-20">
 
     <div class="max-w-3xl mx-auto px-4 text-center">
 
-        <p class="text-xs uppercase tracking-[0.4em] text-[#a47c15] font-semibold">
+        <p class="text-xs uppercase tracking-[0.4em] text-[#BE8B3E] font-semibold">
             Need assistance?
         </p>
 
@@ -289,7 +486,7 @@
             Can't find what you're looking for?
         </h2>
 
-        <p class="mt-5 text-gray-600 leading-7">
+        <p class="mt-5 text-white leading-7">
             Send us a message on WhatsApp and our team
             will help you find the right product.
         </p>
@@ -298,8 +495,7 @@
             href="https://wa.me/{{ config('store.whatsapp') }}"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex mt-8 bg-black text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-[#a47c15] transition"
-        >
+            class="inline-flex mt-8 border border-white rounded-full text-white px-8 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-[#BE8B3E] hover:border-[#BE8B3E] hover:text-white transition">
             Contact Us on WhatsApp
         </a>
 

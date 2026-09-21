@@ -56,11 +56,11 @@
 
                 <a
                     href="{{ route('home') }}"
-                    class="absolute left-1/2 -translate-x-1/2 top-5">
+                    class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 -mt-2">
 
                     <img
                         src="{{ asset('images/logo/logo.png') }}"
-                        alt="Bin Roshan"
+                        alt="Bin Ismail"
                         class="h-14 sm:h-16 lg:h-35 max-w-[150px] sm:max-w-none w-auto object-contain">
 
                 </a>
@@ -227,10 +227,14 @@
 
     <div class="absolute inset-0 bg-black/55"></div>
 
-    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+    <div class="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
 
-        <h1 class="mt-7 text-4xl sm:text-6xl lg:text-8xl font-light leading-tight">
-            The <span class="text-[#BE8B3E] font-serif italic">Bin Roshan Story</span>
+        <p class="text-xs uppercase tracking-[0.45em] text-white/70">
+                The Heritage
+            </p>
+
+        <h1 class="mt-5 text-4xl sm:text-6xl lg:text-8xl font-light leading-tight">
+            Our Legacy of <span class="text-[#BE8B3E] font-serif italic">Style</span>
         </h1>
 
         <p class="mt-5 sm:mt-8 max-w-2xl mx-auto text-sm sm:text-base text-white/80 leading-6 sm:leading-8">

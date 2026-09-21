@@ -16,7 +16,7 @@ export default defineConfig({
         port: 5173,
 
         hmr: {
-            host: '192.168.0.105',
+            host: '192.168.2.102',
         },
 
         watch: {

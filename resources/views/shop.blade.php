@@ -145,14 +145,13 @@
     <div class="absolute inset-0 bg-black/40"></div>
 
     {{-- =====================================================
-         NAVIGATION
+         TRANSPARENT NAVIGATION
     ====================================================== --}}
-
     <header class="absolute top-0 left-0 right-0 z-40">
 
         <div class="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-12">
 
-            <nav class="h-20 sm:h-24 flex items-center justify-between">
+            <nav class="h-24 flex items-center justify-between">
 
                 {{-- LEFT SIDE --}}
 
@@ -185,12 +184,12 @@
 
                 <a
                     href="{{ route('home') }}"
-                    class="absolute left-1/2 -translate-x-1/2 top-3 sm:top-5 max-w-[145px] sm:max-w-none">
+                    class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 -mt-2">
 
                     <img
                         src="{{ asset('images/logo/logo.png') }}"
                         alt="Bin Ismail"
-                        class="h-14 sm:h-16 lg:h-35 w-auto object-contain">
+                        class="h-14 sm:h-16 lg:h-35 max-w-[150px] sm:max-w-none w-auto object-contain">
 
                 </a>
 
@@ -293,7 +292,7 @@
                     aria-label="Open menu">
 
                     <svg
-                        class="w-6 h-6 sm:w-7 sm:h-7"
+                        class="w-7 h-7"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24">
@@ -357,12 +356,12 @@
 
         <div class="text-center max-w-4xl w-full">
 
-            <!-- <p class="text-xs sm:text-sm uppercase tracking-[0.45em] font-medium mb-6">
-                The Collection
-            </p> -->
+            <p class="text-xs uppercase tracking-[0.45em] text-white/70">
+                Eastern Elegance
+            </p>
 
             <h1 class="text-4xl sm:text-6xl lg:text-8xl font-light tracking-tight leading-tight">
-                Shop <span class="text-[#BE8B3E] font-serif italic">Collections</span>
+                Explore Our <span class="text-[#BE8B3E] font-serif italic">Range</span>
             </h1>
 
             <p class="mt-5 sm:mt-8 max-w-3xl mx-auto text-sm sm:text-base lg:text-lg leading-7 sm:leading-8 text-white/90 px-2">

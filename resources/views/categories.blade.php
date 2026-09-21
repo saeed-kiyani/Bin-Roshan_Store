@@ -67,7 +67,7 @@
 
                 <a
                     href="{{ route('home') }}"
-                    class="absolute left-1/2 -translate-x-1/2 top-5">
+                    class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 -mt-2">
 
                     <img
                         src="{{ asset('images/logo/logo.png') }}"
@@ -239,11 +239,15 @@
 
         <div class="text-center max-w-4xl w-full">
 
-            <h1 class="text-4xl sm:text-7xl lg:text-8xl font-light tracking-tight leading-tight">
-                Explore <span class="text-[#BE8B3E] font-serif italic">Categories</span>
+            <p class="text-xs uppercase tracking-[0.45em] text-white/70">
+                Carefully Sorted
+            </p>
+
+            <h1 class="text-4xl sm:text-6xl lg:text-8xl font-light tracking-tight leading-tight">
+                Unveil the <span class="text-[#BE8B3E] font-serif italic">Essentials</span>
             </h1>
 
-            <p class="mt-5 sm:mt-8 max-w-3xl mx-auto text-sm sm:text-base lg:text-lg leading-6 sm:leading-8 text-white/90">
+            <p class="mt-5 sm:mt-8 max-w-3xl mx-auto text-sm sm:text-base lg:text-lg leading-7 sm:leading-8 text-white/90 px-2">
                 Discover carefully selected clothing, jewelry, laces,
                 watches and accessories designed to bring elegance
                 to every style.
