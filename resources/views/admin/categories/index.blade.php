@@ -28,8 +28,7 @@
 
             <a
                 href="{{ route('admin.categories.create') }}"
-                class="inline-flex items-center justify-center bg-black text-white px-6 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#a47c15] transition"
-            >
+                class="inline-flex items-center justify-center border border-[#BE8B3E] rounded-full text-[#BE8B3E] px-6 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#BE8B3E] hover:text-white transition">
                 + Add Category
             </a>
 
@@ -212,7 +211,7 @@
 
                                         <a
                                             href="{{ route('admin.categories.edit', $category) }}"
-                                            class="px-4 py-2 border border-gray-300 text-xs uppercase tracking-widest hover:bg-black hover:text-white hover:border-black transition"
+                                            class="px-4 py-2 border border-gray-300 rounded-full text-xs uppercase tracking-widest hover:bg-black hover:text-white hover:border-black transition"
                                         >
                                             Edit
                                         </a>
@@ -230,7 +229,7 @@
 
                                             <button
                                                 type="submit"
-                                                class="px-4 py-2 border border-red-200 text-red-600 text-xs uppercase tracking-widest hover:bg-red-600 hover:text-white hover:border-red-600 transition"
+                                                class="px-4 py-2 border border-red-200 text-red-600 text-xs uppercase tracking-widest hover:bg-red-600 rounded-full cursor-pointer hover:text-white hover:border-red-600 transition"
                                             >
                                                 Delete
                                             </button>

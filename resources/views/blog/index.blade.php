@@ -4,33 +4,253 @@
 
 @section('content')
 
-{{-- Hero --}}
-<section class="relative overflow-hidden bg-black text-white">
-    <div class="absolute inset-0 opacity-10">
-        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#BE8B3E] blur-3xl"></div>
-        <div class="absolute -bottom-32 -left-24 w-96 h-96 rounded-full bg-[#BE8B3E] blur-3xl"></div>
-    </div>
+{{-- =========================================================
+     HERO
+========================================================= --}}
 
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
-        <div class="max-w-3xl">
-            <p class="text-sm sm:text-base font-semibold tracking-[0.25em] uppercase text-[#BE8B3E] mb-4">
-                Bin Roshan Journal
-            </p>
+<section class="relative h-[55vh] min-h-[420px] sm:min-h-[500px] w-full overflow-hidden text-white">
 
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
-                Our Blog
-            </h1>
+    {{-- =====================================================
+         TRANSPARENT NAVIGATION
+    ====================================================== --}}
+    <header class="absolute top-0 left-0 right-0 z-40">
 
-            <p class="mt-5 text-base sm:text-lg text-gray-300 leading-8 max-w-2xl">
-                Discover helpful guides, thoughtful insights and stories from Bin Roshan.
-            </p>
+        <div class="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-12">
+
+            <nav class="h-24 flex items-center justify-between">
+
+                {{-- LEFT SIDE --}}
+
+                <div class="hidden lg:flex items-center gap-10 flex-1">
+
+                    <a
+                        href="{{ route('home') }}"
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                        Home
+                    </a>
+
+                    <a
+                        href="{{ route('shop') }}"
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                        Shop
+                    </a>
+
+                    <a
+                        href="{{ route('categories') }}"
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                        Categories
+                    </a>
+
+                </div>
+
+
+                {{-- =================================================
+                     CENTER LOGO
+                ================================================== --}}
+
+                <a
+                    href="{{ route('home') }}"
+                    class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 -mt-2">
+
+                    <img
+                        src="{{ asset('images/logo/logo.png') }}"
+                        alt="Bin Ismail"
+                        class="h-14 sm:h-16 lg:h-35 max-w-[150px] sm:max-w-none w-auto object-contain">
+
+                </a>
+
+
+                {{-- RIGHT SIDE --}}
+
+                <div class="hidden lg:flex items-center justify-end gap-10 flex-1">
+
+                    <a
+                        href="{{ route('about') }}"
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                        About
+                    </a>
+
+                    <a href="{{ route('blog.index') }}"
+                       class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                       Blogs
+                    </a>
+
+                    <a
+                        href="{{ route('contact') }}"
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                        Contact
+                    </a>
+
+
+                    {{-- SEARCH --}}
+
+                    <button
+                        type="button"
+                        onclick="openSearch()"
+                        aria-label="Search"
+                        class="text-white hover:text-[#BE8B3E] transition cursor-pointer">
+
+                        <svg
+                            class="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24">
+
+                            <circle
+                                cx="11"
+                                cy="11"
+                                r="7"
+                                stroke-width="1.7"/>
+
+                            <path
+                                d="m20 20-4-4"
+                                stroke-width="1.7"
+                                stroke-linecap="round"/>
+
+                        </svg>
+
+                    </button>
+
+
+                    {{-- CART --}}
+
+                    <button
+                        type="button"
+                        onclick="openCart()"
+                        aria-label="Shopping bag"
+                        class="relative text-white hover:text-[#BE8B3E] transition cursor-pointer">
+
+                        <svg
+                            class="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24">
+
+                            <path
+                                d="M6 8h12l1 13H5L6 8Z"
+                                stroke-width="1.5"
+                                stroke-linejoin="round"/>
+
+                            <path
+                                d="M9 8V6a3 3 0 0 1 6 0v2"
+                                stroke-width="1.5"
+                                stroke-linecap="round"/>
+
+                        </svg>
+
+
+                        {{-- CART COUNT --}}
+
+                        <span
+                            id="cart-count"
+                            class="absolute -top-2 -right-3 min-w-[17px] h-[17px] px-1 rounded-full bg-white text-black text-[9px] flex items-center justify-center font-semibold">
+                            0
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                {{-- =================================================
+                     MOBILE MENU BUTTON
+                ================================================== --}}
+
+                <button
+                    type="button"
+                    onclick="openMobileMenu()"
+                    class="lg:hidden text-white shrink-0"
+                    aria-label="Open menu">
+
+                    <svg
+                        class="w-7 h-7"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24">
+
+                        <path
+                            d="M4 7h16M4 12h16M4 17h16"
+                            stroke-width="1.5"
+                            stroke-linecap="round"/>
+
+                    </svg>
+
+                </button>
+
+
+                {{-- MOBILE CART --}}
+
+                <button
+                    type="button"
+                    onclick="openCart()"
+                    class="lg:hidden relative text-white shrink-0"
+                    aria-label="Shopping bag">
+
+                    <svg
+                        class="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24">
+
+                        <path
+                            d="M6 8h12l1 13H5L6 8Z"
+                            stroke-width="1.5"
+                            stroke-linejoin="round"/>
+
+                        <path
+                            d="M9 8V6a3 3 0 0 1 6 0v2"
+                            stroke-width="1.5"
+                            stroke-linecap="round"/>
+
+                    </svg>
+
+                    <span
+                        id="cart-count-mobile"
+                        class="absolute -top-2 -right-3 min-w-[17px] h-[17px] px-1 rounded-full bg-white text-black text-[9px] flex items-center justify-center font-semibold">
+                        0
+                    </span>
+
+                </button>
+
+            </nav>
+
         </div>
+
+    </header>
+
+
+    <img
+        src="{{ asset('images/banners/blogs.jpeg') }}"
+        alt="Bin Roshan contact image"
+        class="absolute inset-0 w-full h-full object-cover">
+
+    <div class="absolute inset-0 bg-black/55"></div>
+
+    <div class="relative z-20 h-full flex items-center justify-center px-4 sm:px-6">
+
+    <div class="text-center max-w-4xl w-full">
+
+            <p class="text-xs uppercase tracking-[0.45em] text-white/70">
+                Our Journel
+            </p>
+
+        <h1 class="text-4xl sm:text-6xl lg:text-8xl font-light tracking-tight leading-tight">
+            Ideas That <span class="text-[#BE8B3E] font-serif italic">Inspire</span>
+        </h1>
+
+        <p class="mt-5 sm:mt-8 max-w-3xl mx-auto text-sm sm:text-base lg:text-lg leading-7 sm:leading-8 text-white/90 px-2">
+            Explore fashion, beauty, jewellery, tailoring, and trends with inspiring ideas, useful tips, and fresh stories from the world of Bin Roshan.
+        </p>
+
+</div>
+
     </div>
+
 </section>
 
 
 {{-- Blog Content --}}
-<section class="bg-gray-50 py-12 sm:py-16 lg:py-20">
+<section class="bg-[#f8f7f4] py-12 sm:py-16 lg:py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {{-- Categories --}}
@@ -78,9 +298,9 @@
                         }
                     @endphp
 
-                    <article class="group bg-white rounded-2xl overflow-hidden
-                                    border border-gray-200 shadow-sm
-                                    hover:shadow-xl transition duration-300">
+                    <article class="group bg-white rounded-xl overflow-hidden
+                                    border border-gray-200
+                                    hover:shadow-lg hover:shadow-[#BE8B3E] transition duration-300">
 
                         {{-- Image --}}
                         <a href="{{ url('/blog/' . $post->slug) }}"

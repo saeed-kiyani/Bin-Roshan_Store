@@ -14,7 +14,7 @@
 
             <div>
 
-                <p class="text-xs uppercase tracking-[0.35em] text-[#a47c15] font-semibold">
+                <p class="text-xs uppercase tracking-[0.35em] text-[#BE8B3E] font-semibold">
                     Admin Panel
                 </p>
 
@@ -30,8 +30,7 @@
 
             <a
                 href="{{ route('admin.products.create') }}"
-                class="inline-flex items-center justify-center bg-black text-white px-6 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#a47c15] transition"
-            >
+                class="inline-flex items-center justify-center border border-[#BE8B3E] rounded-full text-[#BE8B3E] px-6 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#BE8B3E] hover:text-white transition">
                 + Add Product
             </a>
 
@@ -243,7 +242,7 @@
                                         <a
                                             href="{{ route('product.show', $product->slug) }}"
                                             target="_blank"
-                                            class="px-4 py-2 border border-gray-300 text-xs uppercase tracking-widest hover:bg-gray-100 transition"
+                                            class="px-4 py-2 border rounded-full bg-gray-300 border-gray-300 text-xs text-white uppercase tracking-widest hover:bg-transparent hover:text-gray-300 transition"
                                         >
                                             View
                                         </a>
@@ -251,7 +250,7 @@
 
                                         <a
                                             href="{{ route('admin.products.edit', $product) }}"
-                                            class="px-4 py-2 border border-gray-300 text-xs uppercase tracking-widest hover:bg-black hover:text-white hover:border-black transition"
+                                            class="px-4 py-2 border border-gray-300 rounded-full text-xs uppercase tracking-widest hover:bg-black hover:text-white hover:border-black transition"
                                         >
                                             Edit
                                         </a>
@@ -268,7 +267,7 @@
 
                                             <button
                                                 type="submit"
-                                                class="px-4 py-2 border border-red-200 text-red-600 text-xs uppercase tracking-widest hover:bg-red-600 hover:text-white hover:border-red-600 transition"
+                                                class="px-4 py-2 border border-red-200 text-red-600 text-xs uppercase tracking-widest hover:bg-red-600 hover:text-white rounded-full cursor-pointer hover:border-red-600 transition"
                                             >
                                                 Delete
                                             </button>

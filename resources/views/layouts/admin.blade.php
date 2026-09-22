@@ -72,7 +72,7 @@
                 class="group flex items-center gap-4 px-4 py-3.5 mb-1 text-sm transition
                 {{ request()->routeIs('admin.dashboard')
                     ? 'bg-[#BE8B3E] rounded-lg text-white'
-                    : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
+                    : 'text-[#BE8B3E] border border-[#BE8B3E] rounded-lg hover:bg-[#BE8B3E] hover:text-white' }}">
 
                 <svg
                     class="w-5 h-5 flex-shrink-0"

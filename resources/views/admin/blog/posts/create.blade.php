@@ -9,11 +9,15 @@
         {{-- Header --}}
         <div class="mb-8">
             <a href="{{ route('admin.blog.posts.index') }}"
-               class="inline-flex items-center text-sm text-gray-500 hover:text-gray-900 transition mb-4">
+               class="text-xs uppercase tracking-widest text-gray-500 hover:text-black transition">
                 ← Back to Blog Posts
             </a>
 
-            <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">
+            <p class="mt-8 text-xs uppercase tracking-[0.35em] text-[#BE8B3E] font-semibold">
+                Admin Panel
+            </p>
+
+            <h1 class="mt-3 text-4xl font-light">
                 Add New Blog Post
             </h1>
 
@@ -354,18 +358,12 @@
                         sm:justify-end gap-3">
 
                 <a href="{{ route('admin.blog.posts.index') }}"
-                   class="inline-flex items-center justify-center px-5 py-3
-                          rounded-lg border border-gray-300
-                          text-sm font-semibold text-gray-700
-                          hover:bg-gray-100 transition">
+                   class="border border-gray-300 rounded-full px-7 py-4 text-xs uppercase tracking-widest font-semibold text-center hover:bg-gray-300 hover:text-white transition">
                     Cancel
                 </a>
 
                 <button type="submit"
-                        class="inline-flex items-center justify-center px-6 py-3
-                               rounded-lg bg-black text-white
-                               text-sm font-semibold
-                               hover:bg-gray-800 transition">
+                        class="bg-[#BE8B3E] rounded-full cursor-pointer border border-[#BE8B3E] hover:bg-transparent hover:text-[#BE8B3E] text-white px-7 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#a47c15] transition">
                     Save Post
                 </button>
 

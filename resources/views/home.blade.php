@@ -444,7 +444,7 @@
 
                 <a
                     href="{{ route('category.show', $category->slug) }}"
-                    class="group relative overflow-hidden aspect-[3/4] bg-gray-100 rounded-xl">
+                    class="group relative overflow-hidden aspect-[3/4] bg-gray-100 rounded-xl hover:shadow-lg hover:shadow-[#BE8B3E]">
 
                     <div
                         class="absolute inset-0 bg-cover bg-center transition duration-700 group-hover:scale-105"
@@ -538,7 +538,7 @@
 
                     <a
                         href="{{ route('product.show', $product->slug) }}"
-                        class="block overflow-hidden bg-white aspect-[4/5] rounded-xl">
+                        class="block overflow-hidden bg-white aspect-[4/5] rounded-xl hover:shadow-lg hover:shadow-[#BE8B3E]">
 
                         <div
                             class="w-full h-full bg-cover bg-center transition duration-700 group-hover:scale-105"
@@ -679,7 +679,7 @@
                     }
                 @endphp
 
-                <a href="{{ route('product.show', $product->slug) }}" class="group relative overflow-hidden bg-gray-100 aspect-[4/5] rounded-xl">
+                <a href="{{ route('product.show', $product->slug) }}" class="group relative overflow-hidden bg-gray-100 aspect-[4/5] rounded-xl hover:shadow-lg hover:shadow-[#BE8B3E]">
 
                     <div class="absolute inset-0 bg-cover bg-center transition duration-700 group-hover:scale-105" style="background-image: url('{{ $image }}');"></div>
 

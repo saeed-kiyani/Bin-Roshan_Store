@@ -9,7 +9,11 @@
         {{-- Header --}}
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
             <div>
-                <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">
+                <p class="text-xs uppercase tracking-[0.35em] text-[#a47c15] font-semibold">
+                    Admin Panel
+                </p>
+
+                <h1 class="mt-3 text-4xl font-light">
                     Blog Posts
                 </h1>
                 <p class="mt-1 text-sm text-gray-500">
@@ -18,9 +22,7 @@
             </div>
 
             <a href="{{ route('admin.blog.posts.create') }}"
-               class="inline-flex items-center justify-center px-5 py-3 rounded-lg
-                      bg-black text-white text-sm font-semibold
-                      hover:bg-gray-800 transition">
+               class="inline-flex items-center justify-center border border-[#BE8B3E] rounded-full text-[#BE8B3E] px-6 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#BE8B3E] hover:text-white transition">
                 + Add New Post
             </a>
         </div>
@@ -187,9 +189,7 @@
 
                                         {{-- Edit --}}
                                         <a href="{{ route('admin.blog.posts.edit', $post) }}"
-                                           class="inline-flex items-center px-3 py-2 rounded-lg
-                                                  border border-gray-300 text-sm font-medium
-                                                  text-gray-700 hover:bg-gray-100 transition">
+                                           class="px-4 py-2 border border-gray-300 rounded-full text-xs uppercase tracking-widest hover:bg-black hover:text-white hover:border-black transition">
                                             Edit
                                         </a>
 
@@ -201,10 +201,7 @@
                                             @method('DELETE')
 
                                             <button type="submit"
-                                                    class="inline-flex items-center px-3 py-2
-                                                           rounded-lg border border-red-200
-                                                           text-sm font-medium text-red-600
-                                                           hover:bg-red-50 transition">
+                                                    class="px-4 py-2 border border-red-200 text-red-600 text-xs uppercase tracking-widest hover:bg-red-600 rounded-full cursor-pointer hover:text-white hover:border-red-600 transition">
                                                 Delete
                                             </button>
                                         </form>

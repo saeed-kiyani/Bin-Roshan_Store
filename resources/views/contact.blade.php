@@ -10,7 +10,7 @@
      HERO
 ========================================================= --}}
 
-<section class="relative min-h-[60vh] sm:min-h-[70vh] flex items-center overflow-hidden">
+<section class="relative h-[55vh] min-h-[420px] sm:min-h-[500px] w-full overflow-hidden text-white">
 
     {{-- =====================================================
          TRANSPARENT NAVIGATION
@@ -222,25 +222,29 @@
 
 
     <img
-        src="{{ asset('images/banners/BinRoshanfashioncollection.jpeg') }}"
-        alt="Bin Roshan fashion collection"
+        src="{{ asset('images/banners/contact.jpeg') }}"
+        alt="Bin Roshan contact image"
         class="absolute inset-0 w-full h-full object-cover">
 
     <div class="absolute inset-0 bg-black/55"></div>
 
-    <div class="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+    <div class="relative z-20 h-full flex items-center justify-center px-4 sm:px-6">
+
+    <div class="text-center max-w-4xl w-full">
 
             <p class="text-xs uppercase tracking-[0.45em] text-white/70">
                 Our Concierge
             </p>
 
-        <h1 class="mt-7 text-4xl sm:text-6xl lg:text-8xl font-light leading-tight">
+        <h1 class="text-4xl sm:text-6xl lg:text-8xl font-light tracking-tight leading-tight">
             We’re Here To <span class="text-[#BE8B3E] font-serif italic">Help</span>
         </h1>
 
-        <p class="mt-5 sm:mt-8 max-w-2xl mx-auto text-sm sm:text-base text-white/80 leading-6 sm:leading-8">
+        <p class="mt-5 sm:mt-8 max-w-3xl mx-auto text-sm sm:text-base lg:text-lg leading-7 sm:leading-8 text-white/90 px-2">
             Whether you're looking for a specific product, need more information, or simply want to say hello, we'd love to hear from you.
         </p>
+
+</div>
 
     </div>
 

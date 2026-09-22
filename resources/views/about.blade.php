@@ -14,7 +14,7 @@
      HERO
 ========================================================= --}}
 
-<section class="relative min-h-[60vh] sm:min-h-[70vh] flex items-center overflow-hidden">
+<section class="relative h-[55vh] min-h-[420px] sm:min-h-[500px] w-full overflow-hidden text-white">
 
     {{-- =====================================================
          TRANSPARENT NAVIGATION
@@ -226,27 +226,31 @@
 
 
     <img
-        src="{{ asset('images/banners/BinRoshanfashioncollection.jpeg') }}"
-        alt="Bin Roshan fashion collection"
+        src="{{ asset('images/banners/about.jpeg') }}"
+        alt="Bin Roshan about image"
         class="absolute inset-0 w-full h-full object-cover">
 
     <div class="absolute inset-0 bg-black/55"></div>
 
-    <div class="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+    <div class="relative z-20 h-full flex items-center justify-center px-4 sm:px-6">
+
+    <div class="text-center max-w-4xl w-full">
 
         <p class="text-xs uppercase tracking-[0.45em] text-white/70">
                 The Heritage
             </p>
 
-        <h1 class="mt-5 text-4xl sm:text-6xl lg:text-8xl font-light leading-tight">
+        <h1 class="text-4xl sm:text-6xl lg:text-8xl font-light tracking-tight leading-tight">
             Our Legacy of <span class="text-[#BE8B3E] font-serif italic">Style</span>
         </h1>
 
-        <p class="mt-5 sm:mt-8 max-w-2xl mx-auto text-sm sm:text-base text-white/80 leading-6 sm:leading-8">
+        <p class="mt-5 sm:mt-8 max-w-3xl mx-auto text-sm sm:text-base lg:text-lg leading-7 sm:leading-8 text-white/90 px-2">
             A carefully curated destination for clothing, jewelry,
             laces, watches and accessories — bringing timeless
             style together under one name.
         </p>
+
+        </div>
 
     </div>
 
@@ -528,7 +532,7 @@
                         class="absolute right-0 top-1/2 -translate-y-1/2 z-30
                                w-10 h-10 sm:w-12 sm:h-12
                                bg-black text-white
-                               rounded-full
+                               rounded-full cursor-pointer
                                flex items-center justify-center
                                shadow-xl
                                hover:bg-[#BE8B3E]

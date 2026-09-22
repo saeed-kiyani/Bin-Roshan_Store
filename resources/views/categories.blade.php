@@ -10,7 +10,7 @@
      CATEGORY HERO
 ========================================================= --}}
 
-<section class="relative h-[55vh] min-h-[460px] sm:min-h-[500px] w-full overflow-hidden text-white">
+<section class="relative h-[55vh] min-h-[420px] sm:min-h-[500px] w-full overflow-hidden text-white">
 
     {{-- VIDEO BACKGROUND --}}
     <video
@@ -19,8 +19,7 @@
         muted
         loop
         playsinline
-        preload="auto"
-    >
+        preload="auto">
         <source src="{{ asset('videos/categories.mp4') }}" type="video/mp4">
     </video>
 
@@ -291,7 +290,7 @@
 
                 <a
                     href="{{ route('category.show', $category->slug) }}"
-                    class="group relative overflow-hidden bg-gray-100 aspect-[4/5] rounded-lg">
+                    class="group relative overflow-hidden bg-gray-100 aspect-[4/5] rounded-xl hover:shadow-lg hover:shadow-[#BE8B3E]">
 
                     <img
                         src="{{ $categoryImage }}"

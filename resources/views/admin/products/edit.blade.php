@@ -196,7 +196,7 @@
                 ← Back to Products
             </a>
 
-            <p class="mt-8 text-xs uppercase tracking-[0.35em] text-[#a47c15] font-semibold">
+            <p class="mt-8 text-xs uppercase tracking-[0.35em] text-[#BE8B3E] font-semibold">
                 Admin Panel
             </p>
 
@@ -294,7 +294,7 @@
 
                                 @if($image->is_primary)
 
-                                    <span class="absolute top-2 left-2 bg-black text-white px-3 py-1 text-[9px] uppercase tracking-widest font-semibold">
+                                    <span class="absolute top-2 left-2 bg-[#BE8B3E] text-white px-3 py-1 text-[9px] uppercase tracking-widest font-semibold">
                                         Primary
                                     </span>
 
@@ -317,7 +317,7 @@
 
                                         <button
                                             type="submit"
-                                            class="w-full border border-gray-300 px-3 py-2 text-[10px] uppercase tracking-widest hover:bg-black hover:text-white hover:border-black transition"
+                                            class="w-full border border-gray-300 rounded-full cursor-pointer px-3 py-2 text-[10px] uppercase tracking-widest hover:bg-black hover:text-white hover:border-black transition"
                                         >
                                             Make Primary
                                         </button>
@@ -338,7 +338,7 @@
 
                                     <button
                                         type="submit"
-                                        class="w-full border border-red-200 text-red-600 px-3 py-2 text-[10px] uppercase tracking-widest hover:bg-red-600 hover:text-white hover:border-red-600 transition"
+                                        class="w-full border border-red-200 text-red-600 px-3 py-2 text-[10px] rounded-full cursor-pointer uppercase tracking-widest hover:bg-red-600 hover:text-white hover:border-red-600 transition"
                                     >
                                         Delete Image
                                     </button>
@@ -1713,14 +1713,14 @@
 
                 <button
                     type="submit"
-                    class="bg-black text-white px-7 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#a47c15] transition"
+                    class="bg-[#BE8B3E] rounded-full cursor-pointer border border-[#BE8B3E] hover:bg-transparent hover:text-[#BE8B3E] text-white px-7 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#a47c15] transition"
                 >
                     Update Product
                 </button>
 
                 <a
                     href="{{ route('admin.products.index') }}"
-                    class="border border-gray-300 px-7 py-4 text-xs uppercase tracking-widest font-semibold text-center hover:bg-gray-100 transition"
+                    class="border border-gray-300 rounded-full px-7 py-4 text-xs uppercase tracking-widest font-semibold text-center hover:bg-gray-300 hover:text-white transition"
                 >
                     Cancel
                 </a>

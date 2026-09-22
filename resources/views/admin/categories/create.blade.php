@@ -19,7 +19,7 @@
                 ← Back to Categories
             </a>
 
-            <p class="mt-8 text-xs uppercase tracking-[0.35em] text-[#a47c15] font-semibold">
+            <p class="mt-8 text-xs uppercase tracking-[0.35em] text-[#BE8B3E] font-semibold">
                 Admin Panel
             </p>
 
@@ -218,14 +218,14 @@
 
                 <button
                     type="submit"
-                    class="bg-black text-white px-7 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#a47c15] transition"
+                    class="bg-[#BE8B3E] rounded-full cursor-pointer border border-[#BE8B3E] hover:bg-transparent hover:text-[#BE8B3E] text-white px-7 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#a47c15] transition"
                 >
                     Create Category
                 </button>
 
                 <a
                     href="{{ route('admin.categories.index') }}"
-                    class="border border-gray-300 px-7 py-4 text-xs uppercase tracking-widest font-semibold text-center hover:bg-gray-100 transition"
+                    class="border border-gray-300 rounded-full px-7 py-4 text-xs uppercase tracking-widest font-semibold text-center hover:bg-gray-300 hover:text-white transition"
                 >
                     Cancel
                 </a>

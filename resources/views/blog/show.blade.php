@@ -13,13 +13,13 @@
 @endphp
 
 {{-- Article Header --}}
-<section class="bg-black text-white">
+<section class="bg-black/80 text-white">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
 
         {{-- Breadcrumb --}}
         <div class="mb-8">
             <a href="{{ route('blog.index') }}"
-               class="text-sm text-gray-400 hover:text-white transition">
+               class="text-sm text-gray-400 hover:text-[#BE8B3E] transition">
                 ← Back to Blog
             </a>
         </div>
@@ -28,7 +28,7 @@
         @if($post->category)
             <div class="mb-5">
                 <span class="inline-flex items-center px-3 py-1.5 rounded-full
-                             bg-[#BE8B3E]/15 text-[#D5A85A]
+                             bg-[#BE8B3E]/15 text-[#BE8B3E] border border-[#BE8B3E]
                              text-xs sm:text-sm font-semibold">
                     {{ $post->category->name }}
                 </span>

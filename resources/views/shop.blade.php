@@ -133,12 +133,10 @@
         muted
         loop
         playsinline
-        preload="auto"
-    >
+        preload="auto">
         <source
             src="{{ asset('videos/shop.mp4') }}"
-            type="video/mp4"
-        >
+            type="video/mp4">
     </video>
 
     {{-- OVERLAY --}}
@@ -1993,7 +1991,8 @@
 
                                 {{-- IMAGE --}}
 
-                                <div class="relative overflow-hidden bg-gray-100 aspect-[4/5] rounded-lg">
+                                <div class="relative overflow-hidden bg-gray-100 aspect-[4/5] rounded-xl
+                                hover:shadow-lg hover:shadow-[#BE8B3E]">
 
                                     <a
                                         href="{{ route(
@@ -2005,7 +2004,7 @@
                                         <img
                                             src="{{ $imageUrl }}"
                                             alt="{{ $product->name }}"
-                                            class="w-full h-full rounded-xl object-cover transition duration-700 group-hover:scale-105"
+                                            class="w-full h-full  object-cover transition duration-700 group-hover:scale-105"
                                             loading="lazy"
                                             onerror="this.onerror=null;this.src='{{ asset('images/placeholder.jpg') }}';">
 
