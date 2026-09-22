@@ -1,11 +1,31 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
+import os from 'os';
+
+function getLocalIp() {
+    const interfaces = os.networkInterfaces();
+
+    for (const name of Object.keys(interfaces)) {
+        for (const net of interfaces[name] || []) {
+            if (net.family === 'IPv4' && !net.internal) {
+                return net.address;
+            }
+        }
+    }
+
+    return '127.0.0.1';
+}
+
+const localIp = getLocalIp();
 
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: [
+                'resources/css/app.css',
+                'resources/js/app.js',
+            ],
             refresh: true,
         }),
         tailwindcss(),
@@ -16,11 +36,7 @@ export default defineConfig({
         port: 5173,
 
         hmr: {
-            host: '192.168.2.102',
-        },
-
-        watch: {
-            ignored: ['**/storage/framework/views/**'],
+            host: localIp,
         },
     },
 });

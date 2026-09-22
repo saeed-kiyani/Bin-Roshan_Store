@@ -7,6 +7,9 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminAuthController;
 use App\Models\Category;
+use App\Http\Controllers\BlogCategoryController;
+use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\BlogController;
 
 
 /*
@@ -108,6 +111,49 @@ Route::middleware(['admin'])
         Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])
             ->name('categories.destroy');
 
+        /*
+|--------------------------------------------------------------------------
+| Admin Blog Categories
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/blog/categories', [BlogCategoryController::class, 'index'])
+    ->name('blog.categories.index');
+
+Route::get('/blog/categories/create', [BlogCategoryController::class, 'create'])
+    ->name('blog.categories.create');
+
+Route::post('/blog/categories', [BlogCategoryController::class, 'store'])
+    ->name('blog.categories.store');
+
+Route::get('/blog/categories/{blogCategory}/edit', [BlogCategoryController::class, 'edit'])
+    ->name('blog.categories.edit');
+
+Route::put('/blog/categories/{blogCategory}', [BlogCategoryController::class, 'update'])
+    ->name('blog.categories.update');
+
+Route::delete('/blog/categories/{blogCategory}', [BlogCategoryController::class, 'destroy'])
+    ->name('blog.categories.destroy');
+
+    // Blog Posts
+Route::get('/blog/posts', [BlogPostController::class, 'index'])
+    ->name('blog.posts.index');
+
+Route::get('/blog/posts/create', [BlogPostController::class, 'create'])
+    ->name('blog.posts.create');
+
+Route::post('/blog/posts', [BlogPostController::class, 'store'])
+    ->name('blog.posts.store');
+
+Route::get('/blog/posts/{blogPost}/edit', [BlogPostController::class, 'edit'])
+    ->name('blog.posts.edit');
+
+Route::put('/blog/posts/{blogPost}', [BlogPostController::class, 'update'])
+    ->name('blog.posts.update');
+
+Route::delete('/blog/posts/{blogPost}', [BlogPostController::class, 'destroy'])
+    ->name('blog.posts.destroy');
+
     });
 
 
@@ -183,3 +229,9 @@ Route::get('/contact', function () {
 Route::get('/test-home-route', function () {
     return route('home');
 });
+
+Route::get('/blog', [BlogController::class, 'index'])
+    ->name('blog.index');
+
+Route::get('/blog/{slug}', [BlogController::class, 'show'])
+    ->name('blog.show');

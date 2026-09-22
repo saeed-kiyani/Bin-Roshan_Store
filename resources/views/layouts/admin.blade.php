@@ -13,6 +13,8 @@
         'resources/css/app.css',
         'resources/js/app.js'
     ])
+
+    @stack('styles')
 </head>
 
 <body class="bg-[#f8f7f4] text-gray-900 antialiased">
@@ -27,7 +29,8 @@
         SIDEBAR
     ====================================================== --}}
 
-    <aside id="admin-sidebar" class="fixed bg-gray-200 inset-y-0 left-0 z-50 w-65 bg-black text-white transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
+    <aside id="admin-sidebar"
+        class="fixed bg-gray-200 inset-y-0 left-0 z-50 w-65 bg-black text-white transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
 
         {{-- LOGO / BRAND --}}
 
@@ -36,18 +39,23 @@
             <a href="{{ route('admin.dashboard') }}" class="flex items-center">
 
                 <div class="w-25 h-25 flex items-center justify-center">
-                    <img src="{{ asset('images/logo/logo.png') }}" alt="Bin Roshan" class="h-16 lg:h-35 w-auto object-contain">
+                    <img src="{{ asset('images/logo/logo.png') }}"
+                        alt="Bin Roshan"
+                        class="h-16 lg:h-35 w-auto object-contain">
                 </div>
 
                 <div>
                     <p class="text-black text-lg font-light tracking-wide">
                         Bin Roshan
                     </p>
+
                     <p class="text-[8px] uppercase tracking-[0.35em] text-[#BE8B3E]">
                         Admin Panel
                     </p>
                 </div>
+
             </a>
+
         </div>
 
         {{-- NAVIGATION --}}
@@ -60,10 +68,12 @@
 
             {{-- DASHBOARD --}}
 
-            <a href="{{ route('admin.dashboard') }}" class="group flex items-center gap-4 px-4 py-3.5 mb-1 text-sm transition
+            <a href="{{ route('admin.dashboard') }}"
+                class="group flex items-center gap-4 px-4 py-3.5 mb-1 text-sm transition
                 {{ request()->routeIs('admin.dashboard')
                     ? 'bg-[#BE8B3E] rounded-lg text-white'
                     : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
+
                 <svg
                     class="w-5 h-5 flex-shrink-0"
                     fill="none"
@@ -71,22 +81,24 @@
                     stroke-width="1.5"
                     viewBox="0 0 24 24">
 
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M3 13h8V3H3v10zm10 8h8V11h-8v10zM3 21h8v-4H3v4zm10-10h8V3h-8v8z"/>
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M3 13h8V3H3v10zm10 8h8V11h-8v10zM3 21h8v-4H3v4zm10-10h8V3h-8v8z" />
+
                 </svg>
 
                 <span>
                     Dashboard
                 </span>
+
             </a>
 
             {{-- PRODUCTS --}}
 
-            <a href="{{ route('admin.products.index') }}" 
-               class="group flex items-center gap-4 px-4 py-3.5 mb-1 text-sm [#BE8B3E] rounded-lg transition
-                    {{ request()->routeIs('admin.products.*')
+            <a href="{{ route('admin.products.index') }}"
+                class="group flex items-center gap-4 px-4 py-3.5 mb-1 text-sm border border-[#BE8B3E] rounded-lg transition
+                {{ request()->routeIs('admin.products.*')
                     ? 'bg-[#BE8B3E] text-white'
                     : 'text-[#BE8B3E] hover:bg-[#BE8B3E] hover:text-white' }}">
 
@@ -96,10 +108,12 @@
                     stroke="currentColor"
                     stroke-width="1.5"
                     viewBox="0 0 24 24">
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M20 7l-8-4-8 4m16 0v10l-8 4-8-4V7m16 0l-8 4m-8-4l8 4m0 0v10"/>
+
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M20 7l-8-4-8 4m16 0v10l-8 4-8-4V7m16 0l-8 4m-8-4l8 4m0 0v10" />
+
                 </svg>
 
                 <span>
@@ -111,25 +125,119 @@
             {{-- CATEGORIES --}}
 
             <a href="{{ route('admin.categories.index') }}"
-               class="group flex items-center gap-4 px-4 py-3.5 mb-1 text-sm border border-[#BE8B3E] rounded-lg transition
-               {{ request()->routeIs('admin.categories.*')
-                   ? 'bg-[#BE8B3E] text-white'
-                   : 'text-[#BE8B3E] hover:bg-[#BE8B3E] hover:text-white' }}">
+                class="group flex items-center gap-4 px-4 py-3.5 mb-1 text-sm border border-[#BE8B3E] rounded-lg transition
+                {{ request()->routeIs('admin.categories.*')
+                    ? 'bg-[#BE8B3E] text-white'
+                    : 'text-[#BE8B3E] hover:bg-[#BE8B3E] hover:text-white' }}">
 
                 <svg
                     class="w-5 h-5 flex-shrink-0 transition"
                     fill="none"
                     stroke="currentColor"
                     stroke-width="1.5"
-                viewBox="0 0 24 24">
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M4 5h6v6H4V5zm10 0h6v6h-6V5zM4 15h6v6H4v-6zm10 0h6v6h-6v-6z"/>
+                    viewBox="0 0 24 24">
+
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4 5h6v6H4V5zm10 0h6v6h-6V5zM4 15h6v6H4v-6zm10 0h6v6h-6v-6z" />
+
                 </svg>
 
                 <span>
                     Categories
+                </span>
+
+            </a>
+
+            {{-- BLOG --}}
+
+            <div class="mt-7 mb-3 px-3">
+                <p class="text-[9px] uppercase tracking-[0.35em] text-black font-semibold">
+                    Blog
+                </p>
+            </div>
+
+            {{-- ALL POSTS --}}
+
+            <a href="{{ route('admin.blog.posts.index') }}"
+                class="group flex items-center gap-4 px-4 py-3.5 mb-1 text-sm border border-[#BE8B3E] rounded-lg transition
+                {{ request()->routeIs('admin.blog.posts.*')
+                    ? 'bg-[#BE8B3E] text-white'
+                    : 'text-[#BE8B3E] hover:bg-[#BE8B3E] hover:text-white' }}">
+
+                <svg
+                    class="w-5 h-5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    viewBox="0 0 24 24">
+
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4 5h16M4 9h16M4 13h10M4 17h7" />
+
+                </svg>
+
+                <span>
+                    All Posts
+                </span>
+
+            </a>
+
+            {{-- ADD NEW POST --}}
+
+            <a href="{{ route('admin.blog.posts.create') }}"
+                class="group flex items-center gap-4 px-4 py-3.5 mb-1 text-sm border border-[#BE8B3E] rounded-lg transition
+                {{ request()->routeIs('admin.blog.posts.create')
+                    ? 'bg-[#BE8B3E] text-white'
+                    : 'text-[#BE8B3E] hover:bg-[#BE8B3E] hover:text-white' }}">
+
+                <svg
+                    class="w-5 h-5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    viewBox="0 0 24 24">
+
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M12 5v14M5 12h14" />
+
+                </svg>
+
+                <span>
+                    Add New Post
+                </span>
+
+            </a>
+
+            {{-- BLOG CATEGORIES --}}
+
+            <a href="{{ route('admin.blog.categories.index') }}"
+                class="group flex items-center gap-4 px-4 py-3.5 mb-1 text-sm border border-[#BE8B3E] rounded-lg transition
+                {{ request()->routeIs('admin.blog.categories.*')
+                    ? 'bg-[#BE8B3E] text-white'
+                    : 'text-[#BE8B3E] hover:bg-[#BE8B3E] hover:text-white' }}">
+
+                <svg
+                    class="w-5 h-5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    viewBox="0 0 24 24">
+
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4 6h16M4 12h10M4 18h16" />
+
+                </svg>
+
+                <span>
+                    Blog Categories
                 </span>
 
             </a>
@@ -144,8 +252,9 @@
 
             {{-- VIEW STORE --}}
 
-            <a href="{{ route('home') }}" target="_blank"
-               class="flex items-center border border-[#BE8B3E] rounded-lg bg-[#BE8B3E] gap-4 px-4 py-3.5 text-sm text-white hover:bg-white/5 hover:text-[#BE8B3E] transition">
+            <a href="{{ route('home') }}"
+                target="_blank"
+                class="flex items-center border border-[#BE8B3E] rounded-lg bg-[#BE8B3E] gap-4 px-4 py-3.5 text-sm text-white hover:bg-white/5 hover:text-[#BE8B3E] transition">
 
                 <svg
                     class="w-5 h-5 flex-shrink-0"
@@ -153,15 +262,17 @@
                     stroke="currentColor"
                     stroke-width="1.5"
                     viewBox="0 0 24 24">
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M2.5 12s3.5-5 9.5-5 9.5 5 9.5 5-3.5 5-9.5 5-9.5-5-9.5-5z"/>
 
-                <circle
-                    cx="12"
-                    cy="12"
-                    r="2.5"/>
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M2.5 12s3.5-5 9.5-5 9.5 5 9.5 5-3.5 5-9.5 5-9.5-5-9.5-5z" />
+
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="2.5" />
+
                 </svg>
 
                 <span>
@@ -174,10 +285,12 @@
                     stroke="currentColor"
                     stroke-width="1.5"
                     viewBox="0 0 24 24">
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M7 17L17 7M8 7h9v9"/>
+
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M7 17L17 7M8 7h9v9" />
+
                 </svg>
 
             </a>
@@ -214,10 +327,12 @@
                         stroke="currentColor"
                         stroke-width="1.5"
                         viewBox="0 0 24 24">
+
                         <path
                             stroke-linecap="round"
                             stroke-linejoin="round"
-                            d="M4 6h16M4 12h16M4 18h16"/>
+                            d="M4 6h16M4 12h16M4 18h16" />
+
                     </svg>
 
                 </button>
@@ -242,8 +357,9 @@
 
                     {{-- VIEW STORE --}}
 
-                    <a href="{{ route('shop') }}" target="_blank"
-                       class="hidden sm:inline-flex items-center gap-2 border border-[#BE8B3E] rounded-full px-4 py-2.5 text-[9px] uppercase tracking-widest font-semibold text-[#BE8B3E] hover:bg-[#BE8B3E] hover:text-gray-200 transition">
+                    <a href="{{ route('shop') }}"
+                        target="_blank"
+                        class="hidden sm:inline-flex items-center gap-2 border border-[#BE8B3E] rounded-full px-4 py-2.5 text-[9px] uppercase tracking-widest font-semibold text-[#BE8B3E] hover:bg-[#BE8B3E] hover:text-gray-200 transition">
 
                         <svg
                             class="w-4 h-4"
@@ -251,60 +367,71 @@
                             stroke="currentColor"
                             stroke-width="1.5"
                             viewBox="0 0 24 24">
+
                             <path
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                d="M2.5 12s3.5-5 9.5-5 9.5 5 9.5 5-3.5 5-9.5 5-9.5-5-9.5-5z"/>
+                                d="M2.5 12s3.5-5 9.5-5 9.5 5 9.5 5-3.5 5-9.5 5-9.5-5-9.5-5z" />
+
                             <circle
                                 cx="12"
                                 cy="12"
-                                r="2.5"/>
+                                r="2.5" />
+
                         </svg>
+
                         View Store
+
                     </a>
 
                     {{-- ADMIN PROFILE --}}
 
-<div class="flex items-center gap-3">
+                    <div class="flex items-center gap-3">
 
-    <form method="POST" action="{{ route('admin.logout') }}">
+                        <form method="POST" action="{{ route('admin.logout') }}">
 
-                @csrf
+                            @csrf
 
-        <button type="submit"
-                class="w-10 h-10 border border-[#BE8B3E] cursor-pointer rounded-full flex items-center justify-center text-[#BE8B3E] hover:bg-[#BE8B3E] hover:text-white transition" title="Logout">
+                            <button
+                                type="submit"
+                                class="w-10 h-10 border border-[#BE8B3E] cursor-pointer rounded-full flex items-center justify-center text-[#BE8B3E] hover:bg-[#BE8B3E] hover:text-white transition"
+                                title="Logout">
 
-            <svg
-                    class="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    viewBox="0 0 24 24">
+                                <svg
+                                    class="w-4 h-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    viewBox="0 0 24 24">
 
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M9 5H5a2 2 0 00-2 2v10a2 2 0 002 2h4"/>
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M9 5H5a2 2 0 00-2 2v10a2 2 0 002 2h4" />
 
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M16 17l5-5-5-5"/>
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M16 17l5-5-5-5" />
 
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M21 12H9"/>
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M21 12H9" />
 
-            </svg>
+                                </svg>
 
-        </button>
+                            </button>
 
-    </form>
+                        </form>
 
-</div>
+                    </div>
 
-</header>
+                </div>
+
+            </div>
+
+        </header>
 
         {{-- =================================================
             PAGE CONTENT
@@ -316,10 +443,7 @@
 
         </main>
 
-
     </div>
-
-
 
     {{-- =====================================================
         MOBILE SIDEBAR SCRIPT
@@ -330,11 +454,8 @@
         document.addEventListener('DOMContentLoaded', function () {
 
             const sidebar = document.getElementById('admin-sidebar');
-
             const overlay = document.getElementById('admin-overlay');
-
             const menuButton = document.getElementById('admin-menu-button');
-
 
             function openSidebar() {
 
@@ -346,7 +467,6 @@
 
             }
 
-
             function closeSidebar() {
 
                 sidebar.classList.add('-translate-x-full');
@@ -357,20 +477,17 @@
 
             }
 
-
             if (menuButton) {
 
                 menuButton.addEventListener('click', openSidebar);
 
             }
 
-
             if (overlay) {
 
                 overlay.addEventListener('click', closeSidebar);
 
             }
-
 
             document.querySelectorAll('#admin-sidebar a').forEach(function (link) {
 
@@ -389,6 +506,8 @@
         });
 
     </script>
+
+    @stack('scripts')
 
 </body>
 

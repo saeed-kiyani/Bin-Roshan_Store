@@ -72,6 +72,11 @@
                         About
                     </a>
 
+                    <a href="{{ route('blog.index') }}"
+                       class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                       Blogs
+                    </a>
+
                     <a
                         href="{{ route('contact') }}"
                         class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
