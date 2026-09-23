@@ -41,7 +41,7 @@
 
 
     {{-- =====================================================
-         TRANSPARENT NAVIGATION
+          TRANSPARENT NAVIGATION
     ====================================================== --}}
     <header class="absolute top-0 left-0 right-0 z-40">
 
@@ -208,39 +208,74 @@
                 </button>
 
 
-                {{-- MOBILE CART --}}
+                {{-- MOBILE RIGHT ICONS (SEARCH + CART) --}}
 
-                <button
-                    type="button"
-                    onclick="openCart()"
-                    class="lg:hidden relative text-white shrink-0"
-                    aria-label="Shopping bag">
+                <div class="lg:hidden flex items-center gap-5">
 
-                    <svg
-                        class="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24">
+                    {{-- SEARCH --}}
 
-                        <path
-                            d="M6 8h12l1 13H5L6 8Z"
-                            stroke-width="1.5"
-                            stroke-linejoin="round"/>
+                    <button
+                        type="button"
+                        onclick="openSearch()"
+                        aria-label="Search"
+                        class="relative text-white shrink-0">
 
-                        <path
-                            d="M9 8V6a3 3 0 0 1 6 0v2"
-                            stroke-width="1.5"
-                            stroke-linecap="round"/>
+                        <svg
+                            class="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24">
 
-                    </svg>
+                            <circle
+                                cx="11"
+                                cy="11"
+                                r="7"
+                                stroke-width="1.7"/>
 
-                    <span
-                        id="cart-count-mobile"
-                        class="absolute -top-2 -right-3 min-w-[17px] h-[17px] px-1 rounded-full bg-white text-black text-[9px] flex items-center justify-center font-semibold">
-                        0
-                    </span>
+                            <path
+                                d="m20 20-4-4"
+                                stroke-width="1.7"
+                                stroke-linecap="round"/>
 
-                </button>
+                        </svg>
+
+                    </button>
+
+                    {{-- MOBILE CART --}}
+
+                    <button
+                        type="button"
+                        onclick="openCart()"
+                        aria-label="Shopping bag"
+                        class="relative text-white shrink-0">
+
+                        <svg
+                            class="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24">
+
+                            <path
+                                d="M6 8h12l1 13H5L6 8Z"
+                                stroke-width="1.5"
+                                stroke-linejoin="round"/>
+
+                            <path
+                                d="M9 8V6a3 3 0 0 1 6 0v2"
+                                stroke-width="1.5"
+                                stroke-linecap="round"/>
+
+                        </svg>
+
+                        <span
+                            id="cart-count-mobile"
+                            class="absolute -top-2 -right-3 min-w-[17px] h-[17px] px-1 rounded-full bg-white text-black text-[9px] flex items-center justify-center font-semibold">
+                            0
+                        </span>
+
+                    </button>
+
+                </div>
 
             </nav>
 

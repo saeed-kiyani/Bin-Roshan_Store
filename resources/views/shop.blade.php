@@ -1937,7 +1937,7 @@
                 @if($products->count())
 
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-x-3 sm:gap-x-6 gap-y-10 sm:gap-y-12">
-
+    
                         @foreach($products as $product)
 
                             @php

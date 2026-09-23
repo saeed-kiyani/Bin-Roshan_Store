@@ -94,8 +94,8 @@
             </a>
 
             <a href="{{ route('blog.index') }}"
-               class="block px-4 py-2 text-sm text-gray-700 hover:text-[#BE8B3E]">
-               Blog
+               class="border-b border-neutral-200 py-5 hover:text-[#BE8B3E] text-lg">
+               Blogs
             </a>
 
             <a
