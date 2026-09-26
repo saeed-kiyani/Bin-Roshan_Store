@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ShopController extends Controller
 {
@@ -90,20 +91,72 @@ class ShopController extends Controller
         }
 
         /*
-        |--------------------------------------------------------------------------
-        | SEARCH
-        |--------------------------------------------------------------------------
-        */
-        if ($request->filled('search')) {
-            $search = trim($request->input('search'));
+|--------------------------------------------------------------------------
+| SEARCH
+|--------------------------------------------------------------------------
+|
+| Global product search.
+| Searches product information, category information, brands and
+| category-specific product fields.
+|--------------------------------------------------------------------------
+*/
+if ($request->filled('search')) {
+    $search = trim($request->input('search'));
+    $searchTerm = '%' . $search . '%';
 
-            $products->where(function ($query) use ($search) {
-                $query
-                    ->where('name', 'like', "%{$search}%")
-                    ->orWhere('description', 'like', "%{$search}%")
-                    ->orWhere('sku', 'like', "%{$search}%");
-            });
-        }
+    $products->where(function ($query) use ($searchTerm, $search) {
+
+        // Basic product information
+        $query
+            ->where('name', 'like', $searchTerm)
+            ->orWhere('description', 'like', $searchTerm)
+            ->orWhere('sku', 'like', $searchTerm)
+            ->orWhere('brand', 'like', $searchTerm)
+            ->orWhere('gender', 'like', $searchTerm)
+
+            // Category name / slug
+            ->orWhereHas('category', function ($categoryQuery) use ($searchTerm) {
+                $categoryQuery
+                    ->where('name', 'like', $searchTerm)
+                    ->orWhere('slug', 'like', $searchTerm);
+            })
+
+            // Clothing
+            ->orWhereJsonContains('sizes', $search)
+            
+            // Lace
+            ->orWhere('lace_category', 'like', $searchTerm)
+            ->orWhereJsonContains('lace_subcategories', $search)
+            ->orWhereJsonContains('width', $search)
+            ->orWhereJsonContains('height', $search)
+            ->orWhereJsonContains('length', $search)
+
+            // Cosmetics
+            ->orWhere('cosmetic_product_type', 'like', $searchTerm)
+            ->orWhereJsonContains('skin_types', $search)
+            ->orWhereJsonContains('concerns', $search)
+            ->orWhereJsonContains('product_forms', $search)
+
+            // Jewelry
+            ->orWhereJsonContains('jewelry_gender', $search)
+            ->orWhere('jewelry_type', 'like', $searchTerm)
+            ->orWhereJsonContains('jewelry_subcategories', $search)
+            ->orWhereJsonContains('jewelry_quality', $search)
+            ->orWhereJsonContains('ring_sizes', $search)
+            ->orWhereJsonContains('necklace_lengths', $search)
+            ->orWhereJsonContains('bracelet_sizes', $search)
+
+            // Watches
+            ->orWhereJsonContains('watch_gender', $search)
+            ->orWhere('strap_material', 'like', $searchTerm)
+            ->orWhere('watch_type', 'like', $searchTerm)
+
+            // Other accessories
+            ->orWhere('buttons', 'like', $searchTerm)
+            ->orWhere('piping_clothes', 'like', $searchTerm)
+            ->orWhere('accessory_type', 'like', $searchTerm);
+    });
+}
 
         /*
         |--------------------------------------------------------------------------
@@ -689,6 +742,180 @@ class ShopController extends Controller
 
         return view('shop', $viewData);
     }
+
+    public function searchSuggestions(Request $request)
+{
+    $search = trim($request->input('search', ''));
+
+    if ($search === '') {
+        return response()->json([
+            'products' => [],
+        ]);
+    }
+
+    $searchTerm = '%' . $search . '%';
+
+    $products = Product::query()
+        ->with(['category', 'primaryImage'])
+        ->where('is_active', true)
+
+        ->where(function ($query) use ($searchTerm, $search) {
+
+            $query
+                // Product basic information
+                ->where('name', 'like', $searchTerm)
+                ->orWhere('description', 'like', $searchTerm)
+                ->orWhere('sku', 'like', $searchTerm)
+                ->orWhere('brand', 'like', $searchTerm)
+                ->orWhere('gender', 'like', $searchTerm)
+
+                // Category
+                ->orWhereHas('category', function ($categoryQuery) use ($searchTerm) {
+                    $categoryQuery
+                        ->where('name', 'like', $searchTerm)
+                        ->orWhere('slug', 'like', $searchTerm);
+                })
+
+                // Clothing
+                ->orWhereJsonContains('sizes', $search)
+
+                // Lace
+                ->orWhere('lace_category', 'like', $searchTerm)
+                ->orWhereJsonContains('lace_subcategories', $search)
+                ->orWhereJsonContains('width', $search)
+                ->orWhereJsonContains('height', $search)
+                ->orWhereJsonContains('length', $search)
+
+                // Cosmetics
+                ->orWhere('cosmetic_product_type', 'like', $searchTerm)
+                ->orWhereJsonContains('skin_types', $search)
+                ->orWhereJsonContains('concerns', $search)
+                ->orWhereJsonContains('product_forms', $search)
+
+                // Jewelry
+                ->orWhereJsonContains('jewelry_gender', $search)
+                ->orWhere('jewelry_type', 'like', $searchTerm)
+                ->orWhereJsonContains('jewelry_subcategories', $search)
+                ->orWhereJsonContains('jewelry_quality', $search)
+                ->orWhereJsonContains('ring_sizes', $search)
+                ->orWhereJsonContains('necklace_lengths', $search)
+                ->orWhereJsonContains('bracelet_sizes', $search)
+
+                // Watches
+                ->orWhereJsonContains('watch_gender', $search)
+                ->orWhere('strap_material', 'like', $searchTerm)
+                ->orWhere('watch_type', 'like', $searchTerm)
+
+                // Other accessories
+                ->orWhere('buttons', 'like', $searchTerm)
+                ->orWhere('piping_clothes', 'like', $searchTerm)
+                ->orWhere('accessory_type', 'like', $searchTerm);
+        })
+
+        /*
+        |--------------------------------------------------------------------------
+        | SEARCH RELEVANCE
+        |--------------------------------------------------------------------------
+        |
+        | Lower number = higher priority.
+        |
+        */
+
+        // 1. Exact product name
+        ->orderByRaw(
+            'CASE WHEN LOWER(name) = LOWER(?) THEN 1 ELSE 9 END',
+            [$search]
+        )
+
+        // 2. Product name starts with search
+        ->orderByRaw(
+            'CASE WHEN LOWER(name) LIKE LOWER(?) THEN 2 ELSE 9 END',
+            [$search . '%']
+        )
+
+        // 3. Product name contains search
+        ->orderByRaw(
+            'CASE WHEN LOWER(name) LIKE LOWER(?) THEN 3 ELSE 9 END',
+            [$searchTerm]
+        )
+
+        // 4. Category matches search
+        ->orderByRaw(
+            'CASE
+                WHEN EXISTS (
+                    SELECT 1
+                    FROM categories
+                    WHERE categories.id = products.category_id
+                    AND (
+                        LOWER(categories.name) LIKE LOWER(?)
+                        OR LOWER(categories.slug) LIKE LOWER(?)
+                    )
+                )
+                THEN 4
+                ELSE 9
+            END',
+            [$searchTerm, $searchTerm]
+        )
+
+        // 5. Watch / Lace / Cosmetic / Jewelry / other attributes
+        ->orderByRaw(
+            'CASE
+                WHEN LOWER(COALESCE(lace_category, \'\')) LIKE LOWER(?) THEN 5
+                WHEN LOWER(COALESCE(cosmetic_product_type, \'\')) LIKE LOWER(?) THEN 5
+                WHEN LOWER(COALESCE(jewelry_type, \'\')) LIKE LOWER(?) THEN 5
+                WHEN LOWER(COALESCE(strap_material, \'\')) LIKE LOWER(?) THEN 5
+                WHEN LOWER(COALESCE(watch_type, \'\')) LIKE LOWER(?) THEN 5
+                WHEN LOWER(COALESCE(buttons, \'\')) LIKE LOWER(?) THEN 5
+                WHEN LOWER(COALESCE(piping_clothes, \'\')) LIKE LOWER(?) THEN 5
+                WHEN LOWER(COALESCE(accessory_type, \'\')) LIKE LOWER(?) THEN 5
+                ELSE 9
+            END',
+            [
+                $searchTerm,
+                $searchTerm,
+                $searchTerm,
+                $searchTerm,
+                $searchTerm,
+                $searchTerm,
+                $searchTerm,
+                $searchTerm,
+            ]
+        )
+
+        ->orderBy('name')
+        ->limit(6)
+        ->get();
+
+    return response()->json([
+        'products' => $products->map(function ($product) {
+
+            $image = null;
+
+            if (
+                $product->primaryImage &&
+                $product->primaryImage->image
+            ) {
+                $image = Storage::url(
+                    $product->primaryImage->image
+                );
+            }
+
+            $price = $product->sale_price ?? $product->price;
+
+            return [
+                'id' => $product->id,
+                'name' => $product->name,
+                'price' => $price,
+                'image' => $image,
+                'url' => route(
+                    'product.show',
+                    $product->slug
+                ),
+            ];
+
+        })->values(),
+    ]);
+}
 
     /**
      * Always return a clean array for checkbox query-string inputs.

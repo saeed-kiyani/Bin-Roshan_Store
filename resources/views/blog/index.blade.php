@@ -273,7 +273,7 @@
                           text-sm font-semibold transition
                           {{ $currentCategory && $currentCategory->id === $category->id
                               ? 'bg-black text-white'
-                              : 'bg-white text-gray-700 border border-gray-200 hover:border-[#BE8B3E] hover:text-[#BE8B3E]' }}">
+                              : 'bg-white text-gray-700 border border-gray-200 hover:border-[#BE8B3E] hover:text-[#BE8B3E]'}}">
                     {{ $category->name }}
                 </a>
             @endforeach

@@ -170,7 +170,9 @@ Route::get('/', [ProductController::class, 'home'])
 Route::get('/shop', [ShopController::class, 'index'])
     ->name('shop');
 
-
+Route::get('/shop/search-suggestions', [ShopController::class, 'searchSuggestions'])
+    ->name('shop.search.suggestions');
+    
 Route::get('/product/{slug}', [ProductController::class, 'show'])
     ->name('product.show');
 

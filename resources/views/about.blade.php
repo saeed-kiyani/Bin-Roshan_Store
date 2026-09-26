@@ -224,7 +224,6 @@
 
     </header>
 
-
     <img
         src="{{ asset('images/banners/about.jpeg') }}"
         alt="Bin Roshan about image"
@@ -256,8 +255,6 @@
 
 </section>
 
-
-
 {{-- =========================================================
      INTRODUCTION
 ========================================================= --}}
@@ -279,7 +276,6 @@
                 </h2>
 
             </div>
-
 
             <div class="text-gray-600 text-sm sm:text-base leading-7 sm:leading-8 space-y-5 sm:space-y-6">
 
@@ -310,8 +306,6 @@
 
 </section>
 
-
-
 {{-- =========================================================
      IMAGE + STORY
 ========================================================= --}}
@@ -330,7 +324,6 @@
                     class="w-full h-full object-cover rounded-full">
 
             </div>
-
 
             <div class="lg:pr-10">
 
@@ -359,7 +352,6 @@
 
                 </div>
 
-
                 <div class="mt-8 sm:mt-10 grid grid-cols-2 gap-x-6 sm:gap-x-8 gap-y-7 sm:gap-y-8">
 
                     <div>
@@ -374,7 +366,6 @@
 
                     </div>
 
-
                     <div>
 
                         <p class="text-3xl font-light text-[#BE8B3E]">
@@ -387,7 +378,6 @@
 
                     </div>
 
-
                     <div>
 
                         <p class="text-3xl font-light text-[#BE8B3E]">
@@ -399,7 +389,6 @@
                         </p>
 
                     </div>
-
 
                     <div>
 
@@ -423,8 +412,6 @@
 
 </section>
 
-
-
 {{-- =========================================================
      CATEGORIES
 ========================================================= --}}
@@ -447,7 +434,6 @@
             </h2>
 
         </div>
-
 
         {{-- =================================================
              CATEGORY CAROUSEL
@@ -486,13 +472,11 @@
 
                                 @endif
 
-
                                 {{-- OVERLAY --}}
 
                                 <div
                                     class="absolute inset-0 bg-black/60 group-hover:bg-black/45 transition duration-500">
                                 </div>
-
 
                                 {{-- CONTENT --}}
 
@@ -509,7 +493,6 @@
 
                                 </div>
 
-
                             </a>
 
                         @endforeach
@@ -517,7 +500,6 @@
                     </div>
 
                 </div>
-
 
                 {{-- =================================================
                      CAROUSEL BUTTON
@@ -537,30 +519,26 @@
                                shadow-xl
                                hover:bg-[#BE8B3E]
                                transition duration-300
-                               translate-x-1/3 sm:translate-x-1/2"
-                    >
+                               translate-x-1/3 sm:translate-x-1/2">
 
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="w-4 h-4 sm:w-5 sm:h-5"
                             fill="none"
                             viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
+                            stroke="currentColor">
 
                             <path
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
                                 stroke-width="1.5"
-                                d="M9 5l7 7-7 7"
-                            />
+                                d="M9 5l7 7-7 7"/>
 
                         </svg>
 
                     </button>
 
                 @endif
-
 
             </div>
 
@@ -575,7 +553,6 @@
     </div>
 
 </section>
-
 
 {{-- =========================================================
      VALUES
@@ -604,7 +581,6 @@
 
             </div>
 
-
             <div>
 
                 <div class="mx-auto w-14 h-14 rounded-full border border-[#BE8B3E] flex items-center justify-center text-[#BE8B3E]">
@@ -621,7 +597,6 @@
                 </p>
 
             </div>
-
 
             <div>
 
@@ -645,8 +620,6 @@
     </div>
 
 </section>
-
-
 
 {{-- =========================================================
      WHATSAPP CTA
@@ -673,15 +646,13 @@
             href="https://wa.me/{{ config('store.whatsapp') }}"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex w-full sm:w-auto justify-center mt-8 border border-[#BE8B3E] bg-transparent text-[#BE8B3E] px-6 sm:px-9 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-[#BE8B3E] hover:text-white rounded-full transition"
-        >
+            class="inline-flex w-full sm:w-auto justify-center mt-8 border border-[#BE8B3E] bg-transparent text-[#BE8B3E] px-6 sm:px-9 py-4 text-sm font-semibold uppercase tracking-widest hover:bg-[#BE8B3E] hover:text-white rounded-full transition">
             Chat on WhatsApp
         </a>
 
     </div>
 
 </section>
-
 
 {{-- =========================================================
      FLOATING WHATSAPP BUTTON
@@ -705,8 +676,10 @@
 
 </a>
 
+<!-- ABOUT JAVASCRIPT CODE START HERE -->
 
 <script>
+    
 document.addEventListener('DOMContentLoaded', function () {
 
     const viewport = document.getElementById('aboutCategoryViewport');
@@ -805,7 +778,10 @@ document.addEventListener('DOMContentLoaded', function () {
     updateCarousel();
 
 });
+
 </script>
+
+<!-- ABOUT JAVASCRIPT CODE END HERE -->
 
 @endsection
 

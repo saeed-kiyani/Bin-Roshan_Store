@@ -7,49 +7,197 @@
 @section('content')
 
 {{-- =========================================================
-     FULL SCREEN VIDEO HERO
+     HERO PROMOTIONS CONFIG
 ========================================================= --}}
 
-<section class="relative min-h-screen h-screen overflow-hidden bg-black">
+@php
+
+    /*
+    |--------------------------------------------------------------------------
+    | Promotion Banners
+    |--------------------------------------------------------------------------
+    |
+    | Add future promotion banners here.
+    |
+    | active => true  = promotion will appear
+    | active => false = promotion will stay disabled
+    |
+    | IMPORTANT:
+    | If at least ONE promotion is active, the background video
+    | will be completely disabled.
+    |
+    */
+
+    $promotions = [
+
+        [
+            'desktop_image' => 'images/promotions/11-11-sale-desktop.jpeg',
+            'mobile_image'  => 'images/promotions/11-11-sale-mobile.jpeg',
+            'active' => false,
+            'alt' => '11.11 Sale',
+        ],
+
+        [
+            'desktop_image' => 'images/promotions/eid-sale-desktop.jpeg',
+            'mobile_image'  => 'images/promotions/eid-sale-mobile.jpeg',
+            'active' => false,
+            'alt' => 'Eid Sale',
+        ],
+
+        [
+            'desktop_image' => 'images/promotions/new-collection-desktop.jpeg',
+            'mobile_image'  => 'images/promotions/new-collection-mobile.jpeg',
+            'active' => false,
+            'alt' => 'New Collection',
+        ],
+
+    ];
+
+    $activePromotions = collect($promotions)
+        ->where('active', true)
+        ->values();
+
+@endphp
+
+
+{{-- =========================================================
+     FULL SCREEN HERO
+========================================================= --}}
+
+<section
+    class="relative min-h-screen h-screen overflow-hidden bg-black"
+    id="main-hero">
 
     {{-- =====================================================
-         BACKGROUND VIDEO
+         BACKGROUND
+
+         IF PROMOTION IS ACTIVE:
+         → Video is completely disabled
+         → Promotion carousel is shown
+
+         IF NO PROMOTION IS ACTIVE:
+         → Existing hero video is shown
     ====================================================== --}}
 
-    <video
-        autoplay
-        muted
-        loop
-        playsinline
-        class="absolute inset-0 w-full h-full object-cover">
-        <source
-            src="{{ asset('videos/hero.mp4') }}"
-            type="video/mp4">
+    @if($activePromotions->count() > 0)
 
-        Your browser does not support the video tag.
-    </video>
+        {{-- =================================================
+             PROMOTION CAROUSEL
+        ================================================== --}}
 
+        <div
+            id="promotion-carousel"
+            class="absolute inset-0 w-full h-full">
+
+            @foreach($activePromotions as $index => $promotion)
+
+                <div
+                    class="promotion-slide absolute inset-0 w-full h-full transition-opacity duration-1000
+                           {{ $index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0' }}"
+                    data-slide="{{ $index }}">
+
+                    <picture>
+                        {{-- Mobile: 9:16 --}}
+                        <source
+                            media="(max-width: 767px)"
+                            srcset="{{ asset($promotion['mobile_image']) }}">
+
+                        {{-- Desktop / Tablet --}}
+                        <img
+                            src="{{ asset($promotion['desktop_image']) }}"
+                            alt="{{ $promotion['alt'] }}"
+                            class="absolute inset-0 w-full h-full object-cover bg-black">
+                    </picture>
+
+                </div>
+
+            @endforeach
+
+            {{-- =================================================
+                 PROMOTION OVERLAY
+
+                 Keeps the existing hero content readable.
+            ================================================== --}}
+
+            <div class="absolute inset-0 bg-black/25 z-20"></div>
+
+            <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/20 z-20"></div>
+
+            {{-- =================================================
+                 CAROUSEL DOTS
+
+                 Only shown when there is more than one
+                 active promotion.
+            ================================================== --}}
+
+            @if($activePromotions->count() > 1)
+
+                <div
+                    id="promotion-dots"
+                    class="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2">
+
+                    @foreach($activePromotions as $index => $promotion)
+
+                        <button
+                            type="button"
+                            data-dot="{{ $index }}"
+                            aria-label="Go to promotion {{ $index + 1 }}"
+                            class="promotion-dot h-1.5 rounded-full transition-all duration-300
+                                   {{ $index === 0 ? 'w-8 bg-[#BE8B3E]' : 'w-2 bg-white/60' }}"></button>
+
+                    @endforeach
+
+                </div>
+
+            @endif
+
+        </div>
+
+    @else
+
+        {{-- =================================================
+             DEFAULT BACKGROUND VIDEO
+
+             This section ONLY exists when there are NO
+             active promotion banners.
+        ================================================== --}}
+
+        <video
+            autoplay
+            muted
+            loop
+            playsinline
+            class="absolute inset-0 w-full h-full object-cover">
+
+            <source
+                src="{{ asset('videos/hero.mp4') }}"
+                type="video/mp4">
+
+            Your browser does not support the video tag.
+
+        </video>
+
+        {{-- VIDEO OVERLAY --}}
+
+        <div class="absolute inset-0 bg-black/25"></div>
+
+        <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/20"></div>
+
+    @endif
 
     {{-- =====================================================
-         VIDEO OVERLAY
-         Keeps text readable while keeping video visible
+         TRANSPARENT NAVIGATION
     ====================================================== --}}
 
-    <div class="absolute inset-0 bg-black/25"></div>
-
-    <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/20"></div>
-
-
-    {{-- =====================================================
-          TRANSPARENT NAVIGATION
-    ====================================================== --}}
     <header class="absolute top-0 left-0 right-0 z-40">
 
         <div class="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-12">
 
             <nav class="h-24 flex items-center justify-between">
 
-                {{-- LEFT SIDE --}}
+                {{-- =================================================
+                     LEFT SIDE
+                ================================================== --}}
 
                 <div class="hidden lg:flex items-center gap-10 flex-1">
 
@@ -73,7 +221,6 @@
 
                 </div>
 
-
                 {{-- =================================================
                      CENTER LOGO
                 ================================================== --}}
@@ -89,8 +236,9 @@
 
                 </a>
 
-
-                {{-- RIGHT SIDE --}}
+                {{-- =================================================
+                     RIGHT SIDE
+                ================================================== --}}
 
                 <div class="hidden lg:flex items-center justify-end gap-10 flex-1">
 
@@ -100,9 +248,10 @@
                         About
                     </a>
 
-                    <a href="{{ route('blog.index') }}"
-                       class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
-                       Blogs
+                    <a
+                        href="{{ route('blog.index') }}"
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                        Blogs
                     </a>
 
                     <a
@@ -111,8 +260,9 @@
                         Contact
                     </a>
 
-
-                    {{-- SEARCH --}}
+                    {{-- =================================================
+                         SEARCH
+                    ================================================== --}}
 
                     <button
                         type="button"
@@ -141,8 +291,9 @@
 
                     </button>
 
-
-                    {{-- CART --}}
+                    {{-- =================================================
+                         CART
+                    ================================================== --}}
 
                     <button
                         type="button"
@@ -181,7 +332,6 @@
 
                 </div>
 
-
                 {{-- =================================================
                      MOBILE MENU BUTTON
                 ================================================== --}}
@@ -207,8 +357,9 @@
 
                 </button>
 
-
-                {{-- MOBILE RIGHT ICONS (SEARCH + CART) --}}
+                {{-- =================================================
+                     MOBILE RIGHT ICONS
+                ================================================== --}}
 
                 <div class="lg:hidden flex items-center gap-5">
 
@@ -283,7 +434,6 @@
 
     </header>
 
-
     {{-- =====================================================
          HERO CONTENT — BOTTOM LEFT
     ====================================================== --}}
@@ -294,21 +444,32 @@
 
             <div class="max-w-xl text-white min-w-0">
 
+        @if($activePromotions->count() === 0)
+
                 {{-- SMALL LABEL --}}
 
                 <p class="text-[10px] xs:text-xs sm:text-sm uppercase tracking-[0.25em] sm:tracking-[0.4em] font-medium opacity-90">
-                    Welcome to <span class="text-[#BE8B3E] font-bold">Bin Roshan</span>
-                </p>
 
+                    Welcome to
+                    <span class="text-[#BE8B3E] font-bold">
+                        Bin Roshan
+                    </span>
+
+                </p>
 
                 {{-- MAIN HEADING --}}
 
                 <h1 class="mt-3 sm:mt-4 text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-light leading-[0.95] tracking-tight">
+
                     Elegance
                     <br>
-                    That <span class="text-[#BE8B3E] font-serif italic">Speaks.</span>
-                </h1>
 
+                    That
+                    <span class="text-[#BE8B3E] font-serif italic">
+                        Speaks.
+                    </span>
+
+                </h1>
 
                 {{-- DESCRIPTION --}}
 
@@ -321,6 +482,7 @@
 
                 </p>
 
+                @endif
 
                 {{-- BUTTONS --}}
 
@@ -353,7 +515,6 @@
 
                 </div>
 
-
                 {{-- SMALL FEATURES --}}
 
                 <div class="mt-7 sm:mt-10 flex flex-wrap items-center gap-x-10 gap-y-4 sm:gap-x-12">
@@ -370,7 +531,6 @@
 
                     </div>
 
-
                     <div class="min-w-[65px]">
 
                         <p class="text-[10px] sm:text-xs tracking-widest opacity-60">
@@ -382,7 +542,6 @@
                         </p>
 
                     </div>
-
 
                     <div class="min-w-[65px]">
 
@@ -404,8 +563,6 @@
 
     </div>
 
-
-
     {{-- =====================================================
          SCROLL INDICATOR
     ====================================================== --}}
@@ -421,8 +578,6 @@
     </div>
 
 </section>
-
-
 
 {{-- =========================================================
      CATEGORY SECTION
@@ -518,8 +673,6 @@
     </div>
 
 </section>
-
-
 
 {{-- =========================================================
      FEATURED PRODUCTS
@@ -629,8 +782,6 @@
 
 </section>
 
-
-
 {{-- =========================================================
      PROMOTIONAL BANNER
 ========================================================= --}}
@@ -674,8 +825,6 @@
     </div>
 
 </section>
-
-
 
 {{-- =========================================================
      NEW ARRIVALS
@@ -756,10 +905,8 @@
 
 </section>
 
-
-
 {{-- =========================================================
-     WHY BIN ISMAIL
+     WHY BIN ROSHAN
 ========================================================= --}}
 
 <section class="py-20 sm:py-24 bg-black">
@@ -853,8 +1000,6 @@
 
 </section>
 
-
-
 {{-- =========================================================
      WHATSAPP CTA
 ========================================================= --}}
@@ -900,8 +1045,6 @@
 
 </section>
 
-
-
 {{-- =========================================================
      FLOATING WHATSAPP BUTTON
 ========================================================= --}}
@@ -922,5 +1065,92 @@
     </svg>
 
 </a>
+
+{{-- =========================================================
+     PROMOTION CAROUSEL JAVASCRIPT
+========================================================= --}}
+
+@if($activePromotions->count() > 1)
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const slides = document.querySelectorAll('.promotion-slide');
+    const dots = document.querySelectorAll('.promotion-dot');
+
+    if (!slides.length) {
+        return;
+    }
+
+    let currentSlide = 0;
+
+    const showSlide = (index) => {
+
+        slides.forEach((slide, slideIndex) => {
+
+            if (slideIndex === index) {
+
+                slide.classList.remove('opacity-0', 'z-0');
+                slide.classList.add('opacity-100', 'z-10');
+
+            } else {
+
+                slide.classList.remove('opacity-100', 'z-10');
+                slide.classList.add('opacity-0', 'z-0');
+
+            }
+
+        });
+
+
+        dots.forEach((dot, dotIndex) => {
+
+            if (dotIndex === index) {
+
+                dot.classList.remove('w-2', 'bg-white/60');
+                dot.classList.add('w-8', 'bg-[#BE8B3E]');
+
+            } else {
+
+                dot.classList.remove('w-8', 'bg-[#BE8B3E]');
+                dot.classList.add('w-2', 'bg-white/60');
+
+            }
+
+        });
+
+    };
+
+
+    const nextSlide = () => {
+
+        currentSlide = (currentSlide + 1) % slides.length;
+
+        showSlide(currentSlide);
+
+    };
+
+
+    dots.forEach((dot, index) => {
+
+        dot.addEventListener('click', function () {
+
+            currentSlide = index;
+
+            showSlide(currentSlide);
+
+        });
+
+    });
+
+
+    setInterval(nextSlide, 6000);
+
+});
+
+</script>
+
+@endif
 
 @endsection

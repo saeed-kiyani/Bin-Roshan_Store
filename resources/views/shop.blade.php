@@ -383,7 +383,7 @@
      CATEGORY NAVIGATION
 ========================================================= --}}
 
-<section class="bg-black border-b border-gray-200 sticky top-0 z-30">
+<section class="bg-[#f8f7f4] border-b border-gray-200 sticky top-0 z-30">
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
 
@@ -393,10 +393,10 @@
 
             <a
                 href="{{ route('shop') }}"
-                class="whitespace-nowrap shrink-0 px-3 sm:px-4 py-2 text-[10px] sm:text-xs uppercase tracking-widest font-semibold
+                class="whitespace-nowrap rounded-full shrink-0 px-3 sm:px-4 py-2 text-[10px] sm:text-xs uppercase tracking-widest font-semibold
                 {{ !$selectedCategory
-                    ? 'text-[#BE8B3E] border-b-2 border-[#BE8B3E]'
-                    : 'text-[#BE8B3E] hover:text-white' }}">
+                    ? 'bg-black text-white'
+                    : 'bg-white text-gray-700 border border-gray-200 hover:border-[#BE8B3E] hover:text-[#BE8B3E]' }}">
                 All
             </a>
 
@@ -407,10 +407,10 @@
 
                 <a
                     href="{{ route('shop', ['category' => $category->slug]) }}"
-                    class="whitespace-nowrap shrink-0 px-3 sm:px-4 py-2 text-[10px] sm:text-xs uppercase tracking-widest
+                    class="whitespace-nowrap rounded-full shrink-0 px-3 sm:px-4 py-2 text-[10px] sm:text-xs uppercase tracking-widest
                     {{ $selectedCategory?->id === $category->id
-                        ? 'text-[#BE8B3E] font-semibold border-b-2 border-[#BE8B3E]'
-                        : 'text-[#BE8B3E] hover:text-white' }}">
+                        ? 'bg-black text-white'
+                        : 'bg-white text-gray-700 border border-gray-200 hover:border-[#BE8B3E] hover:text-[#BE8B3E]'}}">
                     {{ $category->name }}
                 </a>
 

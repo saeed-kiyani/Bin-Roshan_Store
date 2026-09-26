@@ -126,56 +126,84 @@
 
 
     <!-- =========================
-         SEARCH OVERLAY
-    ========================== -->
+     SEARCH OVERLAY
+========================== -->
+
+<!-- =========================
+     SEARCH OVERLAY
+========================== -->
+
+<div
+    id="search-overlay"
+    class="fixed inset-0 z-[99999] hidden bg-black/60"
+    onclick="closeSearch()"
+>
 
     <div
-        id="search-overlay"
-        class="fixed inset-0 z-[100] hidden bg-black/50"
-        onclick="closeSearch()">
+        class="mx-auto mt-20 w-[calc(100%-2rem)] max-w-3xl"
+        onclick="event.stopPropagation()">
 
-        <div
-            class="mx-auto mt-24 w-[calc(100%-2rem)] max-w-3xl"
-            onclick="event.stopPropagation()">
+        <div class="overflow-hidden rounded-xl bg-transparent border border-[#BE8B3E] shadow-2xl">
 
-            <div class="overflow-hidden bg-[#faf9f7] shadow-2xl rounded-xl">
+            {{-- SEARCH FORM --}}
+            <form
+                id="global-search-form"
+                method="GET"
+                action="{{ route('shop') }}">
 
-                <div class="flex items-center border-b border-neutral-200 px-5">
+                <div class="flex items-center border-b border-[#BE8B3E] px-5">
 
+                    {{-- Search Icon --}}
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="h-5 w-5 text-[#BE8B3E] hover:text-black cursor-pointer"
+                        class="h-5 w-5 shrink-0 text-[#BE8B3E] cursor-pointer"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
                         stroke-width="1.5">
-                        
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="m21 21-4.35-4.35m2.1-5.4a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"/>
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="m21 21-4.35-4.35m2.1-5.4a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"
+                        />
                     </svg>
 
+                    {{-- SEARCH INPUT --}}
                     <input
                         id="search-input"
                         type="text"
                         placeholder="Search products..."
-                        class="h-16 flex-1 bg-transparent px-4 text-base outline-none"
-                        oninput="searchProducts(this.value)">
+                        class="h-16 flex-1 bg-transparent text-white px-4 text-base outline-none"
+                        oninput="searchProducts(this.value)"
+                        onkeydown="handleSearchKeydown(event)">
 
+                    {{-- ESC --}}
                     <button
                         type="button"
                         onclick="closeSearch()"
-                        class="text-sm text-[#BE8B3E] hover:text-black cursor-pointer">
+                        class="ml-3 shrink-0 text-sm font-medium tracking-wider cursor-pointer text-[#BE8B3E] transition hover:text-white">
                         ESC
                     </button>
 
                 </div>
 
+            </form>
 
-                <div id="search-results" class="max-h-[60vh] overflow-y-auto">
 
-                    <div class="px-6 py-10 text-center text-sm text-neutral-500">
+            {{-- SEARCH SUGGESTIONS --}}
+            <div
+                id="search-results"
+                class="max-h-[65vh] overflow-y-auto">
+
+                <div class="px-6 py-10 text-center">
+
+                    <p class="text-sm text-neutral-500">
                         Search for products, categories or collections.
-                    </div>
+                    </p>
+
+                    <p class="mt-2 text-xs text-neutral-400">
+                        Start typing to see suggestions
+                    </p>
 
                 </div>
 
@@ -185,6 +213,7 @@
 
     </div>
 
+</div>
 
     <!-- =========================
          CART OVERLAY
@@ -202,7 +231,7 @@
 
     <aside
         id="cart-drawer"
-        class="drawer-shadow fixed right-0 top-0 z-[100] flex h-full w-full max-w-md translate-x-full flex-col bg-[#f8f7f4] transition-transform duration-300">
+        class="drawer-shadow fixed bg-[#f8f7f4] right-0 top-0 z-[100] flex h-full w-full max-w-md translate-x-full flex-col bg-[#f8f7f4] transition-transform duration-300">
 
         <!-- Cart Header -->
 
@@ -255,7 +284,7 @@
 
         <div
             id="cart-footer"
-            class="border-t border-neutral-200 bg-[#faf9f7] p-6"></div>
+            class="border-t border-neutral-200 p-6"></div>
 
     </aside>
 
@@ -775,17 +804,15 @@
 
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                class="h-7 w-7 text-neutral-400"
+                                class="h-7 w-7 text-neutral-500"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
-                                stroke-width="1.3"
-                            >
+                                stroke-width="1.3">
                                 <path
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
-                                    d="M3 3h2l2.4 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 7H6"
-                                />
+                                    d="M3 3h2l2.4 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 7H6"/>
                             </svg>
 
                         </div>
@@ -801,8 +828,7 @@
                         <a
                             href="{{ route('shop') }}"
                             onclick="closeCart()"
-                            class="mt-6 bg-black px-6 py-3 text-sm text-white transition hover:bg-neutral-800"
-                        >
+                            class="mt-6 border border-[#BE8B3E] rounded-full px-6 py-3 text-sm text-[#BE8B3E] transition hover:bg-[#BE8B3E] hover:text-white">
                             Continue Shopping
                         </a>
 
@@ -838,8 +864,7 @@
                             <button
                                 type="button"
                                 onclick="removeFromCart(${item.id})"
-                                class="text-neutral-400 hover:text-black"
-                            >
+                                class="text-neutral-400 hover:text-black">
                                 ×
                             </button>
 
@@ -857,8 +882,7 @@
                                 <button
                                     type="button"
                                     onclick="decreaseQuantity(${item.id})"
-                                    class="flex h-8 w-8 items-center justify-center hover:bg-neutral-100"
-                                >
+                                    class="flex h-8 w-8 items-center justify-center text-gray-600 hover:bg-[#BE8B3E] hover:text-white cursor-pointer">
                                     −
                                 </button>
 
@@ -869,8 +893,7 @@
                                 <button
                                     type="button"
                                     onclick="increaseQuantity(${item.id})"
-                                    class="flex h-8 w-8 items-center justify-center hover:bg-neutral-100"
-                                >
+                                    class="flex h-8 w-8 items-center justify-center text-gray-600 hover:bg-[#BE8B3E] hover:text-white cursor-pointer">
                                     +
                                 </button>
 
@@ -907,7 +930,7 @@
                 </div>
 
 
-                <p class="mb-5 text-xs leading-5 text-neutral-500">
+                <p class="mb-5 text-xs leading-5 text-neutral-600">
                     Delivery charges will be confirmed when placing your order.
                 </p>
 
@@ -915,8 +938,7 @@
                 <button
                     type="button"
                     onclick="checkoutWhatsApp()"
-                    class="w-full bg-black py-4 text-sm font-medium text-white transition hover:bg-neutral-800"
-                >
+                    class="w-full border border-[#BE8B3E] rounded-full bg-[#BE8B3E] py-4 text-sm font-medium text-white transition hover:bg-transparent hover:text-[#BE8B3E] cursor-pointer">
                     Order via WhatsApp
                 </button>
 
@@ -1040,125 +1062,476 @@
         |--------------------------------------------------------------------------
         */
 
-        function openSearch() {
+         /*
+    |--------------------------------------------------------------------------
+    | SEARCH
+    |--------------------------------------------------------------------------
+    */
 
-            document
-                .getElementById('search-overlay')
-                .classList.remove('hidden');
+    let searchTimer = null;
 
-            document.body.classList.add('overflow-hidden');
 
-            setTimeout(() => {
+    function openSearch() {
 
-                document
-                    .getElementById('search-input')
-                    .focus();
+        const overlay = document.getElementById('search-overlay');
+        const input = document.getElementById('search-input');
 
-            }, 100);
+        if (!overlay || !input) {
+            return;
+        }
+
+        overlay.classList.remove('hidden');
+
+        document.body.classList.add('overflow-hidden');
+
+        setTimeout(() => {
+
+            input.focus();
+
+        }, 100);
+
+    }
+
+
+    function closeSearch() {
+
+        const overlay = document.getElementById('search-overlay');
+        const input = document.getElementById('search-input');
+        const results = document.getElementById('search-results');
+
+        if (!overlay) {
+            return;
+        }
+
+        overlay.classList.add('hidden');
+
+        document.body.classList.remove('overflow-hidden');
+
+        if (input) {
+            input.value = '';
+        }
+
+        if (results) {
+
+            results.innerHTML = `
+                <div class="px-6 py-10 text-center">
+
+                    <p class="text-sm text-neutral-500">
+                        Search for products, categories or collections.
+                    </p>
+
+                    <p class="mt-2 text-xs text-neutral-400">
+                        Start typing to see suggestions
+                    </p>
+
+                </div>
+            `;
 
         }
 
+    }
 
-        function closeSearch() {
 
-            document
-                .getElementById('search-overlay')
-                .classList.add('hidden');
+    /*
+    |--------------------------------------------------------------------------
+    | LIVE PRODUCT SEARCH
+    |--------------------------------------------------------------------------
+    */
 
-            document.body.classList.remove('overflow-hidden');
+    /*
+|--------------------------------------------------------------------------
+| LIVE PRODUCT SEARCH SUGGESTIONS
+|--------------------------------------------------------------------------
+*/
 
+let searchDebounceTimer = null;
+let searchController = null;
+let searchSequence = 0;
+
+function searchProducts(value) {
+
+    const input = document.getElementById('search-input');
+    const results = document.getElementById('search-results');
+
+    if (!input || !results) return;
+
+    const query = value.trim();
+
+    /*
+    |--------------------------------------------------------------------------
+    | Every new input gets a new sequence number.
+    |--------------------------------------------------------------------------
+    */
+
+    const currentSequence = ++searchSequence;
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cancel previous debounce
+    |--------------------------------------------------------------------------
+    */
+
+    clearTimeout(searchDebounceTimer);
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cancel previous HTTP request
+    |--------------------------------------------------------------------------
+    */
+
+    if (searchController) {
+        searchController.abort();
+        searchController = null;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Empty input
+    |--------------------------------------------------------------------------
+    */
+
+    if (query === '') {
+
+        results.innerHTML = `
+            <div class="px-6 py-10 text-center text-sm text-neutral-500">
+                Search for products, categories or collections.
+            </div>
+        `;
+
+        return;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Wait a little before sending request
+    |--------------------------------------------------------------------------
+    */
+
+    searchDebounceTimer = setTimeout(async () => {
+
+        /*
+        | Make sure this is still the latest input.
+        */
+
+        if (currentSequence !== searchSequence) {
+            return;
         }
 
+        /*
+        | Make sure input wasn't changed.
+        */
+
+        if (input.value.trim() !== query) {
+            return;
+        }
 
         /*
         |--------------------------------------------------------------------------
-        | PRODUCT SEARCH
+        | Loading
         |--------------------------------------------------------------------------
-        |
-        | For now this uses products supplied by the current page.
-        | Later we will connect this to Laravel/database search.
-        |
         */
 
-        function searchProducts(query) {
+        results.innerHTML = `
+            <div class="px-6 py-8 text-center">
+                <div class="inline-flex items-center gap-3 text-sm text-neutral-500">
+                    <span class="h-4 w-4 animate-spin rounded-full border-2 border-neutral-300 border-t-[#BE8B3E]"></span>
+                    Searching...
+                </div>
+            </div>
+        `;
 
-            const results =
-                document.getElementById('search-results');
+        /*
+        |--------------------------------------------------------------------------
+        | New AbortController
+        |--------------------------------------------------------------------------
+        */
 
+        searchController = new AbortController();
 
-            if (!query.trim()) {
+        try {
 
-                results.innerHTML = `
-                    <div class="px-6 py-10 text-center text-sm text-neutral-500">
-                        Search for products, categories or collections.
-                    </div>
-                `;
+            const response = await fetch(
+                `/shop/search-suggestions?search=${encodeURIComponent(query)}`,
+                {
+                    method: 'GET',
 
-                return;
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
 
+                    signal: searchController.signal,
+
+                    cache: 'no-store'
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error(
+                    `HTTP ${response.status}`
+                );
             }
 
+            const data = await response.json();
 
-            const products =
-                window.binIsmailProducts || [];
+            /*
+            |--------------------------------------------------------------------------
+            | VERY IMPORTANT
+            |--------------------------------------------------------------------------
+            | Ignore response if user has typed something else.
+            |--------------------------------------------------------------------------
+            */
 
+            if (currentSequence !== searchSequence) {
+                return;
+            }
 
-            const filtered =
-                products.filter(product =>
-                    product.name
-                        .toLowerCase()
-                        .includes(query.toLowerCase())
-                );
+            if (input.value.trim() !== query) {
+                return;
+            }
 
+            const products = data.products || [];
 
-            if (filtered.length === 0) {
+            /*
+            |--------------------------------------------------------------------------
+            | No results
+            |--------------------------------------------------------------------------
+            */
+
+            if (products.length === 0) {
 
                 results.innerHTML = `
                     <div class="px-6 py-10 text-center">
 
                         <p class="text-sm text-neutral-500">
-                            No products found for "${query}".
+                            No products found for
+                            <span class="font-medium text-neutral-700">
+                                "${escapeSearchHtml(query)}"
+                            </span>
                         </p>
 
                     </div>
                 `;
 
                 return;
-
             }
 
+            /*
+            |--------------------------------------------------------------------------
+            | Render results
+            |--------------------------------------------------------------------------
+            */
 
-            results.innerHTML = filtered.map(product => `
+            results.innerHTML = `
+                <div class="divide-y divide-neutral-200">
+
+                    ${products.map(product => `
+
+                        <a
+                            href="${product.url}"
+                            class="group flex items-center gap-4 px-5 py-4 transition hover:bg-neutral-50"
+                        >
+
+                            <div class="h-16 w-14 shrink-0 overflow-hidden rounded-md bg-neutral-100">
+
+                                ${
+                                    product.image
+                                    ? `
+                                        <img
+                                            src="${product.image}"
+                                            alt="${escapeSearchHtml(product.name)}"
+                                            class="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                                            loading="lazy"
+                                        >
+                                    `
+                                    : `
+                                        <div class="flex h-full w-full items-center justify-center text-neutral-400">
+                                            No Image
+                                        </div>
+                                    `
+                                }
+
+                            </div>
+
+                            <div class="min-w-0 flex-1">
+
+                                <h3 class="truncate text-sm font-medium text-neutral-900 group-hover:text-[#BE8B3E]">
+                                    ${escapeSearchHtml(product.name)}
+                                </h3>
+
+                                <p class="mt-1 text-sm text-neutral-500">
+                                    Rs. ${formatPrice(product.price)}
+                                </p>
+
+                            </div>
+
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5 shrink-0 text-neutral-400 transition group-hover:translate-x-1 group-hover:text-[#BE8B3E]"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="1.5"
+                                    d="M9 5l7 7-7 7"
+                                />
+                            </svg>
+
+                        </a>
+
+                    `).join('')}
+
+                </div>
 
                 <a
-                    href="${product.url}"
-                    class="flex gap-4 border-b border-neutral-200 p-5 transition hover:bg-neutral-100"
+                    href="/shop?search=${encodeURIComponent(query)}"
+                    class="flex items-center justify-center gap-2 border-t border-neutral-200 px-5 py-4 text-sm font-medium text-[#BE8B3E] hover:bg-neutral-50 hover:text-black"
                 >
+                    View all results for
+                    "${escapeSearchHtml(query)}"
 
-                    <img
-                        src="${product.image}"
-                        alt="${product.name}"
-                        class="h-20 w-16 object-cover bg-neutral-100"
-                    >
-
-                    <div>
-
-                        <h3 class="text-sm font-medium">
-                            ${product.name}
-                        </h3>
-
-                        <p class="mt-2 text-sm text-neutral-500">
-                            Rs. ${formatPrice(product.price)}
-                        </p>
-
-                    </div>
-
+                    <span class="text-lg">
+                        →
+                    </span>
                 </a>
+            `;
 
-            `).join('');
+        } catch (error) {
 
+            /*
+            | Aborted request is normal.
+            */
+
+            if (error.name === 'AbortError') {
+                return;
+            }
+
+            console.error('Search error:', error);
+
+            /*
+            | Don't replace newer results with an old error.
+            */
+
+            if (currentSequence !== searchSequence) {
+                return;
+            }
+
+            results.innerHTML = `
+                <div class="px-6 py-10 text-center">
+                    <p class="text-sm text-red-500">
+                        Unable to load search suggestions.
+                    </p>
+                </div>
+            `;
         }
 
+    }, 180);
+}
+
+
+function escapeSearchHtml(value) {
+
+    const div = document.createElement('div');
+
+    div.textContent = value;
+
+    return div.innerHTML;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Escape HTML
+|--------------------------------------------------------------------------
+*/
+
+function escapeSearchHtml(value) {
+
+    const div = document.createElement('div');
+
+    div.textContent = value;
+
+    return div.innerHTML;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Escape HTML
+|--------------------------------------------------------------------------
+*/
+
+function escapeSearchHtml(value) {
+
+    const div = document.createElement('div');
+
+    div.textContent = value;
+
+    return div.innerHTML;
+
+}
+
+    /*
+    |--------------------------------------------------------------------------
+    | SEARCH INPUT
+    |--------------------------------------------------------------------------
+    */
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const searchInput =
+            document.getElementById('search-input');
+
+
+        if (!searchInput) {
+            return;
+        }
+
+
+        searchInput.addEventListener('input', function () {
+
+            const query = this.value;
+
+
+            clearTimeout(searchTimer);
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Small delay prevents request on every keystroke
+            |--------------------------------------------------------------------------
+            */
+
+            searchTimer = setTimeout(() => {
+
+                searchProducts(query);
+
+            }, 250);
+
+        });
+
+    });
+
+    function handleSearchKeydown(event) {
+
+    if (event.key !== 'Enter') {
+        return;
+    }
+
+    event.preventDefault();
+
+    const input = document.getElementById('search-input');
+
+    if (!input) return;
+
+    const query = input.value.trim();
+
+    if (!query) return;
+
+    window.location.href =
+        `/shop?search=${encodeURIComponent(query)}`;
+}
 
         /*
         |--------------------------------------------------------------------------
