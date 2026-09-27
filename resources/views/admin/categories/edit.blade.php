@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit Category | Bin Ismail')
+@section('title', 'Edit Category | Bin Roshan')
 
 @section('content')
 
@@ -12,7 +12,7 @@
     }
 @endphp
 
-<div class="min-h-screen bg-gray-50 py-12">
+<div class="min-h-screen py-12">
 
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -22,8 +22,7 @@
 
             <a
                 href="{{ route('admin.categories.index') }}"
-                class="text-xs uppercase tracking-widest text-gray-500 hover:text-black transition"
-            >
+                class="text-xs uppercase tracking-widest text-gray-500 hover:text-black transition">
                 ← Back to Categories
             </a>
 
@@ -36,7 +35,6 @@
             </h1>
 
         </div>
-
 
         {{-- ERRORS --}}
 
@@ -58,20 +56,17 @@
 
         @endif
 
-
         {{-- FORM --}}
 
         <form
             action="{{ route('admin.categories.update', $category) }}"
             method="POST"
             enctype="multipart/form-data"
-            class="bg-white border border-gray-200 p-6 sm:p-10"
-        >
+            class="border border-[#BE8B3E] rounded-xl p-6 sm:p-10">
 
             @csrf
 
             @method('PUT')
-
 
             {{-- CURRENT IMAGE --}}
 
@@ -86,13 +81,11 @@
                     <img
                         src="{{ $currentImage }}"
                         alt="{{ $category->name }}"
-                        class="w-40 h-48 object-cover bg-gray-100"
-                    >
+                        class="w-40 h-48 object-cover bg-gray-100 rounded-xl">
 
                 </div>
 
             @endif
-
 
             {{-- NAME --}}
 
@@ -100,8 +93,7 @@
 
                 <label
                     for="name"
-                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-                >
+                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
                     Category Name
                 </label>
 
@@ -111,11 +103,9 @@
                     name="name"
                     value="{{ old('name', $category->name) }}"
                     required
-                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black"
-                >
+                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
 
             </div>
-
 
             {{-- SLUG --}}
 
@@ -123,8 +113,7 @@
 
                 <label
                     for="slug"
-                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-                >
+                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
                     Slug
                 </label>
 
@@ -133,11 +122,9 @@
                     id="slug"
                     name="slug"
                     value="{{ old('slug', $category->slug) }}"
-                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black"
-                >
+                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
 
             </div>
-
 
             {{-- DESCRIPTION --}}
 
@@ -145,8 +132,7 @@
 
                 <label
                     for="description"
-                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-                >
+                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
                     Description
                 </label>
 
@@ -154,11 +140,9 @@
                     id="description"
                     name="description"
                     rows="5"
-                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black"
-                >{{ old('description', $category->description) }}</textarea>
+                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">{{ old('description', $category->description) }}</textarea>
 
             </div>
-
 
             {{-- NEW IMAGE --}}
 
@@ -166,8 +150,7 @@
 
                 <label
                     for="image"
-                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-                >
+                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
                     Replace Image
                 </label>
 
@@ -176,8 +159,7 @@
                     id="image"
                     name="image"
                     accept=".jpg,.jpeg,.png,.webp"
-                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white"
-                >
+                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
 
                 <p class="mt-2 text-xs text-gray-400">
                     Leave empty to keep the current image.
@@ -186,15 +168,13 @@
 
             </div>
 
-
             {{-- SORT ORDER --}}
 
             <div class="mt-7">
 
                 <label
                     for="sort_order"
-                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-                >
+                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
                     Sort Order
                 </label>
 
@@ -204,11 +184,9 @@
                     name="sort_order"
                     value="{{ old('sort_order', $category->sort_order) }}"
                     min="0"
-                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black"
-                >
+                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
 
             </div>
-
 
             {{-- ACTIVE --}}
 
@@ -221,8 +199,7 @@
                         name="is_active"
                         value="1"
                         {{ old('is_active', $category->is_active) ? 'checked' : '' }}
-                        class="w-4 h-4"
-                    >
+                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
 
                     <span class="text-sm text-gray-700">
                         Active category

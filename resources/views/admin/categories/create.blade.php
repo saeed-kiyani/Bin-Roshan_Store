@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Add Category | Bin Ismail')
+@section('title', 'Add Category | Bin Roshan')
 
 @section('content')
 
@@ -14,8 +14,7 @@
 
             <a
                 href="{{ route('admin.categories.index') }}"
-                class="text-xs uppercase tracking-widest text-gray-500 hover:text-black transition"
-            >
+                class="text-xs uppercase tracking-widest text-gray-500 hover:text-black transition">
                 ← Back to Categories
             </a>
 
@@ -28,7 +27,6 @@
             </h1>
 
         </div>
-
 
         {{-- ERRORS --}}
 
@@ -50,18 +48,15 @@
 
         @endif
 
-
         {{-- FORM --}}
 
         <form
             action="{{ route('admin.categories.store') }}"
             method="POST"
             enctype="multipart/form-data"
-            class="bg-white border border-gray-200 p-6 sm:p-10"
-        >
+            class="bg-white border border-[#BE8B3E] rounded-lg p-6 sm:p-10">
 
             @csrf
-
 
             {{-- NAME --}}
 
@@ -69,8 +64,7 @@
 
                 <label
                     for="name"
-                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-                >
+                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
                     Category Name
                 </label>
 
@@ -81,11 +75,9 @@
                     value="{{ old('name') }}"
                     placeholder="e.g. Clothing"
                     required
-                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black"
-                >
+                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
 
             </div>
-
 
             {{-- SLUG --}}
 
@@ -93,8 +85,7 @@
 
                 <label
                     for="slug"
-                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-                >
+                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
                     Slug
                 </label>
 
@@ -104,8 +95,7 @@
                     name="slug"
                     value="{{ old('slug') }}"
                     placeholder="Leave empty to generate automatically"
-                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black"
-                >
+                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
 
                 <p class="mt-2 text-xs text-gray-400">
                     Example: clothing
@@ -113,15 +103,13 @@
 
             </div>
 
-
             {{-- DESCRIPTION --}}
 
             <div class="mt-7">
 
                 <label
                     for="description"
-                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-                >
+                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
                     Description
                 </label>
 
@@ -130,11 +118,9 @@
                     name="description"
                     rows="5"
                     placeholder="Describe this category..."
-                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black"
-                >{{ old('description') }}</textarea>
+                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">{{ old('description') }}</textarea>
 
             </div>
-
 
             {{-- IMAGE --}}
 
@@ -142,8 +128,7 @@
 
                 <label
                     for="image"
-                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-                >
+                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
                     Category Image
                 </label>
 
@@ -152,8 +137,7 @@
                     id="image"
                     name="image"
                     accept=".jpg,.jpeg,.png,.webp"
-                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white"
-                >
+                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
 
                 <p class="mt-2 text-xs text-gray-400">
                     JPG, JPEG, PNG or WEBP. Maximum 4MB.
@@ -161,15 +145,13 @@
 
             </div>
 
-
             {{-- SORT ORDER --}}
 
             <div class="mt-7">
 
                 <label
                     for="sort_order"
-                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-                >
+                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
                     Sort Order
                 </label>
 
@@ -179,15 +161,13 @@
                     name="sort_order"
                     value="{{ old('sort_order', 0) }}"
                     min="0"
-                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black"
-                >
+                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
 
                 <p class="mt-2 text-xs text-gray-400">
                     Lower numbers appear first.
                 </p>
 
             </div>
-
 
             {{-- ACTIVE --}}
 
@@ -200,8 +180,7 @@
                         name="is_active"
                         value="1"
                         {{ old('is_active', true) ? 'checked' : '' }}
-                        class="w-4 h-4"
-                    >
+                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
 
                     <span class="text-sm text-gray-700">
                         Active category
@@ -211,22 +190,19 @@
 
             </div>
 
-
             {{-- BUTTONS --}}
 
             <div class="mt-10 flex flex-col sm:flex-row gap-3">
 
                 <button
                     type="submit"
-                    class="bg-[#BE8B3E] rounded-full cursor-pointer border border-[#BE8B3E] hover:bg-transparent hover:text-[#BE8B3E] text-white px-7 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#a47c15] transition"
-                >
+                    class="bg-[#BE8B3E] rounded-full cursor-pointer border border-[#BE8B3E] hover:bg-transparent hover:text-[#BE8B3E] text-white px-7 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#a47c15] transition">
                     Create Category
                 </button>
 
                 <a
                     href="{{ route('admin.categories.index') }}"
-                    class="border border-gray-300 rounded-full px-7 py-4 text-xs uppercase tracking-widest font-semibold text-center hover:bg-gray-300 hover:text-white transition"
-                >
+                    class="border border-gray-300 rounded-full px-7 py-4 text-xs uppercase tracking-widest font-semibold text-center hover:bg-gray-300 hover:text-white transition">
                     Cancel
                 </a>
 

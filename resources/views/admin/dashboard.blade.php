@@ -32,7 +32,6 @@
 
                 </div>
 
-
                 <div class="flex flex-wrap gap-3">
 
                     <a
@@ -55,21 +54,17 @@
 
     </section>
 
-
-
     {{-- =====================================================
         MAIN CONTENT
     ====================================================== --}}
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
-
         {{-- =================================================
             STATISTICS
         ================================================== --}}
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-
 
             {{-- TOTAL PRODUCTS --}}
 
@@ -102,8 +97,6 @@
 
             </div>
 
-
-
             {{-- CATEGORIES --}}
 
             <div class="bg-white border border-[#BE8B3E] rounded-lg p-6 hover:border-gray-400 transition">
@@ -135,8 +128,6 @@
 
             </div>
 
-
-
             {{-- ACTIVE PRODUCTS --}}
 
             <div class="bg-white border border-[#BE8B3E] rounded-lg p-6 hover:border-gray-400 transition">
@@ -166,8 +157,6 @@
                 </p>
 
             </div>
-
-
 
             {{-- FEATURED --}}
 
@@ -201,14 +190,11 @@
 
         </div>
 
-
-
         {{-- =================================================
             STOCK ALERTS
         ================================================== --}}
 
         <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-5">
-
 
             {{-- LOW STOCK --}}
 
@@ -234,7 +220,6 @@
 
                 </div>
 
-
                 <div class="mt-6 flex items-end justify-between">
 
                     <div>
@@ -256,8 +241,6 @@
                 </div>
 
             </div>
-
-
 
             {{-- OUT OF STOCK --}}
 
@@ -283,7 +266,6 @@
 
                 </div>
 
-
                 <div class="mt-6 flex items-end justify-between">
 
                     <div>
@@ -308,8 +290,6 @@
 
         </div>
 
-
-
         {{-- =================================================
             QUICK ACTIONS
         ================================================== --}}
@@ -332,11 +312,10 @@
 
             </div>
 
-
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
                 <a href="{{ route('admin.products.create') }}"
-                    class="group bg-black rounded-lg text-white p-6 hover:bg-[#BE8B3E] transition">
+                    class="group bg-[#BE8B3E] border border-[#BE8B3E] rounded-lg text-white p-6 hover:bg-transparent hover:text-[#BE8B3E] transition">
 
                     <div class="text-2xl font-light">
                         +
@@ -346,62 +325,58 @@
                         Add Product
                     </p>
 
-                    <p class="mt-2 text-xs text-gray-400 group-hover:text-white/80">
+                    <p class="mt-2 text-xs text-white group-hover:text-[#BE8B3E]">
                         Create a new product
                     </p>
 
                 </a>
 
                 <a href="{{ route('admin.products.index') }}"
-                   class="group bg-white border border-[#BE8B3E] rounded-lg p-6 hover:border-black transition">
+                   class="group border border-[#BE8B3E] rounded-lg text-[#BE8B3E] p-6 hover:bg-[#BE8B3E] hover:text-white transition">
 
-                    <div class="text-2xl font-light text-[#BE8B3E] hover:text-black">
+                    <div class="text-2xl font-light">
                         →
                     </div>
 
-                    <p class="mt-5 text-xs uppercase tracking-widest font-semibold text-[#BE8B3E] hover:text-black">
+                    <p class="mt-5 text-xs uppercase tracking-widest font-semibold">
                         Manage Products
                     </p>
 
-                    <p class="mt-2 text-xs text-gray-400">
+                    <p class="mt-2 text-xs text-[#BE8B3E] group-hover:text-white">
                         Edit products and images
                     </p>
 
                 </a>
 
-
-
                 <a href="{{ route('admin.categories.create') }}"
-                   class="group bg-white border border-[#BE8B3E] rounded-lg p-6 hover:border-black transition">
+                   class="group border border-[#BE8B3E] rounded-lg text-[#BE8B3E] p-6 hover:bg-[#BE8B3E] hover:text-white transition">
 
-                    <div class="text-2xl font-light text-[#BE8B3E] hover:text-black">
+                    <div class="text-2xl font-light">
                         +
                     </div>
 
-                    <p class="mt-5 text-xs uppercase tracking-widest font-semibold text-[#BE8B3E] hover:text-black">
+                    <p class="mt-5 text-xs uppercase tracking-widest font-semibold">
                         Add Category
                     </p>
 
-                    <p class="mt-2 text-xs text-gray-400">
+                    <p class="mt-2 text-xs text-[#BE8B3E] group-hover:text-white">
                         Create a new category
                     </p>
 
                 </a>
 
-
-
                 <a href="{{ route('admin.categories.index') }}"
-                   class="group bg-white border border-[#BE8B3E] rounded-lg p-6 hover:border-black transition">
+                   class="group border border-[#BE8B3E] rounded-lg text-[#BE8B3E] p-6 hover:bg-[#BE8B3E] hover:text-white transition">
 
-                    <div class="text-2xl font-light text-[#BE8B3E] hover:text-black">
+                    <div class="text-2xl font-light">
                         ◇
                     </div>
 
-                    <p class="mt-5 text-xs uppercase tracking-widest font-semibold text-[#BE8B3E] hover:text-black">
+                    <p class="mt-5 text-xs uppercase tracking-widest font-semibold">
                         Manage Categories
                     </p>
 
-                    <p class="mt-2 text-xs text-gray-400">
+                    <p class="mt-2 text-xs text-[#BE8B3E] group-hover:text-white">
                         Edit your categories
                     </p>
 
@@ -410,8 +385,6 @@
             </div>
 
         </section>
-
-
 
         {{-- =================================================
             RECENT PRODUCTS
@@ -440,14 +413,13 @@
 
             </div>
 
-
             <div class="bg-white border border-[#BE8B3E] rounded-lg  overflow-hidden">
 
                 <div class="overflow-x-auto">
 
                     <table class="w-full min-w-[800px]">
 
-                        <thead class="border-b border-[#BE8B3E] bg-black">
+                        <thead class="border-b border-[#BE8B3E]">
 
                             <tr>
 
@@ -479,7 +451,6 @@
 
                         </thead>
 
-
                         <tbody class="divide-y divide-[#BE8B3E]/50">
 
                             @forelse($recentProducts as $product)
@@ -494,9 +465,7 @@
 
                                 @endphp
 
-
                                 <tr class="hover:bg-gray-50 transition">
-
 
                                     {{-- PRODUCT --}}
 
@@ -519,7 +488,6 @@
 
                                             @endif
 
-
                                             <div>
 
                                                 <p class="text-sm font-medium text-gray-900">
@@ -540,8 +508,6 @@
 
                                     </td>
 
-
-
                                     {{-- SKU --}}
 
                                     <td class="px-6 py-5">
@@ -552,8 +518,6 @@
 
                                     </td>
 
-
-
                                     {{-- CATEGORY --}}
 
                                     <td class="px-6 py-5">
@@ -563,8 +527,6 @@
                                         </span>
 
                                     </td>
-
-
 
                                     {{-- PRICE --}}
 
@@ -589,8 +551,6 @@
                                         @endif
 
                                     </td>
-
-
 
                                     {{-- STOCK --}}
 
@@ -617,8 +577,6 @@
                                         @endif
 
                                     </td>
-
-
 
                                     {{-- STATUS --}}
 
@@ -648,9 +606,7 @@
 
                                     </td>
 
-
                                 </tr>
-
 
                             @empty
 
@@ -666,7 +622,7 @@
 
                                         <a
                                             href="{{ route('admin.products.create') }}"
-                                            class="inline-flex mt-5 bg-black text-white px-6 py-3 text-[10px] uppercase tracking-widest font-semibold">
+                                            class="inline-flex mt-5 bg-[#BE8B3E] border border-[#BE8B3E] rounded-full text-white hover:bg-transparent hover:text-[#BE8B3E] px-6 py-3 text-[10px] uppercase tracking-widest font-semibold">
                                             Add First Product
                                         </a>
 
@@ -685,8 +641,6 @@
             </div>
 
         </section>
-
-
 
         {{-- =================================================
             RECENT CATEGORIES
@@ -715,14 +669,13 @@
 
             </div>
 
-
             <div class="bg-white border border-[#BE8B3E] rounded-lg overflow-hidden">
 
                 <div class="overflow-x-auto">
 
                     <table class="w-full">
 
-                        <thead class="border-b border-[#BE8B3E] bg-black">
+                        <thead class="border-b border-[#BE8B3E]">
 
                             <tr>
 
@@ -742,7 +695,6 @@
 
                         </thead>
 
-
                         <tbody class="divide-y divide-[#BE8B3E]/50">
 
                             @forelse($recentCategories as $category)
@@ -757,7 +709,6 @@
 
                                     </td>
 
-
                                     <td class="px-6 py-5">
 
                                         <span class="text-xs text-gray-500">
@@ -765,7 +716,6 @@
                                         </span>
 
                                     </td>
-
 
                                     <td class="px-6 py-5">
 
@@ -801,8 +751,7 @@
 
                                     <td
                                         colspan="3"
-                                        class="px-6 py-12 text-center text-sm text-gray-400"
-                                    >
+                                        class="px-6 py-12 text-center text-sm text-gray-400">
                                         No categories found.
                                     </td>
 

@@ -46,7 +46,7 @@
             @csrf
 
             {{-- Main Content --}}
-            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div class="rounded-xl shadow-sm border border-[#BE8B3E] p-6">
 
                 <div class="flex items-center justify-between mb-6">
                     <div>
@@ -73,10 +73,7 @@
                            required
                            maxlength="255"
                            placeholder="Enter post title"
-                           class="w-full rounded-lg border border-gray-300 px-4 py-3
-                                  text-gray-900 placeholder-gray-400
-                                  focus:outline-none focus:ring-2 focus:ring-black
-                                  focus:border-transparent">
+                           class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
 
                     @error('title')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -96,10 +93,7 @@
                            value="{{ old('slug') }}"
                            maxlength="255"
                            placeholder="my-blog-post"
-                           class="w-full rounded-lg border border-gray-300 px-4 py-3
-                                  text-gray-900 placeholder-gray-400
-                                  focus:outline-none focus:ring-2 focus:ring-black
-                                  focus:border-transparent">
+                           class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
 
                     <p class="mt-1 text-xs text-gray-500">
                         Leave empty to automatically generate the slug from the title.
@@ -119,10 +113,7 @@
 
                     <select id="blog_category_id"
                             name="blog_category_id"
-                            class="w-full rounded-lg border border-gray-300 px-4 py-3
-                                   text-gray-900 bg-white
-                                   focus:outline-none focus:ring-2 focus:ring-black
-                                   focus:border-transparent">
+                            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
 
                         <option value="">No Category</option>
 
@@ -151,10 +142,7 @@
                               name="excerpt"
                               rows="4"
                               placeholder="Short summary of the article..."
-                              class="w-full rounded-lg border border-gray-300 px-4 py-3
-                                     text-gray-900 placeholder-gray-400
-                                     focus:outline-none focus:ring-2 focus:ring-black
-                                     focus:border-transparent">{{ old('excerpt') }}</textarea>
+                              class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">{{ old('excerpt') }}</textarea>
 
                     <p class="mt-1 text-xs text-gray-500">
                         This short description can be shown on the blog listing page.
@@ -189,7 +177,7 @@
             </div>
 
             {{-- Featured Image --}}
-            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div class="rounded-xl shadow-sm border border-[#BE8B3E] p-6">
 
                 <h2 class="text-lg font-semibold text-gray-900">
                     Featured Image
@@ -208,7 +196,7 @@
                        id="featured_image"
                        name="featured_image"
                        accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
-                       class="block w-full text-sm text-gray-600
+                       class="block w-full cursor-pointer text-sm text-gray-600
                               file:mr-4 file:py-2.5 file:px-4
                               file:rounded-lg file:border-0
                               file:text-sm file:font-semibold
@@ -226,7 +214,7 @@
             </div>
 
             {{-- Publishing --}}
-            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div class="rounded-xl shadow-sm border border-[#BE8B3E] p-6">
 
                 <h2 class="text-lg font-semibold text-gray-900">
                     Publishing
@@ -245,8 +233,7 @@
                            name="is_published"
                            value="1"
                            {{ old('is_published') ? 'checked' : '' }}
-                           class="mt-1 h-4 w-4 rounded border-gray-300
-                                  text-black focus:ring-black">
+                           class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
 
                     <div>
                         <label for="is_published"
@@ -271,10 +258,7 @@
                            id="published_at"
                            name="published_at"
                            value="{{ old('published_at') }}"
-                           class="w-full rounded-lg border border-gray-300 px-4 py-3
-                                  text-gray-900
-                                  focus:outline-none focus:ring-2 focus:ring-black
-                                  focus:border-transparent">
+                           class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
 
                     <p class="mt-1 text-xs text-gray-500">
                         Leave empty to use the current date and time when publishing.
@@ -288,7 +272,7 @@
             </div>
 
             {{-- SEO --}}
-            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div class="bg-white rounded-xl shadow-sm border border-[#BE8B3E] p-6">
 
                 <h2 class="text-lg font-semibold text-gray-900">
                     SEO Settings
@@ -311,10 +295,7 @@
                            value="{{ old('meta_title') }}"
                            maxlength="255"
                            placeholder="SEO title"
-                           class="w-full rounded-lg border border-gray-300 px-4 py-3
-                                  text-gray-900 placeholder-gray-400
-                                  focus:outline-none focus:ring-2 focus:ring-black
-                                  focus:border-transparent">
+                           class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
 
                     <p class="mt-1 text-xs text-gray-500">
                         Recommended: around 50–60 characters.
@@ -337,10 +318,7 @@
                               rows="3"
                               maxlength="500"
                               placeholder="Short description for search engines..."
-                              class="w-full rounded-lg border border-gray-300 px-4 py-3
-                                     text-gray-900 placeholder-gray-400
-                                     focus:outline-none focus:ring-2 focus:ring-black
-                                     focus:border-transparent">{{ old('meta_description') }}</textarea>
+                              class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">{{ old('meta_description') }}</textarea>
 
                     <p class="mt-1 text-xs text-gray-500">
                         Recommended: around 150–160 characters.
@@ -381,6 +359,7 @@
 @endpush
 
 @push('scripts')
+
     <script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
 
     <script>

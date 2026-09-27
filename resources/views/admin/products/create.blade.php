@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Add Product | Bin Ismail')
+@section('title', 'Add Product | Bin Roshan')
 
 @section('content')
 
@@ -76,8 +76,7 @@
 
             <a
                 href="{{ route('admin.products.index') }}"
-                class="text-xs uppercase tracking-widest text-gray-500 hover:text-black transition"
-            >
+                class="text-xs uppercase tracking-widest text-gray-500 hover:text-black transition">
                 ← Back to Products
             </a>
 
@@ -90,7 +89,6 @@
             </h1>
 
         </div>
-
 
         {{-- ERRORS --}}
 
@@ -112,16 +110,13 @@
 
         @endif
 
-
         <form
             action="{{ route('admin.products.store') }}"
             method="POST"
             enctype="multipart/form-data"
-            class="bg-white border border-gray-200 p-6 sm:p-10"
-        >
+            class="bg-white border border-[#BE8B3E] rounded-lg p-6 sm:p-10">
 
             @csrf
-
 
             {{-- CATEGORY --}}
 
@@ -129,34 +124,31 @@
 
                 <label
                     for="category_id"
-                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-                >
+                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
                     Category
                 </label>
 
                 <select
-    id="category_id"
-    name="category_id"
-    required
-    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
->
-    <option value="">Select Category</option>
+                    id="category_id"
+                    name="category_id"
+                    required
+                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black">
+
+                <option value="">Select Category</option>
 
     @foreach($categories as $category)
 
         <option
             value="{{ $category->id }}"
             data-category-slug="{{ $category->slug }}"
-            {{ old('category_id') == $category->id ? 'selected' : '' }}
-        >
+            {{ old('category_id') == $category->id ? 'selected' : '' }}>
             {{ $category->name }}
         </option>
 
     @endforeach
-</select>
+        </select>
 
             </div>
-
 
             {{-- NAME --}}
 
@@ -164,8 +156,7 @@
 
                 <label
                     for="name"
-                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-                >
+                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
                     Product Name
                 </label>
 
@@ -176,39 +167,34 @@
                     value="{{ old('name') }}"
                     placeholder="e.g. Premium Cotton Shirt"
                     required
-                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black"
-                >
+                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black">
 
             </div>
 
-
             {{-- SLUG --}}
 
-<div class="mt-7">
+            <div class="mt-7">
 
-    <label
-        for="slug"
-        class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-    >
-        Slug
-    </label>
+                <label
+                    for="slug"
+                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+                    Slug
+                </label>
 
-    <input
-        type="text"
-        id="slug"
-        name="slug"
-        value="{{ old('slug') }}"
-        placeholder="Automatically generated from product name"
-        class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black"
-    >
+                <input
+                    type="text"
+                    id="slug"
+                    name="slug"
+                    value="{{ old('slug') }}"
+                    placeholder="Automatically generated from product name"
+                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black">
 
-    <p class="mt-2 text-xs text-gray-400">
-        The slug is automatically generated from the product name.
-        You can edit it manually if needed.
-    </p>
+                <p class="mt-2 text-xs text-gray-400">
+                    The slug is automatically generated from the product name.
+                    You can edit it manually if needed.
+                </p>
 
-</div>
-
+            </div>
 
             {{-- SKU --}}
 
@@ -216,8 +202,7 @@
 
                 <label
                     for="sku"
-                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-                >
+                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
                     SKU
                 </label>
 
@@ -228,8 +213,7 @@
                     value="{{ old('sku') }}"
                     placeholder="e.g. BIS-SHIRT-001"
                     required
-                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black"
-                >
+                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black">
 
             </div>
 
@@ -245,23 +229,20 @@
         Clothing Filtration
     </p>
 
-
     {{-- GENDER --}}
 
     <div>
 
         <label
             for="gender"
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-        >
+            class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
             Gender
         </label>
 
         <select
             id="gender"
             name="gender"
-            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
-        >
+            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black">
 
             <option value="">
                 Select Gender
@@ -283,23 +264,20 @@
 
     </div>
 
-
     {{-- BRAND --}}
 
     <div class="mt-7">
 
         <label
             for="brand"
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-        >
+            class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
             Brand
         </label>
 
         <select
             id="brand"
             name="brand"
-            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
-        >
+            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black">
 
             <option value="">
                 Select Brand
@@ -329,7 +307,6 @@
 
     </div>
 
-
     {{-- SIZE --}}
 
     <div class="mt-7">
@@ -349,8 +326,7 @@
                         name="sizes[]"
                         value="{{ $size }}"
                         {{ in_array($size, old('sizes', [])) ? 'checked' : '' }}
-                        class="w-4 h-4"
-                    >
+                        class="w-4 h-4">
 
                     <span class="text-sm text-gray-700">
                         {{ $size }}
@@ -365,6 +341,7 @@
     </div>
 
 </div>
+
 {{-- END CLOTHING INFORMATION --}}
 
 {{-- =========================================================
@@ -380,16 +357,9 @@
         Laces Filtration
     </p>
 
-
     {{-- LACE CATEGORY --}}
 
     <div>
-
-        <!-- <label
-            for="lace_category"
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Lace Category
-        </label> -->
 
         <select
     name="lace_category"
@@ -425,7 +395,6 @@
 
     </div>
 
-
     {{-- LACE SUBCATEGORIES --}}
 
     <div id="lace-subcategories-container" class="mt-6 hidden">
@@ -436,19 +405,17 @@
 
     <div
         id="lace-subcategories"
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
-    >
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
     </div>
 
 </div>
-
 
     {{-- WIDTH --}}
 
     <div class="mt-7">
 
         <label class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Width
+            Wide
         </label>
 
         <div class="mt-4 flex flex-wrap gap-6">
@@ -1261,7 +1228,7 @@
                     name="images[]"
                     accept=".jpg,.jpeg,.png,.webp"
                     multiple
-                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white"
+                    class="mt-3 w-full border border-gray-300 px-4 cursor-pointer py-3 text-sm bg-white"
                 >
 
                 <p class="mt-2 text-xs text-gray-400">
@@ -1318,15 +1285,13 @@
 
                 <button
                     type="submit"
-                    class="bg-[#BE8B3E] rounded-full cursor-pointer border border-[#BE8B3E] hover:bg-transparent hover:text-[#BE8B3E] text-white px-7 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#a47c15] transition"
-                >
+                    class="bg-[#BE8B3E] rounded-full cursor-pointer border border-[#BE8B3E] hover:bg-transparent hover:text-[#BE8B3E] text-white px-7 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#a47c15] transition">
                     Create Product
                 </button>
 
                 <a
                     href="{{ route('admin.products.index') }}"
-                    class="border border-gray-300 rounded-full px-7 py-4 text-xs uppercase tracking-widest font-semibold text-center hover:bg-gray-300 hover:text-white transition"
-                >
+                    class="border border-gray-300 rounded-full px-7 py-4 text-xs uppercase tracking-widest font-semibold text-center hover:bg-gray-300 hover:text-white transition">
                     Cancel
                 </a>
 

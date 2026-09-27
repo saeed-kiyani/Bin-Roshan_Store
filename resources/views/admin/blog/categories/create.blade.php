@@ -9,17 +9,17 @@
     <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
         {{-- BACK --}}
-        <a
-            href="{{ route('admin.blog.categories.index') }}"
-            class="inline-flex items-center text-[10px] uppercase tracking-widest font-semibold text-gray-500 hover:text-[#BE8B3E] transition">
+
+        <a href="{{ route('admin.blog.categories.index') }}"
+           class="inline-flex items-center text-[10px] uppercase tracking-widest font-semibold text-gray-500 hover:text-[#BE8B3E] transition">
             ← Back to Blog Categories
         </a>
 
-
         {{-- HEADER --}}
+
         <div class="mt-8 mb-8">
 
-            <p class="text-[10px] uppercase tracking-[0.4em] text-[#a47c15] font-semibold">
+            <p class="text-[10px] uppercase tracking-[0.4em] text-[#BE8B3E] font-semibold">
                 Blog
             </p>
 
@@ -33,8 +33,8 @@
 
         </div>
 
-
         {{-- VALIDATION ERRORS --}}
+
         @if($errors->any())
 
             <div class="mb-6 border border-red-200 bg-red-50 px-5 py-4 rounded-lg">
@@ -53,18 +53,14 @@
 
         @endif
 
-
         {{-- FORM --}}
-        <form
-            action="{{ route('admin.blog.categories.store') }}"
-            method="POST"
-            enctype="multipart/form-data"
-            class="bg-white border border-[#BE8B3E] rounded-lg p-6 sm:p-8">
+
+        <form action="{{ route('admin.blog.categories.store') }}" method="POST" enctype="multipart/form-data" class=" border border-[#BE8B3E] rounded-lg p-6 sm:p-8">
 
             @csrf
 
-
             {{-- NAME --}}
+
             <div>
 
                 <label
@@ -79,13 +75,13 @@
                     name="name"
                     value="{{ old('name') }}"
                     required
-                    class="mt-2 w-full border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]"
+                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]"
                     placeholder="e.g. Fashion Trends">
 
             </div>
 
-
             {{-- SLUG --}}
+
             <div class="mt-6">
 
                 <label
@@ -99,7 +95,7 @@
                     id="slug"
                     name="slug"
                     value="{{ old('slug') }}"
-                    class="mt-2 w-full border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]"
+                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]"
                     placeholder="fashion-trends">
 
                 <p class="mt-2 text-xs text-gray-400">
@@ -108,8 +104,8 @@
 
             </div>
 
-
             {{-- DESCRIPTION --}}
+
             <div class="mt-6">
 
                 <label
@@ -122,13 +118,13 @@
                     id="description"
                     name="description"
                     rows="5"
-                    class="mt-2 w-full border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]"
+                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]"
                     placeholder="Write a short description for this blog category...">{{ old('description') }}</textarea>
 
             </div>
 
-
             {{-- IMAGE --}}
+
             <div class="mt-6">
 
                 <label
@@ -142,7 +138,7 @@
                     id="image"
                     name="image"
                     accept=".jpg,.jpeg,.png,.webp"
-                    class="mt-2 block w-full border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-600 bg-white file:mr-4 file:border-0 file:bg-black file:text-white file:px-4 file:py-2 file:text-xs file:uppercase file:tracking-widest file:font-semibold hover:file:bg-[#BE8B3E] transition">
+                    class="mt-3 w-full rounded-lg border border-gray-300 cursor-pointer px-4 py-3 text-sm">
 
                 <p class="mt-2 text-xs text-gray-400">
                     JPG, JPEG, PNG or WEBP. Maximum size: 4MB.
@@ -150,8 +146,8 @@
 
             </div>
 
-
             {{-- SORT ORDER --}}
+
             <div class="mt-6">
 
                 <label
@@ -166,7 +162,7 @@
                     name="sort_order"
                     value="{{ old('sort_order', 0) }}"
                     min="0"
-                    class="mt-2 w-full border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
+                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
 
                 <p class="mt-2 text-xs text-gray-400">
                     Lower numbers appear first.
@@ -174,8 +170,8 @@
 
             </div>
 
-
             {{-- ACTIVE --}}
+
             <div class="mt-6">
 
                 <label class="flex items-center gap-3 cursor-pointer">
@@ -185,7 +181,7 @@
                         name="is_active"
                         value="1"
                         {{ old('is_active', true) ? 'checked' : '' }}
-                        class="w-4 h-4 rounded border-gray-300 text-[#BE8B3E] focus:ring-[#BE8B3E]">
+                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
 
                     <span class="text-sm text-gray-700">
                         Active category
@@ -199,19 +195,19 @@
 
             </div>
 
-
             {{-- ACTIONS --}}
+
             <div class="mt-8 pt-6 border-t border-gray-200 flex flex-col sm:flex-row gap-3">
 
                 <button
                     type="submit"
-                    class="inline-flex items-center justify-center bg-black text-white px-6 py-3 rounded-lg text-xs uppercase tracking-widest font-semibold hover:bg-[#BE8B3E] transition">
+                    class="bg-[#BE8B3E] rounded-full cursor-pointer border border-[#BE8B3E] hover:bg-transparent hover:text-[#BE8B3E] text-white px-7 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#a47c15] transition">
                     Create Blog Category
                 </button>
 
                 <a
                     href="{{ route('admin.blog.categories.index') }}"
-                    class="inline-flex items-center justify-center border border-gray-300 text-gray-700 px-6 py-3 rounded-lg text-xs uppercase tracking-widest font-semibold hover:border-black transition">
+                    class="border border-gray-300 rounded-full px-7 py-4 text-xs uppercase tracking-widest font-semibold text-center hover:bg-gray-300 hover:text-white transition">
                     Cancel
                 </a>
 

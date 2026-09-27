@@ -36,7 +36,6 @@
 
         </div>
 
-
         {{-- SUCCESS --}}
 
         @if(session('success'))
@@ -47,51 +46,49 @@
 
         @endif
 
-
         {{-- TABLE --}}
 
-        <div class="bg-white border border-gray-200 overflow-hidden">
+        <div class="bg-white border border-[#BE8B3E] rounded-lg overflow-hidden">
 
             <div class="overflow-x-auto">
 
                 <table class="w-full">
 
-                    <thead class="bg-gray-50 border-b border-gray-200">
+                    <thead class="bg-gray-50 border-b border-[#BE8B3E]">
 
                         <tr>
 
-                            <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-gray-500">
+                            <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E]">
                                 Image
                             </th>
 
-                            <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-gray-500">
+                            <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E]">
                                 Product
                             </th>
 
-                            <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-gray-500">
+                            <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E]">
                                 Category
                             </th>
 
-                            <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-gray-500">
+                            <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E]">
                                 Price
                             </th>
 
-                            <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-gray-500">
+                            <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E]">
                                 Stock
                             </th>
 
-                            <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-gray-500">
+                            <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E]">
                                 Status
                             </th>
 
-                            <th class="text-right px-6 py-4 text-[10px] uppercase tracking-widest text-gray-500">
+                            <th class="text-right px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E]">
                                 Actions
                             </th>
 
                         </tr>
 
                     </thead>
-
 
                     <tbody class="divide-y divide-gray-100">
 
@@ -111,7 +108,6 @@
 
                             @endphp
 
-
                             <tr class="hover:bg-gray-50 transition">
 
                                 {{-- IMAGE --}}
@@ -121,11 +117,9 @@
                                     <img
                                         src="{{ $image }}"
                                         alt="{{ $product->name }}"
-                                        class="w-16 h-20 object-cover bg-gray-100"
-                                    >
+                                        class="w-16 h-20 object-cover bg-gray-100">
 
                                 </td>
-
 
                                 {{-- PRODUCT --}}
 
@@ -141,7 +135,6 @@
 
                                 </td>
 
-
                                 {{-- CATEGORY --}}
 
                                 <td class="px-6 py-5">
@@ -151,7 +144,6 @@
                                     </span>
 
                                 </td>
-
 
                                 {{-- PRICE --}}
 
@@ -177,7 +169,6 @@
 
                                 </td>
 
-
                                 {{-- STOCK --}}
 
                                 <td class="px-6 py-5">
@@ -197,7 +188,6 @@
                                     @endif
 
                                 </td>
-
 
                                 {{-- STATUS --}}
 
@@ -219,7 +209,6 @@
 
                                         @endif
 
-
                                         @if($product->is_featured)
 
                                             <span class="inline-flex w-fit bg-[#a47c15]/10 text-[#a47c15] px-3 py-1 text-[10px] uppercase tracking-widest font-semibold">
@@ -232,7 +221,6 @@
 
                                 </td>
 
-
                                 {{-- ACTIONS --}}
 
                                 <td class="px-6 py-5">
@@ -242,33 +230,27 @@
                                         <a
                                             href="{{ route('product.show', $product->slug) }}"
                                             target="_blank"
-                                            class="px-4 py-2 border rounded-full bg-gray-300 border-gray-300 text-xs text-white uppercase tracking-widest hover:bg-transparent hover:text-gray-300 transition"
-                                        >
+                                            class="px-4 py-2 border rounded-full bg-gray-300 border-gray-300 text-xs text-white uppercase tracking-widest hover:bg-transparent hover:text-gray-300 transition">
                                             View
                                         </a>
 
-
                                         <a
                                             href="{{ route('admin.products.edit', $product) }}"
-                                            class="px-4 py-2 border border-gray-300 rounded-full text-xs uppercase tracking-widest hover:bg-black hover:text-white hover:border-black transition"
-                                        >
+                                            class="px-4 py-2 border border-gray-300 rounded-full text-xs uppercase tracking-widest hover:bg-black hover:text-white hover:border-black transition">
                                             Edit
                                         </a>
-
 
                                         <form
                                             action="{{ route('admin.products.destroy', $product) }}"
                                             method="POST"
-                                            onsubmit="return confirm('Are you sure you want to delete this product?');"
-                                        >
+                                            onsubmit="return confirm('Are you sure you want to delete this product?');">
 
                                             @csrf
                                             @method('DELETE')
 
                                             <button
                                                 type="submit"
-                                                class="px-4 py-2 border border-red-200 text-red-600 text-xs uppercase tracking-widest hover:bg-red-600 hover:text-white rounded-full cursor-pointer hover:border-red-600 transition"
-                                            >
+                                                class="px-4 py-2 border border-red-200 text-red-600 text-xs uppercase tracking-widest hover:bg-red-600 hover:text-white rounded-full cursor-pointer hover:border-red-600 transition">
                                                 Delete
                                             </button>
 
@@ -292,8 +274,7 @@
 
                                     <a
                                         href="{{ route('admin.products.create') }}"
-                                        class="inline-flex mt-5 bg-black text-white px-6 py-3 text-xs uppercase tracking-widest"
-                                    >
+                                        class="inline-flex mt-5 bg-[#BE8B3E] border border-[#BE8B3E] rounded-full text-white hover:bg-transparent hover:text-[#BE8B3E] px-6 py-3 text-[10px] uppercase tracking-widest font-semibold">
                                         Create First Product
                                     </a>
 
