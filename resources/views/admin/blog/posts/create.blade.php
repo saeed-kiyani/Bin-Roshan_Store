@@ -3,7 +3,7 @@
 @section('title', 'Add New Blog Post | Bin Roshan')
 
 @section('content')
-<div class="min-h-screen bg-gray-50 py-8">
+<div class="min-h-screen py-8">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {{-- Header --}}
@@ -73,7 +73,7 @@
                            required
                            maxlength="255"
                            placeholder="Enter post title"
-                           class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
+                           class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
 
                     @error('title')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -93,7 +93,7 @@
                            value="{{ old('slug') }}"
                            maxlength="255"
                            placeholder="my-blog-post"
-                           class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
+                           class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
 
                     <p class="mt-1 text-xs text-gray-500">
                         Leave empty to automatically generate the slug from the title.
@@ -113,7 +113,7 @@
 
                     <select id="blog_category_id"
                             name="blog_category_id"
-                            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
+                            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
 
                         <option value="">No Category</option>
 
@@ -142,7 +142,7 @@
                               name="excerpt"
                               rows="4"
                               placeholder="Short summary of the article..."
-                              class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">{{ old('excerpt') }}</textarea>
+                              class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">{{ old('excerpt') }}</textarea>
 
                     <p class="mt-1 text-xs text-gray-500">
                         This short description can be shown on the blog listing page.
@@ -198,10 +198,10 @@
                        accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
                        class="block w-full cursor-pointer text-sm text-gray-600
                               file:mr-4 file:py-2.5 file:px-4
-                              file:rounded-lg file:border-0
-                              file:text-sm file:font-semibold
-                              file:bg-gray-100 file:text-gray-700
-                              hover:file:bg-gray-200">
+                              file:rounded-lg file:border file:border-[#BE8B3E]
+                              file:text-sm file:cursor-pointer file:font-semibold
+                              file:bg-[#BE8B3E] file:text-white
+                              hover:file:bg-transparent hover:file:text-[#BE8B3E]">
 
                 <p class="mt-2 text-xs text-gray-500">
                     JPG, JPEG, PNG or WEBP. Maximum size: 4MB.
@@ -258,7 +258,7 @@
                            id="published_at"
                            name="published_at"
                            value="{{ old('published_at') }}"
-                           class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
+                           class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
 
                     <p class="mt-1 text-xs text-gray-500">
                         Leave empty to use the current date and time when publishing.
@@ -272,7 +272,7 @@
             </div>
 
             {{-- SEO --}}
-            <div class="bg-white rounded-xl shadow-sm border border-[#BE8B3E] p-6">
+            <div class="rounded-xl shadow-sm border border-[#BE8B3E] p-6">
 
                 <h2 class="text-lg font-semibold text-gray-900">
                     SEO Settings
@@ -295,7 +295,7 @@
                            value="{{ old('meta_title') }}"
                            maxlength="255"
                            placeholder="SEO title"
-                           class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
+                           class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
 
                     <p class="mt-1 text-xs text-gray-500">
                         Recommended: around 50–60 characters.
@@ -318,7 +318,7 @@
                               rows="3"
                               maxlength="500"
                               placeholder="Short description for search engines..."
-                              class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">{{ old('meta_description') }}</textarea>
+                              class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">{{ old('meta_description') }}</textarea>
 
                     <p class="mt-1 text-xs text-gray-500">
                         Recommended: around 150–160 characters.
@@ -373,7 +373,7 @@
             const wrapper = document.createElement('div');
 
             wrapper.id = 'content-editor';
-            wrapper.className = 'bg-white rounded-lg';
+            wrapper.className = 'rounded-lg';
 
             textarea.parentNode.insertBefore(wrapper, textarea);
             textarea.style.display = 'none';

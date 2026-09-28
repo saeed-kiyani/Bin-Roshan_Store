@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="min-h-screen bg-[#f8f7f4]">
+<div class="min-h-screen">
 
     <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
@@ -75,7 +75,7 @@
                     name="name"
                     value="{{ old('name') }}"
                     required
-                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]"
+                    class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]"
                     placeholder="e.g. Fashion Trends">
 
             </div>
@@ -95,7 +95,7 @@
                     id="slug"
                     name="slug"
                     value="{{ old('slug') }}"
-                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]"
+                    class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]"
                     placeholder="fashion-trends">
 
                 <p class="mt-2 text-xs text-gray-400">
@@ -118,7 +118,7 @@
                     id="description"
                     name="description"
                     rows="5"
-                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]"
+                    class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]"
                     placeholder="Write a short description for this blog category...">{{ old('description') }}</textarea>
 
             </div>
@@ -138,7 +138,12 @@
                     id="image"
                     name="image"
                     accept=".jpg,.jpeg,.png,.webp"
-                    class="mt-3 w-full rounded-lg border border-gray-300 cursor-pointer px-4 py-3 text-sm">
+                    class="block w-full cursor-pointer text-sm text-gray-600
+                              file:mr-4 file:py-2.5 file:px-4
+                              file:rounded-lg file:border file:border-[#BE8B3E]
+                              file:text-sm file:cursor-pointer file:font-semibold
+                              file:bg-[#BE8B3E] file:text-white
+                              hover:file:bg-transparent hover:file:text-[#BE8B3E]">
 
                 <p class="mt-2 text-xs text-gray-400">
                     JPG, JPEG, PNG or WEBP. Maximum size: 4MB.
@@ -162,7 +167,7 @@
                     name="sort_order"
                     value="{{ old('sort_order', 0) }}"
                     min="0"
-                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
+                    class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
 
                 <p class="mt-2 text-xs text-gray-400">
                     Lower numbers appear first.

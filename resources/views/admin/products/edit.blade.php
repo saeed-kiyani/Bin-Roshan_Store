@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit Product | Bin Ismail')
+@section('title', 'Edit Product | Bin Roshan')
 
 @section('content')
 
@@ -183,7 +183,7 @@
 @endphp
 
 
-<div class="min-h-screen bg-gray-50 py-12">
+<div class="min-h-screen py-12">
 
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -191,8 +191,7 @@
 
             <a
                 href="{{ route('admin.products.index') }}"
-                class="text-xs uppercase tracking-widest text-gray-500 hover:text-black transition"
-            >
+                class="text-xs uppercase tracking-widest text-gray-500 hover:text-[#BE8B3E] transition">
                 ← Back to Products
             </a>
 
@@ -245,7 +244,7 @@
 
         {{-- EXISTING IMAGES --}}
 
-        <div class="bg-white border border-gray-200 p-6 sm:p-10 mb-8">
+        <div class="rounded-lg border border-gray-200 p-6 sm:p-10 mb-8">
 
             <div class="flex items-center justify-between mb-7">
 
@@ -374,7 +373,7 @@
             action="{{ route('admin.products.update', $product) }}"
             method="POST"
             enctype="multipart/form-data"
-            class="bg-white border border-gray-200 p-6 sm:p-10"
+            class="rounded-lg border border-gray-200 p-6 sm:p-10"
         >
 
             @csrf
@@ -396,7 +395,7 @@
         id="category_id"
         name="category_id"
         required
-        class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
+        class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]"
     >
 
         @foreach($categories as $category)
@@ -448,7 +447,7 @@
                     name="name"
                     value="{{ old('name', $product->name) }}"
                     required
-                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black"
+                    class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]"
                 >
 
             </div>
@@ -470,7 +469,7 @@
                     id="slug"
                     name="slug"
                     value="{{ old('slug', $product->slug) }}"
-                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black"
+                    class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]"
                 >
 
             </div>
@@ -493,7 +492,7 @@
                     name="sku"
                     value="{{ old('sku', $product->sku) }}"
                     required
-                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black"
+                    class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]"
                 >
 
             </div>
@@ -507,9 +506,8 @@
     class="hidden mt-7 border-t border-gray-200 pt-7">
 
     <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
-        Clothing Information
+        Clothing Filtration
     </p>
-
 
     {{-- GENDER --}}
 
@@ -517,16 +515,14 @@
 
         <label
             for="gender"
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-        >
+            class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
             Gender
         </label>
 
         <select
             id="gender"
             name="gender"
-            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
-        >
+            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
 
             <option value="">
                 Select Gender
@@ -551,23 +547,20 @@
 
     </div>
 
-
     {{-- BRAND --}}
 
     <div class="mt-7">
 
         <label
             for="brand"
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-        >
+            class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
             Brand
         </label>
 
         <select
             id="brand"
             name="brand"
-            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
-        >
+            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
 
             <option value="">
                 Select Brand
@@ -626,8 +619,7 @@
                         name="sizes[]"
                         value="{{ $size }}"
                         {{ in_array($size, $selectedSizes) ? 'checked' : '' }}
-                        class="w-4 h-4"
-                    >
+                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
 
                     <span class="text-sm text-gray-700">
                         {{ $size }}
@@ -642,21 +634,21 @@
     </div>
 
 </div>
-{{-- END CLOTHING INFORMATION --}}
-
-        {{-- =========================================================
-     LACE INFORMATION
+{{-- =========================================================
+     END CLOTHING INFORMATION
 ========================================================= --}}
 
+{{-- =========================================================
+     LACE INFORMATION
+========================================================= --}}
 <div
     id="lace-filter"
     data-filter-section="laces"
     class="hidden mt-7 border-t border-gray-200 pt-7">
 
     <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
-        Lace Information
+        Lace Filtration
     </p>
-
 
     {{-- LACE CATEGORY --}}
 
@@ -665,8 +657,7 @@
         <select
             id="lace_category"
             name="lace_category"
-            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
-        >
+            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
 
             <option value="">
                 Select Lace Category
@@ -676,8 +667,7 @@
 
                 <option
                     value="{{ $value }}"
-                    {{ old('lace_category', $product->lace_category) === $value ? 'selected' : '' }}
-                >
+                    {{ old('lace_category', $product->lace_category) === $value ? 'selected' : '' }}>
                     {{ $category['label'] }}
                 </option>
 
@@ -687,13 +677,11 @@
 
     </div>
 
-
     {{-- LACE SUBCATEGORIES --}}
 
 <div
     id="lace-subcategories-container"
-    class="mt-7 hidden"
->
+    class="mt-7 hidden">
 
     <label class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
         Lace Subcategories
@@ -705,11 +693,9 @@
 
     <div
         id="lace-subcategories"
-        class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4"
-    ></div>
+        class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
 
 </div>
-
 
     {{-- WIDTH --}}
 
@@ -739,8 +725,7 @@
                         name="width[]"
                         value="{{ $widthOption }}"
                         {{ in_array($widthOption, $selectedWidth) ? 'checked' : '' }}
-                        class="w-4 h-4"
-                    >
+                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
 
                     <span class="text-sm text-gray-600">
                         {{ $widthOption }}
@@ -754,96 +739,10 @@
 
     </div>
 
-
-    {{-- HEIGHT --}}
-
-    <div class="mt-7 border-t border-gray-200 pt-7">
-
-        <label class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Height
-        </label>
-
-        <div class="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-4">
-
-            @foreach([
-                '1 inch',
-                '1.5 inch',
-                '2 inch',
-                '2.5 inch',
-                '3 inch',
-                '4 inch',
-                '5 inch',
-                '6 inch'
-            ] as $heightOption)
-
-                <label class="flex items-center gap-3 cursor-pointer">
-
-                    <input
-                        type="checkbox"
-                        name="height[]"
-                        value="{{ $heightOption }}"
-                        {{ in_array($heightOption, $selectedHeight) ? 'checked' : '' }}
-                        class="w-4 h-4"
-                    >
-
-                    <span class="text-sm text-gray-600">
-                        {{ $heightOption }}
-                    </span>
-
-                </label>
-
-            @endforeach
-
-        </div>
-
-    </div>
-
-
-    {{-- LENGTH --}}
-
-    <div class="mt-7 border-t border-gray-200 pt-7">
-
-        <label class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Length
-        </label>
-
-        <div class="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-4">
-
-            @foreach([
-                '1 yard',
-                '2 yards',
-                '3 yards',
-                '5 yards',
-                '10 yards',
-                '20 yards',
-                '25 yards',
-                '50 yards'
-            ] as $lengthOption)
-
-                <label class="flex items-center gap-3 cursor-pointer">
-
-                    <input
-                        type="checkbox"
-                        name="length[]"
-                        value="{{ $lengthOption }}"
-                        {{ in_array($lengthOption, $selectedLength) ? 'checked' : '' }}
-                        class="w-4 h-4"
-                    >
-
-                    <span class="text-sm text-gray-600">
-                        {{ $lengthOption }}
-                    </span>
-
-                </label>
-
-            @endforeach
-
-        </div>
-
-    </div>
-
 </div>
-{{-- END LACE INFORMATION --}}
+{{-- =========================================================
+     END LACE INFORMATION
+========================================================= --}}
 
 {{-- =========================================================
      JEWELRY INFORMATION
@@ -851,10 +750,10 @@
 <div
     id="jewelry-filter"
     data-filter-section="jewelry"
-    class="hidden mt-7 border-t border-gray-200 pt-7"
->
+    class="hidden mt-7 border-t border-gray-200 pt-7">
+
     <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
-        Jewelry Information
+        Jewelry Filtration
     </p>
 
     {{-- GENDER --}}
@@ -877,8 +776,7 @@
                         name="jewelry_gender[]"
                         value="{{ $value }}"
                         {{ in_array($value, $selectedJewelryGender) ? 'checked' : '' }}
-                        class="w-4 h-4"
-                    >
+                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
                     <span class="text-sm text-gray-700">{{ $label }}</span>
                 </label>
             @endforeach
@@ -889,16 +787,15 @@
     <div class="mt-7">
         <label
             for="jewelry_type"
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-        >
+            class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
             Jewelry Type
         </label>
 
         <select
             id="jewelry_type"
             name="jewelry_type"
-            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
-        >
+            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
+
             <option value="">Select Jewelry Type</option>
             <option value="earrings" {{ old('jewelry_type', $product->jewelry_type ?? '') === 'earrings' ? 'selected' : '' }}>Earrings</option>
             <option value="necklaces" {{ old('jewelry_type', $product->jewelry_type ?? '') === 'necklaces' ? 'selected' : '' }}>Necklaces</option>
@@ -945,8 +842,8 @@
                         name="jewelry_quality[]"
                         value="{{ $value }}"
                         {{ in_array($value, $selectedJewelryQuality) ? 'checked' : '' }}
-                        class="w-4 h-4 mt-0.5"
-                    >
+                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
+
                     <span class="text-sm text-gray-700">{{ $label }}</span>
                 </label>
             @endforeach
@@ -973,8 +870,8 @@
                         name="ring_sizes[]"
                         value="{{ $size }}"
                         {{ in_array((string)$size, array_map('strval', $selectedRingSizes)) ? 'checked' : '' }}
-                        class="w-4 h-4"
-                    >
+                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
+
                     <span class="text-sm text-gray-700">{{ $size }}</span>
                 </label>
             @endforeach
@@ -1000,8 +897,8 @@
                         name="necklace_lengths[]"
                         value="{{ $length }}"
                         {{ in_array($length, $selectedNecklaceLengths) ? 'checked' : '' }}
-                        class="w-4 h-4"
-                    >
+                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
+
                     <span class="text-sm text-gray-700">{{ $length }}</span>
                 </label>
             @endforeach
@@ -1027,15 +924,17 @@
                         name="bracelet_sizes[]"
                         value="{{ $size }}"
                         {{ in_array($size, $selectedBraceletSizes) ? 'checked' : '' }}
-                        class="w-4 h-4"
-                    >
+                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
+
                     <span class="text-sm text-gray-700">{{ $size }}</span>
                 </label>
             @endforeach
         </div>
     </div>
 </div>
-
+{{-- =========================================================
+     END JEWELRY INFORMATION
+========================================================= --}}
 
 {{-- =========================================================
      WATCHES INFORMATION
@@ -1043,10 +942,10 @@
 <div
     id="watches-filter"
     data-filter-section="watches"
-    class="hidden mt-7 border-t border-gray-200 pt-7"
->
+    class="hidden mt-7 border-t border-gray-200 pt-7">
+
     <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
-        Watches Information
+        Watches Filtration
     </p>
 
     @php
@@ -1069,8 +968,8 @@
                         name="watch_gender[]"
                         value="{{ $value }}"
                         {{ in_array($value, $selectedWatchGender) ? 'checked' : '' }}
-                        class="w-4 h-4"
-                    >
+                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
+
                     <span class="text-sm text-gray-700">{{ $label }}</span>
                 </label>
             @endforeach
@@ -1081,15 +980,14 @@
     <div class="mt-7">
         <label
             for="strap_material"
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-        >
+            class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
             Strap Material
         </label>
         <select
             id="strap_material"
             name="strap_material"
-            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
-        >
+            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
+
             <option value="">Select Strap Material</option>
             <option value="stainless_steel" {{ old('strap_material', $product->strap_material ?? '') === 'stainless_steel' ? 'selected' : '' }}>Stainless Steel</option>
             <option value="leather" {{ old('strap_material', $product->strap_material ?? '') === 'leather' ? 'selected' : '' }}>Leather (Patty)</option>
@@ -1110,28 +1008,29 @@
                         name="watch_type"
                         value="{{ $value }}"
                         {{ old('watch_type', $product->watch_type ?? '') === $value ? 'checked' : '' }}
-                        class="w-4 h-4"
-                    >
+                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
+
                     <span class="text-sm text-gray-700">{{ $label }}</span>
                 </label>
             @endforeach
         </div>
     </div>
 </div>
+{{-- =========================================================
+     END WATCHES INFORMATION
+========================================================= --}}
 
 {{-- =========================================================
      OTHER ACCESSORIES INFORMATION
 ========================================================= --}}
-
 <div
     id="other-accessories-filter"
     data-filter-section="other_accessories"
-    class="hidden mt-7 border-t border-gray-200 pt-7"
->
+    class="hidden mt-7 border-t border-gray-200 pt-7">
+
     <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
         Other Accessories Information
     </p>
-
 
     {{-- BUTTONS --}}
 
@@ -1139,58 +1038,51 @@
 
         <label
             for="buttons"
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-        >
+            class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
             Buttons
         </label>
 
         <select
             id="buttons"
             name="buttons"
-            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
-        >
+            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
+
             <option value="">
                 Select Buttons
             </option>
 
             <option
                 value="fancy_buttons"
-                {{ old('buttons', $product->buttons ?? '') === 'fancy_buttons' ? 'selected' : '' }}
-            >
+                {{ old('buttons', $product->buttons ?? '') === 'fancy_buttons' ? 'selected' : '' }}>
                 Fancy Buttons
             </option>
 
             <option
                 value="simple_buttons"
-                {{ old('buttons', $product->buttons ?? '') === 'simple_buttons' ? 'selected' : '' }}
-            >
+                {{ old('buttons', $product->buttons ?? '') === 'simple_buttons' ? 'selected' : '' }}>
                 Simple Buttons
             </option>
 
             <option
                 value="pearls_buttons"
-                {{ old('buttons', $product->buttons ?? '') === 'pearls_buttons' ? 'selected' : '' }}
-            >
+                {{ old('buttons', $product->buttons ?? '') === 'pearls_buttons' ? 'selected' : '' }}>
                 Pearls Buttons
             </option>
 
             <option
                 value="pearls_clothes_buttons"
-                {{ old('buttons', $product->buttons ?? '') === 'pearls_clothes_buttons' ? 'selected' : '' }}
-            >
+                {{ old('buttons', $product->buttons ?? '') === 'pearls_clothes_buttons' ? 'selected' : '' }}>
                 Pearls Clothes Buttons
             </option>
 
             <option
                 value="button_patti"
-                {{ old('buttons', $product->buttons ?? '') === 'button_patti' ? 'selected' : '' }}
-            >
+                {{ old('buttons', $product->buttons ?? '') === 'button_patti' ? 'selected' : '' }}>
                 Button Patti
             </option>
         </select>
 
     </div>
-
 
     {{-- PIPING CLOTHES --}}
 
@@ -1198,58 +1090,50 @@
 
         <label
             for="piping_clothes"
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-        >
+            class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
             Piping Clothes
         </label>
 
         <select
             id="piping_clothes"
             name="piping_clothes"
-            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
-        >
+            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
             <option value="">
                 Select Piping Clothes
             </option>
 
             <option
                 value="aparna_shamooz_silk_piping"
-                {{ old('piping_clothes', $product->piping_clothes ?? '') === 'aparna_shamooz_silk_piping' ? 'selected' : '' }}
-            >
+                {{ old('piping_clothes', $product->piping_clothes ?? '') === 'aparna_shamooz_silk_piping' ? 'selected' : '' }}>
                 Aparna / Shamooz Silk Piping
             </option>
 
             <option
                 value="katan_silk_dori_piping"
-                {{ old('piping_clothes', $product->piping_clothes ?? '') === 'katan_silk_dori_piping' ? 'selected' : '' }}
-            >
+                {{ old('piping_clothes', $product->piping_clothes ?? '') === 'katan_silk_dori_piping' ? 'selected' : '' }}>
                 Katan Silk / Dori Piping
             </option>
 
             <option
                 value="cotton_lawn_piping"
-                {{ old('piping_clothes', $product->piping_clothes ?? '') === 'cotton_lawn_piping' ? 'selected' : '' }}
-            >
+                {{ old('piping_clothes', $product->piping_clothes ?? '') === 'cotton_lawn_piping' ? 'selected' : '' }}>
                 Cotton / Lawn Piping
             </option>
 
             <option
                 value="velvet_piping"
-                {{ old('piping_clothes', $product->piping_clothes ?? '') === 'velvet_piping' ? 'selected' : '' }}
-            >
+                {{ old('piping_clothes', $product->piping_clothes ?? '') === 'velvet_piping' ? 'selected' : '' }}>
                 Velvet Piping
             </option>
 
             <option
                 value="metallic_zari_piping"
-                {{ old('piping_clothes', $product->piping_clothes ?? '') === 'metallic_zari_piping' ? 'selected' : '' }}
-            >
+                {{ old('piping_clothes', $product->piping_clothes ?? '') === 'metallic_zari_piping' ? 'selected' : '' }}>
                 Metallic / Zari Piping
             </option>
         </select>
 
     </div>
-
 
     {{-- ACCESSORY TYPE --}}
 
@@ -1268,8 +1152,7 @@
                     name="accessory_type"
                     value="tailor_accessories"
                     {{ old('accessory_type', $product->accessory_type ?? '') === 'tailor_accessories' ? 'checked' : '' }}
-                    class="w-4 h-4"
-                >
+                    class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
 
                 <span class="text-sm text-gray-700">
                     Tailor Accessories
@@ -1285,8 +1168,7 @@
                     name="accessory_type"
                     value="other_accessories"
                     {{ old('accessory_type', $product->accessory_type ?? '') === 'other_accessories' ? 'checked' : '' }}
-                    class="w-4 h-4"
-                >
+                    class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
 
                 <span class="text-sm text-gray-700">
                     Other Accessories
@@ -1299,21 +1181,21 @@
     </div>
 
 </div>
+{{-- =========================================================
+     END OTHER ACCESSORIES INFORMATION
+========================================================= --}}
 
 {{-- =========================================================
      COSMETICS INFORMATION
 ========================================================= --}}
-
 <div
     id="cosmetics-filter"
     data-filter-section="cosmetics"
-    class="mt-7 border-t border-gray-200 pt-7 hidden"
->
+    class="mt-7 border-t border-gray-200 pt-7 hidden">
 
     <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
-        Cosmetics Information
+        Cosmetics Filtration
     </p>
-
 
     {{-- BRAND --}}
 
@@ -1321,16 +1203,14 @@
 
         <label
             for="cosmetic_brand"
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-        >
+            class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
             Brand
         </label>
 
         <select
             id="cosmetic_brand"
             name="brand"
-            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
-        >
+            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
 
             <option value="">
                 Select Brand
@@ -1340,8 +1220,7 @@
 
                 <option
                     value="{{ $value }}"
-                    {{ old('brand', $product->brand ?? '') === $value ? 'selected' : '' }}
-                >
+                    {{ old('brand', $product->brand ?? '') === $value ? 'selected' : '' }}>
                     {{ $label }}
                 </option>
 
@@ -1351,23 +1230,20 @@
 
     </div>
 
-
     {{-- PRODUCT TYPE --}}
 
     <div class="mt-7">
 
         <label
             for="cosmetic_product_type"
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-        >
+            class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
             Product Type
         </label>
 
         <select
             id="cosmetic_product_type"
             name="cosmetic_product_type"
-            class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white focus:outline-none focus:border-black"
-        >
+            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
 
             <option value="">
                 Select Product Type
@@ -1377,8 +1253,7 @@
 
                 <option
                     value="{{ $value }}"
-                    {{ old('cosmetic_product_type', $product->cosmetic_product_type ?? '') === $value ? 'selected' : '' }}
-                >
+                    {{ old('cosmetic_product_type', $product->cosmetic_product_type ?? '') === $value ? 'selected' : '' }}>
                     {{ $label }}
                 </option>
 
@@ -1387,7 +1262,6 @@
         </select>
 
     </div>
-
 
     {{-- SKIN TYPE --}}
 
@@ -1423,8 +1297,7 @@
                         name="skin_types[]"
                         value="{{ $value }}"
                         {{ in_array($value, $selectedSkinTypes) ? 'checked' : '' }}
-                        class="w-4 h-4"
-                    >
+                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
 
                     <span class="text-sm text-gray-600">
                         {{ $label }}
@@ -1437,7 +1310,6 @@
         </div>
 
     </div>
-
 
     {{-- CONCERN / BENEFIT --}}
 
@@ -1473,8 +1345,7 @@
                         name="concerns[]"
                         value="{{ $value }}"
                         {{ in_array($value, $selectedConcerns) ? 'checked' : '' }}
-                        class="w-4 h-4"
-                    >
+                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
 
                     <span class="text-sm text-gray-600">
                         {{ $label }}
@@ -1487,7 +1358,6 @@
         </div>
 
     </div>
-
 
     {{-- PRODUCT FORM --}}
 
@@ -1523,8 +1393,7 @@
                         name="product_forms[]"
                         value="{{ $value }}"
                         {{ in_array($value, $selectedProductForms) ? 'checked' : '' }}
-                        class="w-4 h-4"
-                    >
+                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
 
                     <span class="text-sm text-gray-600">
                         {{ $label }}
@@ -1539,8 +1408,9 @@
     </div>
 
 </div>
-
-{{-- END COSMETICS INFORMATION --}}
+{{-- =========================================================
+     END COSMETICS INFORMATION
+========================================================= --}}
 
             {{-- DESCRIPTION --}}
 
@@ -1548,8 +1418,7 @@
 
                 <label
                     for="description"
-                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-                >
+                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
                     Description
                 </label>
 
@@ -1557,11 +1426,9 @@
                     id="description"
                     name="description"
                     rows="6"
-                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black"
-                >{{ old('description', $product->description) }}</textarea>
+                    class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">{{ old('description', $product->description) }}</textarea>
 
             </div>
-
 
             {{-- PRICES --}}
 
@@ -1571,8 +1438,7 @@
 
                     <label
                         for="price"
-                        class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-                    >
+                        class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
                         Regular Price
                     </label>
 
@@ -1584,18 +1450,15 @@
                         min="0"
                         step="0.01"
                         required
-                        class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black"
-                    >
+                        class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
 
                 </div>
-
 
                 <div>
 
                     <label
                         for="sale_price"
-                        class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-                    >
+                        class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
                         Sale Price
                     </label>
 
@@ -1607,13 +1470,11 @@
                         min="0"
                         step="0.01"
                         placeholder="Optional"
-                        class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black"
-                    >
+                        class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
 
                 </div>
 
             </div>
-
 
             {{-- STOCK --}}
 
@@ -1621,8 +1482,7 @@
 
                 <label
                     for="stock"
-                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-                >
+                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
                     Stock
                 </label>
 
@@ -1633,11 +1493,9 @@
                     value="{{ old('stock', $product->stock) }}"
                     min="0"
                     required
-                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:border-black"
-                >
+                    class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
 
             </div>
-
 
             {{-- ADD IMAGES --}}
 
@@ -1645,8 +1503,7 @@
 
                 <label
                     for="images"
-                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-                >
+                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
                     Add More Images
                 </label>
 
@@ -1656,8 +1513,12 @@
                     name="images[]"
                     accept=".jpg,.jpeg,.png,.webp"
                     multiple
-                    class="mt-3 w-full border border-gray-300 px-4 py-3 text-sm bg-white"
-                >
+                    class="block w-full cursor-pointer text-sm text-gray-600
+                              file:mr-4 file:py-2.5 file:px-4
+                              file:rounded-lg file:border file:border-[#BE8B3E]
+                              file:text-sm file:cursor-pointer file:font-semibold
+                              file:bg-[#BE8B3E] file:text-white
+                              hover:file:bg-transparent hover:file:text-[#BE8B3E]">
 
                 <p class="mt-2 text-xs text-gray-400">
                     Select multiple images to add them to this product.
@@ -1665,7 +1526,6 @@
                 </p>
 
             </div>
-
 
             {{-- OPTIONS --}}
 
@@ -1678,8 +1538,7 @@
                         name="is_featured"
                         value="1"
                         {{ old('is_featured', $product->is_featured) ? 'checked' : '' }}
-                        class="w-4 h-4"
-                    >
+                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
 
                     <span class="text-sm text-gray-700">
                         Featured product
@@ -1695,8 +1554,7 @@
                         name="is_active"
                         value="1"
                         {{ old('is_active', $product->is_active) ? 'checked' : '' }}
-                        class="w-4 h-4"
-                    >
+                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
 
                     <span class="text-sm text-gray-700">
                         Active product
@@ -1706,22 +1564,19 @@
 
             </div>
 
-
             {{-- BUTTONS --}}
 
             <div class="mt-10 flex flex-col sm:flex-row gap-3">
 
                 <button
                     type="submit"
-                    class="bg-[#BE8B3E] rounded-full cursor-pointer border border-[#BE8B3E] hover:bg-transparent hover:text-[#BE8B3E] text-white px-7 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#a47c15] transition"
-                >
+                    class="bg-[#BE8B3E] rounded-full cursor-pointer border border-[#BE8B3E] hover:bg-transparent hover:text-[#BE8B3E] text-white px-7 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#a47c15] transition">
                     Update Product
                 </button>
 
                 <a
                     href="{{ route('admin.products.index') }}"
-                    class="border border-gray-300 rounded-full px-7 py-4 text-xs uppercase tracking-widest font-semibold text-center hover:bg-gray-300 hover:text-white transition"
-                >
+                    class="border border-gray-300 rounded-full px-7 py-4 text-xs uppercase tracking-widest font-semibold text-center hover:bg-gray-300 hover:text-white transition">
                     Cancel
                 </a>
 

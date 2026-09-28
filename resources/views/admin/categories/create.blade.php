@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="min-h-screen bg-gray-50 py-12">
+<div class="min-h-screen py-12">
 
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -54,7 +54,7 @@
             action="{{ route('admin.categories.store') }}"
             method="POST"
             enctype="multipart/form-data"
-            class="bg-white border border-[#BE8B3E] rounded-lg p-6 sm:p-10">
+            class="border border-[#BE8B3E] rounded-lg p-6 sm:p-10">
 
             @csrf
 
@@ -75,7 +75,7 @@
                     value="{{ old('name') }}"
                     placeholder="e.g. Clothing"
                     required
-                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
+                    class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
 
             </div>
 
@@ -95,7 +95,7 @@
                     name="slug"
                     value="{{ old('slug') }}"
                     placeholder="Leave empty to generate automatically"
-                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
+                    class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
 
                 <p class="mt-2 text-xs text-gray-400">
                     Example: clothing
@@ -118,7 +118,7 @@
                     name="description"
                     rows="5"
                     placeholder="Describe this category..."
-                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">{{ old('description') }}</textarea>
+                    class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">{{ old('description') }}</textarea>
 
             </div>
 
@@ -137,7 +137,12 @@
                     id="image"
                     name="image"
                     accept=".jpg,.jpeg,.png,.webp"
-                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
+                    class="block w-full cursor-pointer text-sm text-gray-600
+                              file:mr-4 file:py-2.5 file:px-4
+                              file:rounded-lg file:border file:border-[#BE8B3E]
+                              file:text-sm file:cursor-pointer file:font-semibold
+                              file:bg-[#BE8B3E] file:text-white
+                              hover:file:bg-transparent hover:file:text-[#BE8B3E]">
 
                 <p class="mt-2 text-xs text-gray-400">
                     JPG, JPEG, PNG or WEBP. Maximum 4MB.
@@ -161,7 +166,7 @@
                     name="sort_order"
                     value="{{ old('sort_order', 0) }}"
                     min="0"
-                    class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:border-[#BE8B3E] focus:ring-1 focus:ring-[#BE8B3E]">
+                    class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
 
                 <p class="mt-2 text-xs text-gray-400">
                     Lower numbers appear first.

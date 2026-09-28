@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
-@section('title', 'Manage Products | Bin Ismail')
+@section('title', 'Manage Products | Bin Roshan')
 
 @section('content')
 
-<div class="min-h-screen bg-gray-50 py-12">
+<div class="min-h-screen py-12">
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -40,7 +40,7 @@
 
         @if(session('success'))
 
-            <div class="mb-8 bg-green-50 border border-green-200 text-green-800 px-5 py-4 text-sm">
+            <div id="success-message" class="mb-8 bg-green-50 border border-green-200 text-green-800 px-5 py-4 text-sm">
                 {{ session('success') }}
             </div>
 
@@ -48,41 +48,41 @@
 
         {{-- TABLE --}}
 
-        <div class="bg-white border border-[#BE8B3E] rounded-lg overflow-hidden">
+        <div class="border border-[#BE8B3E] rounded-lg overflow-hidden">
 
             <div class="overflow-x-auto">
 
                 <table class="w-full">
 
-                    <thead class="bg-gray-50 border-b border-[#BE8B3E]">
+                    <thead class="border-b border-[#BE8B3E]">
 
                         <tr>
 
-                            <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E]">
+                            <th class="text-center px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E]">
                                 Image
                             </th>
 
-                            <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E]">
+                            <th class="text-center px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E]">
                                 Product
                             </th>
 
-                            <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E]">
+                            <th class="text-center px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E]">
                                 Category
                             </th>
 
-                            <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E]">
+                            <th class="text-center px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E]">
                                 Price
                             </th>
 
-                            <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E]">
+                            <th class="text-center px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E]">
                                 Stock
                             </th>
 
-                            <th class="text-left px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E]">
+                            <th class="text-center px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E]">
                                 Status
                             </th>
 
-                            <th class="text-right px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E]">
+                            <th class="text-center px-6 py-4 text-[10px] uppercase tracking-widest text-[#BE8B3E]">
                                 Actions
                             </th>
 
@@ -108,7 +108,7 @@
 
                             @endphp
 
-                            <tr class="hover:bg-gray-50 transition">
+                            <tr>
 
                                 {{-- IMAGE --}}
 
@@ -230,27 +230,27 @@
                                         <a
                                             href="{{ route('product.show', $product->slug) }}"
                                             target="_blank"
-                                            class="px-4 py-2 border rounded-full bg-gray-300 border-gray-300 text-xs text-white uppercase tracking-widest hover:bg-transparent hover:text-gray-300 transition">
+                                            class="px-4 py-2 border rounded-full bg-[#BE8B3E] border-[#BE8B3E] text-xs text-white uppercase tracking-widest hover:bg-transparent hover:text-[#BE8B3E] transition">
                                             View
                                         </a>
 
                                         <a
                                             href="{{ route('admin.products.edit', $product) }}"
-                                            class="px-4 py-2 border border-gray-300 rounded-full text-xs uppercase tracking-widest hover:bg-black hover:text-white hover:border-black transition">
+                                            class="inline-flex items-center rounded-full border border-gray-300 px-4 py-2 text-[10px] uppercase tracking-widest font-semibold text-gray-700 hover:border-[#BE8B3E] hover:text-[#BE8B3E] transition">
                                             Edit
                                         </a>
 
                                         <form
-                                            action="{{ route('admin.products.destroy', $product) }}"
+                                            action="{{route('admin.products.destroy', $product)}}"
                                             method="POST"
-                                            onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                            class="delete-category-form">
 
                                             @csrf
                                             @method('DELETE')
 
                                             <button
                                                 type="submit"
-                                                class="px-4 py-2 border border-red-200 text-red-600 text-xs uppercase tracking-widest hover:bg-red-600 hover:text-white rounded-full cursor-pointer hover:border-red-600 transition">
+                                                class="inline-flex items-center rounded-full border border-red-200 px-4 py-2 text-[10px] uppercase tracking-widest font-semibold text-red-500 hover:bg-red-500 hover:text-white hover:border-red-500 transition">
                                                 Delete
                                             </button>
 
@@ -295,5 +295,82 @@
     </div>
 
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const deleteModal = document.getElementById('deleteModal');
+        const cancelDelete = document.getElementById('cancelDelete');
+        const confirmDelete = document.getElementById('confirmDelete');
+
+        let deleteForm = null;
+
+        // Open modal
+        document.querySelectorAll('.delete-category-form').forEach(function (form) {
+
+            form.addEventListener('submit', function (event) {
+
+                event.preventDefault();
+
+                deleteForm = form;
+
+                deleteModal.classList.remove('hidden');
+                deleteModal.classList.add('flex');
+
+            });
+
+        });
+
+        // Cancel
+        cancelDelete.addEventListener('click', function () {
+
+            deleteModal.classList.add('hidden');
+            deleteModal.classList.remove('flex');
+
+            deleteForm = null;
+
+        });
+
+        // Confirm delete
+        confirmDelete.addEventListener('click', function () {
+
+            if (deleteForm) {
+                deleteForm.submit();
+            }
+
+        });
+
+        // Close when clicking outside modal
+        deleteModal.addEventListener('click', function (event) {
+
+            if (event.target === deleteModal) {
+
+                deleteModal.classList.add('hidden');
+                deleteModal.classList.remove('flex');
+
+                deleteForm = null;
+
+            }
+
+        });
+
+    });
+</script>
+
+{{-- AUTO HIDE MESSAGES AFTER 3 SECONDS --}} 
+
+<script> 
+setTimeout(() => { 
+    const successMessage = document.getElementById('success-message'); 
+    const errorMessage = document.getElementById('error-message'); 
+    
+    if (successMessage) {
+        successMessage.style.display = 'none'; 
+    } 
+    if (errorMessage) { 
+        errorMessage.style.display = 'none'; } 
+    }, 2000); 
+    
+</script>
 
 @endsection

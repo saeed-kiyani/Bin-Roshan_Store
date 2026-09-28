@@ -3,7 +3,7 @@
 @section('title', 'Blog Posts | Bin Roshan')
 
 @section('content')
-<div class="min-h-screen bg-gray-50 py-8">
+<div class="min-h-screen py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {{-- Header --}}
@@ -48,7 +48,7 @@
         @endif
 
         {{-- Posts Table --}}
-        <div class="bg-white border border-[#BE8B3E] rounded-lg overflow-hidden">
+        <div class="border border-[#BE8B3E] rounded-lg overflow-hidden">
 
             <div class="overflow-x-auto">
 
@@ -80,7 +80,7 @@
                         </tr>
                     </thead>
 
-                    <tbody class="bg-white divide-y divide-gray-100">
+                    <tbody class="divide-y divide-gray-100">
 
                         @forelse($posts as $post)
 
@@ -92,7 +92,7 @@
                                 }
                             @endphp
 
-                            <tr class="hover:bg-gray-50 transition">
+                            <tr>
 
                                 {{-- Post --}}
                                 <td class="px-6 py-4">
