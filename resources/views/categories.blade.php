@@ -12,53 +12,47 @@
 
 <section class="relative h-[55vh] min-h-[420px] sm:min-h-[500px] w-full overflow-hidden text-white">
 
-    {{-- VIDEO BACKGROUND --}}
-    <video
-        class="absolute inset-0 w-full h-full object-cover"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="auto">
-        <source src="{{ asset('videos/categories.mp4') }}" type="video/mp4">
-    </video>
-
-    {{-- DARK OVERLAY --}}
-    <div class="absolute inset-0 bg-black/40"></div>
-
     {{-- =====================================================
          TRANSPARENT NAVIGATION
     ====================================================== --}}
+
     <header class="absolute top-0 left-0 right-0 z-40">
 
         <div class="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-12">
 
             <nav class="h-24 flex items-center justify-between">
 
-                {{-- LEFT SIDE --}}
+                {{-- =================================================
+                     LEFT SIDE
+                ================================================== --}}
 
                 <div class="hidden lg:flex items-center gap-10 flex-1">
 
                     <a
                         href="{{ route('home') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                        class="text-sm uppercase tracking-[0.18em] transition
+                        {{ request()->is('/')
+                         ? 'text-[#BE8B3E] underline underline-offset-8 decoration-[#BE8B3E]'
+                         : 'text-white hover:text-[#BE8B3E]' }}">
                         Home
                     </a>
 
                     <a
                         href="{{ route('shop') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                        class="text-sm text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
                         Shop
                     </a>
 
                     <a
                         href="{{ route('categories') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                        class="text-sm uppercase tracking-[0.18em] transition
+                        {{ request()->is('categories')
+                         ? 'text-[#BE8B3E] underline underline-offset-8 decoration-[#BE8B3E]'
+                         : 'text-white hover:text-[#BE8B3E]' }}">
                         Categories
                     </a>
 
                 </div>
-
 
                 {{-- =================================================
                      CENTER LOGO
@@ -75,30 +69,143 @@
 
                 </a>
 
-
-                {{-- RIGHT SIDE --}}
+                {{-- =================================================
+                     RIGHT SIDE
+                ================================================== --}}
 
                 <div class="hidden lg:flex items-center justify-end gap-10 flex-1">
 
                     <a
                         href="{{ route('about') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                        class="text-sm text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
                         About
                     </a>
 
-                    <a href="{{ route('blog.index') }}"
-                       class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
-                       Blogs
+                    <a
+                        href="{{ route('blog.index') }}"
+                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                        Blogs
                     </a>
 
                     <a
                         href="{{ route('contact') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                        class="text-text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
                         Contact
                     </a>
 
+                    {{-- =================================================
+     CUSTOMER ACCOUNT
+================================================= --}}
 
-                    {{-- SEARCH --}}
+@if (Auth::check())
+
+    <div class="relative group">
+
+        <button
+            type="button"
+            aria-label="My Account"
+            class="text-white hover:text-[#BE8B3E] transition cursor-pointer">
+
+            <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+
+                <circle
+                    cx="12"
+                    cy="8"
+                    r="3.5"
+                    stroke-width="1.5"/>
+
+                <path
+                    d="M5 20c.8-3.2 3.2-5 7-5s6.2 1.8 7 5"
+                    stroke-width="1.5"
+                    stroke-linecap="round"/>
+
+            </svg>
+
+        </button>
+
+        {{-- ACCOUNT DROPDOWN --}}
+
+        <div
+            class="absolute right-0 top-full mt-4 w-52
+                   rounded-xl bg-white shadow-xl
+                   opacity-0 invisible
+                   group-hover:opacity-100
+                   group-hover:visible
+                   transition-all duration-200">
+
+            <div class="px-4 py-3 border-b border-gray-100">
+
+                <p class="text-sm font-semibold text-gray-900 truncate">
+                    {{ Auth::user()->name }}
+                </p>
+
+                <p class="text-xs text-gray-500 truncate mt-1">
+                    {{ Auth::user()->email }}
+                </p>
+
+            </div>
+
+            <form
+                method="POST"
+                action="{{ route('logout') }}"
+                class="p-2">
+
+                @csrf
+
+                <button
+                    type="submit"
+                    class="w-full rounded-lg px-3 py-2
+                           text-left text-sm text-gray-700
+                           hover:bg-gray-100 transition">
+
+                    Logout
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+@else
+
+    <button
+        type="button"
+        onclick="openCustomerAuthModal()"
+        aria-label="Login"
+        class="text-white hover:text-[#BE8B3E] transition cursor-pointer">
+
+        <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24">
+
+            <circle
+                cx="12"
+                cy="8"
+                r="3.5"
+                stroke-width="1.5"/>
+
+            <path
+                d="M5 20c.8-3.2 3.2-5 7-5s6.2 1.8 7 5"
+                stroke-width="1.5"
+                stroke-linecap="round"/>
+
+        </svg>
+
+    </button>
+
+@endif
+
+                    {{-- =================================================
+                         SEARCH
+                    ================================================== --}}
 
                     <button
                         type="button"
@@ -127,8 +234,9 @@
 
                     </button>
 
-
-                    {{-- CART --}}
+                    {{-- =================================================
+                         CART
+                    ================================================== --}}
 
                     <button
                         type="button"
@@ -167,7 +275,6 @@
 
                 </div>
 
-
                 {{-- =================================================
                      MOBILE MENU BUTTON
                 ================================================== --}}
@@ -193,40 +300,182 @@
 
                 </button>
 
+                {{-- =================================================
+                     MOBILE RIGHT ICONS
+                ================================================== --}}
 
-                {{-- MOBILE CART --}}
+                <div class="lg:hidden flex items-center gap-5">
+
+                {{-- CUSTOMER ACCOUNT --}}
+
+@if (Auth::check())
+
+    <div class="relative group">
+
+        <button
+            type="button"
+            aria-label="My Account"
+            class="text-white hover:text-[#BE8B3E] transition">
+
+            <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+
+                <circle
+                    cx="12"
+                    cy="8"
+                    r="3.5"
+                    stroke-width="1.5"/>
+
+                <path
+                    d="M5 20c.8-3.2 3.2-5 7-5s6.2 1.8 7 5"
+                    stroke-width="1.5"
+                    stroke-linecap="round"/>
+
+            </svg>
+
+        </button>
+
+        <div
+            class="absolute right-0 top-full mt-4 w-52
+                   rounded-xl bg-white shadow-xl
+                   opacity-0 invisible
+                   group-hover:opacity-100
+                   group-hover:visible
+                   transition-all duration-200">
+
+            <div class="px-4 py-3 border-b border-gray-100">
+
+                <p class="text-sm font-semibold text-gray-900 truncate">
+                    {{ Auth::user()->name }}
+                </p>
+
+                <p class="text-xs text-gray-500 truncate mt-1">
+                    {{ Auth::user()->email }}
+                </p>
+
+            </div>
+
+            <form
+                method="POST"
+                action="{{ route('logout') }}"
+                class="p-2">
+
+                @csrf
 
                 <button
-                    type="button"
-                    onclick="openCart()"
-                    class="lg:hidden relative text-white shrink-0"
-                    aria-label="Shopping bag">
+                    type="submit"
+                    class="w-full rounded-lg px-3 py-2
+                           text-left text-sm text-gray-700
+                           hover:bg-gray-100 transition">
 
-                    <svg
-                        class="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24">
-
-                        <path
-                            d="M6 8h12l1 13H5L6 8Z"
-                            stroke-width="1.5"
-                            stroke-linejoin="round"/>
-
-                        <path
-                            d="M9 8V6a3 3 0 0 1 6 0v2"
-                            stroke-width="1.5"
-                            stroke-linecap="round"/>
-
-                    </svg>
-
-                    <span
-                        id="cart-count-mobile"
-                        class="absolute -top-2 -right-3 min-w-[17px] h-[17px] px-1 rounded-full bg-white text-black text-[9px] flex items-center justify-center font-semibold">
-                        0
-                    </span>
+                    Logout
 
                 </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+@else
+
+    <button
+        type="button"
+        onclick="openCustomerAuthModal()"
+        aria-label="Login"
+        class="text-white hover:text-[#BE8B3E] transition cursor-pointer">
+
+        <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24">
+
+            <circle
+                cx="12"
+                cy="8"
+                r="3.5"
+                stroke-width="1.5"/>
+
+            <path
+                d="M5 20c.8-3.2 3.2-5 7 5s6.2 1.8 7 5"
+                stroke-width="1.5"
+                stroke-linecap="round"/>
+
+        </svg>
+
+    </button>
+
+@endif
+
+                    {{-- SEARCH --}}
+
+                    <button
+                        type="button"
+                        onclick="openSearch()"
+                        aria-label="Search"
+                        class="text-white hover:text-[#BE8B3E] transition cursor-pointer">
+
+                        <svg
+                            class="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24">
+
+                            <circle
+                                cx="11"
+                                cy="11"
+                                r="7"
+                                stroke-width="1.7"/>
+
+                            <path
+                                d="m20 20-4-4"
+                                stroke-width="1.7"
+                                stroke-linecap="round"/>
+
+                        </svg>
+
+                    </button>
+
+                    {{-- MOBILE CART --}}
+
+                    <button
+                        type="button"
+                        onclick="openCart()"
+                        aria-label="Shopping bag"
+                        class="relative text-white shrink-0">
+
+                        <svg
+                            class="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24">
+
+                            <path
+                                d="M6 8h12l1 13H5L6 8Z"
+                                stroke-width="1.5"
+                                stroke-linejoin="round"/>
+
+                            <path
+                                d="M9 8V6a3 3 0 0 1 6 0v2"
+                                stroke-width="1.5"
+                                stroke-linecap="round"/>
+
+                        </svg>
+
+                        <span
+                            id="cart-count-mobile"
+                            class="absolute -top-2 -right-3 min-w-[17px] h-[17px] px-1 rounded-full bg-white text-black text-[9px] flex items-center justify-center font-semibold">
+                            0
+                        </span>
+
+                    </button>
+
+                </div>
 
             </nav>
 
@@ -234,28 +483,34 @@
 
     </header>
 
-
     {{-- =====================================================
          HERO CONTENT
     ====================================================== --}}
 
+    <img
+        src="{{ asset('images/banners/categories.jpg') }}"
+        alt="Bin Roshan categories image"
+        class="absolute inset-0 w-full h-full object-cover">
+
+    <div class="absolute inset-0 bg-black/55"></div>
+
     <div class="relative z-20 h-full flex items-center justify-center px-4 sm:px-6">
 
-        <div class="text-center max-w-4xl w-full">
+    <div class="text-center max-w-4xl w-full">
 
-            <p class="text-xs uppercase tracking-[0.45em] text-white/70">
+        <p class="text-xs uppercase tracking-[0.45em] text-white/70">
                 Carefully Sorted
             </p>
 
-            <h1 class="text-4xl sm:text-6xl lg:text-8xl font-light tracking-tight leading-tight">
-                Unveil the <span class="text-[#BE8B3E] font-serif italic">Essentials</span>
-            </h1>
+        <h1 class="text-4xl sm:text-6xl lg:text-8xl font-light tracking-tight leading-tight">
+            Unveil the <span class="text-[#BE8B3E] font-serif italic">Essentials</span>
+        </h1>
 
-            <p class="mt-5 sm:mt-8 max-w-3xl mx-auto text-sm sm:text-base lg:text-lg leading-7 sm:leading-8 text-white/90 px-2">
-                Discover carefully selected clothing, jewelry, laces,
+        <p class="mt-5 sm:mt-8 max-w-3xl mx-auto text-sm sm:text-base lg:text-lg leading-7 sm:leading-8 text-white/90 px-2">
+            Discover carefully selected clothing, jewelry, laces,
                 watches and accessories designed to bring elegance
                 to every style.
-            </p>
+        </p>
 
         </div>
 

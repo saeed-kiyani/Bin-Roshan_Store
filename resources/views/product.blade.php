@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $product->name . ' | Bin Ismail')
+@section('title', $product->name . ' | Bin Saeed')
 
 @section('description', $product->description ?? '')
 
@@ -265,7 +265,7 @@ PRODUCT DETAILS
 
                 @if($product->stock > 0)
 
-                    <div class="mt-9">
+                    <!-- <div class="mt-9">
 
                         <h2 class="text-sm font-semibold uppercase tracking-widest">
                             Quantity
@@ -300,7 +300,7 @@ PRODUCT DETAILS
 
                         </div>
 
-                    </div>
+                    </div> -->
 
                 @endif
 
@@ -486,7 +486,7 @@ RELATED PRODUCTS
             </p>
 
             <h2 class="mt-4 text-4xl font-light">
-                More from Bin Ismail
+                More from Bin Roshan
             </h2>
 
         </div>

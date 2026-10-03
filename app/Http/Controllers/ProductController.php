@@ -8,9 +8,13 @@ use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Services\CloudinaryService;
 
 class ProductController extends Controller
 {
+    public function __construct(private CloudinaryService $cloudinary)
+    {
+    }
     /*
     |--------------------------------------------------------------------------
     | FRONTEND
@@ -835,21 +839,18 @@ if ($categoryType === 'cosmetics') {
 
             foreach ($request->file('images') as $index => $image) {
 
-                $imagePath = $image->store(
-                    'products/' . $product->id,
-                    'public'
+                $uploaded = $this->cloudinary->uploadImage(
+                    $image,
+                    $product->id
                 );
 
                 ProductImage::create([
-
                     'product_id' => $product->id,
-
-                    'image' => $imagePath,
-
+                    'image' => $uploaded['secure_url'],
+                    'cloudinary_public_id' => $uploaded['public_id'],
+                    'cloudinary_asset_id' => $uploaded['asset_id'],
                     'is_primary' => $index === 0,
-
                     'sort_order' => $index,
-
                 ]);
             }
         }
@@ -1501,21 +1502,18 @@ $accessoryType = null;
 
             foreach ($request->file('images') as $index => $image) {
 
-                $imagePath = $image->store(
-                    'products/' . $product->id,
-                    'public'
+                $uploaded = $this->cloudinary->uploadImage(
+                    $image,
+                    $product->id
                 );
 
                 ProductImage::create([
-
                     'product_id' => $product->id,
-
-                    'image' => $imagePath,
-
+                    'image' => $uploaded['secure_url'],
+                    'cloudinary_public_id' => $uploaded['public_id'],
+                    'cloudinary_asset_id' => $uploaded['asset_id'],
                     'is_primary' => !$hasPrimaryImage && $index === 0,
-
                     'sort_order' => $currentImageCount + $index,
-
                 ]);
             }
         }
@@ -1574,8 +1572,12 @@ $accessoryType = null;
         */
 
         foreach ($product->images as $image) {
-
-            if (
+            if ($image->cloudinary_public_id) {
+                $this->cloudinary->deleteImage(
+                    $image->cloudinary_asset_id,
+                    $image->cloudinary_public_id
+                );
+            } elseif (
                 $image->image &&
                 !Str::startsWith(
                     $image->image,
@@ -1661,7 +1663,12 @@ $accessoryType = null;
         |--------------------------------------------------------------------------
         */
 
-        if (
+        if ($image->cloudinary_public_id) {
+            $this->cloudinary->deleteImage(
+                    $image->cloudinary_asset_id,
+                    $image->cloudinary_public_id
+                );
+        } elseif (
             $image->image &&
             !Str::startsWith(
                 $image->image,

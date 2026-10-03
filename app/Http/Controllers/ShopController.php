@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ShopController extends Controller
 {
@@ -889,16 +888,7 @@ if ($request->filled('search')) {
     return response()->json([
         'products' => $products->map(function ($product) {
 
-            $image = null;
-
-            if (
-                $product->primaryImage &&
-                $product->primaryImage->image
-            ) {
-                $image = Storage::url(
-                    $product->primaryImage->image
-                );
-            }
+            $image = $product->primaryImage?->image_url;
 
             $price = $product->sale_price ?? $product->price;
 
@@ -908,7 +898,7 @@ if ($request->filled('search')) {
                 'price' => $price,
                 'image' => $image,
                 'url' => route(
-                    'product.show',
+                'product.show',
                     $product->slug
                 ),
             ];

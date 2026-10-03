@@ -295,6 +295,14 @@
 
             </a>
 
+            <a
+    href="{{ route('admin.subscribers.index') }}"
+    class="..."
+>
+    Subscribers
+</a>
+
+
         </nav>
 
     </aside>

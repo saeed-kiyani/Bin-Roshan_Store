@@ -243,7 +243,7 @@
                                         <form
                                             action="{{route('admin.products.destroy', $product)}}"
                                             method="POST"
-                                            class="delete-category-form">
+                                            class="delete-product-form">
 
                                             @csrf
                                             @method('DELETE')
@@ -296,81 +296,60 @@
 
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
+{{-- DELETE CONFIRMATION MODAL --}}
+<div id="deleteModal"
+     class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm px-4">
 
-        const deleteModal = document.getElementById('deleteModal');
-        const cancelDelete = document.getElementById('cancelDelete');
-        const confirmDelete = document.getElementById('confirmDelete');
+    <div class="w-full max-w-md rounded-2xl bg-[#f8f7f4] p-6 shadow-2xl">
 
-        let deleteForm = null;
+        {{-- Icon --}}
+        <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-red-50">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="h-7 w-7 text-red-500"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke="currentColor"
+                 stroke-width="1.8">
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 9v3.75m0 3.75h.008v.008H12v-.008z" />
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M10.29 3.86 1.82 18a2 2 0 0 0 1.72 3h16.92a2 2 0 0 0 1.72-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+            </svg>
+        </div>
 
-        // Open modal
-        document.querySelectorAll('.delete-category-form').forEach(function (form) {
+        {{-- Title --}}
+        <h3 class="text-center text-lg font-semibold text-gray-900">
+            Delete Product?
+        </h3>
 
-            form.addEventListener('submit', function (event) {
+        {{-- Message --}}
+        <p class="mt-2 text-center text-sm leading-6 text-gray-500">
+            Are you sure you want to delete this product?
+            This action cannot be undone.
+        </p>
 
-                event.preventDefault();
+        {{-- Buttons --}}
+        <div class="mt-6 flex justify-center gap-3">
 
-                deleteForm = form;
+            <button
+                type="button"
+                id="cancelDelete"
+                class="rounded-full cursor-pointer border border-gray-200 px-5 py-2.5 text-xs font-semibold uppercase tracking-widest text-gray-600 transition hover:bg-gray-100">
+                Cancel
+            </button>
 
-                deleteModal.classList.remove('hidden');
-                deleteModal.classList.add('flex');
+            <button
+                type="button"
+                id="confirmDelete"
+                class="rounded-full cursor-pointer bg-red-500 px-5 py-2.5 text-xs font-semibold uppercase tracking-widest text-white transition hover:bg-red-600">
+                Delete
+            </button>
 
-            });
+        </div>
 
-        });
-
-        // Cancel
-        cancelDelete.addEventListener('click', function () {
-
-            deleteModal.classList.add('hidden');
-            deleteModal.classList.remove('flex');
-
-            deleteForm = null;
-
-        });
-
-        // Confirm delete
-        confirmDelete.addEventListener('click', function () {
-
-            if (deleteForm) {
-                deleteForm.submit();
-            }
-
-        });
-
-        // Close when clicking outside modal
-        deleteModal.addEventListener('click', function (event) {
-
-            if (event.target === deleteModal) {
-
-                deleteModal.classList.add('hidden');
-                deleteModal.classList.remove('flex');
-
-                deleteForm = null;
-
-            }
-
-        });
-
-    });
-</script>
-
-{{-- AUTO HIDE MESSAGES AFTER 3 SECONDS --}} 
-
-<script> 
-setTimeout(() => { 
-    const successMessage = document.getElementById('success-message'); 
-    const errorMessage = document.getElementById('error-message'); 
-    
-    if (successMessage) {
-        successMessage.style.display = 'none'; 
-    } 
-    if (errorMessage) { 
-        errorMessage.style.display = 'none'; } 
-    }, 2000); 
-    
-</script>
+    </div>
+</div>
 
 @endsection

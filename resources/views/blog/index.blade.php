@@ -13,25 +13,31 @@
     {{-- =====================================================
          TRANSPARENT NAVIGATION
     ====================================================== --}}
+
     <header class="absolute top-0 left-0 right-0 z-40">
 
         <div class="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-12">
 
             <nav class="h-24 flex items-center justify-between">
 
-                {{-- LEFT SIDE --}}
+                {{-- =================================================
+                     LEFT SIDE
+                ================================================== --}}
 
                 <div class="hidden lg:flex items-center gap-10 flex-1">
 
                     <a
                         href="{{ route('home') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                        class="text-sm uppercase tracking-[0.18em] transition
+                        {{ request()->is('/')
+                         ? 'text-[#BE8B3E] underline underline-offset-8 decoration-[#BE8B3E]'
+                         : 'text-white hover:text-[#BE8B3E]' }}">
                         Home
                     </a>
 
                     <a
                         href="{{ route('shop') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                        class="text-sm text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
                         Shop
                     </a>
 
@@ -42,7 +48,6 @@
                     </a>
 
                 </div>
-
 
                 {{-- =================================================
                      CENTER LOGO
@@ -59,30 +64,146 @@
 
                 </a>
 
-
-                {{-- RIGHT SIDE --}}
+                {{-- =================================================
+                     RIGHT SIDE
+                ================================================== --}}
 
                 <div class="hidden lg:flex items-center justify-end gap-10 flex-1">
 
                     <a
                         href="{{ route('about') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                        class="text-sm text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
                         About
                     </a>
 
-                    <a href="{{ route('blog.index') }}"
-                       class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
-                       Blogs
+                    <a
+                        href="{{ route('blog.index') }}"
+                        class="text-sm uppercase tracking-[0.18em] transition
+                        {{ request()->routeIs('blog.*')
+                         ? 'text-[#BE8B3E] underline underline-offset-8 decoration-[#BE8B3E]'
+                         : 'text-white hover:text-[#BE8B3E]' }}">
+                        Blogs
                     </a>
 
                     <a
                         href="{{ route('contact') }}"
-                        class="text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
+                        class="text-text-sm text-white uppercase tracking-[0.18em] hover:text-[#BE8B3E] transition">
                         Contact
                     </a>
 
+                    {{-- =================================================
+     CUSTOMER ACCOUNT
+================================================= --}}
 
-                    {{-- SEARCH --}}
+@if (Auth::check())
+
+    <div class="relative group">
+
+        <button
+            type="button"
+            aria-label="My Account"
+            class="text-white hover:text-[#BE8B3E] transition cursor-pointer">
+
+            <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+
+                <circle
+                    cx="12"
+                    cy="8"
+                    r="3.5"
+                    stroke-width="1.5"/>
+
+                <path
+                    d="M5 20c.8-3.2 3.2-5 7-5s6.2 1.8 7 5"
+                    stroke-width="1.5"
+                    stroke-linecap="round"/>
+
+            </svg>
+
+        </button>
+
+        {{-- ACCOUNT DROPDOWN --}}
+
+        <div
+            class="absolute right-0 top-full mt-4 w-52
+                   rounded-xl bg-white shadow-xl
+                   opacity-0 invisible
+                   group-hover:opacity-100
+                   group-hover:visible
+                   transition-all duration-200">
+
+            <div class="px-4 py-3 border-b border-gray-100">
+
+                <p class="text-sm font-semibold text-gray-900 truncate">
+                    {{ Auth::user()->name }}
+                </p>
+
+                <p class="text-xs text-gray-500 truncate mt-1">
+                    {{ Auth::user()->email }}
+                </p>
+
+            </div>
+
+            <form
+                method="POST"
+                action="{{ route('logout') }}"
+                class="p-2">
+
+                @csrf
+
+                <button
+                    type="submit"
+                    class="w-full rounded-lg px-3 py-2
+                           text-left text-sm text-gray-700
+                           hover:bg-gray-100 transition">
+
+                    Logout
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+@else
+
+    <button
+        type="button"
+        onclick="openCustomerAuthModal()"
+        aria-label="Login"
+        class="text-white hover:text-[#BE8B3E] transition cursor-pointer">
+
+        <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24">
+
+            <circle
+                cx="12"
+                cy="8"
+                r="3.5"
+                stroke-width="1.5"/>
+
+            <path
+                d="M5 20c.8-3.2 3.2-5 7-5s6.2 1.8 7 5"
+                stroke-width="1.5"
+                stroke-linecap="round"/>
+
+        </svg>
+
+    </button>
+
+@endif
+
+                    {{-- =================================================
+                         SEARCH
+                    ================================================== --}}
 
                     <button
                         type="button"
@@ -111,8 +232,9 @@
 
                     </button>
 
-
-                    {{-- CART --}}
+                    {{-- =================================================
+                         CART
+                    ================================================== --}}
 
                     <button
                         type="button"
@@ -151,7 +273,6 @@
 
                 </div>
 
-
                 {{-- =================================================
                      MOBILE MENU BUTTON
                 ================================================== --}}
@@ -177,47 +298,188 @@
 
                 </button>
 
+                {{-- =================================================
+                     MOBILE RIGHT ICONS
+                ================================================== --}}
 
-                {{-- MOBILE CART --}}
+                <div class="lg:hidden flex items-center gap-5">
+
+                {{-- CUSTOMER ACCOUNT --}}
+
+@if (Auth::check())
+
+    <div class="relative group">
+
+        <button
+            type="button"
+            aria-label="My Account"
+            class="text-white hover:text-[#BE8B3E] transition">
+
+            <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+
+                <circle
+                    cx="12"
+                    cy="8"
+                    r="3.5"
+                    stroke-width="1.5"/>
+
+                <path
+                    d="M5 20c.8-3.2 3.2-5 7-5s6.2 1.8 7 5"
+                    stroke-width="1.5"
+                    stroke-linecap="round"/>
+
+            </svg>
+
+        </button>
+
+        <div
+            class="absolute right-0 top-full mt-4 w-52
+                   rounded-xl bg-white shadow-xl
+                   opacity-0 invisible
+                   group-hover:opacity-100
+                   group-hover:visible
+                   transition-all duration-200">
+
+            <div class="px-4 py-3 border-b border-gray-100">
+
+                <p class="text-sm font-semibold text-gray-900 truncate">
+                    {{ Auth::user()->name }}
+                </p>
+
+                <p class="text-xs text-gray-500 truncate mt-1">
+                    {{ Auth::user()->email }}
+                </p>
+
+            </div>
+
+            <form
+                method="POST"
+                action="{{ route('logout') }}"
+                class="p-2">
+
+                @csrf
 
                 <button
-                    type="button"
-                    onclick="openCart()"
-                    class="lg:hidden relative text-white shrink-0"
-                    aria-label="Shopping bag">
+                    type="submit"
+                    class="w-full rounded-lg px-3 py-2
+                           text-left text-sm text-gray-700
+                           hover:bg-gray-100 transition">
 
-                    <svg
-                        class="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24">
-
-                        <path
-                            d="M6 8h12l1 13H5L6 8Z"
-                            stroke-width="1.5"
-                            stroke-linejoin="round"/>
-
-                        <path
-                            d="M9 8V6a3 3 0 0 1 6 0v2"
-                            stroke-width="1.5"
-                            stroke-linecap="round"/>
-
-                    </svg>
-
-                    <span
-                        id="cart-count-mobile"
-                        class="absolute -top-2 -right-3 min-w-[17px] h-[17px] px-1 rounded-full bg-white text-black text-[9px] flex items-center justify-center font-semibold">
-                        0
-                    </span>
+                    Logout
 
                 </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+@else
+
+    <button
+        type="button"
+        onclick="openCustomerAuthModal()"
+        aria-label="Login"
+        class="text-white hover:text-[#BE8B3E] transition cursor-pointer">
+
+        <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24">
+
+            <circle
+                cx="12"
+                cy="8"
+                r="3.5"
+                stroke-width="1.5"/>
+
+            <path
+                d="M5 20c.8-3.2 3.2-5 7 5s6.2 1.8 7 5"
+                stroke-width="1.5"
+                stroke-linecap="round"/>
+
+        </svg>
+
+    </button>
+
+@endif
+
+                    {{-- SEARCH --}}
+
+                    <button
+                        type="button"
+                        onclick="openSearch()"
+                        aria-label="Search"
+                        class="text-white hover:text-[#BE8B3E] transition cursor-pointer">
+
+                        <svg
+                            class="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24">
+
+                            <circle
+                                cx="11"
+                                cy="11"
+                                r="7"
+                                stroke-width="1.7"/>
+
+                            <path
+                                d="m20 20-4-4"
+                                stroke-width="1.7"
+                                stroke-linecap="round"/>
+
+                        </svg>
+
+                    </button>
+
+                    {{-- MOBILE CART --}}
+
+                    <button
+                        type="button"
+                        onclick="openCart()"
+                        aria-label="Shopping bag"
+                        class="relative text-white shrink-0">
+
+                        <svg
+                            class="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24">
+
+                            <path
+                                d="M6 8h12l1 13H5L6 8Z"
+                                stroke-width="1.5"
+                                stroke-linejoin="round"/>
+
+                            <path
+                                d="M9 8V6a3 3 0 0 1 6 0v2"
+                                stroke-width="1.5"
+                                stroke-linecap="round"/>
+
+                        </svg>
+
+                        <span
+                            id="cart-count-mobile"
+                            class="absolute -top-2 -right-3 min-w-[17px] h-[17px] px-1 rounded-full bg-white text-black text-[9px] flex items-center justify-center font-semibold">
+                            0
+                        </span>
+
+                    </button>
+
+                </div>
 
             </nav>
 
         </div>
 
     </header>
-
 
     <img
         src="{{ asset('images/banners/blogs.jpeg') }}"
@@ -446,5 +708,27 @@
 
     </div>
 </section>
+
+{{-- =========================================================
+     FLOATING WHATSAPP BUTTON
+========================================================= --}}
+
+<a
+    href="https://wa.me/{{ config('store.whatsapp') }}?text={{ urlencode('Hello Bin Roshan, I would like to know more about your products.') }}"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Chat with Bin Roshan on WhatsApp"
+    class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-12 h-12 sm:w-14 sm:h-14 bg-[#BE8B3E] text-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition duration-300">
+
+    <svg
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="w-6 h-6 sm:w-7 sm:h-7">
+
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.1-.471-.149-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.1-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51-.173-.008-.372-.01-.57-.01-.198 0-.52.075-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982 1-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.437-9.884 9.89-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.002 5.45-4.438 9.884-9.889 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.304-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.478-8.413"/>
+
+    </svg>
+
+</a>
 
 @endsection

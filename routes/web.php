@@ -10,7 +10,8 @@ use App\Models\Category;
 use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\BlogController;
-
+use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\CustomerAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,6 @@ Route::post('/admin/login', [AdminAuthController::class, 'login'])
 
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])
     ->name('admin.logout');
-
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +48,17 @@ Route::middleware(['admin'])
         Route::get('/', [AdminController::class, 'index'])
             ->name('dashboard');
 
+        /*
+        |--------------------------------------------------------------------------
+        | Subscribers
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get('/subscribers', [NewsletterController::class, 'index'])
+            ->name('subscribers.index');
+
+        Route::delete('/subscribers/{subscriber}', [NewsletterController::class, 'destroy'])
+            ->name('subscribers.destroy');
 
         /*
         |--------------------------------------------------------------------------
@@ -156,12 +167,39 @@ Route::delete('/blog/posts/{blogPost}', [BlogPostController::class, 'destroy'])
 
     });
 
+/*
+|--------------------------------------------------------------------------
+| Customer Authentication
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware('guest')->group(function () {
+
+    Route::get('/login', [CustomerAuthController::class, 'showLogin'])
+        ->name('login');
+
+    Route::post('/login', [CustomerAuthController::class, 'login'])
+        ->name('login.submit');
+
+    Route::get('/register', [CustomerAuthController::class, 'showRegister'])
+        ->name('register');
+
+    Route::post('/register', [CustomerAuthController::class, 'register'])
+        ->name('register.submit');
+});
+
+Route::post('/logout', [CustomerAuthController::class, 'logout'])
+    ->middleware('auth')
+    ->name('logout');
 
 /*
 |--------------------------------------------------------------------------
 | Frontend
 |--------------------------------------------------------------------------
 */
+
+Route::post('/subscribe', [NewsletterController::class, 'store'])
+    ->name('newsletter.subscribe');
 
 Route::get('/', [ProductController::class, 'home'])
     ->name('home');

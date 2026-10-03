@@ -289,12 +289,12 @@
 
         {{-- Title --}}
         <h3 class="text-center text-lg font-semibold text-gray-900">
-            Delete Blog Category?
+            Delete Category?
         </h3>
 
         {{-- Message --}}
         <p class="mt-2 text-center text-sm leading-6 text-gray-500">
-            Are you sure you want to delete this blog category?
+            Are you sure you want to delete this category?
             This action cannot be undone.
         </p>
 
@@ -319,83 +319,5 @@
 
     </div>
 </div>
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-
-        const deleteModal = document.getElementById('deleteModal');
-        const cancelDelete = document.getElementById('cancelDelete');
-        const confirmDelete = document.getElementById('confirmDelete');
-
-        let deleteForm = null;
-
-        // Open modal
-        document.querySelectorAll('.delete-category-form').forEach(function (form) {
-
-            form.addEventListener('submit', function (event) {
-
-                event.preventDefault();
-
-                deleteForm = form;
-
-                deleteModal.classList.remove('hidden');
-                deleteModal.classList.add('flex');
-
-            });
-
-        });
-
-        // Cancel
-        cancelDelete.addEventListener('click', function () {
-
-            deleteModal.classList.add('hidden');
-            deleteModal.classList.remove('flex');
-
-            deleteForm = null;
-
-        });
-
-        // Confirm delete
-        confirmDelete.addEventListener('click', function () {
-
-            if (deleteForm) {
-                deleteForm.submit();
-            }
-
-        });
-
-        // Close when clicking outside modal
-        deleteModal.addEventListener('click', function (event) {
-
-            if (event.target === deleteModal) {
-
-                deleteModal.classList.add('hidden');
-                deleteModal.classList.remove('flex');
-
-                deleteForm = null;
-
-            }
-
-        });
-
-    });
-</script>
-
-{{-- AUTO HIDE MESSAGES AFTER 3 SECONDS --}} 
-
-<script> 
-setTimeout(() => { 
-    const successMessage = document.getElementById('success-message'); 
-    const errorMessage = document.getElementById('error-message'); 
-    
-    if (successMessage) {
-        successMessage.style.display = 'none'; 
-    } 
-    if (errorMessage) { 
-        errorMessage.style.display = 'none'; } 
-    }, 2000); 
-    
-</script>
 
 @endsection

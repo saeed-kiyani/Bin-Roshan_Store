@@ -7,371 +7,407 @@
 @section('content')
 
 {{-- =========================================================
-     PRODUCT DETAIL
+PRODUCT DETAIL
 ========================================================= --}}
 
 <section class="bg-[#f8f7f4]">
 
-    {{-- Breadcrumb --}}
-    <div class="border-b border-gray-100">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 py-5">
+```
+{{-- Breadcrumb --}}
+<div class="border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-5">
 
-            <div class="flex items-center gap-2 text-xs text-gray-500">
+        <div class="flex items-center gap-2 text-xs text-gray-500">
 
-                <a href="{{ url('/') }}"
-                   class="hover:text-black transition">
-                    Home
-                </a>
+            <a href="{{ url('/') }}"
+               class="hover:text-black transition">
+                Home
+            </a>
 
-                <span>/</span>
+            <span>/</span>
 
-                {{-- Categories --}}
-                <a href="{{ route('categories') }}"
-                    class="hover:text-black transition">
-                    Categories
-                </a>
+            <a href="{{ route('categories') }}"
+               class="hover:text-black transition">
+                Categories
+            </a>
 
-                <span>/</span>
+            <span>/</span>
 
-                <a href="{{ route('category.show', $product->category->slug) }}"
-                   class="hover:text-black transition">
-                    {{ $product->category->name }}
-                </a>
+            <a href="{{ route('category.show', $product->category->slug) }}"
+               class="hover:text-black transition">
+                {{ $product->category->name }}
+            </a>
 
-                <span>/</span>
+            <span>/</span>
 
-                <span class="text-gray-800">
-                    {{ $product->name }}
-                </span>
-
-            </div>
-
-        </div>
-    </div>
-
-
-    {{-- Product --}}
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-
-
-            {{-- =================================================
-     LEFT - PRODUCT IMAGE
-================================================== --}}
-
-<div>
-
-    @if($product->primaryImage)
-
-        <div
-            id="product-image-gallery"
-            class="bg-gray-50 overflow-hidden rounded-lg relative">
-
-            {{-- Main Image --}}
-            <img
-                id="main-product-image"
-                src="{{ Storage::url($product->primaryImage->image) }}"
-                alt="{{ $product->name }}"
-                class="w-full aspect-square object-contain transition-transform duration-300"
-                style="transform: scale(1);">
-
-            {{-- LEFT ARROW --}}
-            @if($product->images->count() > 1)
-
-                <button
-                    type="button"
-                    id="prev-image"
-                    class="absolute left-3 top-1/2 -translate-y-1/2
-                           w-10 h-10
-                           flex items-center justify-center
-                           bg-[#BE8B3E] border border-[#BE8B3E] hover:bg-white hover:text-[#BE8B3E] cursor-pointer
-                           rounded-full
-                           shadow-sm
-                           text-xl text-white
-                           transition
-                           z-10"
-                    aria-label="Previous image">
-                    ‹
-                </button>
-
-                {{-- RIGHT ARROW --}}
-                <button
-                    type="button"
-                    id="next-image"
-                    class="absolute right-3 top-1/2 -translate-y-1/2
-                           w-10 h-10
-                           flex items-center justify-center
-                           bg-[#BE8B3E] border border-[#BE8B3E] hover:bg-white hover:text-[#BE8B3E] cursor-pointer
-                           rounded-full
-                           shadow-sm
-                           text-xl text-white
-                           transition
-                           z-10"
-                    aria-label="Next image"
-                >
-                    ›
-                </button>
-
-            @endif
-
-
-            {{-- ZOOM CONTROLS --}}
-            <div
-                class="absolute bottom-3 right-3
-                       flex items-center gap-1
-                       bg-white/90
-                       rounded-lg
-                       shadow-sm
-                       overflow-hidden
-                       z-10">
-
-                <button
-                    type="button"
-                    id="zoom-out"
-                    class="w-9 h-9 flex items-center justify-center
-                           text-lg text-gray-700
-                           hover:bg-[#BE8B3E] hover:text-white cursor-pointer transition"
-                    aria-label="Zoom out">
-                    −
-                </button>
-
-                <button
-                    type="button"
-                    id="zoom-reset"
-                    class="w-9 h-9 flex items-center justify-center
-                           text-xs text-gray-600
-                           hover:bg-[#BE8B3E] hover:text-white cursor-pointer transition"
-                    aria-label="Reset zoom">
-                    1×
-                </button>
-
-                <button
-                    type="button"
-                    id="zoom-in"
-                    class="w-9 h-9 flex items-center justify-center
-                           text-lg text-gray-700
-                           hover:bg-[#BE8B3E] hover:text-white cursor-pointer transition"
-                    aria-label="Zoom in">
-                    +
-                </button>
-
-            </div>
-
-        </div>
-
-    @else
-
-        <div class="w-full aspect-square bg-gray-100 flex items-center justify-center">
-
-            <span class="text-sm text-gray-400">
-                No image available
+            <span class="text-gray-800">
+                {{ $product->name }}
             </span>
 
         </div>
 
-    @endif
-
-
-    {{-- Other Images --}}
-    @if($product->images->count() > 1)
-
-        <div class="grid grid-cols-5 gap-3 mt-4">
-
-            @foreach($product->images->sortBy('sort_order') as $image)
-
-                <button
-                    type="button"
-                    class="product-thumbnail bg-gray-50 overflow-hidden text-left rounded-full cursor-pointer"
-                    data-image="{{ Storage::url($image->image) }}">
-
-                    <img
-                        src="{{ Storage::url($image->image) }}"
-                        alt="{{ $product->name }}"
-                        class="w-full aspect-square object-contain">
-
-                </button>
-
-            @endforeach
-
-        </div>
-
-    @endif
-
+    </div>
 </div>
 
-            {{-- =================================================
-                 RIGHT - PRODUCT INFORMATION
-            ================================================== --}}
 
-            <div class="flex flex-col justify-center">
+{{-- Product --}}
+<div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
 
 
-                {{-- Category --}}
-                <div class="mb-5">
+        {{-- =================================================
+             LEFT - PRODUCT IMAGE
+        ================================================== --}}
 
-                    <span class="text-[10px] tracking-[0.35em] uppercase text-[#BE8B3E]">
-                        {{ $product->category->name }}
+        <div>
+
+            @if($product->primaryImage)
+
+                <div
+                    id="product-image-gallery"
+                    class="bg-gray-50 overflow-hidden rounded-lg relative">
+
+                    {{-- Main Image --}}
+                    <img
+                        id="main-product-image"
+                        src="{{ $product->primaryImage->image_url }}"
+                        alt="{{ $product->name }}"
+                        class="w-full aspect-square object-contain transition-transform duration-300"
+                        style="transform: scale(1);">
+
+                    {{-- LEFT ARROW --}}
+                    @if($product->images->count() > 1)
+
+                        <button
+                            type="button"
+                            id="prev-image"
+                            class="absolute left-3 top-1/2 -translate-y-1/2
+                                   w-10 h-10
+                                   flex items-center justify-center
+                                   bg-[#BE8B3E] border border-[#BE8B3E]
+                                   hover:bg-white hover:text-[#BE8B3E]
+                                   cursor-pointer
+                                   rounded-full
+                                   shadow-sm
+                                   text-xl text-white
+                                   transition
+                                   z-10"
+                            aria-label="Previous image">
+                            ‹
+                        </button>
+
+                        {{-- RIGHT ARROW --}}
+                        <button
+                            type="button"
+                            id="next-image"
+                            class="absolute right-3 top-1/2 -translate-y-1/2
+                                   w-10 h-10
+                                   flex items-center justify-center
+                                   bg-[#BE8B3E] border border-[#BE8B3E]
+                                   hover:bg-white hover:text-[#BE8B3E]
+                                   cursor-pointer
+                                   rounded-full
+                                   shadow-sm
+                                   text-xl text-white
+                                   transition
+                                   z-10"
+                            aria-label="Next image">
+                            ›
+                        </button>
+
+                    @endif
+
+
+                    {{-- ZOOM CONTROLS --}}
+                    <div
+                        class="absolute bottom-3 right-3
+                               flex items-center gap-1
+                               bg-white/90
+                               rounded-lg
+                               shadow-sm
+                               overflow-hidden
+                               z-10">
+
+                        <button
+                            type="button"
+                            id="zoom-out"
+                            class="w-9 h-9 flex items-center justify-center
+                                   text-lg text-gray-700
+                                   hover:bg-[#BE8B3E] hover:text-white
+                                   cursor-pointer transition"
+                            aria-label="Zoom out">
+                            −
+                        </button>
+
+                        <button
+                            type="button"
+                            id="zoom-reset"
+                            class="w-9 h-9 flex items-center justify-center
+                                   text-xs text-gray-600
+                                   hover:bg-[#BE8B3E] hover:text-white
+                                   cursor-pointer transition"
+                            aria-label="Reset zoom">
+                            1×
+                        </button>
+
+                        <button
+                            type="button"
+                            id="zoom-in"
+                            class="w-9 h-9 flex items-center justify-center
+                                   text-lg text-gray-700
+                                   hover:bg-[#BE8B3E] hover:text-white
+                                   cursor-pointer transition"
+                            aria-label="Zoom in">
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+            @else
+
+                <div class="w-full aspect-square bg-gray-100 flex items-center justify-center">
+
+                    <span class="text-sm text-gray-400">
+                        No image available
                     </span>
 
                 </div>
 
-
-                {{-- Product Name --}}
-                <h1 class="text-4xl lg:text-5xl font-light tracking-tight text-gray-900 leading-tight">
-
-                    {{ $product->name }}
-
-                </h1>
+            @endif
 
 
-                {{-- SKU --}}
-                @if($product->sku)
+            {{-- =================================================
+                 OTHER PRODUCT IMAGES
+            ================================================== --}}
 
-                    <div class="mt-4 text-xs tracking-wide text-gray-400 uppercase">
+            @if($product->images->count() > 1)
 
-                        SKU: {{ $product->sku }}
+                <div class="grid grid-cols-5 gap-3 mt-4">
 
-                    </div>
+                    @foreach($product->images->sortBy('sort_order') as $image)
 
-                @endif
+                        @if($image->image_url)
+
+                            <button
+                                type="button"
+                                class="product-thumbnail bg-gray-50 overflow-hidden text-left rounded-full cursor-pointer"
+                                data-image="{{ $image->image_url }}">
+
+                                <img
+                                    src="{{ $image->image_url }}"
+                                    alt="{{ $product->name }}"
+                                    class="w-full aspect-square object-contain">
+
+                            </button>
+
+                        @endif
+
+                    @endforeach
+
+                </div>
+
+            @endif
+
+        </div>
 
 
-                {{-- Price --}}
-                <div class="mt-8 pb-8 border-b border-gray-200">
+        {{-- =================================================
+             RIGHT - PRODUCT INFORMATION
+        ================================================== --}}
 
-                    @if($product->sale_price)
+        <div class="flex flex-col justify-center">
 
-                        <div class="flex items-center gap-4">
 
-                            <span class="text-2xl font-medium text-gray-900">
+            {{-- Category --}}
+            <div class="mb-5">
 
-                                PKR {{ number_format($product->sale_price) }}
+                <span class="text-[10px] tracking-[0.35em] uppercase text-[#BE8B3E]">
+                    {{ $product->category->name }}
+                </span>
 
-                            </span>
+            </div>
 
-                            <span class="text-sm text-gray-400 line-through">
 
-                                PKR {{ number_format($product->price) }}
+            {{-- Product Name --}}
+            <h1 class="text-4xl lg:text-5xl font-light tracking-tight text-gray-900 leading-tight">
 
-                            </span>
+                {{ $product->name }}
 
-                        </div>
+            </h1>
 
-                    @else
+
+            {{-- SKU --}}
+            @if($product->sku)
+
+                <div class="mt-4 text-xs tracking-wide text-gray-400 uppercase">
+
+                    SKU: {{ $product->sku }}
+
+                </div>
+
+            @endif
+
+
+            {{-- Price --}}
+            <div class="mt-8 pb-8 border-b border-gray-200">
+
+                @if($product->sale_price)
+
+                    <div class="flex items-center gap-4">
 
                         <span class="text-2xl font-medium text-gray-900">
+
+                            PKR {{ number_format($product->sale_price) }}
+
+                        </span>
+
+                        <span class="text-sm text-gray-400 line-through">
 
                             PKR {{ number_format($product->price) }}
 
                         </span>
 
-                    @endif
-
-                </div>
-
-
-                {{-- Description --}}
-                @if($product->description)
-
-                    <div class="mt-8">
-
-                        <h2 class="text-xs font-medium tracking-[0.18em] uppercase text-gray-900 mb-4">
-
-                            Description
-
-                        </h2>
-
-                        <div class="text-sm leading-7 text-gray-500">
-
-                            {!! nl2br(e($product->description)) !!}
-
-                        </div>
-
                     </div>
+
+                @else
+
+                    <span class="text-2xl font-medium text-gray-900">
+
+                        PKR {{ number_format($product->price) }}
+
+                    </span>
 
                 @endif
 
-
-                {{-- Stock --}}
-                <div class="mt-7">
-
-                    @if($product->stock > 0)
-
-                        <span class="text-sm text-green-600">
-                            In Stock
-                        </span>
-
-                    @else
-
-                        <span class="text-sm text-red-500">
-                            Out of Stock
-                        </span>
-
-                    @endif
-
-                </div>
+            </div>
 
 
-                {{-- WhatsApp --}}
-@if($product->stock > 0)
+            {{-- Description --}}
+            @if($product->description)
 
-    @php
+                <div class="mt-8">
 
-        // Product Image URL
-        $productImageUrl = '';
+                    <h2 class="text-xs font-medium tracking-[0.18em] uppercase text-gray-900 mb-4">
 
-        if ($product->primaryImage) {
-            $productImageUrl = Storage::url($product->primaryImage->image);
-        }
+                        Description
 
-        // Product Price
-        $orderPrice = $product->sale_price
-            ? $product->sale_price
-            : $product->price;
+                    </h2>
 
-        // Product Page URL
-        $productPageUrl = url('/product/' . $product->slug);
+                    <div class="text-sm leading-7 text-gray-500">
 
-        // WhatsApp Message
-        $whatsappMessage =
-            "Assalam o Alaikum,\n\n" .
-            "I want to order this product:\n\n" .
-            "Product: " . $product->name . "\n" .
-            "SKU: " . ($product->sku ?? 'N/A') . "\n" .
-            "Price: PKR " . number_format($orderPrice) . "\n\n" .
-            "Product Image:\n" .
-            url($productImageUrl) . "\n\n" .
-            "Product Page:\n" .
-            $productPageUrl;
+                        {!! nl2br(e($product->description)) !!}
 
-    @endphp
-
-    <a
-        href="https://wa.me/923121353516?text={{ urlencode($whatsappMessage) }}"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="mt-8 w-full border border-[#BE8B3E] text-[#BE8B3E] rounded-full py-4 px-6 text-center text-xs font-semibold tracking-widest uppercase hover:bg-[#BE8B3E] hover:text-white transition">
-
-        Order on WhatsApp
-
-    </a>
-
-@endif
-
-
-                {{-- Back to Shop --}}
-                <div class="mt-7">
-
-                    <a
-                        href="{{ route('shop') }}"
-                        class="inline-flex items-center gap-2 text-sm text-gray-700 border-b border-gray-700 pb-1 hover:text-[#BE8B3E] hover:border-[#BE8B3E] transition">
-
-                        ← Back to Shop
-
-                    </a>
+                    </div>
 
                 </div>
+
+            @endif
+
+
+            {{-- Stock --}}
+            <div class="mt-7">
+
+                @if($product->stock > 0)
+
+                    <span class="text-sm text-green-600">
+                        In Stock
+                    </span>
+
+                @else
+
+                    <span class="text-sm text-red-500">
+                        Out of Stock
+                    </span>
+
+                @endif
+
+            </div>
+
+
+            {{-- =================================================
+                 WHATSAPP ORDER
+            ================================================== --}}
+
+            @if($product->stock > 0)
+
+                @php
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Product Image URL
+                    |--------------------------------------------------------------------------
+                    | image_url already contains the complete Cloudinary URL.
+                    */
+
+                    $productImageUrl = '';
+
+                    if ($product->primaryImage) {
+                        $productImageUrl = $product->primaryImage->image_url;
+                    }
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Product Price
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $orderPrice = $product->sale_price
+                        ? $product->sale_price
+                        : $product->price;
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Product Page URL
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $productPageUrl = url('/product/' . $product->slug);
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | WhatsApp Message
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $whatsappMessage =
+                        "Assalam o Alaikum,\n\n" .
+                        "I want to order this product:\n\n" .
+                        "Product: " . $product->name . "\n" .
+                        "SKU: " . ($product->sku ?? 'N/A') . "\n" .
+                        "Price: PKR " . number_format($orderPrice) . "\n\n" .
+                        "Product Image:\n" .
+                        $productImageUrl . "\n\n" .
+                        "Product Page:\n" .
+                        $productPageUrl;
+
+                @endphp
+
+                <a
+                    href="https://wa.me/923121353516?text={{ urlencode($whatsappMessage) }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="mt-8 w-full border border-[#BE8B3E] text-[#BE8B3E] rounded-full py-4 px-6 text-center text-xs font-semibold tracking-widest uppercase hover:bg-[#BE8B3E] hover:text-white transition">
+
+                    Order on WhatsApp
+
+                </a>
+
+            @endif
+
+
+            {{-- Back to Shop --}}
+            <div class="mt-7">
+
+                <a
+                    href="{{ route('shop') }}"
+                    class="inline-flex items-center gap-2 text-sm text-gray-700 border-b border-gray-700 pb-1 hover:text-[#BE8B3E] hover:border-[#BE8B3E] transition">
+
+                    ← Back to Shop
+
+                </a>
 
             </div>
 
@@ -379,10 +415,13 @@
 
     </div>
 
+</div>
+```
+
 </section>
 
 {{-- =================================================
-     PRODUCT IMAGE GALLERY SCRIPT
+PRODUCT IMAGE GALLERY SCRIPT
 ================================================== --}}
 
 @if($product->primaryImage)
@@ -411,11 +450,17 @@ document.addEventListener('DOMContentLoaded', function () {
     |--------------------------------------------------------------------------
     | Images
     |--------------------------------------------------------------------------
+    | Every thumbnail contains the complete Cloudinary image URL.
     */
 
-    const images = thumbnails.map(function (thumbnail) {
-        return thumbnail.dataset.image;
-    });
+    const images = thumbnails
+        .map(function (thumbnail) {
+            return thumbnail.dataset.image;
+        })
+        .filter(function (image) {
+            return image;
+        });
+
 
     /*
     |--------------------------------------------------------------------------
@@ -423,7 +468,9 @@ document.addEventListener('DOMContentLoaded', function () {
     |--------------------------------------------------------------------------
     */
 
-    let currentIndex = images.indexOf(mainImage.src);
+    const primaryImageUrl = @json($product->primaryImage->image_url);
+
+    let currentIndex = images.indexOf(primaryImageUrl);
 
     if (currentIndex === -1) {
         currentIndex = 0;
@@ -445,14 +492,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateZoom() {
 
-    mainImage.style.transform = `scale(${zoomLevel})`;
+        mainImage.style.transform = `scale(${zoomLevel})`;
 
-    if (zoomResetButton) {
-        zoomResetButton.textContent = `${zoomLevel}×`;
+        if (zoomResetButton) {
+            zoomResetButton.textContent = `${zoomLevel}×`;
+        }
+
     }
 
-    }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Update Image
+    |--------------------------------------------------------------------------
+    */
 
     function updateImage(index) {
 
@@ -471,11 +524,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
 
+        /*
+        |--------------------------------------------------------------------------
+        | Change Main Image
+        |--------------------------------------------------------------------------
+        */
+
         mainImage.src = images[currentIndex];
 
 
         /*
-        | Reset zoom whenever image changes
+        |--------------------------------------------------------------------------
+        | Reset Zoom
+        |--------------------------------------------------------------------------
         */
 
         zoomLevel = 1;
@@ -483,18 +544,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         /*
-        | Highlight current thumbnail
+        |--------------------------------------------------------------------------
+        | Highlight Current Thumbnail
+        |--------------------------------------------------------------------------
         */
 
         thumbnails.forEach(function (thumbnail, index) {
 
             if (index === currentIndex) {
 
-                thumbnail.classList.add('ring-2', 'ring-[#BE8B3E]');
+                thumbnail.classList.add(
+                    'ring-2',
+                    'ring-[#BE8B3E]'
+                );
 
             } else {
 
-                thumbnail.classList.remove('ring-2', 'ring-[#BE8B3E]');
+                thumbnail.classList.remove(
+                    'ring-2',
+                    'ring-[#BE8B3E]'
+                );
 
             }
 

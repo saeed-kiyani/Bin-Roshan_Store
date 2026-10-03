@@ -413,7 +413,7 @@
 
             </div>
 
-            <div class="bg-white border border-[#BE8B3E] rounded-lg  overflow-hidden">
+            <div class="border border-[#BE8B3E] rounded-lg  overflow-hidden">
 
                 <div class="overflow-x-auto">
 
@@ -465,7 +465,7 @@
 
                                 @endphp
 
-                                <tr class="hover:bg-gray-50 transition">
+                                <tr>
 
                                     {{-- PRODUCT --}}
 
@@ -476,7 +476,7 @@
                                             @if($image)
 
                                                 <img
-                                                    src="{{ $image }}"
+                                                    src="{{ $product->primaryImage->image_url }}"
                                                     alt="{{ $product->name }}"
                                                     class="w-12 h-14 object-cover bg-gray-100">
 
@@ -669,7 +669,7 @@
 
             </div>
 
-            <div class="bg-white border border-[#BE8B3E] rounded-lg overflow-hidden">
+            <div class="border border-[#BE8B3E] rounded-lg overflow-hidden">
 
                 <div class="overflow-x-auto">
 
@@ -699,7 +699,7 @@
 
                             @forelse($recentCategories as $category)
 
-                                <tr class="hover:bg-gray-50 transition">
+                                <tr>
 
                                     <td class="px-6 py-5">
 
