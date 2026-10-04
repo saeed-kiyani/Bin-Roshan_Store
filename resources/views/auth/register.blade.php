@@ -1,166 +1,467 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+// {{-- =================================================
+// PRODUCT IMAGE GALLERY SCRIPT
+// ================================================== --}}
 
-    <title>Create Account | Bin Roshan</title>
+document.addEventListener('DOMContentLoaded', function () {
 
-    @vite(['resources/css/app.css', 'resources/js/app.js']) 
-</head>
+    const mainImage = document.getElementById('main-product-image');
+    const prevButton = document.getElementById('prev-image');
+    const nextButton = document.getElementById('next-image');
 
-<body class="min-h-screen bg-gray-50">
+    const zoomInButton = document.getElementById('zoom-in');
+    const zoomOutButton = document.getElementById('zoom-out');
+    const zoomResetButton = document.getElementById('zoom-reset');
 
-    <div class="flex min-h-screen items-center justify-center px-4">
+    const thumbnails = Array.from(
+        document.querySelectorAll('.product-thumbnail')
+    );
 
-        <div class="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
+    if (!mainImage) {
+        return;
+    }
 
-            <div class="mb-8 text-center">
+    const images = thumbnails
+        .map(function (thumbnail) {
+            return thumbnail.dataset.image;
+        })
+        .filter(function (image) {
+            return image;
+        });
 
-                <h1 class="text-3xl font-bold text-gray-900">
-                    Bin Roshan
-                </h1>
+    const primaryImageUrl = mainImage.getAttribute('src');
 
-                <p class="mt-2 text-sm text-gray-500">
-                    Create your customer account
-                </p>
+    let currentIndex = images.indexOf(primaryImageUrl);
 
-            </div>
+    if (currentIndex === -1) {
+        currentIndex = 0;
+    }
 
+    // =================================================
+    // ZOOM
+    // =================================================
 
-            @if ($errors->any())
-                <div class="mb-5 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">
-                    <ul class="list-disc space-y-1 pl-5">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+    let zoomLevel = 1;
 
+    const minZoom = 1;
+    const maxZoom = 3;
+    const zoomStep = 0.25;
 
-            <form
-                method="POST"
-                action="{{ route('register.submit') }}"
-                class="space-y-5"
-            >
+    // =================================================
+    // IMAGE POSITION / PAN
+    // =================================================
 
-                @csrf
+    let positionX = 0;
+    let positionY = 0;
 
+    let isDragging = false;
 
-                <div>
-
-                    <label
-                        for="name"
-                        class="mb-2 block text-sm font-medium text-gray-700"
-                    >
-                        Full Name
-                    </label>
-
-                    <input
-                        id="name"
-                        type="text"
-                        name="name"
-                        value="{{ old('name') }}"
-                        required
-                        autofocus
-                        autocomplete="name"
-                        class="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
-                    >
-
-                </div>
+    let dragStartX = 0;
+    let dragStartY = 0;
 
 
-                <div>
+    // =================================================
+    // UPDATE IMAGE TRANSFORM
+    // =================================================
 
-                    <label
-                        for="email"
-                        class="mb-2 block text-sm font-medium text-gray-700"
-                    >
-                        Email Address
-                    </label>
+    function updateImageTransform() {
 
-                    <input
-                        id="email"
-                        type="email"
-                        name="email"
-                        value="{{ old('email') }}"
-                        required
-                        autocomplete="email"
-                        class="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
-                    >
+        mainImage.style.transform =
+            `translate(${positionX}px, ${positionY}px) scale(${zoomLevel})`;
 
-                </div>
+        /*
+        |--------------------------------------------------------------------------
+        | Cursor
+        |--------------------------------------------------------------------------
+        */
 
+        if (zoomLevel > 1) {
 
-                <div>
+            mainImage.style.cursor =
+                isDragging ? 'grabbing' : 'grab';
 
-                    <label
-                        for="password"
-                        class="mb-2 block text-sm font-medium text-gray-700"
-                    >
-                        Password
-                    </label>
+        } else {
 
-                    <input
-                        id="password"
-                        type="password"
-                        name="password"
-                        required
-                        autocomplete="new-password"
-                        class="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
-                    >
+            mainImage.style.cursor = 'default';
 
-                </div>
+        }
+
+    }
 
 
-                <div>
+    // =================================================
+    // RESET IMAGE POSITION
+    // =================================================
 
-                    <label
-                        for="password_confirmation"
-                        class="mb-2 block text-sm font-medium text-gray-700"
-                    >
-                        Confirm Password
-                    </label>
+    function resetImagePosition() {
 
-                    <input
-                        id="password_confirmation"
-                        type="password"
-                        name="password_confirmation"
-                        required
-                        autocomplete="new-password"
-                        class="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
-                    >
+        positionX = 0;
+        positionY = 0;
 
-                </div>
+        updateImageTransform();
+
+    }
 
 
-                <button
-                    type="submit"
-                    class="w-full rounded-lg bg-gray-900 px-4 py-3 font-semibold text-white transition hover:bg-gray-800"
-                >
-                    Create Account
-                </button>
+    // =================================================
+    // UPDATE ZOOM
+    // =================================================
 
-            </form>
+    function updateZoom() {
+
+        /*
+        |--------------------------------------------------------------------------
+        | If zoom returns to 1x, reset position
+        |--------------------------------------------------------------------------
+        */
+
+        if (zoomLevel === 1) {
+            resetImagePosition();
+        } else {
+            updateImageTransform();
+        }
+
+        if (zoomResetButton) {
+
+            zoomResetButton.textContent =
+                `${zoomLevel}×`;
+
+        }
+
+    }
 
 
-            <div class="mt-6 text-center text-sm text-gray-600">
+    // =================================================
+    // UPDATE IMAGE
+    // =================================================
 
-                Already have an account?
+    function updateImage(index) {
 
-                <a
-                    href="{{ route('login') }}"
-                    class="font-semibold text-gray-900 hover:underline"
-                >
-                    Login
-                </a>
+        if (!images.length) {
+            return;
+        }
 
-            </div>
+        currentIndex = index;
 
-        </div>
+        if (currentIndex < 0) {
+            currentIndex = images.length - 1;
+        }
 
-    </div>
+        if (currentIndex >= images.length) {
+            currentIndex = 0;
+        }
 
-</body>
-</html>
+        mainImage.src = images[currentIndex];
+
+        /*
+        |--------------------------------------------------------------------------
+        | Reset zoom
+        |--------------------------------------------------------------------------
+        */
+
+        zoomLevel = 1;
+
+        resetImagePosition();
+
+        if (zoomResetButton) {
+
+            zoomResetButton.textContent = '1×';
+
+        }
+
+
+        // =================================================
+        // ACTIVE THUMBNAIL
+        // =================================================
+
+        thumbnails.forEach(function (thumbnail, index) {
+
+            if (index === currentIndex) {
+
+                thumbnail.classList.add(
+                    'ring-2',
+                    'ring-[#BE8B3E]'
+                );
+
+            } else {
+
+                thumbnail.classList.remove(
+                    'ring-2',
+                    'ring-[#BE8B3E]'
+                );
+
+            }
+
+        });
+
+    }
+
+
+    // =================================================
+    // PREVIOUS IMAGE
+    // =================================================
+
+    if (prevButton) {
+
+        prevButton.addEventListener('click', function () {
+
+            updateImage(currentIndex - 1);
+
+        });
+
+    }
+
+
+    // =================================================
+    // NEXT IMAGE
+    // =================================================
+
+    if (nextButton) {
+
+        nextButton.addEventListener('click', function () {
+
+            updateImage(currentIndex + 1);
+
+        });
+
+    }
+
+
+    // =================================================
+    // THUMBNAILS
+    // =================================================
+
+    thumbnails.forEach(function (thumbnail, index) {
+
+        thumbnail.addEventListener('click', function () {
+
+            updateImage(index);
+
+        });
+
+    });
+
+
+    // =================================================
+    // ZOOM IN
+    // =================================================
+
+    if (zoomInButton) {
+
+        zoomInButton.addEventListener('click', function () {
+
+            if (zoomLevel < maxZoom) {
+
+                zoomLevel = Math.min(
+                    zoomLevel + zoomStep,
+                    maxZoom
+                );
+
+                updateZoom();
+
+            }
+
+        });
+
+    }
+
+
+    // =================================================
+    // ZOOM OUT
+    // =================================================
+
+    if (zoomOutButton) {
+
+        zoomOutButton.addEventListener('click', function () {
+
+            if (zoomLevel > minZoom) {
+
+                zoomLevel = Math.max(
+                    zoomLevel - zoomStep,
+                    minZoom
+                );
+
+                updateZoom();
+
+            }
+
+        });
+
+    }
+
+
+    // =================================================
+    // RESET ZOOM
+    // =================================================
+
+    if (zoomResetButton) {
+
+        zoomResetButton.addEventListener('click', function () {
+
+            zoomLevel = 1;
+
+            resetImagePosition();
+
+            if (zoomResetButton) {
+                zoomResetButton.textContent = '1×';
+            }
+
+        });
+
+    }
+
+
+    // =================================================
+    // MOUSE DRAG / PAN
+    // =================================================
+
+    mainImage.addEventListener('mousedown', function (event) {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Only allow dragging when zoomed
+        |--------------------------------------------------------------------------
+        */
+
+        if (zoomLevel <= 1) {
+            return;
+        }
+
+        event.preventDefault();
+
+        isDragging = true;
+
+        dragStartX =
+            event.clientX - positionX;
+
+        dragStartY =
+            event.clientY - positionY;
+
+        mainImage.style.cursor = 'grabbing';
+
+    });
+
+
+    document.addEventListener('mousemove', function (event) {
+
+        if (!isDragging) {
+            return;
+        }
+
+        positionX =
+            event.clientX - dragStartX;
+
+        positionY =
+            event.clientY - dragStartY;
+
+        updateImageTransform();
+
+    });
+
+
+    document.addEventListener('mouseup', function () {
+
+        if (!isDragging) {
+            return;
+        }
+
+        isDragging = false;
+
+        updateImageTransform();
+
+    });
+
+
+    // =================================================
+    // MOBILE TOUCH DRAG / PAN
+    // =================================================
+
+    mainImage.addEventListener(
+        'touchstart',
+        function (event) {
+
+            if (zoomLevel <= 1) {
+                return;
+            }
+
+            const touch = event.touches[0];
+
+            isDragging = true;
+
+            dragStartX =
+                touch.clientX - positionX;
+
+            dragStartY =
+                touch.clientY - positionY;
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    mainImage.addEventListener(
+        'touchmove',
+        function (event) {
+
+            if (!isDragging || zoomLevel <= 1) {
+                return;
+            }
+
+            const touch = event.touches[0];
+
+            positionX =
+                touch.clientX - dragStartX;
+
+            positionY =
+                touch.clientY - dragStartY;
+
+            updateImageTransform();
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    mainImage.addEventListener(
+        'touchend',
+        function () {
+
+            isDragging = false;
+
+            updateImageTransform();
+
+        }
+    );
+
+
+    // =================================================
+    // KEYBOARD NAVIGATION
+    // =================================================
+
+    document.addEventListener('keydown', function (event) {
+
+        if (event.key === 'ArrowLeft') {
+
+            updateImage(currentIndex - 1);
+
+        }
+
+        if (event.key === 'ArrowRight') {
+
+            updateImage(currentIndex + 1);
+
+        }
+
+    });
+
+
+    // =================================================
+    // INITIAL IMAGE
+    // =================================================
+
+    updateImage(currentIndex);
+
+});

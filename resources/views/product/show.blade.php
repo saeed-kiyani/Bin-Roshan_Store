@@ -12,7 +12,6 @@ PRODUCT DETAIL
 
 <section class="bg-[#f8f7f4]">
 
-```
 {{-- Breadcrumb --}}
 <div class="border-b border-gray-100">
     <div class="max-w-7xl mx-auto px-6 lg:px-8 py-5">
@@ -416,14 +415,7 @@ PRODUCT DETAIL
     </div>
 
 </div>
-```
 
 </section>
-
-{{-- =================================================
-PRODUCT IMAGE GALLERY SCRIPT
-================================================== --}}
-
-
 
 @endsection

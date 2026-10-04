@@ -1,1601 +1,1601 @@
-@extends('layouts.admin')
+    @extends('layouts.admin')
 
-@section('title', 'Edit Product | Bin Roshan')
+    @section('title', 'Edit Product | Bin Roshan')
 
-@section('content')
+    @section('content')
 
-@php
+    @php
 
-    $primaryImageId = optional($product->primaryImage)->id;
+        $primaryImageId = optional($product->primaryImage)->id;
 
-    /*
-    |--------------------------------------------------------------------------
-    | Lace Categories
-    |--------------------------------------------------------------------------
-    */
+        /*
+        |--------------------------------------------------------------------------
+        | Lace Categories
+        |--------------------------------------------------------------------------
+        */
 
-    $laceCategories = [
+        $laceCategories = [
 
-        'basic_everyday' => [
-            'label' => 'Basic & Everyday Laces',
-            'subcategories' => [
-                'cotton' => 'Cotton Laces',
-                'plain' => 'Plain Laces',
-                'printed' => 'Printed Laces',
-                'thread' => 'Thread Laces',
+            'basic_everyday' => [
+                'label' => 'Basic & Everyday Laces',
+                'subcategories' => [
+                    'cotton' => 'Cotton Laces',
+                    'plain' => 'Plain Laces',
+                    'printed' => 'Printed Laces',
+                    'thread' => 'Thread Laces',
+                ],
             ],
-        ],
 
-        'embroidered' => [
-            'label' => 'Embroidered Laces',
-            'subcategories' => [
-                'embroidery' => 'Embroidery Laces',
-                'organza' => 'Organza Laces',
-                'chiffon' => 'Chiffon Laces',
-                'net' => 'Net Laces',
-                'cutwork' => 'Cutwork Laces',
-                'applique' => 'Appliqué Laces',
+            'embroidered' => [
+                'label' => 'Embroidered Laces',
+                'subcategories' => [
+                    'embroidery' => 'Embroidery Laces',
+                    'organza' => 'Organza Laces',
+                    'chiffon' => 'Chiffon Laces',
+                    'net' => 'Net Laces',
+                    'cutwork' => 'Cutwork Laces',
+                    'applique' => 'Appliqué Laces',
+                ],
             ],
-        ],
 
-        'fancy' => [
-            'label' => 'Fancy Laces',
-            'subcategories' => [
-                'sequin' => 'Sequin Laces',
-                'stone' => 'Stone Laces',
-                'crystal' => 'Crystal Laces',
-                'pearl' => 'Pearl Laces',
-                'moti' => 'Moti Laces',
-                'mirror_work' => 'Mirror Work Laces',
-                'shimmer' => 'Shimmer Laces',
-                'fancy_designer' => 'Fancy Designer Laces',
+            'fancy' => [
+                'label' => 'Fancy Laces',
+                'subcategories' => [
+                    'sequin' => 'Sequin Laces',
+                    'stone' => 'Stone Laces',
+                    'crystal' => 'Crystal Laces',
+                    'pearl' => 'Pearl Laces',
+                    'moti' => 'Moti Laces',
+                    'mirror_work' => 'Mirror Work Laces',
+                    'shimmer' => 'Shimmer Laces',
+                    'fancy_designer' => 'Fancy Designer Laces',
+                ],
             ],
-        ],
 
-        'traditional' => [
-            'label' => 'Traditional Laces',
-            'subcategories' => [
-                'gota' => 'Gota Laces',
-                'gota_patti' => 'Gota Patti Laces',
-                'dori' => 'Dori Laces',
-                'zari' => 'Zari Laces',
-                'tilla' => 'Tilla Laces',
-                'resham' => 'Resham Laces',
-                'traditional_border' => 'Traditional Border Laces',
+            'traditional' => [
+                'label' => 'Traditional Laces',
+                'subcategories' => [
+                    'gota' => 'Gota Laces',
+                    'gota_patti' => 'Gota Patti Laces',
+                    'dori' => 'Dori Laces',
+                    'zari' => 'Zari Laces',
+                    'tilla' => 'Tilla Laces',
+                    'resham' => 'Resham Laces',
+                    'traditional_border' => 'Traditional Border Laces',
+                ],
             ],
-        ],
 
-        'suit_specific' => [
-            'label' => 'Suit-Specific Laces',
-            'subcategories' => [
-                'daman' => 'Daman Laces',
-                'neckline' => 'Neckline Laces',
-                'sleeve' => 'Sleeve Laces',
-                'trouser' => 'Trouser Laces',
-                'dupatta' => 'Dupatta Laces',
-                'shirt_border' => 'Shirt Border Laces',
-                'side_border' => 'Side Border Laces',
+            'suit_specific' => [
+                'label' => 'Suit-Specific Laces',
+                'subcategories' => [
+                    'daman' => 'Daman Laces',
+                    'neckline' => 'Neckline Laces',
+                    'sleeve' => 'Sleeve Laces',
+                    'trouser' => 'Trouser Laces',
+                    'dupatta' => 'Dupatta Laces',
+                    'shirt_border' => 'Shirt Border Laces',
+                    'side_border' => 'Side Border Laces',
+                ],
             ],
-        ],
 
-        'premium_bridal' => [
-            'label' => 'Premium / Bridal',
-            'subcategories' => [
-                'bridal' => 'Bridal Laces',
-                'heavy_bridal' => 'Heavy Bridal Laces',
-                'premium_designer' => 'Premium Designer Laces',
+            'premium_bridal' => [
+                'label' => 'Premium / Bridal',
+                'subcategories' => [
+                    'bridal' => 'Bridal Laces',
+                    'heavy_bridal' => 'Heavy Bridal Laces',
+                    'premium_designer' => 'Premium Designer Laces',
+                ],
             ],
-        ],
 
-    ];
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Existing Lace Values
-    |--------------------------------------------------------------------------
-    */
-
-    $selectedLaceSubcategories = old(
-        'lace_subcategories',
-        $product->lace_subcategories ?? []
-    );
-
-    $selectedWidth = old(
-        'width',
-        $product->width ?? []
-    );
-
-    $selectedHeight = old(
-        'height',
-        $product->height ?? []
-    );
-
-    $selectedLength = old(
-        'length',
-        $product->length ?? []
-    );
+        ];
 
 
-    
-    $cosmeticBrands = [
-        'Maybelline' => 'Maybelline',
-        "L'Oréal Paris" => "L'Oréal Paris",
-        'MAC' => 'MAC',
-        'Huda Beauty' => 'Huda Beauty',
-        'NYX Professional Makeup' => 'NYX Professional Makeup',
-        'The Ordinary' => 'The Ordinary',
-        'CeraVe' => 'CeraVe',
-        'NARS' => 'NARS',
-        'Revlon' => 'Revlon',
-        'Wet n Wild' => 'Wet n Wild',
-        'Essence' => 'Essence',
-        'Garnier' => 'Garnier',
-        'Neutrogena' => 'Neutrogena',
-        'Lakmé' => 'Lakmé',
-        'Fenty Beauty' => 'Fenty Beauty',
-        'Rare Beauty' => 'Rare Beauty',
-        'e.l.f. Cosmetics' => 'e.l.f. Cosmetics',
-        'Makeup Revolution' => 'Makeup Revolution',
-        'Dove' => 'Dove',
-        'Other' => 'Other',
-    ];
+        /*
+        |--------------------------------------------------------------------------
+        | Existing Lace Values
+        |--------------------------------------------------------------------------
+        */
 
-    $cosmeticProductTypes = [
-        'makeup' => 'Makeup',
-        'skincare' => 'Skincare',
-        'haircare' => 'Haircare',
-        'fragrance' => 'Fragrance',
-        'body_care' => 'Body Care',
-        'nail_care' => 'Nail Care',
-    ];
+        $selectedLaceSubcategories = old(
+            'lace_subcategories',
+            $product->lace_subcategories ?? []
+        );
 
-    $cosmeticSkinTypes = [
-        'all_skin_types' => 'All Skin Types',
-        'oily' => 'Oily',
-        'dry' => 'Dry',
-        'combination' => 'Combination',
-        'sensitive' => 'Sensitive',
-    ];
+        $selectedWidth = old(
+            'width',
+            $product->width ?? []
+        );
 
-    $cosmeticConcerns = [
-        'hydration' => 'Hydration',
-        'brightening' => 'Brightening',
-        'acne_blemishes' => 'Acne & Blemishes',
-        'oil_control' => 'Oil Control',
-        'anti_aging' => 'Anti-Aging',
-        'sun_protection' => 'Sun Protection',
-        'hair_fall' => 'Hair Fall',
-        'frizz_control' => 'Frizz Control',
-    ];
+        $selectedHeight = old(
+            'height',
+            $product->height ?? []
+        );
 
-    $cosmeticProductForms = [
-        'cream' => 'Cream',
-        'gel' => 'Gel',
-        'serum' => 'Serum',
-        'lotion' => 'Lotion',
-        'powder' => 'Powder',
-        'liquid' => 'Liquid',
-        'spray' => 'Spray',
-        'stick' => 'Stick',
-    ];
-
-@endphp
+        $selectedLength = old(
+            'length',
+            $product->length ?? []
+        );
 
 
-<div class="min-h-screen py-12">
+        
+        $cosmeticBrands = [
+            'Maybelline' => 'Maybelline',
+            "L'Oréal Paris" => "L'Oréal Paris",
+            'MAC' => 'MAC',
+            'Huda Beauty' => 'Huda Beauty',
+            'NYX Professional Makeup' => 'NYX Professional Makeup',
+            'The Ordinary' => 'The Ordinary',
+            'CeraVe' => 'CeraVe',
+            'NARS' => 'NARS',
+            'Revlon' => 'Revlon',
+            'Wet n Wild' => 'Wet n Wild',
+            'Essence' => 'Essence',
+            'Garnier' => 'Garnier',
+            'Neutrogena' => 'Neutrogena',
+            'Lakmé' => 'Lakmé',
+            'Fenty Beauty' => 'Fenty Beauty',
+            'Rare Beauty' => 'Rare Beauty',
+            'e.l.f. Cosmetics' => 'e.l.f. Cosmetics',
+            'Makeup Revolution' => 'Makeup Revolution',
+            'Dove' => 'Dove',
+            'Other' => 'Other',
+        ];
 
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        $cosmeticProductTypes = [
+            'makeup' => 'Makeup',
+            'skincare' => 'Skincare',
+            'haircare' => 'Haircare',
+            'fragrance' => 'Fragrance',
+            'body_care' => 'Body Care',
+            'nail_care' => 'Nail Care',
+        ];
 
-        <div class="mb-10">
+        $cosmeticSkinTypes = [
+            'all_skin_types' => 'All Skin Types',
+            'oily' => 'Oily',
+            'dry' => 'Dry',
+            'combination' => 'Combination',
+            'sensitive' => 'Sensitive',
+        ];
 
-            <a
-                href="{{ route('admin.products.index') }}"
-                class="text-xs uppercase tracking-widest text-gray-500 hover:text-[#BE8B3E] transition">
-                ← Back to Products
-            </a>
+        $cosmeticConcerns = [
+            'hydration' => 'Hydration',
+            'brightening' => 'Brightening',
+            'acne_blemishes' => 'Acne & Blemishes',
+            'oil_control' => 'Oil Control',
+            'anti_aging' => 'Anti-Aging',
+            'sun_protection' => 'Sun Protection',
+            'hair_fall' => 'Hair Fall',
+            'frizz_control' => 'Frizz Control',
+        ];
 
-            <p class="mt-8 text-xs uppercase tracking-[0.35em] text-[#BE8B3E] font-semibold">
-                Admin Panel
-            </p>
+        $cosmeticProductForms = [
+            'cream' => 'Cream',
+            'gel' => 'Gel',
+            'serum' => 'Serum',
+            'lotion' => 'Lotion',
+            'powder' => 'Powder',
+            'liquid' => 'Liquid',
+            'spray' => 'Spray',
+            'stick' => 'Stick',
+        ];
 
-            <h1 class="mt-3 text-4xl font-light">
-                Edit Product
-            </h1>
-
-            <p class="mt-2 text-sm text-gray-500">
-                {{ $product->name }}
-            </p>
-
-        </div>
-
-
-        {{-- SUCCESS --}}
-
-        @if(session('success'))
-
-            <div class="mb-8 bg-green-50 border border-green-200 text-green-800 px-5 py-4 text-sm">
-                {{ session('success') }}
-            </div>
-
-        @endif
+    @endphp
 
 
-        {{-- ERRORS --}}
+    <div class="min-h-screen py-12">
 
-        @if($errors->any())
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            <div class="mb-8 bg-red-50 border border-red-200 text-red-800 px-5 py-4">
+            <div class="mb-10">
 
-                <ul class="text-sm space-y-1">
+                <a
+                    href="{{ route('admin.products.index') }}"
+                    class="text-xs uppercase tracking-widest text-gray-500 hover:text-[#BE8B3E] transition">
+                    ← Back to Products
+                </a>
 
-                    @foreach($errors->all() as $error)
+                <p class="mt-8 text-xs uppercase tracking-[0.35em] text-[#BE8B3E] font-semibold">
+                    Admin Panel
+                </p>
 
-                        <li>{{ $error }}</li>
+                <h1 class="mt-3 text-4xl font-light">
+                    Edit Product
+                </h1>
 
-                    @endforeach
-
-                </ul>
+                <p class="mt-2 text-sm text-gray-500">
+                    {{ $product->name }}
+                </p>
 
             </div>
 
-        @endif
 
+            {{-- SUCCESS --}}
 
-        {{-- EXISTING IMAGES --}}
+            @if(session('success'))
 
-        <div class="rounded-lg border border-gray-200 p-6 sm:p-10 mb-8">
-
-            <div class="flex items-center justify-between mb-7">
-
-                <div>
-
-                    <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
-                        Product Images
-                    </p>
-
-                    <p class="mt-2 text-xs text-gray-400">
-                        Click "Make Primary" to change the main product image.
-                    </p>
-
+                <div class="mb-8 bg-green-50 border border-green-200 text-green-800 px-5 py-4 text-sm">
+                    {{ session('success') }}
                 </div>
 
-            </div>
+            @endif
 
 
-            @if($product->images->count())
+            {{-- ERRORS --}}
 
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
+            @if($errors->any())
 
-                    @foreach($product->images as $image)
+                <div class="mb-8 bg-red-50 border border-red-200 text-red-800 px-5 py-4">
 
-                        @php
+                    <ul class="text-sm space-y-1">
 
-                            $imageUrl = $image->image_url;
+                        @foreach($errors->all() as $error)
 
-                            if ($imageUrl && !str_starts_with($imageUrl, 'http')) {
-                                $imageUrl = asset('storage/' . ltrim($imageUrl, '/'));
-                            }
+                            <li>{{ $error }}</li>
 
-                        @endphp
+                        @endforeach
 
-
-                        <div class="border border-gray-200 p-3">
-
-                            <div class="relative">
-
-                                <img
-                                    src="{{ $imageUrl }}"
-                                    alt="{{ $product->name }}"
-                                    class="w-full aspect-[4/5] object-cover bg-gray-100"
-                                >
-
-
-                                @if($image->is_primary)
-
-                                    <span class="absolute top-2 left-2 bg-[#BE8B3E] text-white px-3 py-1 text-[9px] uppercase tracking-widest font-semibold">
-                                        Primary
-                                    </span>
-
-                                @endif
-
-                            </div>
-
-
-                            <div class="mt-3 space-y-2">
-
-
-                                @if(!$image->is_primary)
-
-                                    <form
-                                        action="{{ route('admin.products.images.primary', $image) }}"
-                                        method="POST"
-                                    >
-
-                                        @csrf
-
-                                        <button
-                                            type="submit"
-                                            class="w-full border border-gray-300 rounded-full cursor-pointer px-3 py-2 text-[10px] uppercase tracking-widest hover:bg-black hover:text-white hover:border-black transition"
-                                        >
-                                            Make Primary
-                                        </button>
-
-                                    </form>
-
-                                @endif
-
-
-                                <form
-                                    action="{{ route('admin.products.images.destroy', $image) }}"
-                                    method="POST"
-                                    onsubmit="return confirm('Delete this image?');"
-                                >
-
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button
-                                        type="submit"
-                                        class="w-full border border-red-200 text-red-600 px-3 py-2 text-[10px] rounded-full cursor-pointer uppercase tracking-widest hover:bg-red-600 hover:text-white hover:border-red-600 transition"
-                                    >
-                                        Delete Image
-                                    </button>
-
-                                </form>
-
-                            </div>
-
-                        </div>
-
-                    @endforeach
-
-                </div>
-
-            @else
-
-                <div class="border border-dashed border-gray-300 px-6 py-12 text-center">
-
-                    <p class="text-sm text-gray-400">
-                        No product images uploaded yet.
-                    </p>
+                    </ul>
 
                 </div>
 
             @endif
 
-        </div>
+
+            {{-- EXISTING IMAGES --}}
+
+            <div class="rounded-lg border border-gray-200 p-6 sm:p-10 mb-8">
+
+                <div class="flex items-center justify-between mb-7">
+
+                    <div>
+
+                        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
+                            Product Images
+                        </p>
+
+                        <p class="mt-2 text-xs text-gray-400">
+                            Click "Make Primary" to change the main product image.
+                        </p>
+
+                    </div>
+
+                </div>
 
 
-        {{-- PRODUCT FORM --}}
+                @if($product->images->count())
 
-        <div
-            id="product-form-config"
-            data-mode="edit"
-            data-existing-lace-subcategories='@json($selectedLaceSubcategories)'
-            data-existing-jewelry-subcategories='@json(old('jewelry_subcategories', $product->jewelry_subcategories ?? []))'
-            aria-hidden="true"
-            class="hidden"
-        ></div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
 
-        <form
-            action="{{ route('admin.products.update', $product) }}"
-            method="POST"
-            enctype="multipart/form-data"
-            class="rounded-lg border border-gray-200 p-6 sm:p-10"
-        >
+                        @foreach($product->images as $image)
 
-            @csrf
-            @method('PUT')
+                            @php
+
+                                $imageUrl = $image->image_url;
+
+                                if ($imageUrl && !str_starts_with($imageUrl, 'http')) {
+                                    $imageUrl = asset('storage/' . ltrim($imageUrl, '/'));
+                                }
+
+                            @endphp
 
 
-            {{-- CATEGORY --}}
+                            <div class="border border-gray-200 p-3">
 
-<div>
+                                <div class="relative">
 
-    <label
-        for="category_id"
-        class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-    >
-        Category
-    </label>
-
-    <select
-        id="category_id"
-        name="category_id"
-        required
-        class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]"
-    >
-
-        @foreach($categories as $category)
-
-            @php
-                $categoryId = is_array($category)
-                    ? ($category['id'] ?? null)
-                    : ($category->id ?? null);
-
-                $categoryName = is_array($category)
-                    ? ($category['name'] ?? '')
-                    : ($category->name ?? '');
-
-                $categorySlug = is_array($category)
-                    ? ($category['slug'] ?? '')
-                    : ($category->slug ?? '');
-            @endphp
-
-            <option
-    value="{{ $categoryId }}"
-    data-slug="{{ strtolower(trim($categorySlug)) }}"
-    data-category-slug="{{ strtolower(trim($categorySlug)) }}"
-    {{ old('category_id', $product->category_id) == $categoryId ? 'selected' : '' }}
->
-    {{ $categoryName }}
-</option>
-
-        @endforeach
-
-    </select>
-
-</div>
+                                    <img
+                                        src="{{ $imageUrl }}"
+                                        alt="{{ $product->name }}"
+                                        class="w-full aspect-[4/5] object-cover bg-gray-100"
+                                    >
 
 
-            {{-- NAME --}}
+                                    @if($image->is_primary)
 
-            <div class="mt-7">
+                                        <span class="absolute top-2 left-2 bg-[#BE8B3E] text-white px-3 py-1 text-[9px] uppercase tracking-widest font-semibold">
+                                            Primary
+                                        </span>
 
-                <label
-                    for="name"
-                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-                >
-                    Product Name
-                </label>
+                                    @endif
 
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value="{{ old('name', $product->name) }}"
-                    required
-                    class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]"
-                >
-
-            </div>
+                                </div>
 
 
-            {{-- SLUG --}}
-
-            <div class="mt-7">
-
-                <label
-                    for="slug"
-                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-                >
-                    Slug
-                </label>
-
-                <input
-                    type="text"
-                    id="slug"
-                    name="slug"
-                    value="{{ old('slug', $product->slug) }}"
-                    class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]"
-                >
-
-            </div>
+                                <div class="mt-3 space-y-2">
 
 
-            {{-- SKU --}}
+                                    @if(!$image->is_primary)
 
-            <div class="mt-7">
+                                        <form
+                                            action="{{ route('admin.products.images.primary', $image) }}"
+                                            method="POST"
+                                        >
 
-                <label
-                    for="sku"
-                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
-                >
-                    SKU
-                </label>
+                                            @csrf
 
-                <input
-                    type="text"
-                    id="sku"
-                    name="sku"
-                    value="{{ old('sku', $product->sku) }}"
-                    required
-                    class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]"
-                >
+                                            <button
+                                                type="submit"
+                                                class="w-full border border-gray-300 rounded-full cursor-pointer px-3 py-2 text-[10px] uppercase tracking-widest hover:bg-black hover:text-white hover:border-black transition"
+                                            >
+                                                Make Primary
+                                            </button>
+
+                                        </form>
+
+                                    @endif
+
+
+                                    <form
+                                        action="{{ route('admin.products.images.destroy', $image) }}"
+                                        method="POST"
+                                        onsubmit="return confirm('Delete this image?');"
+                                    >
+
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button
+                                            type="submit"
+                                            class="w-full border border-red-200 text-red-600 px-3 py-2 text-[10px] rounded-full cursor-pointer uppercase tracking-widest hover:bg-red-600 hover:text-white hover:border-red-600 transition"
+                                        >
+                                            Delete Image
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+                        @endforeach
+
+                    </div>
+
+                @else
+
+                    <div class="border border-dashed border-gray-300 px-6 py-12 text-center">
+
+                        <p class="text-sm text-gray-400">
+                            No product images uploaded yet.
+                        </p>
+
+                    </div>
+
+                @endif
 
             </div>
 
-{{-- =========================================================
-     CLOTHING INFORMATION
-========================================================= --}}
-<div
-    id="clothing-filter"
-    data-filter-section="clothing"
-    class="hidden mt-7 border-t border-gray-200 pt-7">
 
-    <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
-        Clothing Filtration
-    </p>
+            {{-- PRODUCT FORM --}}
 
-    {{-- GENDER --}}
+            <div
+                id="product-form-config"
+                data-mode="edit"
+                data-existing-lace-subcategories='@json($selectedLaceSubcategories)'
+                data-existing-jewelry-subcategories='@json(old('jewelry_subcategories', $product->jewelry_subcategories ?? []))'
+                aria-hidden="true"
+                class="hidden"
+            ></div>
+
+            <form
+                action="{{ route('admin.products.update', $product) }}"
+                method="POST"
+                enctype="multipart/form-data"
+                class="rounded-lg border border-gray-200 p-6 sm:p-10"
+            >
+
+                @csrf
+                @method('PUT')
+
+
+                {{-- CATEGORY --}}
 
     <div>
 
         <label
-            for="gender"
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Gender
+            for="category_id"
+            class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
+        >
+            Category
         </label>
 
         <select
-            id="gender"
-            name="gender"
-            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
+            id="category_id"
+            name="category_id"
+            required
+            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]"
+        >
 
-            <option value="">
-                Select Gender
-            </option>
+            @foreach($categories as $category)
 
-            <option value="men"
-                {{ old('gender', $product->gender) === 'men' ? 'selected' : '' }}>
-                Men
-            </option>
+                @php
+                    $categoryId = is_array($category)
+                        ? ($category['id'] ?? null)
+                        : ($category->id ?? null);
 
-            <option value="women"
-                {{ old('gender', $product->gender) === 'women' ? 'selected' : '' }}>
-                Women
-            </option>
+                    $categoryName = is_array($category)
+                        ? ($category['name'] ?? '')
+                        : ($category->name ?? '');
 
-            <option value="kids"
-                {{ old('gender', $product->gender) === 'kids' ? 'selected' : '' }}>
-                Kids
-            </option>
+                    $categorySlug = is_array($category)
+                        ? ($category['slug'] ?? '')
+                        : ($category->slug ?? '');
+                @endphp
 
-        </select>
+                <option
+        value="{{ $categoryId }}"
+        data-slug="{{ strtolower(trim($categorySlug)) }}"
+        data-category-slug="{{ strtolower(trim($categorySlug)) }}"
+        {{ old('category_id', $product->category_id) == $categoryId ? 'selected' : '' }}
+    >
+        {{ $categoryName }}
+    </option>
 
-    </div>
-
-    {{-- BRAND --}}
-
-    <div class="mt-7">
-
-        <label
-            for="brand"
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Brand
-        </label>
-
-        <select
-            id="brand"
-            name="brand"
-            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
-
-            <option value="">
-                Select Brand
-            </option>
-
-            <option value="Bin Ismail"
-                {{ old('brand', $product->brand) === 'Bin Ismail' ? 'selected' : '' }}>
-                Bin Ismail
-            </option>
-
-            <option value="J."
-                {{ old('brand', $product->brand) === 'J.' ? 'selected' : '' }}>
-                J.
-            </option>
-
-            <option value="Gul Ahmed"
-                {{ old('brand', $product->brand) === 'Gul Ahmed' ? 'selected' : '' }}>
-                Gul Ahmed
-            </option>
-
-            <option value="Khaadi"
-                {{ old('brand', $product->brand) === 'Khaadi' ? 'selected' : '' }}>
-                Khaadi
-            </option>
-
-            <option value="Other"
-                {{ old('brand', $product->brand) === 'Other' ? 'selected' : '' }}>
-                Other
-            </option>
+            @endforeach
 
         </select>
 
     </div>
 
 
-    {{-- SIZE --}}
+                {{-- NAME --}}
 
-    <div class="mt-7">
+                <div class="mt-7">
 
-        <label class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Available Sizes
-        </label>
-
-        @php
-            $selectedSizes = old('sizes', $product->sizes ?? []);
-        @endphp
-
-        <div class="mt-4 flex flex-wrap gap-6">
-
-            @foreach(['S', 'M', 'L'] as $size)
-
-                <label class="flex items-center gap-2 cursor-pointer">
+                    <label
+                        for="name"
+                        class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
+                    >
+                        Product Name
+                    </label>
 
                     <input
-                        type="checkbox"
-                        name="sizes[]"
-                        value="{{ $size }}"
-                        {{ in_array($size, $selectedSizes) ? 'checked' : '' }}
+                        type="text"
+                        id="name"
+                        name="name"
+                        value="{{ old('name', $product->name) }}"
+                        required
+                        class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]"
+                    >
+
+                </div>
+
+
+                {{-- SLUG --}}
+
+                <div class="mt-7">
+
+                    <label
+                        for="slug"
+                        class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
+                    >
+                        Slug
+                    </label>
+
+                    <input
+                        type="text"
+                        id="slug"
+                        name="slug"
+                        value="{{ old('slug', $product->slug) }}"
+                        class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]"
+                    >
+
+                </div>
+
+
+                {{-- SKU --}}
+
+                <div class="mt-7">
+
+                    <label
+                        for="sku"
+                        class="block text-xs uppercase tracking-widest font-semibold text-gray-700"
+                    >
+                        SKU
+                    </label>
+
+                    <input
+                        type="text"
+                        id="sku"
+                        name="sku"
+                        value="{{ old('sku', $product->sku) }}"
+                        required
+                        class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]"
+                    >
+
+                </div>
+
+    {{-- =========================================================
+        CLOTHING INFORMATION
+    ========================================================= --}}
+    <div
+        id="clothing-filter"
+        data-filter-section="clothing"
+        class="hidden mt-7 border-t border-gray-200 pt-7">
+
+        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
+            Clothing Filtration
+        </p>
+
+        {{-- GENDER --}}
+
+        <div>
+
+            <label
+                for="gender"
+                class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+                Gender
+            </label>
+
+            <select
+                id="gender"
+                name="gender"
+                class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
+
+                <option value="">
+                    Select Gender
+                </option>
+
+                <option value="men"
+                    {{ old('gender', $product->gender) === 'men' ? 'selected' : '' }}>
+                    Men
+                </option>
+
+                <option value="women"
+                    {{ old('gender', $product->gender) === 'women' ? 'selected' : '' }}>
+                    Women
+                </option>
+
+                <option value="kids"
+                    {{ old('gender', $product->gender) === 'kids' ? 'selected' : '' }}>
+                    Kids
+                </option>
+
+            </select>
+
+        </div>
+
+        {{-- BRAND --}}
+
+        <div class="mt-7">
+
+            <label
+                for="brand"
+                class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+                Brand
+            </label>
+
+            <select
+                id="brand"
+                name="brand"
+                class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
+
+                <option value="">
+                    Select Brand
+                </option>
+
+                <option value="Bin Ismail"
+                    {{ old('brand', $product->brand) === 'Bin Ismail' ? 'selected' : '' }}>
+                    Bin Ismail
+                </option>
+
+                <option value="J."
+                    {{ old('brand', $product->brand) === 'J.' ? 'selected' : '' }}>
+                    J.
+                </option>
+
+                <option value="Gul Ahmed"
+                    {{ old('brand', $product->brand) === 'Gul Ahmed' ? 'selected' : '' }}>
+                    Gul Ahmed
+                </option>
+
+                <option value="Khaadi"
+                    {{ old('brand', $product->brand) === 'Khaadi' ? 'selected' : '' }}>
+                    Khaadi
+                </option>
+
+                <option value="Other"
+                    {{ old('brand', $product->brand) === 'Other' ? 'selected' : '' }}>
+                    Other
+                </option>
+
+            </select>
+
+        </div>
+
+
+        {{-- SIZE --}}
+
+        <div class="mt-7">
+
+            <label class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+                Available Sizes
+            </label>
+
+            @php
+                $selectedSizes = old('sizes', $product->sizes ?? []);
+            @endphp
+
+            <div class="mt-4 flex flex-wrap gap-6">
+
+                @foreach(['S', 'M', 'L'] as $size)
+
+                    <label class="flex items-center gap-2 cursor-pointer">
+
+                        <input
+                            type="checkbox"
+                            name="sizes[]"
+                            value="{{ $size }}"
+                            {{ in_array($size, $selectedSizes) ? 'checked' : '' }}
+                            class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
+
+                        <span class="text-sm text-gray-700">
+                            {{ $size }}
+                        </span>
+
+                    </label>
+
+                @endforeach
+
+            </div>
+
+        </div>
+
+    </div>
+    {{-- =========================================================
+        END CLOTHING INFORMATION
+    ========================================================= --}}
+
+    {{-- =========================================================
+        LACE INFORMATION
+    ========================================================= --}}
+    <div
+        id="lace-filter"
+        data-filter-section="laces"
+        class="hidden mt-7 border-t border-gray-200 pt-7">
+
+        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
+            Lace Filtration
+        </p>
+
+        {{-- LACE CATEGORY --}}
+
+        <div>
+
+            <select
+                id="lace_category"
+                name="lace_category"
+                class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
+
+                <option value="">
+                    Select Lace Category
+                </option>
+
+                @foreach($laceCategories as $value => $category)
+
+                    <option
+                        value="{{ $value }}"
+                        {{ old('lace_category', $product->lace_category) === $value ? 'selected' : '' }}>
+                        {{ $category['label'] }}
+                    </option>
+
+                @endforeach
+
+            </select>
+
+        </div>
+
+        {{-- LACE SUBCATEGORIES --}}
+
+    <div
+        id="lace-subcategories-container"
+        class="mt-7 hidden">
+
+        <label class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+            Lace Subcategories
+        </label>
+
+        <p class="mt-2 text-xs text-gray-400">
+            Select all subcategories that apply to this lace.
+        </p>
+
+        <div
+            id="lace-subcategories"
+            class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+
+    </div>
+
+        {{-- WIDTH --}}
+
+        <div class="mt-7 border-t border-gray-200 pt-7">
+
+            <label class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+                Width
+            </label>
+
+            <div class="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-4">
+
+                @foreach([
+                    '1 inch',
+                    '1.5 inch',
+                    '2 inch',
+                    '2.5 inch',
+                    '3 inch',
+                    '4 inch',
+                    '5 inch',
+                    '6 inch'
+                ] as $widthOption)
+
+                    <label class="flex items-center gap-3 cursor-pointer">
+
+                        <input
+                            type="checkbox"
+                            name="width[]"
+                            value="{{ $widthOption }}"
+                            {{ in_array($widthOption, $selectedWidth) ? 'checked' : '' }}
+                            class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
+
+                        <span class="text-sm text-gray-600">
+                            {{ $widthOption }}
+                        </span>
+
+                    </label>
+
+                @endforeach
+
+            </div>
+
+        </div>
+
+    </div>
+    {{-- =========================================================
+        END LACE INFORMATION
+    ========================================================= --}}
+
+    {{-- =========================================================
+        JEWELRY INFORMATION
+    ========================================================= --}}
+    <div
+        id="jewelry-filter"
+        data-filter-section="jewelry"
+        class="hidden mt-7 border-t border-gray-200 pt-7">
+
+        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
+            Jewelry Filtration
+        </p>
+
+        {{-- GENDER --}}
+        <div>
+            <p class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+                Gender
+            </p>
+            <div class="mt-4 flex flex-wrap gap-6">
+                @php
+                    $selectedJewelryGender = old('jewelry_gender', $product->jewelry_gender ?? []);
+                    if (is_string($selectedJewelryGender)) {
+                        $selectedJewelryGender = json_decode($selectedJewelryGender, true) ?? [];
+                    }
+                @endphp
+
+                @foreach(['men' => 'Men', 'women' => 'Women'] as $value => $label)
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input
+                            type="checkbox"
+                            name="jewelry_gender[]"
+                            value="{{ $value }}"
+                            {{ in_array($value, $selectedJewelryGender) ? 'checked' : '' }}
+                            class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
+                        <span class="text-sm text-gray-700">{{ $label }}</span>
+                    </label>
+                @endforeach
+            </div>
+        </div>
+
+        {{-- JEWELRY TYPE --}}
+        <div class="mt-7">
+            <label
+                for="jewelry_type"
+                class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+                Jewelry Type
+            </label>
+
+            <select
+                id="jewelry_type"
+                name="jewelry_type"
+                class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
+
+                <option value="">Select Jewelry Type</option>
+                <option value="earrings" {{ old('jewelry_type', $product->jewelry_type ?? '') === 'earrings' ? 'selected' : '' }}>Earrings</option>
+                <option value="necklaces" {{ old('jewelry_type', $product->jewelry_type ?? '') === 'necklaces' ? 'selected' : '' }}>Necklaces</option>
+                <option value="rings" {{ old('jewelry_type', $product->jewelry_type ?? '') === 'rings' ? 'selected' : '' }}>Rings</option>
+                <option value="bracelets" {{ old('jewelry_type', $product->jewelry_type ?? '') === 'bracelets' ? 'selected' : '' }}>Bracelets</option>
+            </select>
+        </div>
+
+        {{-- DYNAMIC SUBCATEGORIES --}}
+        <div id="jewelry-subcategories-container" class="mt-7 hidden">
+            <p class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+                Subcategories
+            </p>
+            <p class="mt-2 text-xs text-gray-400">
+                Select all subcategories that apply to this jewelry type.
+            </p>
+            <div
+                id="jewelry-subcategories"
+                class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4"
+            ></div>
+        </div>
+
+        {{-- QUALITY --}}
+        <div class="mt-7 border-t border-gray-200 pt-7">
+            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
+                Product Type / Quality
+            </p>
+            <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                @php
+                    $selectedJewelryQuality = old('jewelry_quality', $product->jewelry_quality ?? []);
+                    if (is_string($selectedJewelryQuality)) {
+                        $selectedJewelryQuality = json_decode($selectedJewelryQuality, true) ?? [];
+                    }
+                @endphp
+
+                @foreach([
+                    'fine' => 'Fine Jewelry (Real Gold / Diamonds)',
+                    'demi_fine' => 'Demi-Fine (Gold-plated / Silver)',
+                    'fashion' => 'Fashion / Artificial Jewelry'
+                ] as $value => $label)
+                    <label class="flex items-start gap-3 cursor-pointer">
+                        <input
+                            type="checkbox"
+                            name="jewelry_quality[]"
+                            value="{{ $value }}"
+                            {{ in_array($value, $selectedJewelryQuality) ? 'checked' : '' }}
+                            class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
+
+                        <span class="text-sm text-gray-700">{{ $label }}</span>
+                    </label>
+                @endforeach
+            </div>
+        </div>
+
+        {{-- RING SIZE --}}
+        <div class="mt-7 border-t border-gray-200 pt-7 jewelry-size-group" data-jewelry-size="rings">
+            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
+                Ring Size
+            </p>
+            <p class="mt-2 text-xs text-gray-400">Select the available Pakistani ring sizes.</p>
+            @php
+                $selectedRingSizes = old('ring_sizes', $product->ring_sizes ?? []);
+                if (is_string($selectedRingSizes)) {
+                    $selectedRingSizes = json_decode($selectedRingSizes, true) ?? [];
+                }
+            @endphp
+            <div class="mt-5 grid grid-cols-3 sm:grid-cols-6 gap-4">
+                @foreach(range(4, 30) as $size)
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input
+                            type="checkbox"
+                            name="ring_sizes[]"
+                            value="{{ $size }}"
+                            {{ in_array((string)$size, array_map('strval', $selectedRingSizes)) ? 'checked' : '' }}
+                            class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
+
+                        <span class="text-sm text-gray-700">{{ $size }}</span>
+                    </label>
+                @endforeach
+            </div>
+        </div>
+
+        {{-- NECKLACE LENGTH --}}
+        <div class="mt-7 border-t border-gray-200 pt-7 jewelry-size-group" data-jewelry-size="necklaces">
+            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
+                Chain / Necklace Length
+            </p>
+            @php
+                $selectedNecklaceLengths = old('necklace_lengths', $product->necklace_lengths ?? []);
+                if (is_string($selectedNecklaceLengths)) {
+                    $selectedNecklaceLengths = json_decode($selectedNecklaceLengths, true) ?? [];
+                }
+            @endphp
+            <div class="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-4">
+                @foreach(['14 inch (Choker)', '16 inch', '18 inch', '20 inch', '22 inch', '24 inch', '26 inch', '28 inch'] as $length)
+                    <label class="flex items-center gap-3 cursor-pointer">
+                        <input
+                            type="checkbox"
+                            name="necklace_lengths[]"
+                            value="{{ $length }}"
+                            {{ in_array($length, $selectedNecklaceLengths) ? 'checked' : '' }}
+                            class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
+
+                        <span class="text-sm text-gray-700">{{ $length }}</span>
+                    </label>
+                @endforeach
+            </div>
+        </div>
+
+        {{-- BRACELET / BANGLE SIZE --}}
+        <div class="mt-7 border-t border-gray-200 pt-7 jewelry-size-group" data-jewelry-size="bracelets">
+            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
+                Bracelet / Bangle Size
+            </p>
+            @php
+                $selectedBraceletSizes = old('bracelet_sizes', $product->bracelet_sizes ?? []);
+                if (is_string($selectedBraceletSizes)) {
+                    $selectedBraceletSizes = json_decode($selectedBraceletSizes, true) ?? [];
+                }
+            @endphp
+            <div class="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-4">
+                @foreach(['Small', 'Medium', 'Large', '2.4 inch', '2.6 inch', '2.8 inch', '3.0 inch'] as $size)
+                    <label class="flex items-center gap-3 cursor-pointer">
+                        <input
+                            type="checkbox"
+                            name="bracelet_sizes[]"
+                            value="{{ $size }}"
+                            {{ in_array($size, $selectedBraceletSizes) ? 'checked' : '' }}
+                            class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
+
+                        <span class="text-sm text-gray-700">{{ $size }}</span>
+                    </label>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    {{-- =========================================================
+        END JEWELRY INFORMATION
+    ========================================================= --}}
+
+    {{-- =========================================================
+        WATCHES INFORMATION
+    ========================================================= --}}
+    <div
+        id="watches-filter"
+        data-filter-section="watches"
+        class="hidden mt-7 border-t border-gray-200 pt-7">
+
+        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
+            Watches Filtration
+        </p>
+
+        @php
+            $selectedWatchGender = old('watch_gender', $product->watch_gender ?? []);
+            if (is_string($selectedWatchGender)) {
+                $selectedWatchGender = json_decode($selectedWatchGender, true) ?? [];
+            }
+        @endphp
+
+        {{-- GENDER --}}
+        <div>
+            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
+                Gender
+            </p>
+            <div class="mt-4 flex flex-wrap gap-6">
+                @foreach(['men' => 'Men', 'women' => 'Women', 'kids' => 'Kids'] as $value => $label)
+                    <label class="flex items-center gap-3 cursor-pointer">
+                        <input
+                            type="checkbox"
+                            name="watch_gender[]"
+                            value="{{ $value }}"
+                            {{ in_array($value, $selectedWatchGender) ? 'checked' : '' }}
+                            class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
+
+                        <span class="text-sm text-gray-700">{{ $label }}</span>
+                    </label>
+                @endforeach
+            </div>
+        </div>
+
+        {{-- STRAP MATERIAL --}}
+        <div class="mt-7">
+            <label
+                for="strap_material"
+                class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+                Strap Material
+            </label>
+            <select
+                id="strap_material"
+                name="strap_material"
+                class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
+
+                <option value="">Select Strap Material</option>
+                <option value="stainless_steel" {{ old('strap_material', $product->strap_material ?? '') === 'stainless_steel' ? 'selected' : '' }}>Stainless Steel</option>
+                <option value="leather" {{ old('strap_material', $product->strap_material ?? '') === 'leather' ? 'selected' : '' }}>Leather (Patty)</option>
+                <option value="silicone_rubber" {{ old('strap_material', $product->strap_material ?? '') === 'silicone_rubber' ? 'selected' : '' }}>Silicone / Rubber</option>
+            </select>
+        </div>
+
+        {{-- WATCH TYPE --}}
+        <div class="mt-7">
+            <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
+                Watch Type
+            </p>
+            <div class="mt-4 space-y-3">
+                @foreach(['analog' => 'Analog', 'digital' => 'Digital', 'smartwatch' => 'Smartwatch', 'chronograph' => 'Chronograph'] as $value => $label)
+                    <label class="flex items-center gap-3 cursor-pointer">
+                        <input
+                            type="radio"
+                            name="watch_type"
+                            value="{{ $value }}"
+                            {{ old('watch_type', $product->watch_type ?? '') === $value ? 'checked' : '' }}
+                            class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
+
+                        <span class="text-sm text-gray-700">{{ $label }}</span>
+                    </label>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    {{-- =========================================================
+        END WATCHES INFORMATION
+    ========================================================= --}}
+
+    {{-- =========================================================
+        OTHER ACCESSORIES INFORMATION
+    ========================================================= --}}
+    <div
+        id="other-accessories-filter"
+        data-filter-section="other_accessories"
+        class="hidden mt-7 border-t border-gray-200 pt-7">
+
+        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
+            Other Accessories Information
+        </p>
+
+        {{-- BUTTONS --}}
+
+        <div>
+
+            <label
+                for="buttons"
+                class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+                Buttons
+            </label>
+
+            <select
+                id="buttons"
+                name="buttons"
+                class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
+
+                <option value="">
+                    Select Buttons
+                </option>
+
+                <option
+                    value="fancy_buttons"
+                    {{ old('buttons', $product->buttons ?? '') === 'fancy_buttons' ? 'selected' : '' }}>
+                    Fancy Buttons
+                </option>
+
+                <option
+                    value="simple_buttons"
+                    {{ old('buttons', $product->buttons ?? '') === 'simple_buttons' ? 'selected' : '' }}>
+                    Simple Buttons
+                </option>
+
+                <option
+                    value="pearls_buttons"
+                    {{ old('buttons', $product->buttons ?? '') === 'pearls_buttons' ? 'selected' : '' }}>
+                    Pearls Buttons
+                </option>
+
+                <option
+                    value="pearls_clothes_buttons"
+                    {{ old('buttons', $product->buttons ?? '') === 'pearls_clothes_buttons' ? 'selected' : '' }}>
+                    Pearls Clothes Buttons
+                </option>
+
+                <option
+                    value="button_patti"
+                    {{ old('buttons', $product->buttons ?? '') === 'button_patti' ? 'selected' : '' }}>
+                    Button Patti
+                </option>
+            </select>
+
+        </div>
+
+        {{-- PIPING CLOTHES --}}
+
+        <div class="mt-7">
+
+            <label
+                for="piping_clothes"
+                class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+                Piping Clothes
+            </label>
+
+            <select
+                id="piping_clothes"
+                name="piping_clothes"
+                class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
+                <option value="">
+                    Select Piping Clothes
+                </option>
+
+                <option
+                    value="aparna_shamooz_silk_piping"
+                    {{ old('piping_clothes', $product->piping_clothes ?? '') === 'aparna_shamooz_silk_piping' ? 'selected' : '' }}>
+                    Aparna / Shamooz Silk Piping
+                </option>
+
+                <option
+                    value="katan_silk_dori_piping"
+                    {{ old('piping_clothes', $product->piping_clothes ?? '') === 'katan_silk_dori_piping' ? 'selected' : '' }}>
+                    Katan Silk / Dori Piping
+                </option>
+
+                <option
+                    value="cotton_lawn_piping"
+                    {{ old('piping_clothes', $product->piping_clothes ?? '') === 'cotton_lawn_piping' ? 'selected' : '' }}>
+                    Cotton / Lawn Piping
+                </option>
+
+                <option
+                    value="velvet_piping"
+                    {{ old('piping_clothes', $product->piping_clothes ?? '') === 'velvet_piping' ? 'selected' : '' }}>
+                    Velvet Piping
+                </option>
+
+                <option
+                    value="metallic_zari_piping"
+                    {{ old('piping_clothes', $product->piping_clothes ?? '') === 'metallic_zari_piping' ? 'selected' : '' }}>
+                    Metallic / Zari Piping
+                </option>
+            </select>
+
+        </div>
+
+        {{-- ACCESSORY TYPE --}}
+
+        <div class="mt-7">
+
+            <p class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+                Accessory Type
+            </p>
+
+            <div class="mt-4 space-y-3">
+
+                <label class="flex items-center gap-3 cursor-pointer">
+
+                    <input
+                        type="radio"
+                        name="accessory_type"
+                        value="tailor_accessories"
+                        {{ old('accessory_type', $product->accessory_type ?? '') === 'tailor_accessories' ? 'checked' : '' }}
                         class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
 
                     <span class="text-sm text-gray-700">
-                        {{ $size }}
+                        Tailor Accessories
                     </span>
 
                 </label>
 
-            @endforeach
-
-        </div>
-
-    </div>
-
-</div>
-{{-- =========================================================
-     END CLOTHING INFORMATION
-========================================================= --}}
-
-{{-- =========================================================
-     LACE INFORMATION
-========================================================= --}}
-<div
-    id="lace-filter"
-    data-filter-section="laces"
-    class="hidden mt-7 border-t border-gray-200 pt-7">
-
-    <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
-        Lace Filtration
-    </p>
-
-    {{-- LACE CATEGORY --}}
-
-    <div>
-
-        <select
-            id="lace_category"
-            name="lace_category"
-            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
-
-            <option value="">
-                Select Lace Category
-            </option>
-
-            @foreach($laceCategories as $value => $category)
-
-                <option
-                    value="{{ $value }}"
-                    {{ old('lace_category', $product->lace_category) === $value ? 'selected' : '' }}>
-                    {{ $category['label'] }}
-                </option>
-
-            @endforeach
-
-        </select>
-
-    </div>
-
-    {{-- LACE SUBCATEGORIES --}}
-
-<div
-    id="lace-subcategories-container"
-    class="mt-7 hidden">
-
-    <label class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-        Lace Subcategories
-    </label>
-
-    <p class="mt-2 text-xs text-gray-400">
-        Select all subcategories that apply to this lace.
-    </p>
-
-    <div
-        id="lace-subcategories"
-        class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
-
-</div>
-
-    {{-- WIDTH --}}
-
-    <div class="mt-7 border-t border-gray-200 pt-7">
-
-        <label class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Width
-        </label>
-
-        <div class="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-4">
-
-            @foreach([
-                '1 inch',
-                '1.5 inch',
-                '2 inch',
-                '2.5 inch',
-                '3 inch',
-                '4 inch',
-                '5 inch',
-                '6 inch'
-            ] as $widthOption)
 
                 <label class="flex items-center gap-3 cursor-pointer">
 
-                    <input
-                        type="checkbox"
-                        name="width[]"
-                        value="{{ $widthOption }}"
-                        {{ in_array($widthOption, $selectedWidth) ? 'checked' : '' }}
-                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
-
-                    <span class="text-sm text-gray-600">
-                        {{ $widthOption }}
-                    </span>
-
-                </label>
-
-            @endforeach
-
-        </div>
-
-    </div>
-
-</div>
-{{-- =========================================================
-     END LACE INFORMATION
-========================================================= --}}
-
-{{-- =========================================================
-     JEWELRY INFORMATION
-========================================================= --}}
-<div
-    id="jewelry-filter"
-    data-filter-section="jewelry"
-    class="hidden mt-7 border-t border-gray-200 pt-7">
-
-    <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
-        Jewelry Filtration
-    </p>
-
-    {{-- GENDER --}}
-    <div>
-        <p class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Gender
-        </p>
-        <div class="mt-4 flex flex-wrap gap-6">
-            @php
-                $selectedJewelryGender = old('jewelry_gender', $product->jewelry_gender ?? []);
-                if (is_string($selectedJewelryGender)) {
-                    $selectedJewelryGender = json_decode($selectedJewelryGender, true) ?? [];
-                }
-            @endphp
-
-            @foreach(['men' => 'Men', 'women' => 'Women'] as $value => $label)
-                <label class="flex items-center gap-2 cursor-pointer">
-                    <input
-                        type="checkbox"
-                        name="jewelry_gender[]"
-                        value="{{ $value }}"
-                        {{ in_array($value, $selectedJewelryGender) ? 'checked' : '' }}
-                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
-                    <span class="text-sm text-gray-700">{{ $label }}</span>
-                </label>
-            @endforeach
-        </div>
-    </div>
-
-    {{-- JEWELRY TYPE --}}
-    <div class="mt-7">
-        <label
-            for="jewelry_type"
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Jewelry Type
-        </label>
-
-        <select
-            id="jewelry_type"
-            name="jewelry_type"
-            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
-
-            <option value="">Select Jewelry Type</option>
-            <option value="earrings" {{ old('jewelry_type', $product->jewelry_type ?? '') === 'earrings' ? 'selected' : '' }}>Earrings</option>
-            <option value="necklaces" {{ old('jewelry_type', $product->jewelry_type ?? '') === 'necklaces' ? 'selected' : '' }}>Necklaces</option>
-            <option value="rings" {{ old('jewelry_type', $product->jewelry_type ?? '') === 'rings' ? 'selected' : '' }}>Rings</option>
-            <option value="bracelets" {{ old('jewelry_type', $product->jewelry_type ?? '') === 'bracelets' ? 'selected' : '' }}>Bracelets</option>
-        </select>
-    </div>
-
-    {{-- DYNAMIC SUBCATEGORIES --}}
-    <div id="jewelry-subcategories-container" class="mt-7 hidden">
-        <p class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Subcategories
-        </p>
-        <p class="mt-2 text-xs text-gray-400">
-            Select all subcategories that apply to this jewelry type.
-        </p>
-        <div
-            id="jewelry-subcategories"
-            class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4"
-        ></div>
-    </div>
-
-    {{-- QUALITY --}}
-    <div class="mt-7 border-t border-gray-200 pt-7">
-        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Product Type / Quality
-        </p>
-        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            @php
-                $selectedJewelryQuality = old('jewelry_quality', $product->jewelry_quality ?? []);
-                if (is_string($selectedJewelryQuality)) {
-                    $selectedJewelryQuality = json_decode($selectedJewelryQuality, true) ?? [];
-                }
-            @endphp
-
-            @foreach([
-                'fine' => 'Fine Jewelry (Real Gold / Diamonds)',
-                'demi_fine' => 'Demi-Fine (Gold-plated / Silver)',
-                'fashion' => 'Fashion / Artificial Jewelry'
-            ] as $value => $label)
-                <label class="flex items-start gap-3 cursor-pointer">
-                    <input
-                        type="checkbox"
-                        name="jewelry_quality[]"
-                        value="{{ $value }}"
-                        {{ in_array($value, $selectedJewelryQuality) ? 'checked' : '' }}
-                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
-
-                    <span class="text-sm text-gray-700">{{ $label }}</span>
-                </label>
-            @endforeach
-        </div>
-    </div>
-
-    {{-- RING SIZE --}}
-    <div class="mt-7 border-t border-gray-200 pt-7 jewelry-size-group" data-jewelry-size="rings">
-        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Ring Size
-        </p>
-        <p class="mt-2 text-xs text-gray-400">Select the available Pakistani ring sizes.</p>
-        @php
-            $selectedRingSizes = old('ring_sizes', $product->ring_sizes ?? []);
-            if (is_string($selectedRingSizes)) {
-                $selectedRingSizes = json_decode($selectedRingSizes, true) ?? [];
-            }
-        @endphp
-        <div class="mt-5 grid grid-cols-3 sm:grid-cols-6 gap-4">
-            @foreach(range(4, 30) as $size)
-                <label class="flex items-center gap-2 cursor-pointer">
-                    <input
-                        type="checkbox"
-                        name="ring_sizes[]"
-                        value="{{ $size }}"
-                        {{ in_array((string)$size, array_map('strval', $selectedRingSizes)) ? 'checked' : '' }}
-                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
-
-                    <span class="text-sm text-gray-700">{{ $size }}</span>
-                </label>
-            @endforeach
-        </div>
-    </div>
-
-    {{-- NECKLACE LENGTH --}}
-    <div class="mt-7 border-t border-gray-200 pt-7 jewelry-size-group" data-jewelry-size="necklaces">
-        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Chain / Necklace Length
-        </p>
-        @php
-            $selectedNecklaceLengths = old('necklace_lengths', $product->necklace_lengths ?? []);
-            if (is_string($selectedNecklaceLengths)) {
-                $selectedNecklaceLengths = json_decode($selectedNecklaceLengths, true) ?? [];
-            }
-        @endphp
-        <div class="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-4">
-            @foreach(['14 inch (Choker)', '16 inch', '18 inch', '20 inch', '22 inch', '24 inch', '26 inch', '28 inch'] as $length)
-                <label class="flex items-center gap-3 cursor-pointer">
-                    <input
-                        type="checkbox"
-                        name="necklace_lengths[]"
-                        value="{{ $length }}"
-                        {{ in_array($length, $selectedNecklaceLengths) ? 'checked' : '' }}
-                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
-
-                    <span class="text-sm text-gray-700">{{ $length }}</span>
-                </label>
-            @endforeach
-        </div>
-    </div>
-
-    {{-- BRACELET / BANGLE SIZE --}}
-    <div class="mt-7 border-t border-gray-200 pt-7 jewelry-size-group" data-jewelry-size="bracelets">
-        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Bracelet / Bangle Size
-        </p>
-        @php
-            $selectedBraceletSizes = old('bracelet_sizes', $product->bracelet_sizes ?? []);
-            if (is_string($selectedBraceletSizes)) {
-                $selectedBraceletSizes = json_decode($selectedBraceletSizes, true) ?? [];
-            }
-        @endphp
-        <div class="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-4">
-            @foreach(['Small', 'Medium', 'Large', '2.4 inch', '2.6 inch', '2.8 inch', '3.0 inch'] as $size)
-                <label class="flex items-center gap-3 cursor-pointer">
-                    <input
-                        type="checkbox"
-                        name="bracelet_sizes[]"
-                        value="{{ $size }}"
-                        {{ in_array($size, $selectedBraceletSizes) ? 'checked' : '' }}
-                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
-
-                    <span class="text-sm text-gray-700">{{ $size }}</span>
-                </label>
-            @endforeach
-        </div>
-    </div>
-</div>
-{{-- =========================================================
-     END JEWELRY INFORMATION
-========================================================= --}}
-
-{{-- =========================================================
-     WATCHES INFORMATION
-========================================================= --}}
-<div
-    id="watches-filter"
-    data-filter-section="watches"
-    class="hidden mt-7 border-t border-gray-200 pt-7">
-
-    <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
-        Watches Filtration
-    </p>
-
-    @php
-        $selectedWatchGender = old('watch_gender', $product->watch_gender ?? []);
-        if (is_string($selectedWatchGender)) {
-            $selectedWatchGender = json_decode($selectedWatchGender, true) ?? [];
-        }
-    @endphp
-
-    {{-- GENDER --}}
-    <div>
-        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Gender
-        </p>
-        <div class="mt-4 flex flex-wrap gap-6">
-            @foreach(['men' => 'Men', 'women' => 'Women', 'kids' => 'Kids'] as $value => $label)
-                <label class="flex items-center gap-3 cursor-pointer">
-                    <input
-                        type="checkbox"
-                        name="watch_gender[]"
-                        value="{{ $value }}"
-                        {{ in_array($value, $selectedWatchGender) ? 'checked' : '' }}
-                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
-
-                    <span class="text-sm text-gray-700">{{ $label }}</span>
-                </label>
-            @endforeach
-        </div>
-    </div>
-
-    {{-- STRAP MATERIAL --}}
-    <div class="mt-7">
-        <label
-            for="strap_material"
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Strap Material
-        </label>
-        <select
-            id="strap_material"
-            name="strap_material"
-            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
-
-            <option value="">Select Strap Material</option>
-            <option value="stainless_steel" {{ old('strap_material', $product->strap_material ?? '') === 'stainless_steel' ? 'selected' : '' }}>Stainless Steel</option>
-            <option value="leather" {{ old('strap_material', $product->strap_material ?? '') === 'leather' ? 'selected' : '' }}>Leather (Patty)</option>
-            <option value="silicone_rubber" {{ old('strap_material', $product->strap_material ?? '') === 'silicone_rubber' ? 'selected' : '' }}>Silicone / Rubber</option>
-        </select>
-    </div>
-
-    {{-- WATCH TYPE --}}
-    <div class="mt-7">
-        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Watch Type
-        </p>
-        <div class="mt-4 space-y-3">
-            @foreach(['analog' => 'Analog', 'digital' => 'Digital', 'smartwatch' => 'Smartwatch', 'chronograph' => 'Chronograph'] as $value => $label)
-                <label class="flex items-center gap-3 cursor-pointer">
                     <input
                         type="radio"
-                        name="watch_type"
-                        value="{{ $value }}"
-                        {{ old('watch_type', $product->watch_type ?? '') === $value ? 'checked' : '' }}
+                        name="accessory_type"
+                        value="other_accessories"
+                        {{ old('accessory_type', $product->accessory_type ?? '') === 'other_accessories' ? 'checked' : '' }}
                         class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
 
-                    <span class="text-sm text-gray-700">{{ $label }}</span>
-                </label>
-            @endforeach
-        </div>
-    </div>
-</div>
-{{-- =========================================================
-     END WATCHES INFORMATION
-========================================================= --}}
-
-{{-- =========================================================
-     OTHER ACCESSORIES INFORMATION
-========================================================= --}}
-<div
-    id="other-accessories-filter"
-    data-filter-section="other_accessories"
-    class="hidden mt-7 border-t border-gray-200 pt-7">
-
-    <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
-        Other Accessories Information
-    </p>
-
-    {{-- BUTTONS --}}
-
-    <div>
-
-        <label
-            for="buttons"
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Buttons
-        </label>
-
-        <select
-            id="buttons"
-            name="buttons"
-            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
-
-            <option value="">
-                Select Buttons
-            </option>
-
-            <option
-                value="fancy_buttons"
-                {{ old('buttons', $product->buttons ?? '') === 'fancy_buttons' ? 'selected' : '' }}>
-                Fancy Buttons
-            </option>
-
-            <option
-                value="simple_buttons"
-                {{ old('buttons', $product->buttons ?? '') === 'simple_buttons' ? 'selected' : '' }}>
-                Simple Buttons
-            </option>
-
-            <option
-                value="pearls_buttons"
-                {{ old('buttons', $product->buttons ?? '') === 'pearls_buttons' ? 'selected' : '' }}>
-                Pearls Buttons
-            </option>
-
-            <option
-                value="pearls_clothes_buttons"
-                {{ old('buttons', $product->buttons ?? '') === 'pearls_clothes_buttons' ? 'selected' : '' }}>
-                Pearls Clothes Buttons
-            </option>
-
-            <option
-                value="button_patti"
-                {{ old('buttons', $product->buttons ?? '') === 'button_patti' ? 'selected' : '' }}>
-                Button Patti
-            </option>
-        </select>
-
-    </div>
-
-    {{-- PIPING CLOTHES --}}
-
-    <div class="mt-7">
-
-        <label
-            for="piping_clothes"
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Piping Clothes
-        </label>
-
-        <select
-            id="piping_clothes"
-            name="piping_clothes"
-            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
-            <option value="">
-                Select Piping Clothes
-            </option>
-
-            <option
-                value="aparna_shamooz_silk_piping"
-                {{ old('piping_clothes', $product->piping_clothes ?? '') === 'aparna_shamooz_silk_piping' ? 'selected' : '' }}>
-                Aparna / Shamooz Silk Piping
-            </option>
-
-            <option
-                value="katan_silk_dori_piping"
-                {{ old('piping_clothes', $product->piping_clothes ?? '') === 'katan_silk_dori_piping' ? 'selected' : '' }}>
-                Katan Silk / Dori Piping
-            </option>
-
-            <option
-                value="cotton_lawn_piping"
-                {{ old('piping_clothes', $product->piping_clothes ?? '') === 'cotton_lawn_piping' ? 'selected' : '' }}>
-                Cotton / Lawn Piping
-            </option>
-
-            <option
-                value="velvet_piping"
-                {{ old('piping_clothes', $product->piping_clothes ?? '') === 'velvet_piping' ? 'selected' : '' }}>
-                Velvet Piping
-            </option>
-
-            <option
-                value="metallic_zari_piping"
-                {{ old('piping_clothes', $product->piping_clothes ?? '') === 'metallic_zari_piping' ? 'selected' : '' }}>
-                Metallic / Zari Piping
-            </option>
-        </select>
-
-    </div>
-
-    {{-- ACCESSORY TYPE --}}
-
-    <div class="mt-7">
-
-        <p class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Accessory Type
-        </p>
-
-        <div class="mt-4 space-y-3">
-
-            <label class="flex items-center gap-3 cursor-pointer">
-
-                <input
-                    type="radio"
-                    name="accessory_type"
-                    value="tailor_accessories"
-                    {{ old('accessory_type', $product->accessory_type ?? '') === 'tailor_accessories' ? 'checked' : '' }}
-                    class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
-
-                <span class="text-sm text-gray-700">
-                    Tailor Accessories
-                </span>
-
-            </label>
-
-
-            <label class="flex items-center gap-3 cursor-pointer">
-
-                <input
-                    type="radio"
-                    name="accessory_type"
-                    value="other_accessories"
-                    {{ old('accessory_type', $product->accessory_type ?? '') === 'other_accessories' ? 'checked' : '' }}
-                    class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
-
-                <span class="text-sm text-gray-700">
-                    Other Accessories
-                </span>
-
-            </label>
-
-        </div>
-
-    </div>
-
-</div>
-{{-- =========================================================
-     END OTHER ACCESSORIES INFORMATION
-========================================================= --}}
-
-{{-- =========================================================
-     COSMETICS INFORMATION
-========================================================= --}}
-<div
-    id="cosmetics-filter"
-    data-filter-section="cosmetics"
-    class="mt-7 border-t border-gray-200 pt-7 hidden">
-
-    <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
-        Cosmetics Filtration
-    </p>
-
-    {{-- BRAND --}}
-
-    <div>
-
-        <label
-            for="cosmetic_brand"
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Brand
-        </label>
-
-        <select
-            id="cosmetic_brand"
-            name="brand"
-            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
-
-            <option value="">
-                Select Brand
-            </option>
-
-            @foreach($cosmeticBrands as $value => $label)
-
-                <option
-                    value="{{ $value }}"
-                    {{ old('brand', $product->brand ?? '') === $value ? 'selected' : '' }}>
-                    {{ $label }}
-                </option>
-
-            @endforeach
-
-        </select>
-
-    </div>
-
-    {{-- PRODUCT TYPE --}}
-
-    <div class="mt-7">
-
-        <label
-            for="cosmetic_product_type"
-            class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Product Type
-        </label>
-
-        <select
-            id="cosmetic_product_type"
-            name="cosmetic_product_type"
-            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
-
-            <option value="">
-                Select Product Type
-            </option>
-
-            @foreach($cosmeticProductTypes as $value => $label)
-
-                <option
-                    value="{{ $value }}"
-                    {{ old('cosmetic_product_type', $product->cosmetic_product_type ?? '') === $value ? 'selected' : '' }}>
-                    {{ $label }}
-                </option>
-
-            @endforeach
-
-        </select>
-
-    </div>
-
-    {{-- SKIN TYPE --}}
-
-    @php
-        $selectedSkinTypes = old(
-            'skin_types',
-            $product->skin_types ?? []
-        );
-
-        if (is_string($selectedSkinTypes)) {
-            $selectedSkinTypes = json_decode($selectedSkinTypes, true) ?? [];
-        }
-    @endphp
-
-    <div class="mt-7 border-t border-gray-200 pt-7">
-
-        <label class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Skin Type
-        </label>
-
-        <p class="mt-2 text-xs text-gray-400">
-            Select all skin types that apply.
-        </p>
-
-        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-            @foreach($cosmeticSkinTypes as $value => $label)
-
-                <label class="flex items-center gap-3 cursor-pointer">
-
-                    <input
-                        type="checkbox"
-                        name="skin_types[]"
-                        value="{{ $value }}"
-                        {{ in_array($value, $selectedSkinTypes) ? 'checked' : '' }}
-                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
-
-                    <span class="text-sm text-gray-600">
-                        {{ $label }}
+                    <span class="text-sm text-gray-700">
+                        Other Accessories
                     </span>
 
                 </label>
-
-            @endforeach
-
-        </div>
-
-    </div>
-
-    {{-- CONCERN / BENEFIT --}}
-
-    @php
-        $selectedConcerns = old(
-            'concerns',
-            $product->concerns ?? []
-        );
-
-        if (is_string($selectedConcerns)) {
-            $selectedConcerns = json_decode($selectedConcerns, true) ?? [];
-        }
-    @endphp
-
-    <div class="mt-7 border-t border-gray-200 pt-7">
-
-        <label class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Concern / Benefit
-        </label>
-
-        <p class="mt-2 text-xs text-gray-400">
-            Select all benefits that apply to this product.
-        </p>
-
-        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-            @foreach($cosmeticConcerns as $value => $label)
-
-                <label class="flex items-center gap-3 cursor-pointer">
-
-                    <input
-                        type="checkbox"
-                        name="concerns[]"
-                        value="{{ $value }}"
-                        {{ in_array($value, $selectedConcerns) ? 'checked' : '' }}
-                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
-
-                    <span class="text-sm text-gray-600">
-                        {{ $label }}
-                    </span>
-
-                </label>
-
-            @endforeach
-
-        </div>
-
-    </div>
-
-    {{-- PRODUCT FORM --}}
-
-    @php
-        $selectedProductForms = old(
-            'product_forms',
-            $product->product_forms ?? []
-        );
-
-        if (is_string($selectedProductForms)) {
-            $selectedProductForms = json_decode($selectedProductForms, true) ?? [];
-        }
-    @endphp
-
-    <div class="mt-7 border-t border-gray-200 pt-7">
-
-        <label class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-            Product Form
-        </label>
-
-        <p class="mt-2 text-xs text-gray-400">
-            Select all forms that apply to this product.
-        </p>
-
-        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-            @foreach($cosmeticProductForms as $value => $label)
-
-                <label class="flex items-center gap-3 cursor-pointer">
-
-                    <input
-                        type="checkbox"
-                        name="product_forms[]"
-                        value="{{ $value }}"
-                        {{ in_array($value, $selectedProductForms) ? 'checked' : '' }}
-                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
-
-                    <span class="text-sm text-gray-600">
-                        {{ $label }}
-                    </span>
-
-                </label>
-
-            @endforeach
-
-        </div>
-
-    </div>
-
-</div>
-{{-- =========================================================
-     END COSMETICS INFORMATION
-========================================================= --}}
-
-            {{-- DESCRIPTION --}}
-
-            <div class="mt-7">
-
-                <label
-                    for="description"
-                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-                    Description
-                </label>
-
-                <textarea
-                    id="description"
-                    name="description"
-                    rows="6"
-                    class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">{{ old('description', $product->description) }}</textarea>
 
             </div>
 
-            {{-- PRICES --}}
+        </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-7">
+    </div>
+    {{-- =========================================================
+        END OTHER ACCESSORIES INFORMATION
+    ========================================================= --}}
 
-                <div>
+    {{-- =========================================================
+        COSMETICS INFORMATION
+    ========================================================= --}}
+    <div
+        id="cosmetics-filter"
+        data-filter-section="cosmetics"
+        class="mt-7 border-t border-gray-200 pt-7 hidden">
+
+        <p class="text-xs uppercase tracking-widest font-semibold text-gray-700 mb-6">
+            Cosmetics Filtration
+        </p>
+
+        {{-- BRAND --}}
+
+        <div>
+
+            <label
+                for="cosmetic_brand"
+                class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+                Brand
+            </label>
+
+            <select
+                id="cosmetic_brand"
+                name="brand"
+                class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
+
+                <option value="">
+                    Select Brand
+                </option>
+
+                @foreach($cosmeticBrands as $value => $label)
+
+                    <option
+                        value="{{ $value }}"
+                        {{ old('brand', $product->brand ?? '') === $value ? 'selected' : '' }}>
+                        {{ $label }}
+                    </option>
+
+                @endforeach
+
+            </select>
+
+        </div>
+
+        {{-- PRODUCT TYPE --}}
+
+        <div class="mt-7">
+
+            <label
+                for="cosmetic_product_type"
+                class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+                Product Type
+            </label>
+
+            <select
+                id="cosmetic_product_type"
+                name="cosmetic_product_type"
+                class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
+
+                <option value="">
+                    Select Product Type
+                </option>
+
+                @foreach($cosmeticProductTypes as $value => $label)
+
+                    <option
+                        value="{{ $value }}"
+                        {{ old('cosmetic_product_type', $product->cosmetic_product_type ?? '') === $value ? 'selected' : '' }}>
+                        {{ $label }}
+                    </option>
+
+                @endforeach
+
+            </select>
+
+        </div>
+
+        {{-- SKIN TYPE --}}
+
+        @php
+            $selectedSkinTypes = old(
+                'skin_types',
+                $product->skin_types ?? []
+            );
+
+            if (is_string($selectedSkinTypes)) {
+                $selectedSkinTypes = json_decode($selectedSkinTypes, true) ?? [];
+            }
+        @endphp
+
+        <div class="mt-7 border-t border-gray-200 pt-7">
+
+            <label class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+                Skin Type
+            </label>
+
+            <p class="mt-2 text-xs text-gray-400">
+                Select all skin types that apply.
+            </p>
+
+            <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                @foreach($cosmeticSkinTypes as $value => $label)
+
+                    <label class="flex items-center gap-3 cursor-pointer">
+
+                        <input
+                            type="checkbox"
+                            name="skin_types[]"
+                            value="{{ $value }}"
+                            {{ in_array($value, $selectedSkinTypes) ? 'checked' : '' }}
+                            class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
+
+                        <span class="text-sm text-gray-600">
+                            {{ $label }}
+                        </span>
+
+                    </label>
+
+                @endforeach
+
+            </div>
+
+        </div>
+
+        {{-- CONCERN / BENEFIT --}}
+
+        @php
+            $selectedConcerns = old(
+                'concerns',
+                $product->concerns ?? []
+            );
+
+            if (is_string($selectedConcerns)) {
+                $selectedConcerns = json_decode($selectedConcerns, true) ?? [];
+            }
+        @endphp
+
+        <div class="mt-7 border-t border-gray-200 pt-7">
+
+            <label class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+                Concern / Benefit
+            </label>
+
+            <p class="mt-2 text-xs text-gray-400">
+                Select all benefits that apply to this product.
+            </p>
+
+            <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                @foreach($cosmeticConcerns as $value => $label)
+
+                    <label class="flex items-center gap-3 cursor-pointer">
+
+                        <input
+                            type="checkbox"
+                            name="concerns[]"
+                            value="{{ $value }}"
+                            {{ in_array($value, $selectedConcerns) ? 'checked' : '' }}
+                            class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
+
+                        <span class="text-sm text-gray-600">
+                            {{ $label }}
+                        </span>
+
+                    </label>
+
+                @endforeach
+
+            </div>
+
+        </div>
+
+        {{-- PRODUCT FORM --}}
+
+        @php
+            $selectedProductForms = old(
+                'product_forms',
+                $product->product_forms ?? []
+            );
+
+            if (is_string($selectedProductForms)) {
+                $selectedProductForms = json_decode($selectedProductForms, true) ?? [];
+            }
+        @endphp
+
+        <div class="mt-7 border-t border-gray-200 pt-7">
+
+            <label class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+                Product Form
+            </label>
+
+            <p class="mt-2 text-xs text-gray-400">
+                Select all forms that apply to this product.
+            </p>
+
+            <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                @foreach($cosmeticProductForms as $value => $label)
+
+                    <label class="flex items-center gap-3 cursor-pointer">
+
+                        <input
+                            type="checkbox"
+                            name="product_forms[]"
+                            value="{{ $value }}"
+                            {{ in_array($value, $selectedProductForms) ? 'checked' : '' }}
+                            class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
+
+                        <span class="text-sm text-gray-600">
+                            {{ $label }}
+                        </span>
+
+                    </label>
+
+                @endforeach
+
+            </div>
+
+        </div>
+
+    </div>
+    {{-- =========================================================
+        END COSMETICS INFORMATION
+    ========================================================= --}}
+
+                {{-- DESCRIPTION --}}
+
+                <div class="mt-7">
 
                     <label
-                        for="price"
+                        for="description"
                         class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-                        Regular Price
+                        Description
+                    </label>
+
+                    <textarea
+                        id="description"
+                        name="description"
+                        rows="6"
+                        class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">{{ old('description', $product->description) }}</textarea>
+
+                </div>
+
+                {{-- PRICES --}}
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-7">
+
+                    <div>
+
+                        <label
+                            for="price"
+                            class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+                            Regular Price
+                        </label>
+
+                        <input
+                            type="number"
+                            id="price"
+                            name="price"
+                            value="{{ old('price', $product->price) }}"
+                            min="0"
+                            step="0.01"
+                            required
+                            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
+
+                    </div>
+
+                    <div>
+
+                        <label
+                            for="sale_price"
+                            class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+                            Sale Price
+                        </label>
+
+                        <input
+                            type="number"
+                            id="sale_price"
+                            name="sale_price"
+                            value="{{ old('sale_price', $product->sale_price) }}"
+                            min="0"
+                            step="0.01"
+                            placeholder="Optional"
+                            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
+
+                    </div>
+
+                </div>
+
+                {{-- STOCK --}}
+
+                <div class="mt-7">
+
+                    <label
+                        for="stock"
+                        class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
+                        Stock
                     </label>
 
                     <input
                         type="number"
-                        id="price"
-                        name="price"
-                        value="{{ old('price', $product->price) }}"
+                        id="stock"
+                        name="stock"
+                        value="{{ old('stock', $product->stock) }}"
                         min="0"
-                        step="0.01"
                         required
                         class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
 
                 </div>
 
-                <div>
+                {{-- ADD IMAGES --}}
+
+                <div class="mt-7">
 
                     <label
-                        for="sale_price"
+                        for="images"
                         class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-                        Sale Price
+                        Add More Images
                     </label>
 
                     <input
-                        type="number"
-                        id="sale_price"
-                        name="sale_price"
-                        value="{{ old('sale_price', $product->sale_price) }}"
-                        min="0"
-                        step="0.01"
-                        placeholder="Optional"
-                        class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
+                        type="file"
+                        id="images"
+                        name="images[]"
+                        accept=".jpg,.jpeg,.png,.webp"
+                        multiple
+                        class="block w-full cursor-pointer text-sm text-gray-600
+                                file:mr-4 file:py-2.5 file:px-4
+                                file:rounded-lg file:border file:border-[#BE8B3E]
+                                file:text-sm file:cursor-pointer file:font-semibold
+                                file:bg-[#BE8B3E] file:text-white
+                                hover:file:bg-transparent hover:file:text-[#BE8B3E]">
+
+                    <p class="mt-2 text-xs text-gray-400">
+                        Select multiple images to add them to this product.
+                        Existing images will remain.
+                    </p>
 
                 </div>
 
-            </div>
+                {{-- OPTIONS --}}
 
-            {{-- STOCK --}}
+                <div class="mt-7 space-y-4">
 
-            <div class="mt-7">
+                    <label class="flex items-center gap-3 cursor-pointer">
 
-                <label
-                    for="stock"
-                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-                    Stock
-                </label>
+                        <input
+                            type="checkbox"
+                            name="is_featured"
+                            value="1"
+                            {{ old('is_featured', $product->is_featured) ? 'checked' : '' }}
+                            class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
 
-                <input
-                    type="number"
-                    id="stock"
-                    name="stock"
-                    value="{{ old('stock', $product->stock) }}"
-                    min="0"
-                    required
-                    class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#BE8B3E]">
+                        <span class="text-sm text-gray-700">
+                            Featured product
+                        </span>
 
-            </div>
-
-            {{-- ADD IMAGES --}}
-
-            <div class="mt-7">
-
-                <label
-                    for="images"
-                    class="block text-xs uppercase tracking-widest font-semibold text-gray-700">
-                    Add More Images
-                </label>
-
-                <input
-                    type="file"
-                    id="images"
-                    name="images[]"
-                    accept=".jpg,.jpeg,.png,.webp"
-                    multiple
-                    class="block w-full cursor-pointer text-sm text-gray-600
-                              file:mr-4 file:py-2.5 file:px-4
-                              file:rounded-lg file:border file:border-[#BE8B3E]
-                              file:text-sm file:cursor-pointer file:font-semibold
-                              file:bg-[#BE8B3E] file:text-white
-                              hover:file:bg-transparent hover:file:text-[#BE8B3E]">
-
-                <p class="mt-2 text-xs text-gray-400">
-                    Select multiple images to add them to this product.
-                    Existing images will remain.
-                </p>
-
-            </div>
-
-            {{-- OPTIONS --}}
-
-            <div class="mt-7 space-y-4">
-
-                <label class="flex items-center gap-3 cursor-pointer">
-
-                    <input
-                        type="checkbox"
-                        name="is_featured"
-                        value="1"
-                        {{ old('is_featured', $product->is_featured) ? 'checked' : '' }}
-                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
-
-                    <span class="text-sm text-gray-700">
-                        Featured product
-                    </span>
-
-                </label>
+                    </label>
 
 
-                <label class="flex items-center gap-3 cursor-pointer">
+                    <label class="flex items-center gap-3 cursor-pointer">
 
-                    <input
-                        type="checkbox"
-                        name="is_active"
-                        value="1"
-                        {{ old('is_active', $product->is_active) ? 'checked' : '' }}
-                        class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
+                        <input
+                            type="checkbox"
+                            name="is_active"
+                            value="1"
+                            {{ old('is_active', $product->is_active) ? 'checked' : '' }}
+                            class="h-4 w-4 rounded border border-[#BE8B3E] bg-white text-[#BE8B3E] accent-[#BE8B3E]  focus:ring-[#BE8B3E]/30 focus:ring-offset-0">
 
-                    <span class="text-sm text-gray-700">
-                        Active product
-                    </span>
+                        <span class="text-sm text-gray-700">
+                            Active product
+                        </span>
 
-                </label>
+                    </label>
 
-            </div>
+                </div>
 
-            {{-- BUTTONS --}}
+                {{-- BUTTONS --}}
 
-            <div class="mt-10 flex flex-col sm:flex-row gap-3">
+                <div class="mt-10 flex flex-col sm:flex-row gap-3">
 
-                <button
-                    type="submit"
-                    class="bg-[#BE8B3E] rounded-full cursor-pointer border border-[#BE8B3E] hover:bg-transparent hover:text-[#BE8B3E] text-white px-7 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#a47c15] transition">
-                    Update Product
-                </button>
+                    <button
+                        type="submit"
+                        class="bg-[#BE8B3E] rounded-full cursor-pointer border border-[#BE8B3E] hover:bg-transparent hover:text-[#BE8B3E] text-white px-7 py-4 text-xs uppercase tracking-widest font-semibold hover:bg-[#a47c15] transition">
+                        Update Product
+                    </button>
 
-                <a
-                    href="{{ route('admin.products.index') }}"
-                    class="border border-gray-300 rounded-full px-7 py-4 text-xs uppercase tracking-widest font-semibold text-center hover:bg-gray-300 hover:text-white transition">
-                    Cancel
-                </a>
+                    <a
+                        href="{{ route('admin.products.index') }}"
+                        class="border border-gray-300 rounded-full px-7 py-4 text-xs uppercase tracking-widest font-semibold text-center hover:bg-gray-300 hover:text-white transition">
+                        Cancel
+                    </a>
 
-            </div>
+                </div>
 
-        </form>
+            </form>
+
+        </div>
 
     </div>
 
-</div>
 
-
-@endsection
+    @endsection

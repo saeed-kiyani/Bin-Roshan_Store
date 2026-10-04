@@ -9,6 +9,11 @@
         @yield('title', 'Admin Panel | Bin Roshan')
     </title>
 
+    <link
+    rel="icon"
+    type="image/x-icon"
+    href="{{ asset('images/logo/favicon.ico') }}">
+
     @vite([
         'resources/css/app.css',
         'resources/js/app.js'
@@ -297,7 +302,7 @@
 
             <a
     href="{{ route('admin.subscribers.index') }}"
-    class="..."
+    class="flex items-center border border-[#BE8B3E] rounded-lg mt-1 gap-4 px-4 py-3.5 text-sm text-[#BE8B3E] hover:bg-[#BE8B3E] hover:text-white transition"
 >
     Subscribers
 </a>

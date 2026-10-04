@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
         slug = String(slug || '').toLowerCase().trim();
 
         if (
-            (formMode === 'create' && slug === 'clothes') ||
+            slug === 'clothes' ||
             slug === 'clothing' ||
             slug === 'ladies-clothing' ||
             slug === 'mens-clothing' ||

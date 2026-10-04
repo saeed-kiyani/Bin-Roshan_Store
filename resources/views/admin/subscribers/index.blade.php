@@ -7,7 +7,7 @@
     <div class="mb-6 flex items-center justify-between">
 
         <div>
-            <h1 class="text-2xl font-semibold text-gray-900">
+            <h1 class="text-2xl font-semibold text-[#BE8B3E]">
                 Subscribers
             </h1>
 
@@ -16,7 +16,7 @@
             </p>
         </div>
 
-        <div class="rounded-lg bg-gray-100 px-4 py-2">
+        <div class="rounded-lg px-4 py-2">
             <span class="text-sm text-gray-500">
                 Total:
             </span>
@@ -36,13 +36,13 @@
     @endif
 
 
-    <div class="overflow-hidden rounded-xl border border-gray-200 bg-white">
+    <div class="overflow-hidden rounded-xl border border-gray-200">
 
         <div class="overflow-x-auto">
 
             <table class="min-w-full divide-y divide-gray-200">
 
-                <thead class="bg-gray-50">
+                <thead>
 
                     <tr>
 
@@ -67,11 +67,11 @@
                 </thead>
 
 
-                <tbody class="divide-y divide-gray-200 bg-white">
+                <tbody class="divide-y divide-gray-200">
 
                     @forelse ($subscribers as $subscriber)
 
-                        <tr class="hover:bg-gray-50">
+                        <tr>
 
                             <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
                                 {{ $subscriber->id }}
