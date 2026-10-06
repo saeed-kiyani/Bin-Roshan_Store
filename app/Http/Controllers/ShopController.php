@@ -56,7 +56,9 @@ class ShopController extends Controller
                 $categoryType = 'lace';
             } elseif (
                 str_contains($categoryText, 'clothing') ||
-                str_contains($categoryText, 'apparel')
+                str_contains($categoryText, 'clothes') ||
+                str_contains($categoryText, 'apparel') ||
+                str_contains($categoryText, 'cloth')
             ) {
                 $categoryType = 'clothing';
             } elseif (str_contains($categoryText, 'cosmetic')) {

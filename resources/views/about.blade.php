@@ -98,116 +98,6 @@
                     </a>
 
                     {{-- =================================================
-     CUSTOMER ACCOUNT
-================================================= --}}
-
-@if (Auth::check())
-
-    <div class="relative group">
-
-        <button
-            type="button"
-            aria-label="My Account"
-            class="text-white hover:text-[#BE8B3E] transition cursor-pointer">
-
-            <svg
-                class="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24">
-
-                <circle
-                    cx="12"
-                    cy="8"
-                    r="3.5"
-                    stroke-width="1.5"/>
-
-                <path
-                    d="M5 20c.8-3.2 3.2-5 7-5s6.2 1.8 7 5"
-                    stroke-width="1.5"
-                    stroke-linecap="round"/>
-
-            </svg>
-
-        </button>
-
-        {{-- ACCOUNT DROPDOWN --}}
-
-        <div
-            class="absolute right-0 top-full mt-4 w-52
-                   rounded-xl bg-white shadow-xl
-                   opacity-0 invisible
-                   group-hover:opacity-100
-                   group-hover:visible
-                   transition-all duration-200">
-
-            <div class="px-4 py-3 border-b border-gray-100">
-
-                <p class="text-sm font-semibold text-gray-900 truncate">
-                    {{ Auth::user()->name }}
-                </p>
-
-                <p class="text-xs text-gray-500 truncate mt-1">
-                    {{ Auth::user()->email }}
-                </p>
-
-            </div>
-
-            <form
-                method="POST"
-                action="{{ route('logout') }}"
-                class="p-2">
-
-                @csrf
-
-                <button
-                    type="submit"
-                    class="w-full rounded-lg px-3 py-2
-                           text-left text-sm text-gray-700
-                           hover:bg-gray-100 transition">
-
-                    Logout
-
-                </button>
-
-            </form>
-
-        </div>
-
-    </div>
-
-@else
-
-    <button
-        type="button"
-        onclick="openCustomerAuthModal()"
-        aria-label="Login"
-        class="text-white hover:text-[#BE8B3E] transition cursor-pointer">
-
-        <svg
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24">
-
-            <circle
-                cx="12"
-                cy="8"
-                r="3.5"
-                stroke-width="1.5"/>
-
-            <path
-                d="M5 20c.8-3.2 3.2-5 7-5s6.2 1.8 7 5"
-                stroke-width="1.5"
-                stroke-linecap="round"/>
-
-        </svg>
-
-    </button>
-
-@endif
-
-                    {{-- =================================================
                          SEARCH
                     ================================================== --}}
 
@@ -543,22 +433,15 @@
             <div class="text-gray-600 text-sm sm:text-base leading-7 sm:leading-8 space-y-5 sm:space-y-6">
 
                 <p>
-                    <span class="italic text-[#BE8B3E]">Bin Roshan</span> is built around a simple idea:
-                    bringing beautiful products together in one
-                    refined destination.
+                    <span class="italic text-[#BE8B3E]">Bin Roshan</span> is a destination where everything you need for your personal style comes together under one roof.
                 </p>
 
                 <p>
-                    From carefully selected clothing and elegant
-                    jewelry to decorative laces, sophisticated
-                    watches and stylish accessories, every collection
-                    is chosen with an eye for quality and design.
+                    From stitched and unstitched clothing to beautiful laces for your outfits, our collection also includes cosmetics, elegant jewelry, watches and stylish accessories — carefully brought together to complement your everyday needs and personal style.
                 </p>
 
                 <p>
-                    Our goal is not simply to offer products,
-                    but to make discovering your personal style
-                    an enjoyable experience.
+                    Our aim is simple: <i>to make shopping convenient, enjoyable and complete, so you can find everything related to your wearing and personal use in one place</i>.
                 </p>
 
             </div>

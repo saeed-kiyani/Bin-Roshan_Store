@@ -19,8 +19,6 @@
     name="description"
     content="@yield('description', 'Bin Roshan — Premium fancy laces, clothing, jewelry, watches and accessories.')">
 
-<meta name="customer-authenticated" content="{{ Auth::check() ? '1' : '0' }}">
-
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 <style>
@@ -301,14 +299,6 @@
 
 </aside>
 
-
-<!-- =========================================================
-     CUSTOMER AUTH MODAL
-========================================================== -->
-
-@include('components.customer-auth-modal')
-
-
 <!-- =========================================================
      PAGE CONTENT
 ========================================================== -->
@@ -448,7 +438,8 @@
                     <!-- Instagram -->
 
                     <a
-                        href="#"
+                        href="https://www.instagram.com/roshansons13d/"
+                        target="_blank"
                         aria-label="Instagram"
                         class="flex h-10 w-10 items-center justify-center rounded-full border border-[#BE8B3E] text-[#BE8B3E] transition duration-300 hover:bg-[#BE8B3E] hover:text-white">
 
@@ -486,7 +477,8 @@
                     <!-- Facebook -->
 
                     <a
-                        href="#"
+                        href="https://www.facebook.com/roshansons13d"
+                        target="_blank"
                         aria-label="Facebook"
                         class="flex h-10 w-10 items-center justify-center rounded-full border border-[#BE8B3E] text-[#BE8B3E] transition duration-300 hover:bg-[#BE8B3E] hover:text-white">
 
@@ -693,12 +685,6 @@
     </div>
 
 </footer>
-
-<!-- =========================================================
-     JAVASCRIPT
-========================================================== -->
-
-
 
 </body>
 
