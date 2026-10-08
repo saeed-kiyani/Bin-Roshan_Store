@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\ProductFilterValue;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -109,5 +110,10 @@ class Product extends Model
     {
         return $this->hasOne(ProductImage::class)
             ->where('is_primary', true);
+    }
+
+    public function filterValues(): HasMany
+    {
+        return $this->hasMany(ProductFilterValue::class);
     }
 }

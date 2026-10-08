@@ -301,27 +301,20 @@
 
                                 </div>
 
-
                                 <div class="mt-3 space-y-2">
 
 
                                     @if(!$image->is_primary)
 
-                                        <form
-                                            action="{{ route('admin.products.images.primary', $image) }}"
-                                            method="POST"
-                                        >
+                                        <form action="{{ route('admin.products.images.primary', $image) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
 
-                                            @csrf
-
-                                            <button
-                                                type="submit"
-                                                class="w-full border border-gray-300 rounded-full cursor-pointer px-3 py-2 text-[10px] uppercase tracking-widest hover:bg-black hover:text-white hover:border-black transition"
-                                            >
-                                                Make Primary
-                                            </button>
-
-                                        </form>
+                                    <button type="submit"
+                                        class="w-full border border-gray-300 rounded-full cursor-pointer px-3 py-2 text-[10px] uppercase tracking-widest hover:bg-black hover:text-white hover:border-black transition">
+                                        Make Primary
+                                    </button>
+                                </form>
 
                                     @endif
 
@@ -552,6 +545,10 @@
                     Kids
                 </option>
 
+                <option value="unisex" {{ old('gender') === 'unisex' ? 'selected' : '' }}>
+                Unisex
+                </option>
+
             </select>
 
         </div>
@@ -590,6 +587,10 @@
                     Gul Ahmed
                 </option>
 
+                <option value="Bin Saeed" {{ old('brand') === 'Bin Saeed' ? 'selected' : '' }}>
+                Bin Saeed
+                </option>
+
                 <option value="Khaadi"
                     {{ old('brand', $product->brand) === 'Khaadi' ? 'selected' : '' }}>
                     Khaadi
@@ -619,7 +620,7 @@
 
             <div class="mt-4 flex flex-wrap gap-6">
 
-                @foreach(['S', 'M', 'L'] as $size)
+                @foreach(['S', 'M', 'L', 'XL'] as $size)
 
                     <label class="flex items-center gap-2 cursor-pointer">
 

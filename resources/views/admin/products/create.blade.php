@@ -227,7 +227,7 @@
             </div>
 
 {{-- =========================================================
-     CLOTHING INFORMATION
+     CLOTHING FILTRATION
 ========================================================= --}}
 <div
     id="clothing-filter"
@@ -269,6 +269,10 @@
                 Kids
             </option>
 
+            <option value="unisex" {{ old('gender') === 'unisex' ? 'selected' : '' }}>
+                Unisex
+            </option>
+
         </select>
 
     </div>
@@ -304,6 +308,10 @@
                 Gul Ahmed
             </option>
 
+            <option value="Bin Saeed" {{ old('brand') === 'Bin Saeed' ? 'selected' : '' }}>
+                Bin Saeed
+            </option>
+
             <option value="Khaadi" {{ old('brand') === 'Khaadi' ? 'selected' : '' }}>
                 Khaadi
             </option>
@@ -326,7 +334,7 @@
 
         <div class="mt-4 flex flex-wrap gap-6">
 
-            @foreach(['S', 'M', 'L'] as $size)
+            @foreach(['S', 'M', 'L', 'XL'] as $size)
 
                 <label class="flex items-center gap-2 cursor-pointer">
 
@@ -351,7 +359,7 @@
 
 </div>
 {{-- =========================================================
-     END CLOTHING INFORMATION
+     END CLOTHING FILTRATION
 ========================================================= --}}
 
 {{-- =========================================================

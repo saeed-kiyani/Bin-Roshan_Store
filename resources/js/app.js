@@ -1,5 +1,7 @@
 import './bootstrap';
 
+import './admin/delete-modal';
+
 import './admin/layout';
 
 import './admin/products/product-form';

@@ -1,64 +1,90 @@
 /**
- * Shared admin delete confirmation modal and flash-message auto-hide.
- *
- * Used by admin list pages that contain #deleteModal and delete forms.
+ * Admin delete confirmation modal
+ * + success/error flash message auto-hide
  */
+
 document.addEventListener('DOMContentLoaded', () => {
+
     const deleteModal = document.getElementById('deleteModal');
     const cancelDelete = document.getElementById('cancelDelete');
     const confirmDelete = document.getElementById('confirmDelete');
 
-    if (deleteModal && cancelDelete && confirmDelete) {
-        let deleteForm = null;
+    let deleteForm = null;
 
-        // Support the existing delete form classes used across admin list pages.
+    // -----------------------------------------
+    // DELETE CONFIRMATION MODAL
+    // -----------------------------------------
+
+    if (deleteModal && cancelDelete && confirmDelete) {
+
         const deleteForms = document.querySelectorAll(
             '.delete-category-form, .delete-product-form'
         );
 
         deleteForms.forEach((form) => {
-            form.addEventListener('submit', (event) => {
+
+            form.addEventListener('submit', function (event) {
                 event.preventDefault();
 
-                deleteForm = form;
+                deleteForm = this;
 
                 deleteModal.classList.remove('hidden');
                 deleteModal.classList.add('flex');
             });
+
         });
 
+        // Cancel
         cancelDelete.addEventListener('click', () => {
+
             deleteModal.classList.add('hidden');
             deleteModal.classList.remove('flex');
+
             deleteForm = null;
         });
 
+        // Confirm Delete
         confirmDelete.addEventListener('click', () => {
-            if (deleteForm) {
-                deleteForm.submit();
+
+            if (!deleteForm) {
+                return;
             }
+
+            deleteForm.submit();
         });
 
+        // Click outside modal
         deleteModal.addEventListener('click', (event) => {
+
             if (event.target === deleteModal) {
+
                 deleteModal.classList.add('hidden');
                 deleteModal.classList.remove('flex');
+
                 deleteForm = null;
             }
+
         });
     }
 
-    // Preserve the existing 2-second auto-hide behavior.
-    setTimeout(() => {
-        const successMessage = document.getElementById('success-message');
-        const errorMessage = document.getElementById('error-message');
 
-        if (successMessage) {
+    // -----------------------------------------
+    // FLASH MESSAGE AUTO HIDE
+    // -----------------------------------------
+
+    const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('error-message');
+
+    if (successMessage) {
+        setTimeout(() => {
             successMessage.style.display = 'none';
-        }
+        }, 2000);
+    }
 
-        if (errorMessage) {
+    if (errorMessage) {
+        setTimeout(() => {
             errorMessage.style.display = 'none';
-        }
-    }, 2000);
+        }, 1000);
+    }
+
 });

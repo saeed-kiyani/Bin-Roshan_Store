@@ -12,6 +12,7 @@ use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\CustomerAuthController;
+use App\Http\Controllers\ProductFilterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -164,6 +165,28 @@ Route::put('/blog/posts/{blogPost}', [BlogPostController::class, 'update'])
 
 Route::delete('/blog/posts/{blogPost}', [BlogPostController::class, 'destroy'])
     ->name('blog.posts.destroy');
+
+
+    Route::get('/product-filters', [ProductFilterController::class, 'index'])
+    ->name('product-filters.index');
+
+Route::post('/product-filters', [ProductFilterController::class, 'storeFilter'])
+    ->name('product-filters.store');
+
+Route::put('/product-filters/{filter}', [ProductFilterController::class, 'updateFilter'])
+    ->name('product-filters.update');
+
+Route::delete('/product-filters/{filter}', [ProductFilterController::class, 'destroyFilter'])
+    ->name('product-filters.destroy');
+
+Route::post('/product-filters/{filter}/options', [ProductFilterController::class, 'storeOption'])
+    ->name('product-filters.options.store');
+
+Route::put('/product-filter-options/{option}', [ProductFilterController::class, 'updateOption'])
+    ->name('product-filters.options.update');
+
+Route::delete('/product-filter-options/{option}', [ProductFilterController::class, 'destroyOption'])
+    ->name('product-filters.options.destroy');
 
     });
 

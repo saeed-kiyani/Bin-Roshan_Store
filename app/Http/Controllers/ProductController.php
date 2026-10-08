@@ -367,7 +367,7 @@ class ProductController extends Controller
 
             'gender' => [
                 'nullable',
-                'in:men,women,kids',
+                'in:men,women,kids,unisex',
             ],
 
             'brand' => [
@@ -382,7 +382,7 @@ class ProductController extends Controller
             ],
 
             'sizes.*' => [
-                'in:S,M,L',
+                'in:S,M,L,XL',
             ],
 
 
